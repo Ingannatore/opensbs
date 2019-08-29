@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--suppress CheckEmptyScriptTag -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NAVIGATION HUD</title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+</head>
+<body>
+    <div class="station">
+        <svg width="1920" height="1080" viewBox="0 0 1920 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="black">
+            <defs>
+                <g id="DirectionArrowElement">
+                    <path d="M 0 -6 L 6 6 L 0 3 L -6 6 Z" stroke="white" stroke-width="1" fill="white"/>
+                </g>
+
+                <g id="RoundContainerBig">
+                    <circle cx="0" cy="0" r="480" stroke="#36424a" fill="none"/>
+                    <circle cx="0" cy="0" r="476" stroke="#2a363c" fill="none"/>
+                </g>
+                <g id="RoundContainerMedium">
+                    <circle cx="0" cy="0" r="220" stroke="none" fill="black" opacity=".4"/>
+                    <circle cx="0" cy="0" r="220" stroke="#36424a" fill="none"/>
+                    <circle cx="0" cy="0" r="216" stroke="#2a363c" fill="none"/>
+                </g>
+
+                <g id="RoundDisplay">
+                    <circle cx="0" cy="0" r="120" stroke="#33393d" stroke-width="2" fill="none"/>
+                    <circle cx="0" cy="0" r="116" stroke="#85888a" fill="none"/>
+                </g>
+                <g id="RoundDisplayMed">
+                    <circle cx="0" cy="0" r="80" stroke="none" fill="black" opacity=".4"/>
+                    <circle cx="0" cy="0" r="80" stroke="#33393d" stroke-width="2" fill="none"/>
+                    <circle cx="0" cy="0" r="76" stroke="#85888a" fill="none"/>
+                </g>
+                <g id="RoundDisplaySmall">
+                    <circle cx="0" cy="0" r="60" stroke="none" fill="black" opacity=".4"/>
+                    <circle cx="0" cy="0" r="60" stroke="#33393d" stroke-width="2" fill="none"/>
+                    <circle cx="0" cy="0" r="56" stroke="#85888a" fill="none"/>
+                </g>
+
+                <g id="RoundButtonSmall">
+                    <circle cx="0" cy="0" r="30" stroke="none" fill="black" opacity=".4"/>
+                    <circle cx="0" cy="0" r="30" stroke="#33393d" stroke-width="2" fill="none"/>
+                    <circle cx="0" cy="0" r="26" stroke="#c0daf1" fill="none"/>
+                </g>
+                <g id="RoundButtonSmallOn">
+                    <circle cx="0" cy="0" r="30" stroke="none" fill="black" opacity=".4"/>
+                    <circle cx="0" cy="0" r="30" stroke="#33393d" stroke-width="2" fill="none"/>
+                    <circle cx="0" cy="0" r="26" stroke="#c0daf1" fill="none"/>
+                    <circle cx="0" cy="0" r="24" stroke="none" fill="#c0daf1" opacity=".8"/>
+                </g>
+
+                <g id="CompassArc">
+                    <path fill="none" stroke="#2a363c" stroke-width="4" stroke-dasharray="4 6" d="M 185.43026374087643 -458.9560080105598 A 495 495 0 0 0 3.0310008278896993e-14 -495" />
+                </g>
+            </defs>
+
+            <g id="StationBackground">
+                <rect x="0" y="0" width="1920" height="1080" fill="#0b1519"/>
+                <rect x="0" y="0" width="1920" height="1080" fill="#black" opacity=".4"/>
+            </g>
+
+            <g id="Radar" transform="translate(960 540)">
+                <g transform="scale(1 .5)">
+                    <g id="RadarLines">
+                        <line x1="-940" y1="0" x2="940" y2="0" stroke="#2a363c" stroke-width="1"/>
+                        <line x1="0" y1="-940" x2="0" y2="940" stroke="#2a363c" stroke-width="1"/>
+
+                        <line x1="0" y1="-940" x2="0" y2="940" stroke="#122127" stroke-width="1" transform="rotate(30)"/>
+                        <line x1="0" y1="-940" x2="0" y2="940" stroke="#122127" stroke-width="1" transform="rotate(60)"/>
+                        <line x1="0" y1="-940" x2="0" y2="940" stroke="#122127" stroke-width="1" transform="rotate(120)"/>
+                        <line x1="0" y1="-940" x2="0" y2="940" stroke="#122127" stroke-width="1" transform="rotate(150)"/>
+                    </g>
+                    <g id="RadarCircles">
+                        <circle cx="0" cy="0" r="96" stroke="#122127" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                        <circle cx="0" cy="0" r="192" stroke="#122127" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                        <circle cx="0" cy="0" r="298" stroke="#122127" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                        <circle cx="0" cy="0" r="384" stroke="#122127" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                    </g>
+                    <g id="RadarDirectionArrow">
+                        <use href="#DirectionArrowElement" x="0" y="0"/>
+                    </g>
+                </g>
+
+            </g>
+
+            <!--
+            <g id="Radar" transform="translate(960 540) scale(1.5 .75)">
+                <use href="#DirectionArrowElementMuted" x="0" y="-485"/>
+                <g transform="rotate(-45)">
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(4)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(34)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(64)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(94)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(124)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(154)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(184)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(214)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(244)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(274)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(304)"/>
+                    <use href="#CompassArc" x="0" y="0" transform="rotate(334)"/>
+
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem">0</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(30)">030</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(60)">060</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(90)">090</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(120)">120</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(150)">150</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(180)">180</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(210)">210</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(240)">240</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(270)">270</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(300)">300</text>
+                    <text x="0" y="-495" class="highlight-white" text-anchor="middle" font-size="1.4rem" transform="rotate(330)">330</text>
+                </g>
+
+                <use href="#RoundContainerBig" x="0" y="0"/>
+                <line x1="0" y1="-475" x2="0" y2="475" stroke="#2a363c" stroke-width="1"/>
+                <line x1="0" y1="-475" x2="0" y2="475" stroke="#122127" stroke-width="1" transform="rotate(30)"/>
+                <line x1="0" y1="-475" x2="0" y2="475" stroke="#122127" stroke-width="1" transform="rotate(60)"/>
+                <line x1="0" y1="-475" x2="0" y2="475" stroke="#2a363c" stroke-width="1" transform="rotate(90)"/>
+                <line x1="0" y1="-475" x2="0" y2="475" stroke="#122127" stroke-width="1" transform="rotate(120)"/>
+                <line x1="0" y1="-475" x2="0" y2="475" stroke="#122127" stroke-width="1" transform="rotate(150)"/>
+
+                <circle cx="0" cy="0" r="96" stroke="#122127" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                <circle cx="0" cy="0" r="192" stroke="#122127" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                <circle cx="0" cy="0" r="298" stroke="#122127" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                <circle cx="0" cy="0" r="384" stroke="#122127" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                <use href="#DirectionArrowElement" x="0" y="0"/>
+            </g>
+            <g transform="translate(960 540)">
+                <text x="98" y="-8" class="muted" text-anchor="start" font-size="1.0rem">2km</text>
+                <text x="194" y="-8" class="muted" text-anchor="start" font-size="1.0rem">4km</text>
+                <text x="300" y="-8" class="muted" text-anchor="start" font-size="1.0rem">6km</text>
+                <text x="386" y="-8" class="muted" text-anchor="start" font-size="1.0rem">8km</text>
+            </g>
+            -->
+        </svg>
+    </div>
+</body>
+</html>

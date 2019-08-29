@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: black;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.station {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.station svg {
+    height: 100%;
+    width: 100%;
+}
+
+/*
+ * COLOURS
+ *
+ * LightBlue: #122127
+ * MediumBlue: #0b1519
+ * DarkBlue: #091215
+ * MediumGrey: #76797c
+ * DarkYellow: #c9c571
+ * Azure: #c0daf1
+ */
+
+/* FILLS */
+
+.fill-light-blue {
+    fill: #122127;
+}
+
+.fill-medium-blue {
+    fill: #0b1519;
+}
+
+.fill-dark-blue {
+    fill: #091215;
+}
+
+.fill-medium-grey {
+    fill: #76797c;
+}
+
+.fill-dark-yellow {
+    fill: #c9c571;
+}
+
+.fill-azure {
+    fill: #c0daf1;
+}
+
+.fill-dirty-white {
+    fill: #aaadae;
+}
+
+/* STROKES */
+
+.stroke-dark-grey {
+    stroke: #4d5457;
+}
+
+.stroke-blue-grey {
+    stroke: #2e373a;
+}
+
+/* TEXTS */
+
+text {
+    fill: #76797c;
+    text-transform: uppercase;
+    dominant-baseline: central;
+}
+
+text.bold {
+    font-weight: bold;
+}
+
+text.dark {
+    fill: #000;
+}
+
+text.muted {
+    fill: #2a363c;
+}
+
+text.highlight-yellow {
+    fill: #c9c571;
+}
+
+text.highlight-azure {
+    fill: #c0daf1;
+}
+
+text.highlight-white {
+    fill: #aaadae;
+}
+
+text.black {
+    fill: black;
+}
+
+text.white {
+    fill: white;
+}
+
+text.vertical {
+    text-orientation: upright;
+    writing-mode: vertical-rl;
+    glyph-orientation-vertical: 0;
+}
