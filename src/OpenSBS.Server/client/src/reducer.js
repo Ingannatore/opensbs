@@ -1,10 +1,8 @@
 import Actions from "./actions";
 
 const defaultState = {
-    ship: {
-        bearing: 0,
-        rudder: 0
-    }
+    "ship.bearing": 0.0,
+    "ship.rudder": 0
 };
 
 const rootReducer = (state = defaultState, action) => {

@@ -21,6 +21,9 @@ namespace OpenSBS.Server
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSignalR();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "client"; });
+
+            services.AddSingleton<EventsQueue>();
+            services.AddHostedService<GameLoop>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

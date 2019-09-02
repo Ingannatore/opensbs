@@ -41,7 +41,7 @@ class Rudder extends Component {
 
 const mapStateToProps = state => {
     return {
-        rudder: state.ship.rudder
+        rudder: state['ship.rudder']
     }
 };
 

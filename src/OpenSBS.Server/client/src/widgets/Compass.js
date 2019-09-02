@@ -55,7 +55,7 @@ class Compass extends Component {
 
 const mapStateToProps = state => {
     return {
-        bearing: state.ship.bearing
+        bearing: state['ship.bearing']
     }
 };
 
