@@ -14,7 +14,7 @@ export default (hub) => {
                 if (action.socket && action.socket.send) {
                     switch (action.type) {
                         case Actions.Types.UPDATE_STATE:
-                            hub.invoke('UpdateState', action.payload.key, action.payload.value).catch((err) => {
+                            hub.invoke('UpdateState', action.payload).catch((err) => {
                                 return console.error(err.toString());
                             });
                             break;

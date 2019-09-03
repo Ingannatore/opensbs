@@ -15,10 +15,10 @@ namespace OpenSBS.Server
             _logger = logger;
         }
 
-        public async Task UpdateState(string key, string value)
+        public async Task UpdateState(UpdateStateEvent updateStateEvent)
         {
-            _eventsQueue.AddEvent(new UpdateStateEvent(key, value));
-            _logger.LogInformation($"UpdateState({key}): {value}");            
+            _eventsQueue.AddEvent(updateStateEvent);
+            _logger.LogInformation($"UpdateState({updateStateEvent.Key}): {updateStateEvent.Value}");            
         }
     }
 }
