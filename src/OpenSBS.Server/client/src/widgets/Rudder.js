@@ -27,15 +27,15 @@ class Rudder extends Component {
     }
 
     sxButtonClick() {
-        this.props.dispatch(Actions.setRudderAction(-5))
+        this.props.dispatch(Actions.setState('ship.rudder', -5))
     }
 
     resetButtonClick() {
-        this.props.dispatch(Actions.resetRudderAction())
+        this.props.dispatch(Actions.setState('ship.rudder', 0))
     }
 
     dxButtonClick() {
-        this.props.dispatch(Actions.setRudderAction(+5))
+        this.props.dispatch(Actions.setState('ship.rudder', +5))
     }
 }
 

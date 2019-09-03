@@ -13,13 +13,8 @@ export default (hub) => {
             return function (action) {
                 if (action.socket && action.socket.send) {
                     switch (action.type) {
-                        case Actions.Types.SET_RUDDER:
-                            hub.invoke('SetRudder', action.payload).catch((err) => {
-                                return console.error(err.toString());
-                            });
-                            break;
-                        case Actions.Types.RESET_RUDDER:
-                            hub.invoke('ResetRudder').catch((err) => {
+                        case Actions.Types.SET_STATE:
+                            hub.invoke('SetState', action.payload.key, action.payload.value).catch((err) => {
                                 return console.error(err.toString());
                             });
                             break;

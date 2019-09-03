@@ -15,16 +15,10 @@ namespace OpenSBS.Server
             _logger = logger;
         }
 
-        public async Task SetRudder(int value)
+        public async Task SetState(string key, string value)
         {
-            _eventsQueue.AddEvent(new SocketEvent("SET_RUDDER", value));
-            _logger.LogInformation($"SetRudder({value})");
-        }
-
-        public async Task ResetRudder()
-        {
-            _eventsQueue.AddEvent(new SocketEvent("RESET_RUDDER"));
-            _logger.LogInformation("ResetRudder()");
+            _eventsQueue.AddEvent(new SetStateEvent(key, value));
+            _logger.LogInformation($"SetState({key}): {value}");            
         }
     }
 }

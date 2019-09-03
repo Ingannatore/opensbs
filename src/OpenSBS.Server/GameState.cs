@@ -5,19 +5,29 @@ namespace OpenSBS.Server
 {
     public class GameState
     {
-        private readonly IDictionary<string, object> _values;
+        private readonly IDictionary<string, string> _values;
 
         public GameState()
         {
-            _values = new Dictionary<string, object>();
+            _values = new Dictionary<string, string>();
         }
 
-        public T GetValue<T>(string key)
+        public string GetValue(string key)
         {
-            return (T) _values[key];
+            return _values[key];
         }
 
-        public void SetValue(string key, object value)
+        public int GetIntValue(string key)
+        {
+            return int.Parse(_values[key]);
+        }
+
+        public double GetDoubleValue(string key)
+        {
+            return double.Parse(_values[key]);
+        }
+
+        public void SetValue(string key, string value)
         {
             _values[key] = value;
         }

@@ -6,20 +6,20 @@ namespace OpenSBS.Server
 {
     public class EventsQueue
     {
-        private readonly Queue<SocketEvent> _queue;
+        private readonly Queue<SetStateEvent> _queue;
         public bool HasEvents => _queue.Any();
 
         public EventsQueue()
         {
-            _queue = new Queue<SocketEvent>();
+            _queue = new Queue<SetStateEvent>();
         }
 
-        public void AddEvent(SocketEvent socketEvent)
+        public void AddEvent(SetStateEvent setStateEvent)
         {
-            _queue.Enqueue(socketEvent);
+            _queue.Enqueue(setStateEvent);
         }
 
-        public SocketEvent ReadEvent()
+        public SetStateEvent ReadEvent()
         {
             try
             {

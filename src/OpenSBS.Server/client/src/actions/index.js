@@ -1,20 +1,14 @@
 const Types = {
-    SET_RUDDER: 'SET_RUDDER',
-    RESET_RUDDER: 'RESET_RUDDER',
-    UPDATE_STATE: 'UPDATE_STATE'
+    SET_STATE: 'SET_STATE',
+    UPDATE_STATE: 'UPDATE_STATE',
 };
 
-const setRudderAction = value => ({
-    type: Types.SET_RUDDER,
-    payload: value,
-    socket: {
-        send: true
-    }
-});
-
-const resetRudderAction = () => ({
-    type: Types.RESET_RUDDER,
-    payload: null,
+const setState = (key, value) => ({
+    type: Types.SET_STATE,
+    payload: {
+        key: key,
+        value: value   
+    },
     socket: {
         send: true
     }
@@ -22,6 +16,5 @@ const resetRudderAction = () => ({
 
 export default {
     Types,
-    setRudderAction,
-    resetRudderAction
+    setState
 };
