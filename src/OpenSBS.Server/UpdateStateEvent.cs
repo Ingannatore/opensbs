@@ -1,11 +1,11 @@
 ﻿namespace OpenSBS.Server
 {
-    public class SetStateEvent
+    public class UpdateStateEvent
     {
         public string Key { get; }
         public string Value { get; }
 
-        public SetStateEvent(string key, string value = null)
+        public UpdateStateEvent(string key, string value = null)
         {
             Key = key;
             Value = value;

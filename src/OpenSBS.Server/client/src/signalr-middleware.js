@@ -13,8 +13,8 @@ export default (hub) => {
             return function (action) {
                 if (action.socket && action.socket.send) {
                     switch (action.type) {
-                        case Actions.Types.SET_STATE:
-                            hub.invoke('SetState', action.payload.key, action.payload.value).catch((err) => {
+                        case Actions.Types.UPDATE_STATE:
+                            hub.invoke('UpdateState', action.payload.key, action.payload.value).catch((err) => {
                                 return console.error(err.toString());
                             });
                             break;

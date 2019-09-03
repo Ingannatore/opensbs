@@ -1,10 +1,10 @@
 const Types = {
-    SET_STATE: 'SET_STATE',
+    UPDATE_STATE: 'UPDATE_STATE',
     REFRESH_STATE: 'REFRESH_STATE',
 };
 
-const setState = (key, value) => ({
-    type: Types.SET_STATE,
+const updateState = (key, value) => ({
+    type: Types.UPDATE_STATE,
     payload: {
         key: key,
         value: value   
@@ -16,5 +16,5 @@ const setState = (key, value) => ({
 
 export default {
     Types,
-    setState
+    updateState
 };
