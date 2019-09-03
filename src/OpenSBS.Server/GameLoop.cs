@@ -56,7 +56,7 @@ namespace OpenSBS.Server
         {
             ConsumeEvents();
             UpdateState();
-            SendState();
+            SendRefreshStateMessage();
         }
 
         private void ConsumeEvents()
@@ -91,10 +91,9 @@ namespace OpenSBS.Server
             _state.SetValue("ship.bearing", Math.Round(nextBearing, 2).ToString(CultureInfo.InvariantCulture));
         }
 
-        private void SendState()
+        private void SendRefreshStateMessage()
         {
-            var stateJson = _state.ToJSON();
-            _hubContext.Clients.All.SendAsync("UpdateState", stateJson);
+            _hubContext.Clients.All.SendAsync("RefreshState", _state.ToJSON());
         }
     }
 }

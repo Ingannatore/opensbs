@@ -6,7 +6,7 @@ const defaultState = {
 };
 
 const rootReducer = (state = defaultState, action) => {
-    if (action.type === Actions.Types.UPDATE_STATE) {
+    if (action.type === Actions.Types.REFRESH_STATE) {
         let newState = action.payload;
         if (typeof newState === 'string') {
             newState = JSON.parse(newState);

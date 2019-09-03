@@ -2,9 +2,9 @@
 
 export default (hub) => {
     return function (store) {
-        hub.on('UpdateState', (data) => {
+        hub.on('RefreshState', (data) => {
             return store.dispatch({
-                type: Actions.Types.UPDATE_STATE,
+                type: Actions.Types.REFRESH_STATE,
                 payload: JSON.parse(data)
             });
         });

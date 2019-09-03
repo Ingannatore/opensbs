@@ -1,6 +1,6 @@
 const Types = {
     SET_STATE: 'SET_STATE',
-    UPDATE_STATE: 'UPDATE_STATE',
+    REFRESH_STATE: 'REFRESH_STATE',
 };
 
 const setState = (key, value) => ({
