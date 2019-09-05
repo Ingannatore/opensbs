@@ -18,14 +18,8 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
-    <Content Include="client\src\components\StationComponent.js" />
-    <Content Include="client\src\signalr-middleware.js" />
-    <Content Include="client\src\ui\StationBackground.js" />
-    <Content Include="client\src\ui\SvgContainer.js" />
-    <Content Include="client\src\ui\SvgDefinitions.js" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <None Include="client\src\reducers\reducer.js" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
