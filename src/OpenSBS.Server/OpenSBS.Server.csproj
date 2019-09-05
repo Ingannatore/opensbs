@@ -18,6 +18,7 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
+    <Content Include="client\src\components\StationComponent.js" />
     <Content Include="client\src\signalr-middleware.js" />
     <Content Include="client\src\ui\StationBackground.js" />
     <Content Include="client\src\ui\SvgContainer.js" />
