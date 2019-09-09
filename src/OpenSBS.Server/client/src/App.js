@@ -1,16 +1,14 @@
 import React, {Component} from 'react'
-import SvgContainer from './ui/SvgContainer'
-import Rudder from './widgets/Rudder'
-import StationComponent from "./components/StationComponent";
+import Svg from './svg'
+import Helm from "./svg/stations/helm";
 
 class App extends Component {
     render() {
         return (
             <div>
-                <Rudder/>
-                <SvgContainer>
-                    <StationComponent/>
-                </SvgContainer>
+                <Svg>
+                    <Helm/>
+                </Svg>
             </div>
         );
     }
