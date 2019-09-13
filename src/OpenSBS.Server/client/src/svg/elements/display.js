@@ -9,6 +9,8 @@ class Display extends Component {
             throw "The content of a Display component must be a string";
         }
 
+        this.titleY = (-props.size / 2 ) - 10;
+        this.subtitleY = +props.size / 2;
         this.titleSize = (+props.size / 86).toFixed(1);
         this.valueSize = (+props.size / 20).toFixed(1);
         this.subtitleSize = (+props.size / 120).toFixed(1);
@@ -17,9 +19,9 @@ class Display extends Component {
     render() {
         return (
             <Container id={this.props.id} x={this.props.x} y={this.props.y} size={this.props.size} outerStroke="#33393d" innerStroke="#85888a">
-                <Text x="0" y="-70" size={this.titleSize}>{this.props.title}</Text>
+                <Text x="0" y={this.titleY} size={this.titleSize}>{this.props.title}</Text>
                 <Text size={this.valueSize} fill="#ffffff">{this.props.children}</Text>
-                <Text x="0" y="60" size={this.subtitleSize}>{this.props.subtitle}</Text>
+                <Text x="0" y={this.subtitleY} size={this.subtitleSize}>{this.props.subtitle}</Text>
             </Container>
         );
     }

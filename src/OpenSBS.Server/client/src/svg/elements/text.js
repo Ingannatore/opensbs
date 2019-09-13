@@ -16,7 +16,7 @@ class Text extends Component {
         }
 
         return (
-            <text x={this.props.x} y={this.props.y} textAnchor="middle" fontSize={this.fontSize} fill={this.props.fill}>
+            <text x={this.props.x} y={this.props.y} textAnchor={this.props.anchor} fontSize={this.fontSize} fill={this.props.fill} transform={this.props.transform}>
                 {this.props.children}
             </text>
         );
@@ -26,7 +26,9 @@ class Text extends Component {
 Text.defaultProps = {
     x: '0',
     y: '0',
-    fill: '#76797c'
+    fill: '#76797c',
+    anchor: 'middle',
+    transform: ''
 };
 
 export default Text;

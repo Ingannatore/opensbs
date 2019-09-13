@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Container from "../elements/container";
 import Actions from "../../actions";
 
-class Rudder extends Component {
+class Rudder3D extends Component {
     constructor(props) {
         super(props);
 
@@ -85,4 +85,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(Rudder);
+export default connect(mapStateToProps)(Rudder3D);

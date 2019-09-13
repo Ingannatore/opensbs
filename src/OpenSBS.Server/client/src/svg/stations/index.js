@@ -6,12 +6,12 @@ class Station extends Component {
             <g id={'station' + this.props.id}>
                 <defs>
                     <pattern id="BackgroundPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect x="9" y="9" width="4" height="4" className="fill-dark-blue"/>
-                        <rect x="10" y="10" width="2" height="2" className="fill-light-blue"/>
+                        <line x1="0" y1="20" x2="20" y2="20" stroke="#122127" strokeWidth="1"/>
+                        <line x1="20" y1="0" x2="20" y2="20" stroke="#122127" strokeWidth="1"/>
                     </pattern>
                 </defs>
                 <rect x="0" y="0" width="1920" height="1080" fill="#0b1519"/>
-                <rect x="0" y="0" width="1920" height="1080" fill="url(#BackgroundPattern)"/>
+                <rect x="0" y="0" width="1920" height="1080" fill="url(#BackgroundPattern)" opacity=".75"/>
                 {this.props.children}
             </g>
         );
