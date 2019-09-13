@@ -5,11 +5,8 @@ import Text from "./text";
 class Display extends Component {
     constructor(props) {
         super(props);
-        if (typeof this.props.children !== 'string') {
-            throw "The content of a Display component must be a string";
-        }
 
-        this.titleY = (-props.size / 2 ) - 10;
+        this.titleY = (-props.size / 2) - 5;
         this.subtitleY = +props.size / 2;
         this.titleSize = (+props.size / 86).toFixed(1);
         this.valueSize = (+props.size / 20).toFixed(1);

@@ -3,9 +3,6 @@
 class Text extends Component {
     constructor(props) {
         super(props);
-        if (typeof this.props.children !== 'string') {
-            throw "The content of a Text component must be a string";
-        }
 
         this.fontSize = this.props.size + "rem";
     }
