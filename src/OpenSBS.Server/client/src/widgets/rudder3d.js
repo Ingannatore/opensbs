@@ -1,7 +1,7 @@
 ﻿import React, {Component} from 'react'
 import {connect} from "react-redux";
 import Container from "../elements/container";
-import Actions from "../../actions";
+import Actions from "../actions";
 
 class Rudder3D extends Component {
     constructor(props) {

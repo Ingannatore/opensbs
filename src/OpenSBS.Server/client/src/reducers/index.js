@@ -1,16 +1,8 @@
-import Actions from "../actions";
+import { combineReducers } from 'redux'
+import stateReducer from "./state";
+import radarReducer from "../widgets/radar/reducer";
 
-const rootReducer = (state = {}, action) => {
-    if (action.type !== Actions.Types.REFRESH_STATE) {
-        return state;
-    }
-
-    let newState = action.payload;
-    if (typeof newState === 'string') {
-        newState = JSON.parse(newState);
-    }
-
-    return {...state, ...newState};
-};
-
-export default rootReducer;
+export default combineReducers({
+    stateReducer,
+    radarReducer
+});

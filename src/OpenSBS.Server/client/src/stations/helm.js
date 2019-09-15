@@ -1,5 +1,5 @@
 ﻿import React, {Component} from 'react'
-import Station from "./index";
+import Station from "../elements/station";
 import Rudder3D from "../widgets/rudder3d";
 import Footer from "../elements/footer";
 import Radar from "../widgets/radar";

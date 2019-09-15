@@ -8,10 +8,6 @@ class Text extends Component {
     }
 
     render() {
-        if (!this.props.children) {
-            return;
-        }
-
         return (
             <text x={this.props.x} y={this.props.y} textAnchor={this.props.anchor} fontSize={this.fontSize} fill={this.props.fill} transform={this.props.transform}>
                 {this.props.children}

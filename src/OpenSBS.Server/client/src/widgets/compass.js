@@ -1,7 +1,7 @@
 ﻿import React, {Component} from 'react';
 import {connect} from "react-redux";
-import Container from "../elements/container";
-import Display from "../elements/display";
+import Container from "../../elements/container";
+import Display from "../../elements/display";
 
 class Compass extends Component {
     render() {

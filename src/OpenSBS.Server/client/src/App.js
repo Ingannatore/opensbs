@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Svg from './svg'
-import Helm from "./svg/stations/helm";
+import Svg from './elements/svg'
+import Helm from "./stations/helm";
 
 class App extends Component {
     render() {
