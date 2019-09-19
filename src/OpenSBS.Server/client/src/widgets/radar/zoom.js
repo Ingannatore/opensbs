@@ -17,11 +17,11 @@ class ZoomControls extends Component {
     render() {
         return(
             <g id="widget-radar-zoom" transform={this.translation}>
-                <Display id="display-range" size="80" title="radar range" subtitle="kilometers">
+                <Display x="420" y="420" id="display-range" size="80" title="radar range" subtitle="kilometers">
                     {this.props.range}
                 </Display>
-                <Button x="50" y="-110" size="30" fontSize="2" onClick={this.increaseZoom}>-</Button>
-                <Button x="-110" y="50" size="30" fontSize="2" onClick={this.decreaseZoom}>+</Button>
+                <Button x="0" y="542" size="30" fontSize="2" rotation="-60" onClick={this.increaseZoom}>-</Button>
+                <Button x="0" y="542" size="30" fontSize="2" rotation="-30" onClick={this.decreaseZoom}>+</Button>
             </g>
         );
     }

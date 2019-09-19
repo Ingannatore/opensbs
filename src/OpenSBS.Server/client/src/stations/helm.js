@@ -9,7 +9,7 @@ class Helm extends Component {
     render() {
         return (
             <Station id="helm">
-                <Rudder3D x="240" y="800"/>
+                <Rudder3D x="230" y="800"/>
                 <Bearing x="540" y="100"/>
                 <Radar x="960" y="520"/>
 

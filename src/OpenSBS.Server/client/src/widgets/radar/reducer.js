@@ -4,25 +4,37 @@ import State from "./state";
 const radarRanges = [10, 7.5, 5, 2];
 
 const reducer = (state = State.defaultState, action) => {
-    let newResolution = null;
-
     switch (action.type) {
         case Actions.Types.INCREASE_ZOOM:
-            newResolution = Math.min(3, state[State.Keys.RESOLUTION] + 1);
-            break;
+            return {
+                ...state,
+                [State.Keys.RANGE]: radarRanges[Math.min(3, radarRanges.indexOf(state[State.Keys.RANGE]) + 1)]
+            };
         case Actions.Types.DECREASE_ZOOM:
-            newResolution = Math.max(0, state[State.Keys.RESOLUTION] - 1);
-            break;
-        default:
-            newResolution = null;
-    }
-
-    if (newResolution !== null) {
-        return {
-            ...state,
-            [State.Keys.RESOLUTION]: newResolution,
-            [State.Keys.RANGE]: radarRanges[newResolution]
-        };
+            return {
+                ...state,
+                [State.Keys.RANGE]: radarRanges[Math.max(0, radarRanges.indexOf(state[State.Keys.RANGE]) - 1)]
+            };
+        case Actions.Types.TOGGLE_DIRECTIONS:
+            return {
+                ...state,
+                [State.Keys.DIRECTIONS_MARKERS]: !state[State.Keys.DIRECTIONS_MARKERS]
+            };
+        case Actions.Types.TOGGLE_RANGES:
+            return {
+                ...state,
+                [State.Keys.RANGE_MARKERS]: !state[State.Keys.RANGE_MARKERS]
+            };
+        case Actions.Types.TOGGLE_TEXTS:
+            return {
+                ...state,
+                [State.Keys.TEXT_MARKERS]: !state[State.Keys.TEXT_MARKERS]
+            };
+        case Actions.Types.TOGGLE_WEAPONS:
+            return {
+                ...state,
+                [State.Keys.WEAPONS_MARKERS]: !state[State.Keys.WEAPONS_MARKERS]
+            };
     }
 
     return state;

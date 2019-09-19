@@ -8,8 +8,9 @@ class Text extends Component {
     }
 
     render() {
+        let style = this.props.bold ? {'font-weight': 'bold'} : {};
         return (
-            <text x={this.props.x} y={this.props.y} textAnchor={this.props.anchor} fontSize={this.fontSize} fill={this.props.fill} transform={this.props.transform}>
+            <text x={this.props.x} y={this.props.y} textAnchor={this.props.anchor} fontSize={this.fontSize} fill={this.props.fill} transform={this.props.transform} style={style}>
                 {this.props.children}
             </text>
         );

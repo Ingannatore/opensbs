@@ -17,11 +17,11 @@ class Rudder3D extends Component {
         const translateRudder = `translate(${this.state.px}, ${this.state.py})`;
         return (
             <g onMouseDown={ this.mouseDownHandler } onMouseMove={ this.mouseMoveHandler } onMouseUp={ this.mouseUpHandler }>
-                <Container id="widget-rudder" size="220" x={this.props.x} y={this.props.y}>
-                    <line x1="0" y1="215" x2="0" y2="-215" stroke="#33393d" strokeWidth="1" strokeDasharray="2 4" />
-                    <line x1="0" y1="215" x2="0" y2="-215" stroke="#33393d" strokeWidth="1" transform="rotate(45)" strokeDasharray="2 4" />
-                    <line x1="0" y1="215" x2="0" y2="-215" stroke="#33393d" strokeWidth="1" transform="rotate(90)" strokeDasharray="2 4" />
-                    <line x1="0" y1="215" x2="0" y2="-215" stroke="#33393d" strokeWidth="1" transform="rotate(135)" strokeDasharray="2 4" />
+                <Container id="widget-rudder" size="210" x={this.props.x} y={this.props.y}>
+                    <line x1="0" y1="205" x2="0" y2="-205" stroke="#33393d" strokeWidth="1" strokeDasharray="2 4" />
+                    <line x1="0" y1="205" x2="0" y2="-205" stroke="#33393d" strokeWidth="1" transform="rotate(45)" strokeDasharray="2 4" />
+                    <line x1="0" y1="205" x2="0" y2="-205" stroke="#33393d" strokeWidth="1" transform="rotate(90)" strokeDasharray="2 4" />
+                    <line x1="0" y1="205" x2="0" y2="-205" stroke="#33393d" strokeWidth="1" transform="rotate(135)" strokeDasharray="2 4" />
 
                     <circle cx="0" cy="0" r="60" stroke="none" fill="black" opacity=".4"/>
                     <g transform={translateRudder}>
@@ -60,12 +60,12 @@ class Rudder3D extends Component {
             event.clientX - this.props.x
         );
 
-        const px = 150 * Math.cos(angle);
+        const px = 140 * Math.cos(angle);
         this.dispatchUpdateState(px);
 
         this.setState({
             px: px,
-            py: 150 * Math.sin(angle)
+            py: 140 * Math.sin(angle)
         });
     }
 
