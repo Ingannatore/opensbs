@@ -10,6 +10,7 @@ const defaultState = {
     [Keys.RANGE]: 10,
     [Keys.DIRECTIONS_MARKERS]: true,
     [Keys.RANGE_MARKERS]: true,
+    [Keys.TEXT_MARKERS]: true,
     [Keys.WEAPONS_MARKERS]: true
 };
 
