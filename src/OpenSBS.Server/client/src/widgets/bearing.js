@@ -16,7 +16,7 @@ class Bearing extends Component {
 
 const mapStateToProps = state => {
     return {
-        bearing: state['ship.bearing'] || '0'
+        bearing: state.stateReducer['ship.bearing'] || '0'
     }
 };
 
