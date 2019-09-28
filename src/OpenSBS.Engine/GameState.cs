@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace OpenSBS.Server
+namespace OpenSBS.Engine
 {
     public class GameState
     {
@@ -32,7 +32,7 @@ namespace OpenSBS.Server
             _values[key] = value;
         }
 
-        public string ToJSON()
+        public string ToJson()
         {
             return JsonConvert.SerializeObject(_values);
         }

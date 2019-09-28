@@ -1,24 +1,21 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
+using OpenSBS.Server.Commands;
 
 namespace OpenSBS.Server
 {
     public class MyHub : Hub
     {
-        private readonly EventsQueue _eventsQueue;
-        private readonly ILogger<MyHub> _logger;
+        private readonly GameCommandsManager _manager;
 
-        public MyHub(EventsQueue eventsQueue, ILogger<MyHub> logger)
+        public MyHub(GameCommandsManager manager)
         {
-            _eventsQueue = eventsQueue;
-            _logger = logger;
+            _manager = manager;
         }
 
-        public async Task UpdateState(UpdateStateEvent updateStateEvent)
+        public async Task UpdateState(UpdateStateCommand command)
         {
-            _eventsQueue.AddEvent(updateStateEvent);
-            _logger.LogInformation($"UpdateState({updateStateEvent.Key}): {updateStateEvent.Value}");            
+            await _manager.EnqueueCommand(command);
         }
     }
 }

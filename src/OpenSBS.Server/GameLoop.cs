@@ -1,30 +1,37 @@
 ﻿using System;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OpenSBS.Engine;
+using OpenSBS.Server.Commands;
 
 namespace OpenSBS.Server
 {
     public class GameLoop : IHostedService, IDisposable
     {
-        private readonly EventsQueue _eventsQueue;
+        private readonly GameState _state;
+        private readonly GameCommandsManager _manager;
         private readonly IHubContext<MyHub> _hubContext;
         private readonly ILogger<GameLoop> _logger;
-        private readonly GameState _state;
+        private readonly Mission _mission;
         private Timer _timer;
 
-        public GameLoop(EventsQueue eventsQueue, IHubContext<MyHub> hubContext, ILogger<GameLoop> logger)
+        public GameLoop(
+            GameState state,
+            GameCommandsManager manager,
+            IHubContext<MyHub> hubContext,
+            ILogger<GameLoop> logger
+        )
         {
-            _eventsQueue = eventsQueue;
-            _hubContext = hubContext;
+            _state = state ?? throw new ArgumentNullException(nameof(state));
+            _manager = manager ?? throw new ArgumentNullException(nameof(manager));
+            _hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
             _logger = logger;
 
-            _state = new GameState();
-            _state.SetValue("ship.bearing", "0");
-            _state.SetValue("ship.rudder", "0");
+            _mission = new Mission(_state);
+            _mission.Initialize();
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -54,46 +61,9 @@ namespace OpenSBS.Server
 
         private void DoWork(object state)
         {
-            ConsumeEvents();
-            UpdateState();
-            SendRefreshStateMessage();
-        }
-
-        private void ConsumeEvents()
-        {
-            while (_eventsQueue.HasEvents)
-            {
-                var nextEvent = _eventsQueue.ReadEvent();
-                _logger.LogInformation($"Consuming event of type '{nextEvent.Key}'");
-                _state.SetValue(nextEvent.Key, nextEvent.Value);
-            }
-        }
-
-        private void UpdateState()
-        {
-            var currentRudder = _state.GetIntValue("ship.rudder");
-            if (currentRudder == 0)
-            {
-                return;
-            }
-
-            var currentBearing = _state.GetDoubleValue("ship.bearing");
-            var nextBearing = currentBearing + Math.Sign(currentRudder);
-            if (nextBearing < 0)
-            {
-                nextBearing += 360;
-            }
-            if (nextBearing >= 360)
-            {
-                nextBearing -= 360;
-            }
-
-            _state.SetValue("ship.bearing", Math.Round(nextBearing, 2).ToString(CultureInfo.InvariantCulture));
-        }
-
-        private void SendRefreshStateMessage()
-        {
-            _hubContext.Clients.All.SendAsync("RefreshState", _state.ToJSON());
+            _manager.ConsumeCommands();
+            _mission.Update();
+            _hubContext.Clients.All.SendAsync("RefreshState", _state.ToJson());
         }
     }
 }
