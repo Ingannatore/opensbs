@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OpenSBS.Engine;
-using OpenSBS.Engine.Commands;
-using OpenSBS.Server.Commands;
 
 namespace OpenSBS.Server
 {
@@ -24,12 +21,7 @@ namespace OpenSBS.Server
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSignalR();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "client"; });
-
-            services.AddSingleton<GameState>();
-            services.AddSingleton<CommandsQueue>();
-            services.AddSingleton<GameCommandsManager>();
-
-            services.AddHostedService<GameLoop>();
+            services.AddSingleton<RefreshStateService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

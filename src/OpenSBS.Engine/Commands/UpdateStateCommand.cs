@@ -1,6 +1,4 @@
-﻿using OpenSBS.Engine.Commands;
-
-namespace OpenSBS.Server.Commands
+﻿namespace OpenSBS.Engine.Commands
 {
     public class UpdateStateCommand : Command
     {

@@ -9,12 +9,16 @@ import App from './App'
 import './index.css'
 
 const hub = new signalR.HubConnectionBuilder().withUrl("/ws").build();
-hub.start().catch(err => document.write(err));
+hub.start().then(function () {
+    hub.invoke('StartScenario').catch((err) => {
+        return console.error(err.toString());
+    });
+}).catch(err => document.write(err));
 const store = createStore(rootReducer, applyMiddleware(SignalrMiddleware(hub)));
 
 render(
     <Provider store={store}>
-        <App />
+        <App/>
     </Provider>,
     document.getElementById('root')
 );
