@@ -1,6 +1,7 @@
 ﻿import Actions from '../actions';
 
 const Methods = {
+    START_SCENARIO: 'StartScenario',
     UPDATE_STATE: 'UpdateState',
     REFRESH_STATE: 'RefreshState',
 };
@@ -18,6 +19,11 @@ export default (hub) => {
             return function (action) {
                 if (action.socket && action.socket.send) {
                     switch (action.type) {
+                        case Actions.Types.START_SCENARIO:
+                            hub.invoke(Methods.START_SCENARIO).catch((err) => {
+                                return console.error(err.toString());
+                            });
+                            break;
                         case Actions.Types.UPDATE_STATE:
                             hub.invoke(Methods.UPDATE_STATE, action.payload).catch((err) => {
                                 return console.error(err.toString());

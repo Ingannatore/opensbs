@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import Svg from './elements/svg'
-import Helm from "./stations/helm";
+import Svg from './../elements/svg'
+import Helm from "./../stations/helm";
 
-class App extends Component {
+class Station extends Component {
     render() {
         return (
             <div>
@@ -14,4 +14,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Station;
