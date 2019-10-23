@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace OpenSBS.Engine
+namespace OpenSBS.Engine.Entities
 {
     public class AbstractEntity : IUpdatable
     {
@@ -11,7 +11,7 @@ namespace OpenSBS.Engine
         public Vector3 Rotation { get; set; }
         public float Mass { get; set; }
         public float Size { get; set; }
-        
+
         public void Update()
         {
             throw new System.NotImplementedException();

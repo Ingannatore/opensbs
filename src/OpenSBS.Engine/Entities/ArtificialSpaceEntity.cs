@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OpenSBS.Engine
+namespace OpenSBS.Engine.Entities
 {
     public class ArtificialSpaceEntity : AbstractEntity
     {
@@ -11,9 +11,7 @@ namespace OpenSBS.Engine
 
         public int Hullpoints { get; set; }
         public int MaxHullpoints { get; }
-        
+
         public List<IModule> Modules { get; set; }
-        
-        
     }
 }

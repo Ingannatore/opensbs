@@ -1,7 +1,4 @@
-﻿namespace OpenSBS.Engine
+﻿namespace OpenSBS.Engine.Entities
 {
-    public interface IModule
-    {
-        
-    }
+    public interface IModule { }
 }

@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Engine
+﻿namespace OpenSBS.Engine.Entities
 {
     public class AbstractBrain : IUpdatable
     {

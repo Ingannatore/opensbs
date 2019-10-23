@@ -1,7 +1,7 @@
-﻿namespace OpenSBS.Engine
+﻿namespace OpenSBS.Engine.Entities
 {
     public interface IUpdatable
     {
-       void Update();
+        void Update();
     }
 }
