@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenSBS.Engine.Commands;
@@ -9,20 +10,31 @@ namespace OpenSBS.Engine
 {
     public class Game
     {
-        private static readonly Lazy<Game> _instance = new Lazy<Game>(() => new Game());
+        private static readonly Lazy<Game> SingletonInstance = new Lazy<Game>(() => new Game());
         private readonly ICollection<IUpdatable> _entityList;
-        private readonly Ship _myShip;
+        private readonly IDictionary<string, Brain> _brains;
+        //private readonly Ship _myShip;
         private Timer _timer;
         private DateTime _lastTick;
 
-        public static Game Instance => _instance.Value;
+        public static Game Instance => SingletonInstance.Value;
         public event EventHandler<string> StateRefreshEventHandler;
 
         public Game()
         {
             // TODO : init game, build something?
             _entityList = new List<IUpdatable>();
-            _myShip = new Ship();
+            _brains = new Dictionary<string, Brain>();
+            //_myShip = new Ship(100);
+            AddBrain(new PlayerBrain());
+        }
+
+        public void AddEntity(Entity entity) => _entityList.Add(entity);
+
+        public void AddBrain(Brain brain)
+        {
+            _entityList.Add(brain);
+            _brains.Add(brain.Id, brain);
         }
 
         public void Start()
@@ -44,21 +56,21 @@ namespace OpenSBS.Engine
         public async Task EnqueueCommand(Command command)
         {
             // TODO : routing command to destination entity (with brain)
-            await _myShip.EnqueueCommand(command);
+            await _brains[command.Recipient].EnqueueCommand(command);
+            //await _myShip.EnqueueCommand(command);
         }
 
         private void OnTick(object state)
         {
             var now = DateTime.Now;
-            _lastTick = now;
-
-            _myShip.Update(now - _lastTick);
-            StateRefreshEventHandler?.Invoke(this, _myShip.State);
-
+            var globalState = new string("");
             foreach (var entity in _entityList)
             {
-                entity.Update();
+                entity.Update(now - _lastTick);
+                globalState += entity.State;
             }
+            StateRefreshEventHandler?.Invoke(this, globalState);
+            _lastTick = now;
         }
     }
 }

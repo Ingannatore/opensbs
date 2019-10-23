@@ -1,45 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using OpenSBS.Engine.Commands;
+using OpenSBS.Engine.Entities;
 
 namespace OpenSBS.Engine
 {
-    public class Ship
+    public class Ship : ArtificialSpaceEntity
     {
-        private readonly CommandsQueue _commands;
         private readonly GameState _state;
         public string State => _state.ToJson();
 
-        public Ship()
+        public Ship(int hullpoints) : base(hullpoints)
         {
-            _commands = new CommandsQueue();
             _state = new GameState();
 
             _state.SetValue("ship.bearing", "0");
             _state.SetValue("ship.rudder", "0");
         }
 
-        public async Task EnqueueCommand(Command command)
+        public override void Update(TimeSpan timeSpan)
         {
-            await _commands.Enqueue(command);
-        }
-
-        public void Update(TimeSpan timeSpan)
-        {
-            HandleCommands();
             UpdateState(timeSpan);
         }
 
-        private void HandleCommands()
+        public void HandleCommand(Command command)
         {
-            while (!_commands.Empty)
+            if (command is UpdateStateCommand myCommand)
             {
-                var command = _commands.Dequeue();
-                if (command is UpdateStateCommand myCommand)
-                {
-                    _state.SetValue(myCommand.Key, myCommand.Value);
-                }
+                _state.SetValue(myCommand.Key, myCommand.Value);
             }
         }
 
@@ -57,6 +47,7 @@ namespace OpenSBS.Engine
             {
                 nextBearing += 360;
             }
+
             if (nextBearing >= 360)
             {
                 nextBearing -= 360;

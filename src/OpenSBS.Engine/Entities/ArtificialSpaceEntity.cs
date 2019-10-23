@@ -1,17 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace OpenSBS.Engine.Entities
 {
-    public class ArtificialSpaceEntity : AbstractEntity
+    public abstract class ArtificialSpaceEntity : Entity
     {
-        public ArtificialSpaceEntity(int hullpoints)
-        {
-            MaxHullpoints = Hullpoints = hullpoints;
-        }
-
         public int Hullpoints { get; set; }
         public int MaxHullpoints { get; }
+        public ICollection<IModule> Modules { get; }
 
-        public List<IModule> Modules { get; set; }
+        protected ArtificialSpaceEntity(int hullpoints)
+        {
+            MaxHullpoints = Hullpoints = hullpoints;
+            Modules = new List<IModule>();
+        }
+
+        public void AddModules(IEnumerable<IModule> modules)
+        {
+            foreach (var module in modules)
+            {
+                Modules.Add(module);
+            }
+        }
     }
 }
