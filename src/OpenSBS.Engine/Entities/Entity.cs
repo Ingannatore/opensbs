@@ -13,8 +13,7 @@ namespace OpenSBS.Engine.Entities
         public float Mass { get; set; }
         public float Size { get; set; }
 
-        public string State { get; }
+        public abstract string State();
         public abstract void Update(TimeSpan timeSpan);
-        
     }
 }

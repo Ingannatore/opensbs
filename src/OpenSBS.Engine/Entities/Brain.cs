@@ -6,32 +6,29 @@ namespace OpenSBS.Engine.Entities
 {
     public abstract class Brain : IUpdatable
     {
-        protected readonly Entity _entity;
-        protected readonly CommandsQueue _commands;
-        public string Id
-        {
-            get => _entity.Id; 
-        }
-
-        public string State
-        {
-            get => _entity.State;
-        }
+        protected readonly Entity Entity;
+        protected readonly CommandsQueue Commands;
+        public string Id => Entity.Id;
 
         protected Brain(Entity entity)
         {
-            _entity = entity;
-            _commands = new CommandsQueue();
+            Commands = new CommandsQueue();
+            Entity = entity;
         }
 
         public async Task EnqueueCommand(Command command)
         {
-            await _commands.Enqueue(command);
+            await Commands.Enqueue(command);
         }
 
         public virtual void Update(TimeSpan timeSpan)
         {
-            _entity.Update(timeSpan);
+            Entity.Update(timeSpan);
+        }
+
+        public string State()
+        {
+            return Entity.State();
         }
     }
 }

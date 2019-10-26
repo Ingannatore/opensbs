@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenSBS.Engine.Commands;
@@ -63,11 +62,11 @@ namespace OpenSBS.Engine
         private void OnTick(object state)
         {
             var now = DateTime.Now;
-            var globalState = new string("");
+            var globalState = "";
             foreach (var entity in _entityList)
             {
                 entity.Update(now - _lastTick);
-                globalState += entity.State;
+                globalState += entity.State();
             }
             StateRefreshEventHandler?.Invoke(this, globalState);
             _lastTick = now;

@@ -4,8 +4,7 @@ namespace OpenSBS.Engine.Entities
 {
     public interface IUpdatable
     {
-        string State { get; }
-
+        string State();
         void Update(TimeSpan timeSpan);
     }
 }

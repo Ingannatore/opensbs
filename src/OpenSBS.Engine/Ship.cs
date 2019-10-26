@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Threading.Tasks;
 using OpenSBS.Engine.Commands;
 using OpenSBS.Engine.Entities;
 
@@ -10,7 +8,6 @@ namespace OpenSBS.Engine
     public class Ship : ArtificialSpaceEntity
     {
         private readonly GameState _state;
-        public string State => _state.ToJson();
 
         public Ship(int hullpoints) : base(hullpoints)
         {
@@ -18,6 +15,11 @@ namespace OpenSBS.Engine
 
             _state.SetValue("ship.bearing", "0");
             _state.SetValue("ship.rudder", "0");
+        }
+
+        public override string State()
+        {
+            return _state.ToJson();
         }
 
         public override void Update(TimeSpan timeSpan)
