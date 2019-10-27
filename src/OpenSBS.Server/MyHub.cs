@@ -19,16 +19,16 @@ namespace OpenSBS.Server
             await Task.Run(
                 () =>
                 {
-                    Game.Instance.Start();
-                    Game.Instance.StateRefreshEventHandler -= _refreshStateService.SendRefreshStateCommand;
-                    Game.Instance.StateRefreshEventHandler += _refreshStateService.SendRefreshStateCommand;
+                    GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
+                    Game.Instance.RegisterStateRefreshEventHandler(_refreshStateService.SendRefreshStateCommand);
+                    GameClock.Instance.Start();
                 }
             );
         }
 
         public async Task PauseScenario()
         {
-            await Task.Run(() => Game.Instance.Stop());
+            await Task.Run(() => GameClock.Instance.Stop());
         }
 
         public async Task UpdateState(UpdateStateCommand command)

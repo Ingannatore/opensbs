@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using OpenSBS.Engine.Commands;
 using OpenSBS.Engine.Entities;
@@ -12,9 +11,6 @@ namespace OpenSBS.Engine
         private static readonly Lazy<Game> SingletonInstance = new Lazy<Game>(() => new Game());
         private readonly ICollection<IUpdatable> _entityList;
         private readonly IDictionary<string, Brain> _brains;
-        //private readonly Ship _myShip;
-        private Timer _timer;
-        private DateTime _lastTick;
 
         public static Game Instance => SingletonInstance.Value;
         public event EventHandler<string> StateRefreshEventHandler;
@@ -24,11 +20,13 @@ namespace OpenSBS.Engine
             // TODO : init game, build something?
             _entityList = new List<IUpdatable>();
             _brains = new Dictionary<string, Brain>();
-            //_myShip = new Ship(100);
             AddBrain(new PlayerBrain());
         }
 
-        public void AddEntity(Entity entity) => _entityList.Add(entity);
+        public void AddEntity(Entity entity)
+        {
+            _entityList.Add(entity);
+        }
 
         public void AddBrain(Brain brain)
         {
@@ -36,40 +34,28 @@ namespace OpenSBS.Engine
             _brains.Add(brain.Id, brain);
         }
 
-        public void Start()
+        public void RegisterStateRefreshEventHandler(EventHandler<string> handler)
         {
-            _lastTick = DateTime.Now;
-            _timer = new Timer(
-                OnTick,
-                null,
-                TimeSpan.Zero,
-                TimeSpan.FromMilliseconds(Math.Round(1000.0 / 1))
-            );
-        }
-
-        public void Stop()
-        {
-            _timer?.Change(Timeout.Infinite, 0);
+            StateRefreshEventHandler -= handler;
+            StateRefreshEventHandler += handler;
         }
 
         public async Task EnqueueCommand(Command command)
         {
             // TODO : routing command to destination entity (with brain)
             await _brains[command.Recipient].EnqueueCommand(command);
-            //await _myShip.EnqueueCommand(command);
         }
 
-        private void OnTick(object state)
+        public void OnTick(object state, TimeSpan timeSpan)
         {
-            var now = DateTime.Now;
             var globalState = "";
             foreach (var entity in _entityList)
             {
-                entity.Update(now - _lastTick);
+                entity.Update(timeSpan);
                 globalState += entity.State();
             }
+
             StateRefreshEventHandler?.Invoke(this, globalState);
-            _lastTick = now;
         }
     }
 }
