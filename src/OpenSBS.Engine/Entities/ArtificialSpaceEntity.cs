@@ -4,11 +4,12 @@ namespace OpenSBS.Engine.Entities
 {
     public abstract class ArtificialSpaceEntity : Entity
     {
-        public int Hullpoints { get; set; }
-        public int MaxHullpoints { get; }
         public ICollection<IModule> Modules { get; }
+        public int Hullpoints { get; protected set; }
+        public int MaxHullpoints { get; protected set; }
+        public bool IsDestroyed => Hullpoints <= 0;
 
-        protected ArtificialSpaceEntity(int hullpoints)
+        protected ArtificialSpaceEntity(string id, string name, string type, int hullpoints) : base(id, name, type)
         {
             MaxHullpoints = Hullpoints = hullpoints;
             Modules = new List<IModule>();
@@ -20,6 +21,11 @@ namespace OpenSBS.Engine.Entities
             {
                 Modules.Add(module);
             }
+        }
+
+        public void ApplyDamage(int value)
+        {
+            Hullpoints -= value;
         }
     }
 }

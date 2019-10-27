@@ -4,12 +4,7 @@ namespace OpenSBS.Engine.Entities
 {
     public class PlayerBrain : Brain
     {
-        public PlayerBrain() : base(new Ship(100))
-        {
-            Entity.Id = "PLAYER_SHIP";
-            Entity.Name = "Player Ship";
-            Entity.Type = "Player Ship";
-        }
+        public PlayerBrain(Entity entity) : base(entity) { }
 
         public override void Update(TimeSpan timeSpan)
         {

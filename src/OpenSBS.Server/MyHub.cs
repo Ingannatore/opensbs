@@ -21,6 +21,7 @@ namespace OpenSBS.Server
                 {
                     GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
                     Game.Instance.RegisterStateRefreshEventHandler(_refreshStateService.SendRefreshStateCommand);
+                    Game.Instance.Initialize(new MyScenario());
                     GameClock.Instance.Start();
                 }
             );

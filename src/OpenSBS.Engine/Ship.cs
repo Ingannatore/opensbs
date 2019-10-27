@@ -9,7 +9,7 @@ namespace OpenSBS.Engine
     {
         private readonly GameState _state;
 
-        public Ship(int hullpoints) : base(hullpoints)
+        public Ship(string id, string name) : base(id, name, nameof(Ship), 100)
         {
             _state = new GameState();
 
