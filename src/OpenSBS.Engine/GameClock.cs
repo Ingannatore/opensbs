@@ -3,13 +3,11 @@ using System.Threading;
 
 namespace OpenSBS.Engine
 {
-    public class GameClock
+    public class GameClock : Singleton<GameClock>
     {
-        private static readonly Lazy<GameClock> SingletonInstance = new Lazy<GameClock>(() => new GameClock());
         private Timer _timer;
         private DateTime _lastTick;
 
-        public static GameClock Instance => SingletonInstance.Value;
         public event EventHandler<TimeSpan> TickEventHandler;
 
         public void Start()

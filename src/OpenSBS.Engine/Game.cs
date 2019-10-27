@@ -6,14 +6,12 @@ using OpenSBS.Engine.Entities;
 
 namespace OpenSBS.Engine
 {
-    public class Game
+    public class Game : Singleton<Game>
     {
-        private static readonly Lazy<Game> SingletonInstance = new Lazy<Game>(() => new Game());
         private readonly ICollection<IUpdatable> _entities;
         private readonly IDictionary<string, Brain> _brains;
         private Scenario _scenario;
 
-        public static Game Instance => SingletonInstance.Value;
         public event EventHandler<string> StateRefreshEventHandler;
 
         public Game()
