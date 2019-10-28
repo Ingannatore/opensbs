@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using OpenSBS.Engine.Commands;
+using OpenSBS.Engine.Messages;
 using OpenSBS.Engine.Entities;
 
 namespace OpenSBS.Engine
@@ -27,11 +27,11 @@ namespace OpenSBS.Engine
             UpdateState(timeSpan);
         }
 
-        public void HandleCommand(Command command)
+        public void HandleMessage(Message message)
         {
-            if (command is UpdateStateCommand myCommand)
+            if (message is UpdateStateMessage updateStateMessage)
             {
-                _state.SetValue(myCommand.Key, myCommand.Value);
+                _state.SetValue(updateStateMessage.Key, updateStateMessage.Value);
             }
         }
 

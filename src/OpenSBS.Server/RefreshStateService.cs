@@ -11,7 +11,7 @@ namespace OpenSBS.Server
             _hubContext = hubContext;
         }
 
-        public void SendRefreshStateCommand(object sender, string state)
+        public void SendRefreshStateMessage(object sender, string state)
         {
             _hubContext.Clients.All.SendAsync("RefreshState", state);
         }

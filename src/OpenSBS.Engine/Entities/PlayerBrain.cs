@@ -10,9 +10,9 @@ namespace OpenSBS.Engine.Entities
         {
             if (Entity is Ship playerShip)
             {
-                while (!Commands.Empty)
+                while (!Message.Empty)
                 {
-                    playerShip.HandleCommand(Commands.Dequeue());
+                    playerShip.HandleMessage(Message.Dequeue());
                 }
             }
 

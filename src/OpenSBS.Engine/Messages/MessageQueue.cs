@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenSBS.Engine.Commands
+namespace OpenSBS.Engine.Messages
 {
-    public class CommandsQueue
+    public class MessageQueue
     {
-        private readonly Queue<Command> _queue;
+        private readonly Queue<Message> _queue;
         public bool Empty => !_queue.Any();
 
-        public CommandsQueue()
+        public MessageQueue()
         {
-            _queue = new Queue<Command>();
+            _queue = new Queue<Message>();
         }
 
-        public async Task Enqueue(Command command)
+        public async Task Enqueue(Message message)
         {
-            await Task.Run(() => _queue.Enqueue(command));
+            await Task.Run(() => _queue.Enqueue(message));
         }
 
-        public Command Dequeue()
+        public Message Dequeue()
         {
             try
             {

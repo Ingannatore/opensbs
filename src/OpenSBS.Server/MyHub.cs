@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using OpenSBS.Engine;
-using OpenSBS.Engine.Commands;
+using OpenSBS.Engine.Messages;
 
 namespace OpenSBS.Server
 {
@@ -20,7 +20,7 @@ namespace OpenSBS.Server
                 () =>
                 {
                     GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
-                    Game.Instance.RegisterStateRefreshEventHandler(_refreshStateService.SendRefreshStateCommand);
+                    Game.Instance.RegisterStateRefreshEventHandler(_refreshStateService.SendRefreshStateMessage);
                     Game.Instance.Initialize(new MyScenario());
                     GameClock.Instance.Start();
                 }
@@ -32,9 +32,9 @@ namespace OpenSBS.Server
             await Task.Run(() => GameClock.Instance.Stop());
         }
 
-        public async Task UpdateState(UpdateStateCommand command)
+        public async Task UpdateState(UpdateStateMessage message)
         {
-            await Game.Instance.EnqueueCommand(command);
+            await Game.Instance.EnqueueMessage(message);
         }
     }
 }

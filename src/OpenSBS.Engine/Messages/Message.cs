@@ -1,11 +1,11 @@
-﻿namespace OpenSBS.Engine.Commands
+﻿namespace OpenSBS.Engine.Messages
 {
-    public abstract class Command
+    public abstract class Message
     {
         public string Id { get; }
         public string Recipient { get;  }
 
-        protected Command(string id, string recipient)
+        protected Message(string id, string recipient)
         {
             Id = id;
             Recipient = recipient;
