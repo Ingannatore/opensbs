@@ -17,7 +17,7 @@ export default (hub) => {
 
         return function (next) {
             return function (action) {
-                if (action.socket && action.socket.send) {
+                if (action.meta && action.meta.socket) {
                     switch (action.type) {
                         case Actions.Types.START_SCENARIO:
                             hub.invoke(Methods.START_SCENARIO).catch((err) => {

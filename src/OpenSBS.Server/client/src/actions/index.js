@@ -6,9 +6,8 @@ const Types = {
 
 const startScenario = () => ({
     type: Types.START_SCENARIO,
-    payload: null,
-    socket: {
-        send: true
+    meta: {
+        socket: true
     }
 });
 
@@ -18,8 +17,8 @@ const updateState = (key, value) => ({
         key: key,
         value: value
     },
-    socket: {
-        send: true
+    meta: {
+        socket: true
     }
 });
 
