@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import Svg from './../elements/svg'
-import Helm from "./../stations/helm";
+import Navigation from "../stations/navigation";
 
 class Station extends Component {
     render() {
         return (
             <div>
                 <Svg>
-                    <Helm/>
+                    <Navigation/>
                 </Svg>
             </div>
         );

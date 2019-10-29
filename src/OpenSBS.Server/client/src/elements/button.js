@@ -33,7 +33,8 @@ class Button extends Component {
 Button.defaultProps = {
     fontSize: 1,
     bold: false,
-    rotation: ''
+    rotation: '',
+    toggled: false
 };
 
 export default Button;
