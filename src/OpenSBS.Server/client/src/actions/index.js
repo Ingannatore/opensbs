@@ -1,15 +1,7 @@
 const Types = {
-    START_SCENARIO: 'START_SCENARIO',
     UPDATE_STATE: 'UPDATE_STATE',
     REFRESH_STATE: 'REFRESH_STATE',
 };
-
-const startScenario = () => ({
-    type: Types.START_SCENARIO,
-    meta: {
-        socket: true
-    }
-});
 
 const updateState = (key, value) => ({
     type: Types.UPDATE_STATE,
@@ -18,12 +10,13 @@ const updateState = (key, value) => ({
         value: value
     },
     meta: {
-        socket: true
+        socket: true,
+        method: 'UpdateState',
+        path: null
     }
 });
 
 export default {
     Types,
-    startScenario,
     updateState
 };

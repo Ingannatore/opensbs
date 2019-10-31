@@ -1,7 +1,7 @@
 ﻿import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import Actions from '../actions';
+import Actions from '../actions/system';
 
 class Home extends Component {
     constructor(props) {

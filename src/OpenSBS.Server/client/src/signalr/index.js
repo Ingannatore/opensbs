@@ -1,14 +1,20 @@
 ﻿import Actions from '../actions';
 
-const Methods = {
-    START_SCENARIO: 'StartScenario',
-    UPDATE_STATE: 'UpdateState',
-    REFRESH_STATE: 'RefreshState',
+const sendMessage = (hub, action) => {
+    if (action.payload) {
+        hub.invoke(action.meta.method, action.payload).catch((err) => {
+            return console.error(err.toString());
+        });
+    } else {
+        hub.invoke(action.meta.method).catch((err) => {
+            return console.error(err.toString());
+        });
+    }
 };
 
 export default (hub) => {
     return function (store) {
-        hub.on(Methods.REFRESH_STATE, (data) => {
+        hub.on('RefreshState', (data) => {
             return store.dispatch({
                 type: Actions.Types.REFRESH_STATE,
                 payload: JSON.parse(data)
@@ -18,20 +24,7 @@ export default (hub) => {
         return function (next) {
             return function (action) {
                 if (action.meta && action.meta.socket) {
-                    switch (action.type) {
-                        case Actions.Types.START_SCENARIO:
-                            hub.invoke(Methods.START_SCENARIO).catch((err) => {
-                                return console.error(err.toString());
-                            });
-                            break;
-                        case Actions.Types.UPDATE_STATE:
-                            hub.invoke(Methods.UPDATE_STATE, action.payload).catch((err) => {
-                                return console.error(err.toString());
-                            });
-                            break;
-                        default:
-                            return console.error(`Unknown socket action: ${action.type}`);
-                    }
+                    sendMessage(hub, action);
                 }
 
                 return next(action);
