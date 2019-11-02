@@ -9,6 +9,7 @@ const startScenario = () => ({
     meta: {
         socket: true,
         method: 'StartScenario',
+        empty: true,
         path: null
     }
 });
@@ -19,6 +20,7 @@ const pauseScenario = () => ({
     meta: {
         socket: true,
         method: 'PauseScenario',
+        empty: true,
         path: null
     }
 });

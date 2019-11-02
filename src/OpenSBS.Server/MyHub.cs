@@ -32,7 +32,7 @@ namespace OpenSBS.Server
             await Task.Run(() => GameClock.Instance.Stop());
         }
 
-        public async Task UpdateState(UpdateStateMessage message)
+        public async Task UpdateState(Message message)
         {
             await Game.Instance.EnqueueMessage(message);
         }

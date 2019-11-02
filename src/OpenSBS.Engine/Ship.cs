@@ -29,10 +29,8 @@ namespace OpenSBS.Engine
 
         public void HandleMessage(Message message)
         {
-            if (message is UpdateStateMessage updateStateMessage)
-            {
-                _state.SetValue(updateStateMessage.Key, updateStateMessage.Value);
-            }
+            var payload = message.Payload.ToObject<UpdateStatePayload>();
+            _state.SetValue(payload.Key, payload.Value);
         }
 
         private void UpdateState(TimeSpan timeSpan)

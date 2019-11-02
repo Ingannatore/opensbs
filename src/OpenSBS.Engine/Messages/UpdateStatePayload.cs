@@ -1,11 +1,11 @@
 ﻿namespace OpenSBS.Engine.Messages
 {
-    public class UpdateStateMessage : Message
+    public class UpdateStatePayload
     {
         public string Key { get; }
         public string Value { get; }
 
-        public UpdateStateMessage(string key, string value = null) : base("UPDATE_STATE", "PLAYER_SHIP")
+        public UpdateStatePayload(string key, string value = null)
         {
             Key = key;
             Value = value;

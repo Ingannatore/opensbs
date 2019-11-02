@@ -12,7 +12,8 @@ const updateState = (key, value) => ({
     meta: {
         socket: true,
         method: 'UpdateState',
-        path: null
+        empty: false,
+        path: 'PLAYER_SHIP'
     }
 });
 

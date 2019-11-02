@@ -1,14 +1,16 @@
-﻿namespace OpenSBS.Engine.Messages
-{
-    public abstract class Message
-    {
-        public string Id { get; }
-        public string Recipient { get; }
+﻿using Newtonsoft.Json.Linq;
 
-        protected Message(string id, string recipient)
+namespace OpenSBS.Engine.Messages
+{
+    public class Message
+    {
+        public string Recipient { get; }
+        public JObject Payload { get; }
+
+        public Message(string recipient, JObject payload)
         {
-            Id = id;
             Recipient = recipient;
+            Payload = payload;
         }
     }
 }

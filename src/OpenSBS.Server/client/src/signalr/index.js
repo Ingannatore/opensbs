@@ -1,12 +1,19 @@
 ﻿import Actions from '../actions';
 
+const createMessage = (action) => {
+    return {
+        recipient: action.meta.path,
+        payload: action.payload ? action.payload : null
+    };
+};
+
 const sendMessage = (hub, action) => {
-    if (action.payload) {
-        hub.invoke(action.meta.method, action.payload).catch((err) => {
+    if (action.meta.empty) {
+        hub.invoke(action.meta.method).catch((err) => {
             return console.error(err.toString());
         });
     } else {
-        hub.invoke(action.meta.method).catch((err) => {
+        hub.invoke(action.meta.method, createMessage(action)).catch((err) => {
             return console.error(err.toString());
         });
     }
