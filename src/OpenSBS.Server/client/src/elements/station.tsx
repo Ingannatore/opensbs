@@ -1,9 +1,9 @@
-﻿import React, {Component} from 'react'
+﻿import * as React from 'react';
 
-class Station extends Component {
+export default class Station extends React.Component<{}, {}> {
     render() {
         return (
-            <g id={'station' + this.props.id}>
+            <g>
                 <defs>
                     <pattern id="BackgroundPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                         <line x1="0" y1="20" x2="20" y2="20" stroke="#122127" strokeWidth="1"/>
@@ -17,5 +17,3 @@ class Station extends Component {
         );
     }
 }
-
-export default Station;

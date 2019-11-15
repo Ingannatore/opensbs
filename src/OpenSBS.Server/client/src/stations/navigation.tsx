@@ -1,14 +1,16 @@
-﻿import React, {Component} from 'react'
+﻿import * as React from 'react';
 import Station from "../elements/station";
 import Helm from "../widgets/helm";
 import Footer from "../elements/footer";
 import Radar from "../widgets/radar";
 import Bearing from "../widgets/bearing";
+import Compass from "../widgets/compass";
 
-class Navigation extends Component {
+export default class Navigation extends React.Component<{}, {}> {
     render() {
         return (
-            <Station id="helm">
+            <Station>
+                <Compass x={230} y={230}/>
                 <Helm x="230" y="800"/>
                 <Bearing x="540" y="100"/>
                 <Radar x="960" y="520"/>
@@ -23,5 +25,3 @@ class Navigation extends Component {
         );
     }
 }
-
-export default Navigation;

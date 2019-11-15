@@ -1,6 +1,6 @@
 ﻿import Actions from "../actions";
 
-const stateReducer = (state = {}, action) => {
+const stateReducer = (state = {}, action: any) => {
     if (action.type !== Actions.Types.REFRESH_STATE) {
         return state;
     }

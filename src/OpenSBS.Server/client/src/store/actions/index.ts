@@ -3,7 +3,7 @@ const Types = {
     REFRESH_STATE: 'REFRESH_STATE',
 };
 
-const updateState = (key, value) => ({
+const updateState = (key: string, value: any) => ({
     type: Types.UPDATE_STATE,
     payload: {
         key: key,

@@ -1,35 +1,35 @@
 ﻿import Actions from '../actions';
 
-const createMessage = (action) => {
+const createMessage = (action: any) => {
     return {
         recipient: action.meta.path,
         payload: action.payload ? action.payload : null
     };
 };
 
-const sendMessage = (hub, action) => {
+const sendMessage = (hub: any, action: any) => {
     if (action.meta.empty) {
-        hub.invoke(action.meta.method).catch((err) => {
+        hub.invoke(action.meta.method).catch((err: any) => {
             return console.error(err.toString());
         });
     } else {
-        hub.invoke(action.meta.method, createMessage(action)).catch((err) => {
+        hub.invoke(action.meta.method, createMessage(action)).catch((err: any) => {
             return console.error(err.toString());
         });
     }
 };
 
-export default (hub) => {
-    return function (store) {
-        hub.on('RefreshState', (data) => {
+export default (hub: any) => {
+    return function (store: any) {
+        hub.on('RefreshState', (data: string) => {
             return store.dispatch({
                 type: Actions.Types.REFRESH_STATE,
                 payload: JSON.parse(data)
             });
         });
 
-        return function (next) {
-            return function (action) {
+        return function (next: any) {
+            return function (action: any) {
                 if (action.meta && action.meta.socket) {
                     sendMessage(hub, action);
                 }

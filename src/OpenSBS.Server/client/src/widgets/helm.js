@@ -1,6 +1,6 @@
 ﻿import React, {Component} from 'react'
 import {connect} from "react-redux";
-import Actions from "../actions";
+import Actions from "../store/actions";
 import Button from "../elements/button";
 import Container from "../elements/container";
 

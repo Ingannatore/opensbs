@@ -4,9 +4,9 @@ import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 import * as signalR from "@aspnet/signalr";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import rootReducer from './reducers';
-import SignalrMiddleware from './signalr';
-import Home from './pages/home';
+import rootReducer from './store/reducers';
+import SignalrMiddleware from './store/middlewares/signalr';
+import Home from './pages/home.tsx';
 import Station from './pages/station';
 import './index.css';
 

@@ -1,10 +1,15 @@
-﻿import React, {Component} from 'react';
+﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
-import Actions from '../actions/system';
+import {withRouter, RouteComponentProps} from 'react-router-dom';
+import {Dispatch} from "redux";
+import Actions from '../store/actions/system';
 
-class Home extends Component {
-    constructor(props) {
+interface HomePageProps extends RouteComponentProps {
+    dispatch: Dispatch,
+}
+
+class Home extends React.Component<HomePageProps, {}> {
+    constructor(props: HomePageProps) {
         super(props);
 
         this.startButtonHandler = this.startButtonHandler.bind(this);
@@ -24,8 +29,4 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {};
-};
-
-export default withRouter(connect(mapStateToProps)(Home));
+export default withRouter(connect(null, null)(Home));
