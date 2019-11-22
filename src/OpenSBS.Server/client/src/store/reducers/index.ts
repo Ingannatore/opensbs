@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import stateReducer from "./state";
+import server from "./server";
 import radarReducer from "../../widgets/radar/reducer";
 
 export default combineReducers({
-    stateReducer,
+    server,
     radarReducer
 });

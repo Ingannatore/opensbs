@@ -7,7 +7,10 @@ namespace OpenSBS.Engine
     {
         public override void Initialize()
         {
-            Game.Instance.AddBrain(new PlayerBrain(new Ship("PLAYER_SHIP", "Player Ship")));
+            var ship = new Ship("PLAYER_SHIP", "Archimedes");
+            ship.SetRotation(0, 23, 0);
+
+            Game.Instance.AddBrain(new Brain(ship));
         }
 
         public override void Update(TimeSpan timeSpan) { }

@@ -4,31 +4,34 @@ using OpenSBS.Engine.Messages;
 
 namespace OpenSBS.Engine.Entities
 {
-    public abstract class Brain : IUpdatable
+    public class Brain : IUpdatable
     {
-        protected readonly Entity Entity;
-        protected readonly MessageQueue Message;
+        protected readonly MessageQueue MessageQueue;
+        public Entity Entity { get; }
         public string Id => Entity.Id;
 
-        protected Brain(Entity entity)
+        public Brain(Entity entity)
         {
-            Message = new MessageQueue();
+            MessageQueue = new MessageQueue();
             Entity = entity;
         }
 
         public async Task EnqueueMessage(Message message)
         {
-            await Message.Enqueue(message);
+            await MessageQueue.Enqueue(message);
         }
 
         public virtual void Update(TimeSpan timeSpan)
         {
-            Entity.Update(timeSpan);
-        }
+            if (Entity is ArtificialEntity spaceEntity)
+            {
+                while (!MessageQueue.Empty)
+                {
+                    spaceEntity.HandleMessage(MessageQueue.Dequeue());
+                }
+            }
 
-        public string State()
-        {
-            return Entity.State();
+            Entity.Update(timeSpan);
         }
     }
 }

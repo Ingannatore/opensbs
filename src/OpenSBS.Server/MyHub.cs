@@ -36,5 +36,10 @@ namespace OpenSBS.Server
         {
             await Game.Instance.EnqueueMessage(message);
         }
+
+        public async Task ModuleMessage(Message message)
+        {
+            await Game.Instance.EnqueueMessage(message);
+        }
     }
 }

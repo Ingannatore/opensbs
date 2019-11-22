@@ -1,6 +1,6 @@
 ﻿import Actions from "../actions";
 
-const stateReducer = (state = {}, action: any) => {
+const server = (state = {}, action: any) => {
     if (action.type !== Actions.Types.REFRESH_STATE) {
         return state;
     }
@@ -13,4 +13,4 @@ const stateReducer = (state = {}, action: any) => {
     return {...state, ...newState};
 };
 
-export default stateReducer;
+export default server;

@@ -1,4 +1,9 @@
-﻿namespace OpenSBS.Engine.Entities
+﻿using OpenSBS.Engine.Messages;
+
+namespace OpenSBS.Engine.Entities
 {
-    public interface IModule { }
+    public interface IModule : IUpdatable
+    {
+        void HandleMessage(Message message);
+    }
 }

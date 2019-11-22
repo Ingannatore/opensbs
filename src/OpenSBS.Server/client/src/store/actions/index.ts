@@ -1,9 +1,11 @@
+import ReduxAction from "../models/redux-action";
+
 const Types = {
     UPDATE_STATE: 'UPDATE_STATE',
     REFRESH_STATE: 'REFRESH_STATE',
 };
 
-const updateState = (key: string, value: any) => ({
+const updateState = (key: string, value: any): ReduxAction => ({
     type: Types.UPDATE_STATE,
     payload: {
         key: key,
@@ -13,11 +15,25 @@ const updateState = (key: string, value: any) => ({
         socket: true,
         method: 'UpdateState',
         empty: false,
-        path: 'PLAYER_SHIP'
+        path: 'PLAYER_SHIP',
+        module: null
+    }
+});
+
+const sendModuleMessage = (moduleId: string, payload: any): ReduxAction => ({
+    type: Types.UPDATE_STATE,
+    payload: payload,
+    meta: {
+        socket: true,
+        method: 'ModuleMessage',
+        empty: false,
+        path: 'PLAYER_SHIP',
+        module: moduleId
     }
 });
 
 export default {
     Types,
-    updateState
+    updateState,
+    sendModuleMessage
 };

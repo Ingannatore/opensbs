@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using OpenSBS.Engine.Messages;
 using OpenSBS.Engine.Entities;
@@ -8,7 +9,7 @@ namespace OpenSBS.Engine
 {
     public class Game : Singleton<Game>
     {
-        private readonly ICollection<IUpdatable> _entities;
+        private readonly ICollection<Entity> _entities;
         private readonly IDictionary<string, Brain> _brains;
         private Scenario _scenario;
 
@@ -16,7 +17,7 @@ namespace OpenSBS.Engine
 
         public Game()
         {
-            _entities = new List<IUpdatable>();
+            _entities = new List<Entity>();
             _brains = new Dictionary<string, Brain>();
         }
 
@@ -36,7 +37,7 @@ namespace OpenSBS.Engine
 
         public void AddBrain(Brain brain)
         {
-            _entities.Add(brain);
+            AddEntity(brain.Entity);
             _brains.Add(brain.Id, brain);
         }
 
@@ -53,15 +54,13 @@ namespace OpenSBS.Engine
 
         public void OnTick(object state, TimeSpan timeSpan)
         {
-            var globalState = "";
-            foreach (var entity in _entities)
+            foreach (var brain in _brains.Values)
             {
-                entity.Update(timeSpan);
-                globalState += entity.State();
+                brain.Update(timeSpan);
             }
 
             _scenario.Update(timeSpan);
-            StateRefreshEventHandler?.Invoke(this, globalState);
+            StateRefreshEventHandler?.Invoke(this, _entities.First().State());
         }
     }
 }

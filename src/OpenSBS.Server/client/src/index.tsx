@@ -12,7 +12,10 @@ import './index.css';
 
 const hub = new signalR.HubConnectionBuilder().withUrl("/ws").build();
 hub.start().catch(err => document.write(err));
-const store = createStore(rootReducer, applyMiddleware(SignalrMiddleware(hub)));
+const store = createStore(
+    rootReducer,
+    applyMiddleware(SignalrMiddleware(hub))
+);
 
 render(
     <Provider store={store}>
