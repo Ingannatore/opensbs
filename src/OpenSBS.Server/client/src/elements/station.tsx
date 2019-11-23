@@ -11,7 +11,17 @@ export default class Station extends React.Component<{}, {}> {
                     </pattern>
                 </defs>
                 <rect x="0" y="0" width="1920" height="1080" fill="#0b1519"/>
-                <rect x="0" y="0" width="1920" height="1080" fill="url(#BackgroundPattern)" opacity=".75"/>
+                <rect x="0" y="0" width="1920" height="1080" fill="url(#BackgroundPattern)" opacity="1"/>
+
+                {/*
+                <line x1="20" y1="20" x2="20" y2="1020" stroke="red"/>
+                <line x1="460" y1="20" x2="460" y2="1020" stroke="red"/>
+                <line x1="960" y1="20" x2="960" y2="1020" stroke="red"/>
+                <line x1="1460" y1="20" x2="1460" y2="1020" stroke="red"/>
+                <line x1="1900" y1="20" x2="1900" y2="1020" stroke="red"/>
+                <line x1="20" y1="520" x2="1900" y2="520" stroke="red"/>
+                */}
+
                 {this.props.children}
             </g>
         );

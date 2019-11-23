@@ -7,7 +7,8 @@ interface BezelComponentProps {
     stroke: string,
     rotation: number,
     interval: number,
-    majorInterval: number
+    majorInterval: number,
+    fontSize: number
 }
 
 export default class Bezel extends React.Component<BezelComponentProps, {}> {
@@ -21,7 +22,8 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
         y: 0,
         stroke: '#c0daf1',
         interval: 10,
-        majorInterval: 30
+        majorInterval: 30,
+        fontSize: 1.4
     };
 
     constructor(props: BezelComponentProps) {
@@ -30,7 +32,7 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
         this.markerStart = -this.props.size;
         this.minorMarkerEnd = this.markerStart - 10;
         this.majorMarkerEnd = this.markerStart - 18;
-        this.textPosition = this.majorMarkerEnd - 18;
+        this.textPosition = this.majorMarkerEnd - 14;
     }
 
     public render(): JSX.Element {
@@ -72,7 +74,7 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
                         x="0"
                         y={this.textPosition}
                         textAnchor="middle"
-                        fontSize="1.4rem"
+                        fontSize={this.props.fontSize + 'rem'}
                         transform={`rotate(${i}, 0, 0)`}
                         fill="#76797c"
                     >{i}</text>

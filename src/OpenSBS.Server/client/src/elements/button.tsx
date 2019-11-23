@@ -9,7 +9,7 @@ interface ButtonComponentProps {
     rotation: number,
     toggled: boolean,
     fontSize: number,
-    onClick: (event: React.MouseEvent<SVGElement, MouseEvent>) => void
+    onClick?: (event: React.MouseEvent<SVGElement, MouseEvent>) => void
 }
 
 export default class Button extends React.Component<ButtonComponentProps, {}> {
@@ -20,6 +20,7 @@ export default class Button extends React.Component<ButtonComponentProps, {}> {
         fontSize: 1,
         bold: false,
         rotation: 0,
+        size: 30,
         toggled: false
     };
 

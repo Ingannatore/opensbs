@@ -24,7 +24,7 @@ class Helm extends React.Component<HelmComponentProps> {
 
     render() {
         return (
-            <Container size={210} x={this.props.x} y={this.props.y}>
+            <Container size={200} x={this.props.x} y={this.props.y}>
                 <Button x={-100} y={0} size={30} onClick={this.turnLeft}>-</Button>
                 <Button x={0} y={0} size={30} onClick={this.reset}>0</Button>
                 <Button x={100} y={0} size={30} onClick={this.turnRight}>+</Button>

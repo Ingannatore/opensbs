@@ -3,14 +3,17 @@ import Station from "../elements/station";
 import Footer from "../elements/footer";
 import Compass from "../widgets/compass";
 import Helm from "../widgets/helm";
+import Bearing from "../widgets/bearing";
+import Radar from "../widgets/radar";
 
 export default class Navigation extends React.Component<{}, {}> {
     render() {
         return (
             <Station>
-                <Compass x={230} y={230}/>
-                <Helm x={230} y={690} />
-
+                <Compass x={220} y={220}/>
+                <Helm x={220} y={820} />
+                <Bearing x={540} y={100}/>
+                <Radar x={960} y={520}/>
                 <Footer>
                     <text x="960" y="21" textAnchor="middle" fontSize="1.5rem" fill="white">navigation</text>
                     <g transform="translate(960, 3) rotate(180)">

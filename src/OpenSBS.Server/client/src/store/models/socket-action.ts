@@ -1,7 +1,7 @@
 ﻿import ReduxActionMetadata from "./redux-action-metadata";
 
-export default interface ReduxAction {
+export default interface SocketAction {
     type: string,
     payload: any | null,
-    meta: ReduxActionMetadata | null
+    meta: ReduxActionMetadata
 }

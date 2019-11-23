@@ -1,8 +1,8 @@
 ﻿import Actions from '../actions';
 import SignalrMessage from "../models/signalr-message";
-import ReduxAction from "../models/redux-action";
+import SocketAction from "../models/socket-action";
 
-const createMessage = (action: ReduxAction): SignalrMessage => {
+const createMessage = (action: SocketAction): SignalrMessage => {
     return {
         recipient: action.meta.path,
         moduleId: action.meta.module,
@@ -10,7 +10,7 @@ const createMessage = (action: ReduxAction): SignalrMessage => {
     };
 };
 
-const sendMessage = (hub: any, action: ReduxAction): void => {
+const sendMessage = (hub: any, action: SocketAction): void => {
     if (action.meta.empty) {
         hub.invoke(action.meta.method).catch((err: any) => {
             return console.error(err.toString());
