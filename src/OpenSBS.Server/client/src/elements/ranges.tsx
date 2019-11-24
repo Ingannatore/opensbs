@@ -60,7 +60,7 @@ export default class Ranges extends React.Component<RangesComponentProps, {}> {
     }
 
     private static renderText(radius: number, value: number) {
-        const stringValue = value <= 1000 ? value : value / 1000 + 'k';
+        const stringValue = value < 1000 ? value : value / 1000 + 'k';
         return (
             <text
                 x={radius - 4} y="-8"

@@ -5,11 +5,11 @@ import Vector3 from "../../store/models/vector3";
 import Container from "../../elements/container";
 import Bezel from "../../elements/bezel";
 import Button from "../../elements/button";
-import Actions from "./actions";
-import {RadarState} from "./state";
-import Display from "../../elements/display";
 import Directions from "../../elements/directions";
 import Ranges from "../../elements/ranges";
+import RangeDisplay from "../../elements/range-display";
+import Actions from "./actions";
+import {RadarState} from "./state";
 
 interface RadarComponentProps {
     dispatch: any,
@@ -32,6 +32,8 @@ class Radar extends React.Component<RadarComponentProps, {}> {
         this.toggleRangeCirclesHandler = this.toggleRangeCirclesHandler.bind(this);
         this.toggleRangeTextsHandler = this.toggleRangeTextsHandler.bind(this);
         this.toggleWeaponsArcsHandler = this.toggleWeaponsArcsHandler.bind(this);
+        this.radarZoomInHandler = this.radarZoomInHandler.bind(this);
+        this.radarZoomOutHandler = this.radarZoomOutHandler.bind(this);
     }
 
     public render() {
@@ -44,7 +46,7 @@ class Radar extends React.Component<RadarComponentProps, {}> {
                 )}
 
                 {this.props.radar.enableRangeCircles && (
-                    <Ranges size={440} distance={10000} showTextes={this.props.radar.enableRangeTexts}/>
+                    <Ranges size={440} distance={this.props.radar.radarRange} showTextes={this.props.radar.enableRangeTexts}/>
                 )}
 
                 <circle cx="0" cy="0" r="440" stroke="#33393d" fill="none" strokeWidth="1"/>
@@ -71,9 +73,17 @@ class Radar extends React.Component<RadarComponentProps, {}> {
                     onClick={this.toggleWeaponsArcsHandler}
                 >WPN</Button>
 
-                <Display x={420} y={420} size={80} title="radar range" subtitle="kilometers">10</Display>
-                <Button x={0} y={542} fontSize={2} rotation={-60}>-</Button>
-                <Button x={0} y={542} fontSize={2} rotation={-30}>+</Button>
+                <RangeDisplay x={420} y={420} title={'radar range'}>
+                    {this.props.radar.radarRange}
+                </RangeDisplay>
+                <Button
+                    x={0} y={542} fontSize={2} rotation={-60}
+                    onClick={this.radarZoomInHandler}
+                >+</Button>
+                <Button
+                    x={0} y={542} fontSize={2} rotation={-30}
+                    onClick={this.radarZoomOutHandler}
+                >-</Button>
             </Container>
         );
     }
@@ -92,6 +102,14 @@ class Radar extends React.Component<RadarComponentProps, {}> {
 
     private toggleWeaponsArcsHandler() {
         this.props.dispatch(Actions.toggleWeaponsArcs());
+    }
+
+    private radarZoomInHandler() {
+        this.props.dispatch(Actions.zoomIn());
+    }
+
+    private radarZoomOutHandler() {
+        this.props.dispatch(Actions.zoomOut());
     }
 }
 

@@ -5,6 +5,8 @@ const Types = {
     TOGGLE_RANGE_CIRCLES: 'TOGGLE_RANGE_CIRCLES',
     TOGGLE_RANGE_TEXTS: 'TOGGLE_RANGE_TEXTS',
     TOGGLE_WEAPONS_ARCS: 'TOGGLE_WEAPONS_ARCS',
+    ZOOM_IN: 'ZOOM_IN',
+    ZOOM_OUT: 'ZOOM_OUT'
 };
 
 const toggleDirectionsLines = (): ReduxAction => ({
@@ -31,10 +33,24 @@ const toggleWeaponsArcs = (): ReduxAction => ({
     meta: null
 });
 
+const zoomIn = (): ReduxAction => ({
+    type: Types.ZOOM_IN,
+    payload: null,
+    meta: null
+});
+
+const zoomOut = (): ReduxAction => ({
+    type: Types.ZOOM_OUT,
+    payload: null,
+    meta: null
+});
+
 export default {
     Types,
     toggleDirectionsLines,
     toggleRangeCircles,
     toggleRangeTexts,
-    toggleWeaponsArcs
+    toggleWeaponsArcs,
+    zoomIn,
+    zoomOut
 };
