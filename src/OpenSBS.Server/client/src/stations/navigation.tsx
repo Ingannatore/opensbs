@@ -1,7 +1,6 @@
 ﻿import * as React from 'react';
 import Station from "../elements/station";
 import Footer from "../elements/footer";
-import Compass from "../widgets/compass";
 import Helm from "../widgets/helm";
 import Bearing from "../widgets/bearing";
 import Radar from "../widgets/radar";
@@ -10,7 +9,6 @@ export default class Navigation extends React.Component<{}, {}> {
     render() {
         return (
             <Station>
-                <Compass x={220} y={220}/>
                 <Helm x={220} y={820} />
                 <Bearing x={540} y={100}/>
                 <Radar x={960} y={520}/>

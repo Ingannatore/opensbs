@@ -8,7 +8,10 @@ interface BezelComponentProps {
     rotation: number,
     interval: number,
     majorInterval: number,
-    fontSize: number
+    fontSize: number,
+    fromAngle: number,
+    toAngle: number,
+    labels: string
 }
 
 export default class Bezel extends React.Component<BezelComponentProps, {}> {
@@ -16,6 +19,7 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
     private readonly majorMarkerEnd: number;
     private readonly markerStart: number;
     private readonly textPosition: number;
+    private readonly labels: string[] | null;
 
     public static defaultProps = {
         x: 0,
@@ -23,7 +27,10 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
         stroke: '#c0daf1',
         interval: 10,
         majorInterval: 30,
-        fontSize: 1.4
+        fontSize: 1.4,
+        fromAngle: 0,
+        toAngle: 360,
+        labels: ''
     };
 
     constructor(props: BezelComponentProps) {
@@ -33,6 +40,7 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
         this.minorMarkerEnd = this.markerStart - 10;
         this.majorMarkerEnd = this.markerStart - 18;
         this.textPosition = this.majorMarkerEnd - 14;
+        this.labels = this.props.labels ? this.props.labels.split(' ') : null;
     }
 
     public render(): JSX.Element {
@@ -57,8 +65,14 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
 
     private renderMarkers(): JSX.Element[] {
         const markers = [];
-        for (let i = 0; i < 360; i += this.props.interval) {
+        let numberOfMajorMarker = 0;
+        for (let i = this.props.fromAngle; i <= this.props.toAngle; i += this.props.interval) {
+            if (this.props.fromAngle === 0 && this.props.toAngle === 360 && i === 360) {
+                continue;
+            }
+
             if ((i % this.props.majorInterval) === 0) {
+                const markerValue = this.labels ? this.labels[numberOfMajorMarker] : i;
                 markers.push(
                     <line
                         key={`linemarker${i}`}
@@ -77,8 +91,10 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
                         fontSize={this.props.fontSize + 'rem'}
                         transform={`rotate(${i}, 0, 0)`}
                         fill="#76797c"
-                    >{i}</text>
+                    >{markerValue}</text>
                 );
+
+                numberOfMajorMarker += 1;
             } else {
                 markers.push(
                     <line
