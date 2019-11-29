@@ -52,6 +52,7 @@ export default class Ranges extends React.Component<RangesComponentProps, {}> {
     private static renderCircle(radius: number) {
         return (
             <circle
+                key={'rangecircle-' + radius}
                 cx="0" cy="0" r={radius}
                 stroke="#122127" strokeWidth="1"
                 fill="none"
@@ -63,6 +64,7 @@ export default class Ranges extends React.Component<RangesComponentProps, {}> {
         const stringValue = value < 1000 ? value : value / 1000 + 'k';
         return (
             <text
+                key={'rangetext-' + value}
                 x={radius - 4} y="-8"
                 fontSize="1rem" fill="#76797c" textAnchor="end"
             >{stringValue}</text>

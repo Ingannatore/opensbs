@@ -77,13 +77,13 @@ class Radar extends React.Component<RadarComponentProps, {}> {
                     {this.props.radar.radarRange}
                 </RangeDisplay>
                 <Button
-                    x={0} y={542} fontSize={2} rotation={-60}
+                    x={0} y={542} fontSize={2} rotation={-56}
                     onClick={this.radarZoomInHandler}
-                >+</Button>
-                <Button
-                    x={0} y={542} fontSize={2} rotation={-30}
-                    onClick={this.radarZoomOutHandler}
                 >-</Button>
+                <Button
+                    x={0} y={542} fontSize={2} rotation={-34}
+                    onClick={this.radarZoomOutHandler}
+                >+</Button>
             </Container>
         );
     }

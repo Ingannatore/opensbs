@@ -38,6 +38,7 @@ export default class Directions extends React.Component<DirectionsComponentProps
         const transform = angle ? `rotate(${angle})` : '';
         return (
             <line
+                key={'direction-' + angle}
                 x1="0" y1={-size}
                 x2="0" y2={size}
                 stroke="#2a363c" strokeDasharray="2 4"
