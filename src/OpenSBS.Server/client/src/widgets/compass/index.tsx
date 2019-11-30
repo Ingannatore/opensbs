@@ -1,10 +1,10 @@
 ﻿import * as React from 'react';
-import {connect} from "react-redux";
-import Selectors from "../../store/selectors";
-import Vector3 from "../../store/models/vector3";
-import Container from "../../elements/container";
-import Display from "../../elements/display";
-import Bezel from "../../elements/bezel";
+import {connect} from 'react-redux';
+import Selectors from '../../store/selectors';
+import Vector3 from '../../models/vector3';
+import Container from '../../elements/container';
+import Display from '../../elements/display';
+import Bezel from '../../elements/bezel';
 
 interface CompassComponentProps {
     x: number,

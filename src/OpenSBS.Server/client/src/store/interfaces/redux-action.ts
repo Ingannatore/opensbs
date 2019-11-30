@@ -1,4 +1,4 @@
-﻿import ReduxActionMetadata from "./redux-action-metadata";
+﻿import ReduxActionMetadata from './socket-action-metadata';
 
 export default interface ReduxAction {
     type: string,

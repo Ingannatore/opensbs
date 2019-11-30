@@ -1,15 +1,15 @@
 ﻿import * as React from 'react';
-import {connect} from "react-redux";
-import Selectors from "../../store/selectors";
-import Vector3 from "../../store/models/vector3";
-import Container from "../../elements/container";
-import Bezel from "../../elements/bezel";
-import Button from "../../elements/button";
-import Directions from "../../elements/directions";
-import Ranges from "../../elements/ranges";
-import RangeDisplay from "../../elements/range-display";
-import Actions from "./actions";
-import {RadarState} from "./state";
+import {connect} from 'react-redux';
+import Selectors from '../../store/selectors';
+import Vector3 from '../../models/vector3';
+import Container from '../../elements/container';
+import Bezel from '../../elements/bezel';
+import Button from '../../elements/button';
+import Directions from '../../elements/directions';
+import Ranges from '../../elements/ranges';
+import RangeDisplay from '../../elements/range-display';
+import {RadarState} from './state';
+import Actions from './actions';
 
 interface RadarComponentProps {
     dispatch: any,

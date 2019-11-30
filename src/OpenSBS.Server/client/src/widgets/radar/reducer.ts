@@ -1,5 +1,5 @@
-﻿import ReduxAction from "../../store/models/redux-action";
-import {defaultState, RadarState} from "./state";
+﻿import ReduxAction from '../../store/interfaces/redux-action';
+import {defaultState, RadarState} from './state';
 import Actions from "./actions";
 
 const radarRanges = [10000, 7500, 5000, 2000, 1000];

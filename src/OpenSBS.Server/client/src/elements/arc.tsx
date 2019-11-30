@@ -1,4 +1,6 @@
 ﻿import * as React from 'react';
+import Angle from '../lib/angle';
+import Coords from '../lib/coords';
 
 interface ArcComponentProps {
     x: number,
@@ -25,8 +27,8 @@ export default class Arc extends React.Component<ArcComponentProps, {}> {
     constructor(props: ArcComponentProps) {
         super(props);
 
-        this.start = this.polarToCartesian(this.props.size, this.degToRad(this.props.fromAngle));
-        this.end = this.polarToCartesian(this.props.size, this.degToRad(this.props.toAngle));
+        this.start = Coords.toCarthesian(this.props.size, Angle.toRadians(this.props.fromAngle));
+        this.end = Coords.toCarthesian(this.props.size, Angle.toRadians(this.props.toAngle));
         this.isLargeArc = this.props.toAngle - this.props.fromAngle > 180;
     }
 
@@ -40,16 +42,5 @@ export default class Arc extends React.Component<ArcComponentProps, {}> {
                   d={d}
             />
         );
-    }
-
-    private polarToCartesian(r: number, theta: number): any {
-        return {
-            x: r * Math.cos(theta),
-            y: r * Math.sin(theta)
-        };
-    }
-
-    private degToRad(degrees: number): number {
-        return degrees * (Math.PI / 180);
     }
 }

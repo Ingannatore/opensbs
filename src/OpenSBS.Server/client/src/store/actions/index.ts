@@ -1,4 +1,4 @@
-import SocketAction from "../models/socket-action";
+import SocketAction from '../interfaces/socket-action';
 
 const Types = {
     UPDATE_STATE: 'UPDATE_STATE',

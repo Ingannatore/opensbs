@@ -5,7 +5,8 @@ interface ContainerComponentProps {
     y: number,
     size: number,
     outerStroke: string,
-    innerStroke: string
+    innerStroke: string,
+    onClick?: (event: React.MouseEvent<SVGElement, MouseEvent>) => void
 }
 
 export default class Container extends React.Component<ContainerComponentProps, {}> {
@@ -27,7 +28,7 @@ export default class Container extends React.Component<ContainerComponentProps, 
 
     public render() {
         return (
-            <g transform={this.translation}>
+            <g transform={this.translation} onClick={this.props.onClick}>
                 <circle cx="0" cy="0" r={this.props.size} stroke="none" fill="#070d0f"/>
                 <circle cx="0" cy="0" r={this.props.size} stroke={this.props.outerStroke} fill="none"/>
                 <circle cx="0" cy="0" r={this.innerRadius} stroke={this.props.innerStroke} fill="none"/>

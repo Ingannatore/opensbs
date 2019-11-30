@@ -1,6 +1,6 @@
 ﻿import Actions from '../actions';
-import SignalrMessage from "../models/signalr-message";
-import SocketAction from "../models/socket-action";
+import SignalrMessage from '../interfaces/signalr-message';
+import SocketAction from '../interfaces/socket-action';
 
 const createMessage = (action: SocketAction): SignalrMessage => {
     return {

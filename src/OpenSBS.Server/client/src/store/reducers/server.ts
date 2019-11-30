@@ -1,4 +1,4 @@
-﻿import Actions from "../actions";
+﻿import Actions from '../actions';
 
 const server = (state = {}, action: any) => {
     if (action.type !== Actions.Types.REFRESH_STATE) {

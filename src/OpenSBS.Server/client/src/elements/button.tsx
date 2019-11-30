@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
-import Container from "./container";
-import Text from "./text";
+import Container from './container';
+import Text from './text';
 
 interface ButtonComponentProps {
     x: number,

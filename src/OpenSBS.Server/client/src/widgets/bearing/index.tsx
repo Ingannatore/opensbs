@@ -1,8 +1,8 @@
 ﻿import * as React from 'react';
-import {connect} from "react-redux";
-import Selectors from "../../store/selectors";
-import Vector3 from "../../store/models/vector3";
-import Display from "../../elements/display";
+import {connect} from 'react-redux';
+import Selectors from '../../store/selectors';
+import Vector3 from '../../models/vector3';
+import Display from '../../elements/display';
 
 interface BearingComponentProps {
     x: number,

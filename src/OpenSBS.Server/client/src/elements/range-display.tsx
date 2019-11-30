@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import Display from "./display";
+import Display from './display';
 
 interface RangeDisplayComponentProps {
     x: number,

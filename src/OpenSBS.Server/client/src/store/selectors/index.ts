@@ -1,5 +1,5 @@
-﻿import EntityModule from "../models/entity-module";
-import Vector3 from "../models/vector3";
+﻿import EntityModule from '../../models/entity-module';
+import Vector3 from '../../models/vector3';
 
 const selectRotation = (state: any): Vector3 => {
     if (!state.server.rotation) {

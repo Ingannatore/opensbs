@@ -1,4 +1,4 @@
-﻿import ReduxAction from "../../store/models/redux-action";
+﻿import ReduxAction from '../../store/interfaces/redux-action';
 
 const Types = {
     TOGGLE_DIRECTION_LINES: 'TOGGLE_DIRECTION_LINES',

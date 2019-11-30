@@ -1,13 +1,13 @@
 ﻿import * as React from 'react';
-import Button from "../../elements/button";
-import Container from "../../elements/container";
-import Actions from "../../store/actions";
-import {connect} from "react-redux";
-import Selectors from "../../store/selectors";
-import Bezel from "../../elements/bezel";
-import Display from "../../elements/display";
-import Arc from "../../elements/arc";
-import Text from "../../elements/text";
+import {connect} from 'react-redux';
+import Actions from '../../store/actions';
+import Selectors from '../../store/selectors';
+import Button from '../../elements/button';
+import Container from '../../elements/container';
+import Bezel from '../../elements/bezel';
+import Display from '../../elements/display';
+import Arc from '../../elements/arc';
+import Text from '../../elements/text';
 
 interface HelmComponentProps {
     dispatch: any,
@@ -20,9 +20,9 @@ class Helm extends React.Component<HelmComponentProps> {
     constructor(props: HelmComponentProps) {
         super(props);
 
-        this.turnLeft = this.turnLeft.bind(this);
-        this.reset = this.reset.bind(this);
-        this.turnRight = this.turnRight.bind(this);
+        this.turnLeftHandler = this.turnLeftHandler.bind(this);
+        this.resetHandler = this.resetHandler.bind(this);
+        this.turnRightHandler = this.turnRightHandler.bind(this);
     }
 
     render() {
@@ -70,22 +70,22 @@ class Helm extends React.Component<HelmComponentProps> {
                 <Display size={120} title="rudder" subtitle={subtitle}>
                     {Math.abs(rudderValue)}
                 </Display>
-                <Button x={-170} y={-170} size={30} fontSize={2} onClick={this.turnLeft}>←</Button>
-                <Button x={170} y={170} size={30} onClick={this.reset}>STOP</Button>
-                <Button x={170} y={-170} size={30} fontSize={2} onClick={this.turnRight}>→</Button>
+                <Button x={-170} y={-170} size={30} fontSize={2} onClick={this.turnLeftHandler}>←</Button>
+                <Button x={170} y={170} size={30} onClick={this.resetHandler}>STOP</Button>
+                <Button x={170} y={-170} size={30} fontSize={2} onClick={this.turnRightHandler}>→</Button>
             </Container>
         );
     }
 
-    private turnLeft() {
+    private turnLeftHandler() {
         this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, -1))
     }
 
-    private reset() {
+    private resetHandler() {
         this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 0))
     }
 
-    private turnRight() {
+    private turnRightHandler() {
         this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 1))
     }
 }
