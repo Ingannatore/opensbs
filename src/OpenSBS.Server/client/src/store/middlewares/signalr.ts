@@ -6,6 +6,7 @@ const createMessage = (action: SocketAction): SignalrMessage => {
     return {
         recipient: action.meta.path,
         moduleId: action.meta.module,
+        command: action.meta.command,
         payload: action.payload
     };
 };
