@@ -16,11 +16,12 @@ const updateState = (key: string, value: any): SocketAction => ({
         method: 'UpdateState',
         empty: false,
         path: 'PLAYER_SHIP',
-        module: null
+        module: null,
+        command: null
     }
 });
 
-const sendModuleMessage = (moduleId: string, payload: any): SocketAction => ({
+const sendModuleMessage = (moduleId: string, command: string, payload: any): SocketAction => ({
     type: Types.UPDATE_STATE,
     payload: payload,
     meta: {
@@ -28,7 +29,8 @@ const sendModuleMessage = (moduleId: string, payload: any): SocketAction => ({
         method: 'ModuleMessage',
         empty: false,
         path: 'PLAYER_SHIP',
-        module: moduleId
+        module: moduleId,
+        command: command
     }
 });
 

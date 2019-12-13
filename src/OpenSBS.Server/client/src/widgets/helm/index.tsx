@@ -27,7 +27,7 @@ class Helm extends React.Component<HelmComponentProps> {
 
     render() {
         const rudderValue = this.props.module ? this.props.module.rudder : 0;
-        let subtitle = '';
+        let subtitle: string;
         switch (Math.sign(rudderValue)) {
             case -1:
                 subtitle = 'port';
@@ -78,15 +78,15 @@ class Helm extends React.Component<HelmComponentProps> {
     }
 
     private turnLeftHandler() {
-        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, -1))
+        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 'set', -1))
     }
 
     private resetHandler() {
-        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 0))
+        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 'set',0))
     }
 
     private turnRightHandler() {
-        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 1))
+        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 'set',1))
     }
 }
 

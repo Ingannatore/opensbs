@@ -3,5 +3,6 @@
     method: string,
     empty: boolean,
     path: string,
-    module: string | null
+    module: string | null,
+    command: string | null
 }
