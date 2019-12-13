@@ -25,10 +25,9 @@ namespace OpenSBS.Engine.Modules
                     break;
                 default:
                     // Log message??
-                    Console.WriteLine("Unknown command: "+message.Command);
+                    Console.WriteLine($"Unknown command: '{message.Recipient}'; '{message.ModuleId}'; '{message.Command}'");
                     break;
             }
-            Rudder = message.Payload.ToObject<int>();
         }
 
         public override void Update(TimeSpan timeSpan)
