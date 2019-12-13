@@ -15,6 +15,19 @@ namespace OpenSBS.Engine.Modules
 
         public override void HandleMessage(Message message)
         {
+            switch (message.Command)
+            {
+                case "pippo":
+                    Rudder = message.Payload.ToObject<int>();
+                    break;
+                case "pluto":
+                    Rudder += message.Payload.ToObject<int>();
+                    break;
+                default:
+                    // Log message??
+                    Console.WriteLine("Unknown command: "+message.Command);
+                    break;
+            }
             Rudder = message.Payload.ToObject<int>();
         }
 
