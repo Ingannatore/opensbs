@@ -17,10 +17,10 @@ namespace OpenSBS.Engine.Modules
         {
             switch (message.Command)
             {
-                case "pippo":
+                case "set":
                     Rudder = message.Payload.ToObject<int>();
                     break;
-                case "pluto":
+                case "add":
                     Rudder += message.Payload.ToObject<int>();
                     break;
                 default:
