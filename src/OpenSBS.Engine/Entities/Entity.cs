@@ -45,6 +45,11 @@ namespace OpenSBS.Engine.Entities
             return this;
         }
 
+        public override string ToString()
+        {
+            return $"{Id}:{Name}:{Type}";
+        }
+
         public abstract string State();
         public abstract void Update(TimeSpan timeSpan);
     }

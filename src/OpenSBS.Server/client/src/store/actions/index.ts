@@ -15,8 +15,7 @@ const updateState = (key: string, value: any): SocketAction => ({
         socket: true,
         method: 'UpdateState',
         empty: false,
-        path: 'PLAYER_SHIP',
-        module: null,
+        recipient: 'PLAYER_SHIP',
         command: null
     }
 });
@@ -28,8 +27,7 @@ const sendModuleMessage = (moduleId: string, command: string, payload: any): Soc
         socket: true,
         method: 'ModuleMessage',
         empty: false,
-        path: 'PLAYER_SHIP',
-        module: moduleId,
+        recipient: `PLAYER_SHIP/${moduleId}`,
         command: command
     }
 });

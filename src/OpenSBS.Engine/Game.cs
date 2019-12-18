@@ -43,7 +43,7 @@ namespace OpenSBS.Engine
 
         public async Task EnqueueMessage(Message message)
         {
-            await _brains[message.Recipient].EnqueueMessage(message);
+            await _brains[message.Recipient.EntityId].EnqueueMessage(message);
         }
 
         public void RegisterStateRefreshEventHandler(EventHandler<string> handler)

@@ -21,9 +21,9 @@ namespace OpenSBS.Engine.Entities
 
         public void HandleMessage(Message message)
         {
-            if (message.IsForModule)
+            if (message.Recipient.IsModule)
             {
-                _modules[message.ModuleId].HandleMessage(message);
+                _modules[message.Recipient.ModuleId].HandleMessage(message);
             }
         }
 

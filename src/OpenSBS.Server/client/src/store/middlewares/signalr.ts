@@ -4,8 +4,7 @@ import SocketAction from '../interfaces/socket-action';
 
 const createMessage = (action: SocketAction): SignalrMessage => {
     return {
-        recipient: action.meta.path,
-        moduleId: action.meta.module,
+        recipient: action.meta.recipient,
         command: action.meta.command,
         payload: action.payload
     };

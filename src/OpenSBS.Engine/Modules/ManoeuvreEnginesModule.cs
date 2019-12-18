@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenSBS.Engine.Entities;
+using OpenSBS.Engine.Exceptions;
 using OpenSBS.Engine.Messages;
 
 namespace OpenSBS.Engine.Modules
@@ -24,9 +25,7 @@ namespace OpenSBS.Engine.Modules
                     Rudder += message.Payload.ToObject<int>();
                     break;
                 default:
-                    // Log message??
-                    Console.WriteLine($"Unknown command: '{message.Recipient}'; '{message.ModuleId}'; '{message.Command}'");
-                    break;
+                    throw new UnknownModuleCommandException(this, message);
             }
         }
 

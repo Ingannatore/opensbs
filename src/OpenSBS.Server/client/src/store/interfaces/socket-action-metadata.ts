@@ -2,7 +2,6 @@
     socket: boolean,
     method: string,
     empty: boolean,
-    path: string,
-    module: string | null,
+    recipient: string,
     command: string | null
 }

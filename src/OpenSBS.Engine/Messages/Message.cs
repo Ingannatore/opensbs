@@ -4,18 +4,20 @@ namespace OpenSBS.Engine.Messages
 {
     public class Message
     {
-        public string Recipient { get; }
-        public string ModuleId { get; }
+        public MessageRecipient Recipient { get; }
         public string Command { get; }
         public JRaw Payload { get; }
-        public bool IsForModule => !string.IsNullOrWhiteSpace(ModuleId);
 
-        public Message(string recipient, string moduleId, string command, JRaw payload)
+        public Message(string recipient, string command, JRaw payload)
         {
-            Recipient = recipient;
-            ModuleId = moduleId;
+            Recipient = new MessageRecipient(recipient);
             Command = command;
             Payload = payload;
+        }
+
+        public override string ToString()
+        {
+            return $"{Recipient}:{Command}";
         }
     }
 }

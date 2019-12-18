@@ -22,6 +22,11 @@ namespace OpenSBS.Engine.Entities
             return this;
         }
 
+        public override string ToString()
+        {
+            return $"{Id}:{Type}@{Owner}";
+        }
+
         public abstract void Update(TimeSpan timeSpan);
         public abstract void HandleMessage(Message message);
     }
