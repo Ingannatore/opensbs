@@ -19,6 +19,8 @@ namespace OpenSBS.Server
             await Task.Run(
                 () =>
                 {
+                    _refreshStateService.ClearState();
+
                     GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
                     Game.Instance.RegisterStateRefreshEventHandler(_refreshStateService.SendRefreshStateMessage);
                     Game.Instance.Initialize(new MyScenario());
