@@ -25,13 +25,7 @@ namespace OpenSBS.Server
 
         public void SendRefreshStateMessage(object sender, ICollection<Entity> entities)
         {
-            /*
-            if (state == _lastSentState)
-            {
-                return;
-            }
-            */
-            string state = JsonConvert.SerializeObject(
+            var state = JsonConvert.SerializeObject(
                 new RefreshStateMessage(entities.First(), entities.Skip(1), ""),
                 new JsonSerializerSettings
                 {
@@ -41,6 +35,11 @@ namespace OpenSBS.Server
                     }
                 }
             );
+
+            if (state == _lastSentState)
+            {
+                return;
+            }
 
             _hubContext.Clients.All.SendAsync("RefreshState", state);
             _lastSentState = state;

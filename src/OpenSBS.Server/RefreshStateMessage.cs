@@ -5,17 +5,19 @@ namespace OpenSBS.Server
 {
     public class RefreshStateMessage
     {
-        public Entity PlayerShip { get; }
-        public IEnumerable<Entity> WorldEntities { get; }
-        public string ServerProperties { get; }
+        public Entity Ship { get; }
+        public IEnumerable<Entity> Entities { get; }
+        public string Properties { get; }
 
-        public RefreshStateMessage(Entity playerShip, IEnumerable<Entity> worldEntities,
-            string serverProperties)
+        public RefreshStateMessage(
+            Entity ship,
+            IEnumerable<Entity> entities,
+            string properties
+        )
         {
-            PlayerShip = playerShip;
-            WorldEntities = worldEntities;
-            ServerProperties = serverProperties;
+            Ship = ship;
+            Entities = entities;
+            Properties = properties;
         }
     }
-
 }
