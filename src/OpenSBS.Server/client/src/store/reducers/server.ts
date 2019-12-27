@@ -1,6 +1,12 @@
 ﻿import Actions from '../actions';
 
-const server = (state = {}, action: any) => {
+const defaultState = {
+    ship: null,
+    entities: [],
+    properties: null
+};
+
+const server = (state = defaultState, action: any) => {
     if (action.type !== Actions.Types.REFRESH_STATE) {
         return state;
     }
