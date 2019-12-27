@@ -13,7 +13,7 @@ namespace OpenSBS.Engine
         private readonly IDictionary<string, Brain> _brains;
         private Scenario _scenario;
 
-        public event EventHandler<string> StateRefreshEventHandler;
+        public event EventHandler<ICollection<Entity>> StateRefreshEventHandler;
 
         public Game()
         {
@@ -46,7 +46,7 @@ namespace OpenSBS.Engine
             await _brains[message.Recipient.EntityId].EnqueueMessage(message);
         }
 
-        public void RegisterStateRefreshEventHandler(EventHandler<string> handler)
+        public void RegisterStateRefreshEventHandler(EventHandler<ICollection<Entity>> handler)
         {
             StateRefreshEventHandler -= handler;
             StateRefreshEventHandler += handler;
@@ -60,7 +60,7 @@ namespace OpenSBS.Engine
             }
 
             _scenario.Update(timeSpan);
-            StateRefreshEventHandler?.Invoke(this, _entities.First().State());
+            StateRefreshEventHandler?.Invoke(this, _entities);
         }
     }
 }

@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using OpenSBS.Engine.Entities;
 
 namespace OpenSBS.Server
 {
@@ -18,12 +23,24 @@ namespace OpenSBS.Server
             _lastSentState = null;
         }
 
-        public void SendRefreshStateMessage(object sender, string state)
+        public void SendRefreshStateMessage(object sender, ICollection<Entity> entities)
         {
+            /*
             if (state == _lastSentState)
             {
                 return;
             }
+            */
+            string state = JsonConvert.SerializeObject(
+                new RefreshStateMessage(entities.First(), entities.Skip(1), ""),
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    }
+                }
+            );
 
             _hubContext.Clients.All.SendAsync("RefreshState", state);
             _lastSentState = state;
