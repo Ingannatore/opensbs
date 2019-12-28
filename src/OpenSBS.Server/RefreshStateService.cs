@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using OpenSBS.Engine;
 using OpenSBS.Engine.Entities;
 
 namespace OpenSBS.Server
@@ -26,7 +27,7 @@ namespace OpenSBS.Server
         public void SendRefreshStateMessage(object sender, ICollection<Entity> entities)
         {
             var state = JsonConvert.SerializeObject(
-                new RefreshStateMessage(entities.First(), entities.Skip(1), ""),
+                new RefreshStateMessage(entities.First(), entities.Skip(1), new ServerProperties(true, GameClock.Instance.IsRunning())),
                 new JsonSerializerSettings
                 {
                     ContractResolver = new DefaultContractResolver

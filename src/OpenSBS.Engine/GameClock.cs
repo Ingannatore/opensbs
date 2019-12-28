@@ -7,6 +7,7 @@ namespace OpenSBS.Engine
     {
         private Timer _timer;
         private DateTime _lastTick;
+        private bool _isRunning;
 
         public event EventHandler<TimeSpan> TickEventHandler;
 
@@ -19,11 +20,13 @@ namespace OpenSBS.Engine
                 TimeSpan.Zero,
                 TimeSpan.FromMilliseconds(Math.Round(1000.0 / 1))
             );
+            _isRunning = true;
         }
 
         public void Stop()
         {
             _timer?.Change(Timeout.Infinite, 0);
+            _isRunning = false;
         }
 
         public void RegisterTickEventHandler(EventHandler<TimeSpan> onTick)
@@ -39,5 +42,7 @@ namespace OpenSBS.Engine
 
             _lastTick = now;
         }
+
+        public bool IsRunning() => _isRunning;
     }
 }
