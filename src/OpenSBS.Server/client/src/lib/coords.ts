@@ -8,4 +8,12 @@ export default class Coords {
             z: 0
         };
     }
+
+    public static distance(from: Vector3, to: Vector3): number {
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        const dz = to.z - from.z;
+
+        return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2) + Math.pow(dz, 2));
+    }
 }

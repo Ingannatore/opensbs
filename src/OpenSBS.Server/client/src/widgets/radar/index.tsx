@@ -10,6 +10,8 @@ import Ranges from '../../elements/ranges';
 import RangeDisplay from '../../elements/range-display';
 import {RadarState} from './state';
 import Actions from './actions';
+import Entity from '../../models/entity';
+import EntitiesOverlay from '../../elements/entities-overlay';
 
 interface RadarComponentProps {
     dispatch: any,
@@ -17,7 +19,9 @@ interface RadarComponentProps {
     y: number,
     size: number,
     radar: RadarState,
-    rotation: Vector3
+    position: Vector3,
+    rotation: Vector3,
+    entities: Entity[]
 }
 
 class Radar extends React.Component<RadarComponentProps, {}> {
@@ -37,20 +41,34 @@ class Radar extends React.Component<RadarComponentProps, {}> {
     }
 
     public render() {
+        const innerSize = this.props.size - 60;
         return (
             <Container x={this.props.x} y={this.props.y} size={this.props.size}>
-                <Bezel size={450} stroke={'none'} rotation={this.props.rotation.y} interval={3} majorInterval={15} fontSize={1}/>
-
                 {this.props.radar.enableDirectionLines && (
-                    <Directions size={440}/>
+                    <Directions size={innerSize}/>
                 )}
 
                 {this.props.radar.enableRangeCircles && (
-                    <Ranges size={440} distance={this.props.radar.radarRange} showTextes={this.props.radar.enableRangeTexts}/>
+                    <Ranges
+                        size={innerSize} distance={this.props.radar.radarRange}
+                        showTextes={this.props.radar.enableRangeTexts}
+                    />
                 )}
 
-                <circle cx="0" cy="0" r="440" stroke="#33393d" fill="none" strokeWidth="1"/>
-                <path d="M 0 -6 L 6 6 L 0 3 L -6 6 Z" stroke="white" strokeWidth="1" fill="white"/>
+                <EntitiesOverlay
+                    range={this.props.radar.radarRange}
+                    size={innerSize}
+                    entities={this.props.entities}
+                />
+
+                <circle cx="0" cy="0" r={this.props.size - 33} stroke="#070d0f" fill="none" strokeWidth="54"/>
+                <Bezel
+                    size={this.props.size - 50} stroke={'none'} rotation={this.props.rotation.y}
+                    interval={3} majorInterval={15} fontSize={1}
+                />
+                <circle cx="0" cy="0" r={innerSize} stroke="#33393d" fill="none" strokeWidth="1"/>
+
+                <use href="#icon-ship"/>
 
                 <Button
                     x={0} y={542} rotation={60}
@@ -114,9 +132,14 @@ class Radar extends React.Component<RadarComponentProps, {}> {
 }
 
 const mapStateToProps = (state: any) => {
+    const shipPosition = Selectors.selectShipPosition(state);
+    const radarState = state.radar;
+
     return {
-        rotation: Selectors.selectRotation(state),
-        radar: state.radar
+        position: shipPosition,
+        rotation: Selectors.selectShipRotation(state),
+        entities: Selectors.selectEntitiesByDistance(state, shipPosition, radarState.radarRange),
+        radar: radarState
     };
 };
 
