@@ -58,6 +58,8 @@ class Radar extends React.Component<RadarComponentProps, {}> {
                 <EntitiesOverlay
                     range={this.props.radar.radarRange}
                     size={innerSize}
+                    origin={this.props.position}
+                    rotation={this.props.rotation}
                     entities={this.props.entities}
                 />
 
