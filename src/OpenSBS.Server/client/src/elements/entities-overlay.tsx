@@ -42,7 +42,7 @@ export default class EntitiesOverlay extends React.Component<EntitiesOverlayComp
                 <text
                     x="0" y="18"
                     fontSize="1rem" fill="white" textAnchor="middle"
-                    transform={SvgTransform.rotate(this.props.rotation.y, 0, 18)}
+                    transform={SvgTransform.rotate(this.props.rotation.y)}
                 >{entity.name}</text>
             </g>
         );
