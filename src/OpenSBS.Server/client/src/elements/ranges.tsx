@@ -66,7 +66,7 @@ export default class Ranges extends React.Component<RangesComponentProps, {}> {
             <text
                 key={'rangetext-' + value}
                 x={radius - 4} y="-8"
-                fontSize="1rem" fill="#76797c" textAnchor="end"
+                fontSize=".75rem" fill="#76797c" textAnchor="end"
             >{stringValue}</text>
         );
     }

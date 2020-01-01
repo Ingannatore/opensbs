@@ -29,7 +29,7 @@ class Compass extends React.Component<CompassComponentProps, {}> {
 
 const mapStateToProps = (state: any) => {
     return {
-        rotation: Selectors.selectRotation(state)
+        rotation: Selectors.selectShipRotation(state)
     };
 };
 

@@ -33,7 +33,7 @@ class Bearing extends React.Component<BearingComponentProps, {}> {
 
 const mapStateToProps = (state: any) => {
     return {
-        rotation: Selectors.selectRotation(state)
+        rotation: Selectors.selectShipRotation(state)
     };
 };
 
