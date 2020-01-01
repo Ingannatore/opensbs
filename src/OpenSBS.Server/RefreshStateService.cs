@@ -26,8 +26,14 @@ namespace OpenSBS.Server
 
         public void SendRefreshStateMessage(object sender, ICollection<Entity> entities)
         {
+            var refreshStateMessage = new RefreshStateMessage(
+                entities.First(),
+                entities.Skip(1),
+                new ServerProperties(true, GameClock.Instance.IsRunning)
+            );
+
             var state = JsonConvert.SerializeObject(
-                new RefreshStateMessage(entities.First(), entities.Skip(1), new ServerProperties(true, GameClock.Instance.IsRunning())),
+                refreshStateMessage,
                 new JsonSerializerSettings
                 {
                     ContractResolver = new DefaultContractResolver

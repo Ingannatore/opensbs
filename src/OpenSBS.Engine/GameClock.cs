@@ -5,10 +5,11 @@ namespace OpenSBS.Engine
 {
     public class GameClock : Singleton<GameClock>
     {
+        private const int ExpectedFps = 1;
         private Timer _timer;
         private DateTime _lastTick;
-        private bool _isRunning;
 
+        public bool IsRunning { get; private set; }
         public event EventHandler<TimeSpan> TickEventHandler;
 
         public void Start()
@@ -18,15 +19,15 @@ namespace OpenSBS.Engine
                 OnTick,
                 null,
                 TimeSpan.Zero,
-                TimeSpan.FromMilliseconds(Math.Round(1000.0 / 1))
+                TimeSpan.FromMilliseconds(Math.Round(1000.0 / ExpectedFps))
             );
-            _isRunning = true;
+            IsRunning = true;
         }
 
         public void Stop()
         {
             _timer?.Change(Timeout.Infinite, 0);
-            _isRunning = false;
+            IsRunning = false;
         }
 
         public void RegisterTickEventHandler(EventHandler<TimeSpan> onTick)
@@ -42,7 +43,5 @@ namespace OpenSBS.Engine
 
             _lastTick = now;
         }
-
-        public bool IsRunning() => _isRunning;
     }
 }

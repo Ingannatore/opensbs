@@ -3,7 +3,10 @@
 const defaultState = {
     ship: null,
     entities: [],
-    properties: null
+    properties: {
+        isReady: false,
+        isRunning: false
+    }
 };
 
 const server = (state = defaultState, action: any) => {

@@ -20,17 +20,4 @@ namespace OpenSBS.Server
             Properties = properties;
         }
     }
-
-    public class ServerProperties
-    {
-        public bool isReady { get; }
-        public bool isRunning { get; }
-
-        public ServerProperties(bool isReady, bool isRunning)
-        {
-            this.isReady = isReady;
-            this.isRunning = isRunning;
-        }
-
-    }
 }
