@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import Container from './container';
 import Text from './text';
+import SvgTransform from '../lib/svg-transform';
 
 interface ButtonComponentProps {
     x: number,
@@ -27,8 +28,8 @@ export default class Button extends React.Component<ButtonComponentProps, {}> {
     constructor(props: ButtonComponentProps) {
         super(props);
 
-        this.rotation = `rotate(${this.props.rotation})`;
-        this.textRotation = `rotate(${-(this.props.rotation)})`;
+        this.rotation = SvgTransform.rotate(this.props.rotation);
+        this.textRotation = SvgTransform.rotate(-this.props.rotation);
     }
 
     public render() {

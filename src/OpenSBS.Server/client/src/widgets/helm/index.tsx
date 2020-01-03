@@ -2,6 +2,7 @@
 import {connect} from 'react-redux';
 import Actions from '../../store/actions';
 import Selectors from '../../store/selectors';
+import SvgTransform from '../../lib/svg-transform';
 import Button from '../../elements/button';
 import Container from '../../elements/container';
 import Bezel from '../../elements/bezel';
@@ -38,6 +39,7 @@ class Helm extends React.Component<HelmComponentProps> {
             default: subtitle = 'stop';
         }
 
+        const rotation = SvgTransform.rotate(rudderValue * 30);
         return (
             <Container size={200} x={this.props.x} y={this.props.y}>
                 <Bezel
@@ -51,13 +53,13 @@ class Helm extends React.Component<HelmComponentProps> {
                     x1="0" y1="-186"
                     x2="0" y2="-195"
                     stroke="#c9c571" strokeWidth="2"
-                    transform={`rotate(${rudderValue * 30}, 0, 0)`}
+                    transform={rotation}
                 />
                 <line
                     x1="0" y1="-121"
                     x2="0" y2="-134"
                     stroke="#c9c571" strokeWidth="2"
-                    transform={`rotate(${rudderValue * 30}, 0, 0)`}
+                    transform={rotation}
                 />
                 <line
                     x1="0" y1="121"

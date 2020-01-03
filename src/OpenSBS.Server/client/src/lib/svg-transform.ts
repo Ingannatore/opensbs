@@ -4,7 +4,7 @@
     }
 
     public static rotate(degrees: number, x: number = 0, y: number = 0): string {
-        if (degrees === 0) {
+        if (!degrees) {
             return '';
         }
 
