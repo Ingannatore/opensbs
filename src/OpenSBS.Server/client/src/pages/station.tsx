@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import * as React from 'react';
 import Svg from './../elements/svg'
 import Navigation from "../stations/navigation";
 
-class Station extends Component {
+class Station extends React.Component<{}, {}> {
     render() {
         return (
             <div>
