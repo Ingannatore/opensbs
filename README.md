@@ -1,6 +1,6 @@
 # OpenSBS
 
-OpenSBS is an open-source starship bridge simulator.
+OpenSBS is a web-based open-source starship bridge simulator.
 
 We started this project mainly to test our skill but also to try something different in the bridge simulators world.
 
