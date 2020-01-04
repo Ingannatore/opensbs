@@ -45,7 +45,7 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
     }
 
     public render(): JSX.Element {
-        const rotation = SvgTransform.rotate(-Math.trunc(this.props.rotation));
+        const rotation = SvgTransform.rotate(-this.props.rotation);
 
         return (
             <g>

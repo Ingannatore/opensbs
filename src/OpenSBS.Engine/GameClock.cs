@@ -5,7 +5,7 @@ namespace OpenSBS.Engine
 {
     public class GameClock : Singleton<GameClock>
     {
-        private const int ExpectedFps = 1;
+        private const int ExpectedFps = 30;
         private Timer _timer;
         private DateTime _lastTick;
 

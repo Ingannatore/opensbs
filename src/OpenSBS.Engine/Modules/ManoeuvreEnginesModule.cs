@@ -7,6 +7,7 @@ namespace OpenSBS.Engine.Modules
 {
     public class ManoeuvreEnginesModule : Module
     {
+        private const float RotationSpeed = 1;
         public int Rudder { get; protected set; }
 
         public ManoeuvreEnginesModule(string id) : base(id, "engine.manoeuvre")
@@ -36,7 +37,8 @@ namespace OpenSBS.Engine.Modules
                 return;
             }
 
-            var rotationY = Owner.Rotation.Y + Math.Sign(Rudder);
+            var deltaRotation = (float)Math.Round(Math.Sign(Rudder) * RotationSpeed * timeSpan.TotalSeconds, 2);
+            var rotationY = Owner.Rotation.Y + deltaRotation;
             if (rotationY < 0)
             {
                 rotationY += 360;
