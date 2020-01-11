@@ -6,7 +6,7 @@ using Newtonsoft.Json.Serialization;
 using OpenSBS.Engine;
 using OpenSBS.Engine.Entities;
 
-namespace OpenSBS.Server
+namespace OpenSBS
 {
     public class RefreshStateService
     {

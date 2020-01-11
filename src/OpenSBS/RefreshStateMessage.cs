@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using OpenSBS.Engine.Entities;
 
-namespace OpenSBS.Server
+namespace OpenSBS
 {
     public class RefreshStateMessage
     {

@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Server
+﻿namespace OpenSBS
 {
     public class ServerProperties
     {

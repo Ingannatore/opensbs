@@ -2,7 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace OpenSBS.Server
+namespace OpenSBS
 {
     public class Program
     {

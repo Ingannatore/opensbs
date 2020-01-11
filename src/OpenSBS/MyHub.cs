@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 using OpenSBS.Engine;
 using OpenSBS.Engine.Messages;
 
-namespace OpenSBS.Server
+namespace OpenSBS
 {
     public class MyHub : Hub
     {
