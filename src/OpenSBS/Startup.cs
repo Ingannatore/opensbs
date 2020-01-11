@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenSBS.Services;
 
 namespace OpenSBS
 {
@@ -20,7 +21,7 @@ namespace OpenSBS
         {
             services.AddSignalR().AddNewtonsoftJsonProtocol();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "client"; });
-            services.AddSingleton<RefreshStateService>();
+            services.AddSingleton<StateService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,7 +42,7 @@ namespace OpenSBS
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<MyHub>("/ws");
+                endpoints.MapHub<ServerHub>("/ws");
             });
 
             app.UseSpa(spa =>

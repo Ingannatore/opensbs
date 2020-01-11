@@ -1,16 +1,12 @@
-﻿import Actions from '../actions';
+﻿import ServerActions from '../actions/server';
 
 const defaultState = {
-    ship: null,
-    entities: [],
-    properties: {
-        isReady: false,
-        isRunning: false
-    }
+    isReady: false,
+    isRunning: false
 };
 
 const server = (state = defaultState, action: any) => {
-    if (action.type !== Actions.Types.REFRESH_STATE) {
+    if (action.type !== ServerActions.Types.REFRESH_SERVER_STATE) {
         return state;
     }
 

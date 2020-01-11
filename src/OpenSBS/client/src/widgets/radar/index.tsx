@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import Selectors from '../../store/selectors';
+import ShipSelectors from '../../store/selectors/ship';
+import WorldSelectors from '../../store/selectors/world';
 import Vector3 from '../../models/vector3';
 import Container from '../../elements/container';
 import Bezel from '../../elements/bezel';
@@ -134,13 +135,13 @@ class Radar extends React.Component<RadarComponentProps, {}> {
 }
 
 const mapStateToProps = (state: any) => {
-    const shipPosition = Selectors.selectShipPosition(state);
+    const shipPosition = ShipSelectors.selectShipPosition(state);
     const radarState = state.radar;
 
     return {
         position: shipPosition,
-        rotation: Selectors.selectShipRotation(state),
-        entities: Selectors.selectEntitiesByDistance(state, shipPosition, radarState.radarRange),
+        rotation: ShipSelectors.selectShipRotation(state),
+        entities: WorldSelectors.selectEntitiesByDistance(state, shipPosition, radarState.radarRange),
         radar: radarState
     };
 };

@@ -1,11 +1,11 @@
-﻿namespace OpenSBS
+﻿namespace OpenSBS.Models
 {
-    public class ServerProperties
+    public class ServerState
     {
         public bool IsReady { get; }
         public bool IsRunning { get; }
 
-        public ServerProperties(bool isReady, bool isRunning)
+        public ServerState(bool isReady, bool isRunning)
         {
             IsReady = isReady;
             IsRunning = isRunning;

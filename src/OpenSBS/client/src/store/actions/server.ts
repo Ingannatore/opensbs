@@ -1,9 +1,12 @@
-﻿const Types = {
+﻿import SocketAction from '../interfaces/socket-action';
+
+const Types = {
     START_SCENARIO: 'START_SCENARIO',
     PAUSE_SCENARIO: 'PAUSE_SCENARIO',
+    REFRESH_SERVER_STATE: 'REFRESH_SERVER_STATE'
 };
 
-const startScenario = () => ({
+const startScenario = (): SocketAction => ({
     type: Types.START_SCENARIO,
     payload: null,
     meta: {
@@ -14,7 +17,7 @@ const startScenario = () => ({
     }
 });
 
-const pauseScenario = () => ({
+const pauseScenario = (): SocketAction => ({
     type: Types.PAUSE_SCENARIO,
     payload: null,
     meta: {

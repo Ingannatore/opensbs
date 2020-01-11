@@ -4,15 +4,15 @@ using OpenSBS.Data.Scenarios;
 using OpenSBS.Engine;
 using OpenSBS.Engine.Messages;
 
-namespace OpenSBS
+namespace OpenSBS.Services
 {
-    public class MyHub : Hub
+    public class ServerHub : Hub
     {
-        private readonly RefreshStateService _refreshStateService;
+        private readonly StateService _stateService;
 
-        public MyHub(RefreshStateService refreshStateService)
+        public ServerHub(StateService stateService)
         {
-            _refreshStateService = refreshStateService;
+            _stateService = stateService;
         }
 
         public async Task StartScenario()
@@ -20,19 +20,27 @@ namespace OpenSBS
             await Task.Run(
                 () =>
                 {
-                    _refreshStateService.ClearState();
+                    _stateService.ClearState();
 
                     GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
-                    Game.Instance.RegisterStateRefreshEventHandler(_refreshStateService.SendRefreshStateMessage);
+                    Game.Instance.RegisterStateRefreshEventHandler(_stateService.SendWorldState);
                     Game.Instance.Initialize(new MyScenario());
                     GameClock.Instance.Start();
+
+                    _stateService.SendServerState();
                 }
             );
         }
 
         public async Task PauseScenario()
         {
-            await Task.Run(() => GameClock.Instance.Stop());
+            await Task.Run(
+                () =>
+                {
+                    GameClock.Instance.Stop();
+                    _stateService.SendServerState();
+                }
+            );
         }
 
         public async Task UpdateState(Message message)

@@ -1,10 +1,11 @@
 ﻿import EntityModule from '../../models/entity-module';
 import Vector3 from '../../models/vector3';
 import Entity from '../../models/entity';
-import Coords from '../../lib/coords';
+
+const getPlayersShip = (state: any): Entity => state.world.ship;
 
 const selectShipPosition = (state: any): Vector3 => {
-    const ship = selectPlayersShip(state);
+    const ship = getPlayersShip(state);
     if (!ship) {
         return {x: 0, y: 0, z: 0};
     }
@@ -13,7 +14,7 @@ const selectShipPosition = (state: any): Vector3 => {
 };
 
 const selectShipRotation = (state: any): Vector3 => {
-    const ship = selectPlayersShip(state);
+    const ship = getPlayersShip(state);
     if (!ship) {
         return {x: 0, y: 0, z: 0};
     }
@@ -22,7 +23,7 @@ const selectShipRotation = (state: any): Vector3 => {
 };
 
 const selectModulesByType = (type: string, state: any): Array<Partial<EntityModule>> => {
-    const ship = selectPlayersShip(state);
+    const ship = getPlayersShip(state);
     if (!ship) {
         return [];
     }
@@ -33,7 +34,7 @@ const selectModulesByType = (type: string, state: any): Array<Partial<EntityModu
 };
 
 const selectModuleById = (id: string, state: any): Partial<EntityModule> | undefined => {
-    const ship = selectPlayersShip(state);
+    const ship = getPlayersShip(state);
     if (!ship) {
         return undefined;
     }
@@ -43,23 +44,9 @@ const selectModuleById = (id: string, state: any): Partial<EntityModule> | undef
     );
 };
 
-const selectEntitiesByDistance = (state: any, from: Vector3, distance: number): Entity[] => {
-    const entities = state.server.entities;
-    if (!entities) {
-        return [];
-    }
-
-    return entities.filter(
-        (entity: any) => Coords.distance(from, entity.position) <= distance
-    );
-};
-
-const selectPlayersShip = (state: any): Entity => state.server.ship;
-
 export default {
     selectShipPosition,
     selectShipRotation,
     selectModulesByType,
     selectModuleById,
-    selectEntitiesByDistance
 };

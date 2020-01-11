@@ -2,7 +2,7 @@
 import {connect} from 'react-redux';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {Dispatch} from "redux";
-import Actions from '../store/actions/system';
+import ServerActions from '../store/actions/server';
 
 interface HomePageProps extends RouteComponentProps {
     dispatch: Dispatch,
@@ -24,7 +24,7 @@ class Home extends React.Component<HomePageProps, {}> {
     }
 
     startButtonHandler() {
-        this.props.dispatch(Actions.startScenario());
+        this.props.dispatch(ServerActions.startScenario());
         this.props.history.push('/station');
     }
 }

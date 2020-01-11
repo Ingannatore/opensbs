@@ -1,4 +1,5 @@
-﻿import Actions from '../actions';
+﻿import WorldActions from '../actions/world';
+import ServerActions from '../actions/server';
 import ReduxAction from '../interfaces/redux-action';
 import SignalrRequest from '../interfaces/signalr-request';
 import SignalrResponse from '../interfaces/signalr-response';
@@ -37,9 +38,15 @@ const invokeHubMethod = (hub: any, action: SocketAction): Promise<any> => {
 
 export default (hub: any) => {
     return function (store: any) {
-        hub.on('RefreshState', (data: string) => {
+        hub.on('RefreshWorldState', (data: string) => {
             return store.dispatch({
-                type: Actions.Types.REFRESH_STATE,
+                type: WorldActions.Types.REFRESH_WORLD_STATE,
+                payload: JSON.parse(data)
+            });
+        });
+        hub.on('RefreshServerState', (data: string) => {
+            return store.dispatch({
+                type: ServerActions.Types.REFRESH_SERVER_STATE,
                 payload: JSON.parse(data)
             });
         });

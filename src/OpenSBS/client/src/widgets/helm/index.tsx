@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import Actions from '../../store/actions';
-import Selectors from '../../store/selectors';
+import ShipActions from '../../store/actions/ship';
+import ShipSelectors from '../../store/selectors/ship';
 import SvgTransform from '../../lib/svg-transform';
 import Button from '../../elements/button';
 import Container from '../../elements/container';
@@ -80,21 +80,21 @@ class Helm extends React.Component<HelmComponentProps> {
     }
 
     private turnLeftHandler() {
-        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 'set', -1))
+        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set', -1))
     }
 
     private resetHandler() {
-        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 'set',0))
+        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set',0))
     }
 
     private turnRightHandler() {
-        this.props.dispatch(Actions.sendModuleMessage(this.props.module.id, 'set',1))
+        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set',1))
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
-        'module': Selectors.selectModulesByType('engine.manoeuvre', state)[0]
+        'module': ShipSelectors.selectModulesByType('engine.manoeuvre', state)[0]
     };
 };
 

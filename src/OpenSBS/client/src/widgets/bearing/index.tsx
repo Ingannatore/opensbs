@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import Selectors from '../../store/selectors';
+import ShipSelectors from '../../store/selectors/ship';
 import Vector3 from '../../models/vector3';
 import Display from '../../elements/display';
 
@@ -33,7 +33,7 @@ class Bearing extends React.Component<BearingComponentProps, {}> {
 
 const mapStateToProps = (state: any) => {
     return {
-        rotation: Selectors.selectShipRotation(state)
+        rotation: ShipSelectors.selectShipRotation(state)
     };
 };
 

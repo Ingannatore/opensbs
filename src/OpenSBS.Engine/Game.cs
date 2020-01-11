@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using OpenSBS.Engine.Messages;
 using OpenSBS.Engine.Entities;
@@ -13,21 +12,26 @@ namespace OpenSBS.Engine
         private readonly IDictionary<string, Brain> _brains;
         private Scenario _scenario;
 
+        public bool IsReady { get; protected set; }
         public event EventHandler<ICollection<Entity>> StateRefreshEventHandler;
 
         public Game()
         {
             _entities = new List<Entity>();
             _brains = new Dictionary<string, Brain>();
+
+            IsReady = false;
         }
 
         public void Initialize(Scenario scenario)
         {
+            IsReady = false;
             _entities.Clear();
             _brains.Clear();
 
             _scenario = scenario;
             _scenario.Initialize();
+            IsReady = true;
         }
 
         public void AddEntity(Entity entity)
