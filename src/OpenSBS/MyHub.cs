@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using OpenSBS.Data.Scenarios;
 using OpenSBS.Engine;
 using OpenSBS.Engine.Messages;
 

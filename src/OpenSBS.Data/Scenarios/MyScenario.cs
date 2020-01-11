@@ -1,7 +1,9 @@
 ﻿using System;
+using OpenSBS.Data.Ships;
+using OpenSBS.Engine;
 using OpenSBS.Engine.Entities;
 
-namespace OpenSBS.Engine
+namespace OpenSBS.Data.Scenarios
 {
     public class MyScenario : Scenario
     {

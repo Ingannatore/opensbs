@@ -1,7 +1,7 @@
-﻿using OpenSBS.Engine.Entities;
-using OpenSBS.Engine.Modules;
+﻿using OpenSBS.Data.Modules;
+using OpenSBS.Engine.Entities;
 
-namespace OpenSBS.Engine
+namespace OpenSBS.Data.Ships
 {
     public class Ship : ArtificialEntity
     {

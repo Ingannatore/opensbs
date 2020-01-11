@@ -3,7 +3,7 @@ using OpenSBS.Engine.Entities;
 using OpenSBS.Engine.Exceptions;
 using OpenSBS.Engine.Messages;
 
-namespace OpenSBS.Engine.Modules
+namespace OpenSBS.Data.Modules
 {
     public class ManoeuvreEnginesModule : Module
     {

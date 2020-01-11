@@ -1,6 +1,6 @@
 ﻿using OpenSBS.Engine.Entities;
 
-namespace OpenSBS.Engine
+namespace OpenSBS.Data.Ships
 {
     public class DummyTarget: ArtificialEntity
     {
