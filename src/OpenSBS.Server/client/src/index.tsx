@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import * as signalR from "@aspnet/signalr";
+import * as signalR from '@microsoft/signalr';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import rootReducer from './store/reducers';
 import SignalrMiddleware from './store/middlewares/signalr';
@@ -11,7 +11,7 @@ import Home from './pages/home';
 import Station from './pages/station';
 import './index.css';
 
-const hub = new signalR.HubConnectionBuilder().withUrl("/ws").build();
+const hub = new signalR.HubConnectionBuilder().withUrl('/ws').build();
 hub.start().catch(err => document.write(err));
 const store = createStore(
     rootReducer,
