@@ -6,9 +6,9 @@ namespace OpenSBS.Engine.Messages
     {
         public MessageRecipient Recipient { get; }
         public string Command { get; }
-        public JRaw Payload { get; }
+        public JValue Payload { get; }
 
-        public Message(string recipient, string command, JRaw payload)
+        public Message(string recipient, string command, JValue payload)
         {
             Recipient = new MessageRecipient(recipient);
             Command = command;
