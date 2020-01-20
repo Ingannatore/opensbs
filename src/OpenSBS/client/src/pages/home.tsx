@@ -22,7 +22,7 @@ class Home extends React.Component<HomePageProps, {}> {
 
         return (
             <div>
-                <p><button onClick={this.loadButtonHandler}>LOAD!</button></p>
+                <p><button onClick={this.loadButtonHandler}>Load Scenarios</button></p>
                 <ul>{scenarioButtons}</ul>
             </div>
         );
