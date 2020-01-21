@@ -20,10 +20,10 @@ namespace OpenSBS.Data.Modules
             switch (message.Command)
             {
                 case "set":
-                    Rudder = message.Payload.ToObject<int>();
+                    Rudder = message.Content.ToObject<int>();
                     break;
                 case "add":
-                    Rudder += message.Payload.ToObject<int>();
+                    Rudder += message.Content.ToObject<int>();
                     break;
                 default:
                     throw new UnknownModuleCommandException(this, message);

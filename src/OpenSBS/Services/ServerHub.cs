@@ -22,7 +22,7 @@ namespace OpenSBS.Services
                 {
                     MissionsLibrary.Instance.LoadMissions();
                     return new MessageResponse(
-                        "GET_MISSIONS_RESPONSE",
+                        "GetMissionsResponse",
                         MissionsLibrary.Instance.AvailableMissions
                     );
                 }
@@ -36,7 +36,7 @@ namespace OpenSBS.Services
                 {
                     _stateService.ClearState();
                     var mission = MissionsLibrary.Instance
-                        .InstantiateMission(message.Payload.ToObject<string>());
+                        .InstantiateMission(message.Content.ToObject<string>());
 
                     GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
                     Game.Instance.RegisterStateRefreshEventHandler(_stateService.SendWorldState);

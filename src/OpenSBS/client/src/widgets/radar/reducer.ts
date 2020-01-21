@@ -1,4 +1,4 @@
-﻿import ReduxAction from '../../store/interfaces/redux-action';
+﻿import Action from '../../store/interfaces/action';
 import {defaultState, RadarState} from './state';
 import Actions from "./actions";
 
@@ -9,7 +9,7 @@ const getNextRadarRange = (currentRange: number, delta: number) => {
     return radarRanges[nextIndex];
 };
 
-const reducer = (state: RadarState = defaultState, action: ReduxAction) => {
+export default (state: RadarState = defaultState, action: Action) => {
     switch (action.type) {
         case Actions.Types.TOGGLE_DIRECTION_LINES:
             return {
@@ -45,5 +45,3 @@ const reducer = (state: RadarState = defaultState, action: ReduxAction) => {
 
     return state;
 };
-
-export default reducer;

@@ -5,7 +5,7 @@ const defaultState = {
     entities: []
 };
 
-const world = (state = defaultState, action: any) => {
+export default (state = defaultState, action: any) => {
     if (action.type !== WorldActions.Types.REFRESH_WORLD_STATE) {
         return state;
     }
@@ -17,5 +17,3 @@ const world = (state = defaultState, action: any) => {
 
     return {...state, ...newState};
 };
-
-export default world;

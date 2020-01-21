@@ -6,13 +6,13 @@ namespace OpenSBS.Engine.Messages
     {
         public MessageRecipient Recipient { get; }
         public string Command { get; }
-        public JValue Payload { get; }
+        public JValue Content { get; }
 
-        public Message(string recipient, string command, JValue payload)
+        public Message(string recipient, string command, JValue content)
         {
             Recipient = new MessageRecipient(recipient);
             Command = command;
-            Payload = payload;
+            Content = content;
         }
 
         public override string ToString()

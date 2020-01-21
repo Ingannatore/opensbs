@@ -1,4 +1,4 @@
-﻿import ReduxAction from '../../store/interfaces/redux-action';
+﻿import Action from '../../store/interfaces/action';
 
 const Types = {
     TOGGLE_DIRECTION_LINES: 'TOGGLE_DIRECTION_LINES',
@@ -9,40 +9,28 @@ const Types = {
     ZOOM_OUT: 'ZOOM_OUT'
 };
 
-const toggleDirectionsLines = (): ReduxAction => ({
-    type: Types.TOGGLE_DIRECTION_LINES,
-    payload: null,
-    meta: null
+const toggleDirectionsLines = (): Action => ({
+    type: Types.TOGGLE_DIRECTION_LINES
 });
 
-const toggleRangeCircles = (): ReduxAction => ({
-    type: Types.TOGGLE_RANGE_CIRCLES,
-    payload: null,
-    meta: null
+const toggleRangeCircles = (): Action => ({
+    type: Types.TOGGLE_RANGE_CIRCLES
 });
 
-const toggleRangeTexts = (): ReduxAction => ({
-    type: Types.TOGGLE_RANGE_TEXTS,
-    payload: null,
-    meta: null
+const toggleRangeTexts = (): Action => ({
+    type: Types.TOGGLE_RANGE_TEXTS
 });
 
-const toggleWeaponsArcs = (): ReduxAction => ({
-    type: Types.TOGGLE_WEAPONS_ARCS,
-    payload: null,
-    meta: null
+const toggleWeaponsArcs = (): Action => ({
+    type: Types.TOGGLE_WEAPONS_ARCS
 });
 
-const zoomIn = (): ReduxAction => ({
-    type: Types.ZOOM_IN,
-    payload: null,
-    meta: null
+const zoomIn = (): Action => ({
+    type: Types.ZOOM_IN
 });
 
-const zoomOut = (): ReduxAction => ({
-    type: Types.ZOOM_OUT,
-    payload: null,
-    meta: null
+const zoomOut = (): Action => ({
+    type: Types.ZOOM_OUT
 });
 
 export default {
