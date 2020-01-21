@@ -12,7 +12,7 @@
         {
             _raw = raw;
 
-            var pieces = _raw.Split('/');
+            var pieces = _raw != null ? _raw.Split('/') : new string[0];
             switch (pieces.Length)
             {
                 case 1:
@@ -21,6 +21,10 @@
                 case 2:
                     EntityId = pieces[0];
                     ModuleId = pieces[1];
+                    break;
+                default:
+                    EntityId = null;
+                    ModuleId = null;
                     break;
             }
         }

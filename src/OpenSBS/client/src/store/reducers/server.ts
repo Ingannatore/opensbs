@@ -2,20 +2,30 @@
 
 const defaultState = {
     isReady: false,
-    isRunning: false
+    isRunning: false,
+    scenarios: []
+};
+
+const parsePayload = (payload: any) => {
+    if (typeof payload === 'string') {
+        return JSON.parse(payload);
+    }
+
+    return payload;
 };
 
 const server = (state = defaultState, action: any) => {
-    if (action.type !== ServerActions.Types.REFRESH_SERVER_STATE) {
-        return state;
+    if (action.type === ServerActions.Types.GET_SCENARIOS_RESPONSE) {
+        const scenarios = parsePayload(action.payload);
+        return { ...state, scenarios: scenarios }
     }
 
-    let newState = action.payload;
-    if (typeof newState === 'string') {
-        newState = JSON.parse(newState);
+    if (action.type === ServerActions.Types.REFRESH_SERVER_STATE) {
+        const newState = parsePayload(action.payload);
+        return {...state, ...newState};
     }
 
-    return {...state, ...newState};
+    return state;
 };
 
 export default server;

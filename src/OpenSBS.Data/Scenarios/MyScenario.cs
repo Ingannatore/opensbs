@@ -1,16 +1,17 @@
 ﻿using System;
 using OpenSBS.Data.Ships;
 using OpenSBS.Engine;
+using OpenSBS.Engine.Attributes;
 using OpenSBS.Engine.Entities;
 
 namespace OpenSBS.Data.Scenarios
 {
+    [Scenario("My Test Scenario", Description = "Just a simple test scenario, nothing fancy.")]
     public class MyScenario : Scenario
     {
         public override void Initialize()
         {
             var ship = new Ship("PLAYER_SHIP", "Archimedes");
-            //ship.SetRotation(0, 23, 0);
             Game.Instance.AddBrain(new Brain(ship));
 
             var dummyTarget1 = new DummyTarget("DUMMY_1", "Dummy 1");
