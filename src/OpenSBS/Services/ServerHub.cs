@@ -15,32 +15,32 @@ namespace OpenSBS.Services
             _stateService = stateService;
         }
 
-        public async Task<MessageResponse> GetScenarios()
+        public async Task<MessageResponse> GetMissions()
         {
             return await Task.Run(
                 () =>
                 {
-                    ScenariosLibrary.Instance.LoadScenarios();
+                    MissionsLibrary.Instance.LoadMissions();
                     return new MessageResponse(
-                        "GET_SCENARIOS_RESPONSE",
-                        ScenariosLibrary.Instance.AvailableScenarios
+                        "GET_MISSIONS_RESPONSE",
+                        MissionsLibrary.Instance.AvailableMissions
                     );
                 }
             );
         }
 
-        public async Task StartScenario(Message message)
+        public async Task StartMission(Message message)
         {
             await Task.Run(
                 () =>
                 {
                     _stateService.ClearState();
-                    var scenario = ScenariosLibrary.Instance
-                        .InstantiateScenario(message.Payload.ToObject<string>());
+                    var mission = MissionsLibrary.Instance
+                        .InstantiateMission(message.Payload.ToObject<string>());
 
                     GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
                     Game.Instance.RegisterStateRefreshEventHandler(_stateService.SendWorldState);
-                    Game.Instance.Initialize(scenario);
+                    Game.Instance.Initialize(mission);
                     GameClock.Instance.Start();
 
                     _stateService.SendServerState();
@@ -48,7 +48,7 @@ namespace OpenSBS.Services
             );
         }
 
-        public async Task PauseScenario()
+        public async Task PauseMission()
         {
             await Task.Run(
                 () =>

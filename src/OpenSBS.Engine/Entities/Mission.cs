@@ -2,7 +2,7 @@
 
 namespace OpenSBS.Engine.Entities
 {
-    public abstract class Scenario
+    public abstract class Mission
     {
         public abstract void Initialize();
         public abstract void Update(TimeSpan timeSpan);

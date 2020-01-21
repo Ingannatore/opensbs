@@ -1,49 +1,52 @@
 ﻿import SocketAction from '../interfaces/socket-action';
 
 const Types = {
-    GET_SCENARIOS: 'GET_SCENARIOS',
-    GET_SCENARIOS_RESPONSE: 'GET_SCENARIOS_RESPONSE',
-    START_SCENARIO: 'START_SCENARIO',
-    PAUSE_SCENARIO: 'PAUSE_SCENARIO',
+    GET_MISSIONS: 'GET_MISSIONS',
+    GET_MISSIONS_RESPONSE: 'GET_MISSIONS_RESPONSE',
+    START_MISSION: 'START_MISSION',
+    PAUSE_MISSION: 'PAUSE_MISSION',
     REFRESH_SERVER_STATE: 'REFRESH_SERVER_STATE'
 };
 
-const getScenarios = (): SocketAction => ({
-    type: Types.GET_SCENARIOS,
+const getMissions = (): SocketAction => ({
+    type: Types.GET_MISSIONS,
     payload: null,
     meta: {
         socket: true,
-        method: 'GetScenarios',
+        method: 'GetMissions',
         empty: true,
-        path: null
+        recipient: '',
+        command: ''
     }
 });
 
-const startScenario = (scenarioId: string): SocketAction => ({
-    type: Types.START_SCENARIO,
-    payload: scenarioId,
+const startMission = (id: string): SocketAction => ({
+    type: Types.START_MISSION,
+    payload: id,
     meta: {
         socket: true,
-        method: 'StartScenario',
+        method: 'StartMission',
         empty: false,
-        path: null
+        recipient: '',
+        command: ''
     }
 });
 
-const pauseScenario = (): SocketAction => ({
-    type: Types.PAUSE_SCENARIO,
+const pauseMission = (): SocketAction => ({
+    type: Types.PAUSE_MISSION,
     payload: null,
     meta: {
         socket: true,
-        method: 'PauseScenario',
+        method: 'PauseMission',
         empty: true,
-        path: null
+        recipient: '',
+        command: ''
     }
 });
 
 export default {
     Types,
-    startScenario,
-    pauseScenario,
-    getScenarios
+    startMission,
+    pauseMission,
+    getMissions
 };

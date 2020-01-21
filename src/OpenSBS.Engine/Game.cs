@@ -10,7 +10,7 @@ namespace OpenSBS.Engine
     {
         private readonly ICollection<Entity> _entities;
         private readonly IDictionary<string, Brain> _brains;
-        private Scenario _scenario;
+        private Mission _mission;
 
         public bool IsReady { get; protected set; }
         public event EventHandler<ICollection<Entity>> StateRefreshEventHandler;
@@ -23,14 +23,14 @@ namespace OpenSBS.Engine
             IsReady = false;
         }
 
-        public void Initialize(Scenario scenario)
+        public void Initialize(Mission mission)
         {
             IsReady = false;
             _entities.Clear();
             _brains.Clear();
 
-            _scenario = scenario;
-            _scenario.Initialize();
+            _mission = mission;
+            _mission.Initialize();
             IsReady = true;
         }
 
@@ -63,7 +63,7 @@ namespace OpenSBS.Engine
                 brain.Update(timeSpan);
             }
 
-            _scenario.Update(timeSpan);
+            _mission.Update(timeSpan);
             StateRefreshEventHandler?.Invoke(this, _entities);
         }
     }
