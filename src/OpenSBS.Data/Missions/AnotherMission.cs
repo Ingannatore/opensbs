@@ -4,10 +4,10 @@ using OpenSBS.Engine;
 using OpenSBS.Engine.Attributes;
 using OpenSBS.Engine.Entities;
 
-namespace OpenSBS.Data.Scenarios
+namespace OpenSBS.Data.Missions
 {
-    [Scenario("Another Test Scenario", Description = "Just another test scenario, not spiffy at all.")]
-    public class AnotherScenario : Scenario
+    [Mission("Another Test Mission", Description = "Just another test mission, not spiffy at all.")]
+    public class AnotherMission : Mission
     {
         public override void Initialize()
         {

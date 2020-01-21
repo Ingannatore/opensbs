@@ -3,7 +3,7 @@
 const defaultState = {
     isReady: false,
     isRunning: false,
-    scenarios: []
+    missions: []
 };
 
 const parsePayload = (payload: any) => {
@@ -15,9 +15,9 @@ const parsePayload = (payload: any) => {
 };
 
 const server = (state = defaultState, action: any) => {
-    if (action.type === ServerActions.Types.GET_SCENARIOS_RESPONSE) {
-        const scenarios = parsePayload(action.payload);
-        return { ...state, scenarios: scenarios }
+    if (action.type === ServerActions.Types.GET_MISSIONS_RESPONSE) {
+        const missions = parsePayload(action.payload);
+        return { ...state, missions: missions }
     }
 
     if (action.type === ServerActions.Types.REFRESH_SERVER_STATE) {

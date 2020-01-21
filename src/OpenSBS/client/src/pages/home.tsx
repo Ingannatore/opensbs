@@ -5,7 +5,7 @@ import {Dispatch} from "redux";
 import ServerActions from '../store/actions/server';
 
 interface HomePageProps extends RouteComponentProps {
-    scenarios: any[],
+    missions: any[],
     dispatch: Dispatch,
 }
 
@@ -18,40 +18,40 @@ class Home extends React.Component<HomePageProps, {}> {
     }
 
     render() {
-        const scenarioButtons = this.props.scenarios.map((scenario) => this.renderScenarioButton(scenario));
+        const missionsButtons = this.props.missions.map((mission) => this.renderMissionButton(mission));
 
         return (
             <div>
-                <p><button onClick={this.loadButtonHandler}>Load Scenarios</button></p>
-                <ul>{scenarioButtons}</ul>
+                <p><button onClick={this.loadButtonHandler}>Load Missions</button></p>
+                <ul>{missionsButtons}</ul>
             </div>
         );
     }
 
-    renderScenarioButton(scenario: any) {
+    renderMissionButton(mission: any) {
         return (
                 <li>
                     <button
-                        id={scenario.guid}
-                        onClick={() => this.startButtonHandler(scenario.guid)}
-                    >{scenario.title}</button>
+                        id={mission.guid}
+                        onClick={() => this.startButtonHandler(mission.guid)}
+                    >{mission.title}</button>
                 </li>
         );
     }
 
     loadButtonHandler() {
-        this.props.dispatch(ServerActions.getScenarios());
+        this.props.dispatch(ServerActions.getMissions());
     }
 
     startButtonHandler(id: string) {
-        this.props.dispatch(ServerActions.startScenario(id));
+        this.props.dispatch(ServerActions.startMission(id));
         this.props.history.push('/station');
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
-        scenarios: state.server.scenarios
+        missions: state.server.missions
     };
 };
 
