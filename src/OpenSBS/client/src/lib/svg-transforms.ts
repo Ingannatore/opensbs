@@ -1,4 +1,4 @@
-﻿export default class SvgTransform {
+﻿export default class SvgTransforms {
     public static translate(x: number, y: number): string {
         return x || y ? `translate(${x} ${y})` : '';
     }

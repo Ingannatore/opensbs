@@ -1,4 +1,4 @@
-﻿import Action from '../../store/interfaces/action';
+﻿import Action from '../../store/models/action';
 import {defaultState, RadarState} from './state';
 import Actions from "./actions";
 

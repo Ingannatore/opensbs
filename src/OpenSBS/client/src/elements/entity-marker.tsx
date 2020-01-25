@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import SvgTransform from '../lib/svg-transform';
+import SvgTransforms from '../lib/svg-transforms';
 
 interface EntityMarkerComponentProps {
     x: number,
@@ -13,7 +13,7 @@ export default class EntityMarker extends React.Component<EntityMarkerComponentP
     };
 
     public render() {
-        const transform = SvgTransform.translate(this.props.x, this.props.y);
+        const transform = SvgTransforms.translate(this.props.x, this.props.y);
         return (
             <g transform={transform}>
                 <use href="#icon-dummy"/>

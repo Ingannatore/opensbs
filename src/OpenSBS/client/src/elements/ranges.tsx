@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import SvgTransform from '../lib/svg-transform';
+import SvgTransforms from '../lib/svg-transforms';
 
 interface RangesComponentProps {
     x: number,
@@ -22,7 +22,7 @@ export default class Ranges extends React.Component<RangesComponentProps, {}> {
 
     constructor(props: RangesComponentProps) {
         super(props);
-        this.translation = SvgTransform.translate(this.props.x, this.props.y);
+        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
     }
 
     public render() {
