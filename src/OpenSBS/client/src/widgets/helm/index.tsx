@@ -14,6 +14,7 @@ interface HelmComponentProps {
     dispatch: any,
     x: number,
     y: number,
+    shipId: string,
     module: any
 }
 
@@ -36,7 +37,8 @@ class Helm extends React.Component<HelmComponentProps> {
             case 1:
                 subtitle = 'starboard';
                 break;
-            default: subtitle = 'stop';
+            default:
+                subtitle = 'stop';
         }
 
         const rotation = SvgTransform.rotate(rudderValue * 30);
@@ -80,20 +82,36 @@ class Helm extends React.Component<HelmComponentProps> {
     }
 
     private turnLeftHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set', -1))
+        this.props.dispatch(ShipActions.sendModuleMessage(
+            this.props.shipId,
+            this.props.module.id,
+            'set',
+            -1
+        ));
     }
 
     private resetHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set',0))
+        this.props.dispatch(ShipActions.sendModuleMessage(
+            this.props.shipId,
+            this.props.module.id,
+            'set',
+            0
+        ));
     }
 
     private turnRightHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set',1))
+        this.props.dispatch(ShipActions.sendModuleMessage(
+            this.props.shipId,
+            this.props.module.id,
+            'set',
+            1
+        ));
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
+        'shipId': ShipSelectors.selectShipId(state),
         'module': ShipSelectors.selectModulesByType('engine.manoeuvre', state)[0]
     };
 };

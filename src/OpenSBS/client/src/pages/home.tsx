@@ -33,6 +33,7 @@ class Home extends React.Component<HomePageProps, {}> {
                 <li>
                     <button
                         id={mission.guid}
+                        key={`mission-${mission.guid}`}
                         onClick={() => this.startButtonHandler(mission.guid)}
                     >{mission.title}</button>
                 </li>

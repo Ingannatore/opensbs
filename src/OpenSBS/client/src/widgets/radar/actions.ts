@@ -1,4 +1,4 @@
-﻿import Action from '../../store/interfaces/action';
+﻿import Action from '../../store/models/action';
 
 const Types = {
     TOGGLE_DIRECTION_LINES: 'TOGGLE_DIRECTION_LINES',
