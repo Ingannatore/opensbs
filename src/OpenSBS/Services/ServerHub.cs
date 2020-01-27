@@ -15,14 +15,14 @@ namespace OpenSBS.Services
             _stateService = stateService;
         }
 
-        public async Task<MessageResponse> GetMissions()
+        public async Task<Action> GetMissions()
         {
             return await Task.Run(
                 () =>
                 {
                     MissionsLibrary.Instance.LoadMissions();
-                    return new MessageResponse(
-                        "GetMissionsResponse",
+                    return new Action(
+                        "SetMissions",
                         MissionsLibrary.Instance.AvailableMissions
                     );
                 }

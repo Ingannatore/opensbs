@@ -2,7 +2,7 @@
 
 const Types = {
     GET_MISSIONS: 'GetMissions',
-    GET_MISSIONS_RESPONSE: 'GetMissionsResponse',
+    SET_MISSIONS: 'SetMissions',
     START_MISSION: 'StartMission',
     PAUSE_MISSION: 'PauseMission',
     REFRESH_SERVER_STATE: 'RefreshServerState'
