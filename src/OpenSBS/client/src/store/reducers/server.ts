@@ -14,8 +14,8 @@ const parsePayload = (payload: any) => {
     return payload;
 };
 
-const server = (state = defaultState, action: any) => {
-    if (action.type === ServerActions.Types.GET_MISSIONS_RESPONSE) {
+export default (state = defaultState, action: any) => {
+    if (action.type === ServerActions.Types.SET_MISSIONS) {
         const missions = parsePayload(action.payload);
         return { ...state, missions: missions }
     }
@@ -27,5 +27,3 @@ const server = (state = defaultState, action: any) => {
 
     return state;
 };
-
-export default server;

@@ -1,52 +1,38 @@
-﻿import SocketAction from '../interfaces/socket-action';
+﻿import Action from '../models/action';
 
 const Types = {
-    GET_MISSIONS: 'GET_MISSIONS',
-    GET_MISSIONS_RESPONSE: 'GET_MISSIONS_RESPONSE',
-    START_MISSION: 'START_MISSION',
-    PAUSE_MISSION: 'PAUSE_MISSION',
-    REFRESH_SERVER_STATE: 'REFRESH_SERVER_STATE'
+    GET_MISSIONS: 'GetMissions',
+    SET_MISSIONS: 'SetMissions',
+    START_MISSION: 'StartMission',
+    PAUSE_MISSION: 'PauseMission',
+    REFRESH_SERVER_STATE: 'RefreshServerState'
 };
 
-const getMissions = (): SocketAction => ({
+const getMissions = (): Action => ({
     type: Types.GET_MISSIONS,
-    payload: null,
-    meta: {
-        socket: true,
-        method: 'GetMissions',
-        empty: true,
-        recipient: '',
-        command: ''
-    }
+    meta: {socket: true}
 });
 
-const startMission = (id: string): SocketAction => ({
+const startMission = (id: string): Action => ({
     type: Types.START_MISSION,
-    payload: id,
-    meta: {
-        socket: true,
-        method: 'StartMission',
-        empty: false,
-        recipient: '',
-        command: ''
-    }
+    payload: {content: id},
+    meta: {socket: true}
 });
 
-const pauseMission = (): SocketAction => ({
+const pauseMission = (): Action => ({
     type: Types.PAUSE_MISSION,
-    payload: null,
-    meta: {
-        socket: true,
-        method: 'PauseMission',
-        empty: true,
-        recipient: '',
-        command: ''
-    }
+    meta: {socket: true}
+});
+
+const refreshServerState = (data: string): Action => ({
+    type: Types.REFRESH_SERVER_STATE,
+    payload: JSON.parse(data)
 });
 
 export default {
     Types,
     startMission,
     pauseMission,
-    getMissions
+    getMissions,
+    refreshServerState
 };

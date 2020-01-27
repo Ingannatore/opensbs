@@ -30,7 +30,7 @@ class Home extends React.Component<HomePageProps, {}> {
 
     renderMissionButton(mission: any) {
         return (
-                <li>
+                <li key={`mission-${mission.guid}`}>
                     <button
                         id={mission.guid}
                         onClick={() => this.startButtonHandler(mission.guid)}

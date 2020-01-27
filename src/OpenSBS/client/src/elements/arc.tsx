@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import Angle from '../lib/angle';
+import Angles from '../lib/angles';
 import Coords from '../lib/coords';
 
 interface ArcComponentProps {
@@ -27,8 +27,8 @@ export default class Arc extends React.Component<ArcComponentProps, {}> {
     constructor(props: ArcComponentProps) {
         super(props);
 
-        this.start = Coords.toCarthesian(this.props.size, Angle.toRadians(this.props.fromAngle));
-        this.end = Coords.toCarthesian(this.props.size, Angle.toRadians(this.props.toAngle));
+        this.start = Coords.toCarthesian(this.props.size, Angles.toRadians(this.props.fromAngle));
+        this.end = Coords.toCarthesian(this.props.size, Angles.toRadians(this.props.toAngle));
         this.isLargeArc = this.props.toAngle - this.props.fromAngle > 180;
     }
 

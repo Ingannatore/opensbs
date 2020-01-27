@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import SvgTransform from '../lib/svg-transform';
+import SvgTransforms from '../lib/svg-transforms';
 
 interface BezelComponentProps {
     x: number,
@@ -45,7 +45,7 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
     }
 
     public render(): JSX.Element {
-        const rotation = SvgTransform.rotate(-this.props.rotation);
+        const rotation = SvgTransforms.rotate(-this.props.rotation);
 
         return (
             <g>
@@ -72,7 +72,7 @@ export default class Bezel extends React.Component<BezelComponentProps, {}> {
                 continue;
             }
 
-            const rotation = SvgTransform.rotate(i);
+            const rotation = SvgTransforms.rotate(i);
             if ((i % this.props.majorInterval) === 0) {
                 const markerValue = this.labels ? this.labels[numberOfMajorMarker] : i;
                 markers.push(

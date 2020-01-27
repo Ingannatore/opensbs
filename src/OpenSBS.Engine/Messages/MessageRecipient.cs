@@ -12,7 +12,7 @@
         {
             _raw = raw;
 
-            var pieces = _raw != null ? _raw.Split('/') : new string[0];
+            var pieces = string.IsNullOrEmpty(_raw) ? new string[0] : _raw.Split('/');
             switch (pieces.Length)
             {
                 case 1:

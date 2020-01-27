@@ -4,11 +4,11 @@ import Footer from "../elements/footer";
 import Helm from "../widgets/helm";
 import Bearing from "../widgets/bearing";
 import Radar from "../widgets/radar";
-import SvgTransform from '../lib/svg-transform';
+import SvgTransforms from '../lib/svg-transforms';
 
 export default class Navigation extends React.Component<{}, {}> {
     render() {
-        const footerTransform = `${SvgTransform.translate(960, 3)} ${SvgTransform.rotate(180)}`;
+        const footerTransform = `${SvgTransforms.translate(960, 3)} ${SvgTransforms.rotate(180)}`;
         return (
             <Station>
                 <Helm x={220} y={820} />

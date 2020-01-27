@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import SvgTransform from '../lib/svg-transform';
+import SvgTransforms from '../lib/svg-transforms';
 
 interface DirectionsComponentProps {
     x: number,
@@ -19,7 +19,7 @@ export default class Directions extends React.Component<DirectionsComponentProps
 
     constructor(props: DirectionsComponentProps) {
         super(props);
-        this.translation = SvgTransform.translate(this.props.x, this.props.y);
+        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
     }
 
     public render() {
@@ -36,7 +36,7 @@ export default class Directions extends React.Component<DirectionsComponentProps
     }
 
     private static renderLine(size: number, angle: number) {
-        const transform = SvgTransform.rotate(angle);
+        const transform = SvgTransforms.rotate(angle);
         return (
             <line
                 key={'direction-' + angle}

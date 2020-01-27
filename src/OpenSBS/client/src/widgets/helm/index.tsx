@@ -2,7 +2,7 @@
 import {connect} from 'react-redux';
 import ShipActions from '../../store/actions/ship';
 import ShipSelectors from '../../store/selectors/ship';
-import SvgTransform from '../../lib/svg-transform';
+import SvgTransforms from '../../lib/svg-transforms';
 import Button from '../../elements/button';
 import Container from '../../elements/container';
 import Bezel from '../../elements/bezel';
@@ -14,6 +14,7 @@ interface HelmComponentProps {
     dispatch: any,
     x: number,
     y: number,
+    shipId: string,
     module: any
 }
 
@@ -36,10 +37,11 @@ class Helm extends React.Component<HelmComponentProps> {
             case 1:
                 subtitle = 'starboard';
                 break;
-            default: subtitle = 'stop';
+            default:
+                subtitle = 'stop';
         }
 
-        const rotation = SvgTransform.rotate(rudderValue * 30);
+        const rotation = SvgTransforms.rotate(rudderValue * 30);
         return (
             <Container size={200} x={this.props.x} y={this.props.y}>
                 <Bezel
@@ -80,20 +82,36 @@ class Helm extends React.Component<HelmComponentProps> {
     }
 
     private turnLeftHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set', -1))
+        this.props.dispatch(ShipActions.sendModuleMessage(
+            this.props.shipId,
+            this.props.module.id,
+            'set',
+            -1
+        ));
     }
 
     private resetHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set',0))
+        this.props.dispatch(ShipActions.sendModuleMessage(
+            this.props.shipId,
+            this.props.module.id,
+            'set',
+            0
+        ));
     }
 
     private turnRightHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(this.props.module.id, 'set',1))
+        this.props.dispatch(ShipActions.sendModuleMessage(
+            this.props.shipId,
+            this.props.module.id,
+            'set',
+            1
+        ));
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
+        'shipId': ShipSelectors.selectShipId(state),
         'module': ShipSelectors.selectModulesByType('engine.manoeuvre', state)[0]
     };
 };

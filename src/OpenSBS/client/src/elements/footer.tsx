@@ -1,9 +1,9 @@
 ﻿import * as React from 'react';
-import SvgTransform from '../lib/svg-transform';
+import SvgTransforms from '../lib/svg-transforms';
 
 export default class Footer extends React.Component<{}, {}> {
     render() {
-        const transform = SvgTransform.translate(0, 1040);
+        const transform = SvgTransforms.translate(0, 1040);
         return (
             <g transform={transform}>
                 <line x1="0" y1="0" x2="1920" y2="0" stroke="#36424a" strokeWidth="1"/>

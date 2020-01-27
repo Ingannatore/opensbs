@@ -2,7 +2,7 @@
 import Entity from '../models/entity';
 import Vector3 from '../models/vector3';
 import Coords from '../lib/coords';
-import SvgTransform from '../lib/svg-transform';
+import SvgTransforms from '../lib/svg-transforms';
 
 interface EntitiesOverlayComponentProps {
     x: number,
@@ -34,7 +34,7 @@ export default class EntitiesOverlay extends React.Component<EntitiesOverlayComp
 
     private renderMarker(entity: Entity, scale: number) {
         const markerPosition = Coords.scale(Coords.translateOrigin(entity.position, this.props.origin), scale);
-        const transform = SvgTransform.translate(markerPosition.x, markerPosition.y);
+        const transform = SvgTransforms.translate(markerPosition.x, markerPosition.y);
 
         return (
             <g transform={transform} key={`entitymarker-${entity.id}`}>
@@ -42,16 +42,16 @@ export default class EntitiesOverlay extends React.Component<EntitiesOverlayComp
                 <text
                     x="0" y="18"
                     fontSize="1rem" fill="white" textAnchor="middle"
-                    transform={SvgTransform.rotate(this.props.rotation.y)}
+                    transform={SvgTransforms.rotate(this.props.rotation.y)}
                 >{entity.name}</text>
             </g>
         );
     }
 
     private static createTransform(x: number, y: number, rotation: Vector3): string {
-        let transform = SvgTransform.translate(x, y);
+        let transform = SvgTransforms.translate(x, y);
         if (rotation.y) {
-            transform += ` ${SvgTransform.rotate(-rotation.y)}`;
+            transform += ` ${SvgTransforms.rotate(-rotation.y)}`;
         }
 
         return transform;

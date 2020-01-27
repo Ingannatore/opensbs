@@ -4,6 +4,11 @@ import Entity from '../../models/entity';
 
 const getPlayersShip = (state: any): Entity => state.world.ship;
 
+const selectShipId = (state: any): string => {
+    const ship = getPlayersShip(state);
+    return !ship ? '' : ship.id;
+};
+
 const selectShipPosition = (state: any): Vector3 => {
     const ship = getPlayersShip(state);
     if (!ship) {
@@ -45,6 +50,7 @@ const selectModuleById = (id: string, state: any): Partial<EntityModule> | undef
 };
 
 export default {
+    selectShipId,
     selectShipPosition,
     selectShipRotation,
     selectModulesByType,

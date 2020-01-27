@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import SvgTransform from '../lib/svg-transform';
+import SvgTransforms from '../lib/svg-transforms';
 
 interface ContainerComponentProps {
     x: number,
@@ -24,7 +24,7 @@ export default class Container extends React.Component<ContainerComponentProps, 
     constructor(props: ContainerComponentProps) {
         super(props);
         this.innerRadius = this.props.size - 4;
-        this.translation = SvgTransform.translate(this.props.x, this.props.y);
+        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
     }
 
     public render() {
