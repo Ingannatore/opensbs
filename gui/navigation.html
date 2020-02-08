@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<!--suppress CheckEmptyScriptTag -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HELM STATION</title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+</head>
+<body>
+    <div class="station">
+        <svg width="1920" height="1080" viewBox="0 0 1920 1080" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="BackgroundPattern" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <line x1="0" y1="10" x2="10" y2="10" stroke="#fff" stroke-width="1"></line>
+                    <line x1="10" y1="0" x2="10" y2="10" stroke="#fff" stroke-width="1"></line>
+                </pattern>
+                <g id="header">
+                    <path d="M -1 -1 L -1 60 L 420 60 L 460 20 L 1460 20 L 1500 60 L 1921 60 L 1921 -1 Z" stroke="none" fill="#020202"/>
+                    <path d="M -1 60 L 420 60 L 460 20 L 1460 20 L 1500 60 L 1921 60" stroke="#383838" fill="none"/>
+                </g>
+                <g id="icon-helm">
+                    <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
+                    <line x1="0" y1="-12" x2="0" y2="12" stroke="#dedede"/>
+                    <line x1="-12" y1="0" x2="12" y2="0" stroke="#dedede"/>
+                    <line x1="-10" y1="-10" x2="10" y2="10" stroke="#dedede"/>
+                    <line x1="10" y1="-10" x2="-10" y2="10" stroke="#dedede"/>
+                </g>
+                <g id="icon-dummy">
+                    <circle cx="0" cy="0" r="6" stroke="#dedede" stroke-width="2" fill="#020202"></circle>
+                    <circle cx="0" cy="0" r="1" stroke="none" fill="#dedede"></circle>
+                </g>
+                <path id="header-border" d="M 0 60 L 200 60" stroke="white" stroke-width="1" fill="white"></path>
+                <path id="icon-ship" d="M 0 -6 L 6 6 L 0 3 L -6 6 Z" stroke="white" stroke-width="1" fill="white"></path>
+                <rect id="icon-station" x="-6" y="-6" width="12" height="12" stroke="white" stroke-width="2" fill="#474747"/>
+            </defs>
+            <g>
+                <!-- BACKGROUND -->
+                <rect x="0" y="0" width="1920" height="1080" fill="#121212"></rect>
+                <rect x="0" y="0" width="1920" height="1080" fill="url(#BackgroundPattern)" opacity=".05"></rect>
+
+                <!-- HEADER -->
+                <g transform="translate(0 0)">
+                    <use href="#header"/>
+                    <use href="#icon-helm" x="20" y="20" transform="scale(1.5)"/>
+                    <text x="70" y="30" font-size="2rem" fill="#dedede" dominant-baseline="central">navigation</text>
+                </g>
+
+                <!-- BEARING -->
+                <g transform="translate(540 120)">
+                    <circle cx="0" cy="0" r="80" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                    <text x="0" y="-45" text-anchor="middle" font-size="1rem" fill="#999999">bearing</text>
+                    <text x="0" y="0" text-anchor="middle" font-size="4rem" fill="#dedede">000</text>
+                    <text x="0" y="40" text-anchor="middle" font-size="1rem" fill="#999999">degrees</text>
+                </g>
+
+                <!-- RADAR -->
+                <g transform="translate(960 540)">
+                    <circle cx="0" cy="0" r="500" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                    <circle cx="0" cy="0" r="440" stroke="#616161" fill="none" stroke-width="1"></circle>
+                    <g>
+                        <line x1="0" y1="-440" x2="0" y2="440" stroke="#616161"></line>
+                        <line x1="0" y1="-440" x2="0" y2="440" stroke="#616161" transform="rotate(45)"></line>
+                        <line x1="0" y1="-440" x2="0" y2="440" stroke="#616161" transform="rotate(90)"></line>
+                        <line x1="0" y1="-440" x2="0" y2="440" stroke="#616161" transform="rotate(135)"></line>
+                        <circle cx="0" cy="0" r="88" stroke="#616161" stroke-width="1" fill="none" stroke-dasharray="2 4"></circle>
+                        <circle cx="0" cy="0" r="176" stroke="#616161" stroke-width="1" fill="none" stroke-dasharray="2 4"></circle>
+                        <circle cx="0" cy="0" r="264" stroke="#616161" stroke-width="1" fill="none" stroke-dasharray="2 4"></circle>
+                        <circle cx="0" cy="0" r="352" stroke="#616161" stroke-width="1" fill="none" stroke-dasharray="2 4"></circle>
+                        <text x="84" y="-8" font-size=".75rem" fill="#616161" text-anchor="end">2k</text>
+                        <text x="172" y="-8" font-size=".75rem" fill="#616161" text-anchor="end">4k</text>
+                        <text x="260" y="-8" font-size=".75rem" fill="#616161" text-anchor="end">6k</text>
+                        <text x="348" y="-8" font-size=".75rem" fill="#616161" text-anchor="end">8k</text>
+                        <text x="436" y="-8" font-size=".75rem" fill="#616161" text-anchor="end">10k</text>
+                    </g>
+
+                    <g>
+                        <g transform="translate(88 30)">
+                            <path d="M -6 0 L 0 -6 L 6 0 L 6 4 L -6 4 Z" stroke="#dedede" stroke-width="2" fill="#020202"></path>
+                            <text x="0" y="18" font-size="1rem" fill="#dedede" text-anchor="middle">SC-357</text>
+                        </g>
+                        <g transform="translate(22 -176)">
+                            <rect x="-6" y="-6" width="12" height="12" stroke="#4acfac" stroke-width="2" fill="#020202"/>
+                            <text x="0" y="18" font-size="1rem" fill="#4acfac" text-anchor="middle">DS-123</text>
+                        </g>
+                        <g transform="translate(-352 88)">
+                            <path d="M -6 0 L 0 -6 L 6 0 Z" stroke="#ffa48e" stroke-width="2" fill="#020202"></path>
+                            <text x="0" y="18" font-size="1rem" fill="#ffa48e" text-anchor="middle">X-789</text>
+                        </g>
+                    </g>
+
+                    <g>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" fill="#dedede">0</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(3)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(6)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(9)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(12)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(15)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(15)" fill="#dedede">15</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(18)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(21)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(24)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(27)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(30)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(30)" fill="#dedede">30</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(33)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(36)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(39)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(42)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(45)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(45)" fill="#dedede">45</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(48)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(51)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(54)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(57)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(60)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(60)" fill="#dedede">60</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(63)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(66)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(69)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(72)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(75)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(75)" fill="#dedede">75</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(78)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(81)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(84)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(87)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(90)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(90)" fill="#dedede">90</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(93)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(96)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(99)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(102)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(105)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(105)" fill="#dedede">105</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(108)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(111)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(114)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(117)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(120)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(120)" fill="#dedede">120</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(123)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(126)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(129)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(132)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(135)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(135)" fill="#dedede">135</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(138)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(141)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(144)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(147)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(150)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(150)" fill="#dedede">150</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(153)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(156)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(159)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(162)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(165)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(165)" fill="#dedede">165</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(168)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(171)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(174)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(177)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(180)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(180)" fill="#dedede">180</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(183)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(186)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(189)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(192)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(195)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(195)" fill="#dedede">195</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(198)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(201)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(204)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(207)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(210)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(210)" fill="#dedede">210</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(213)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(216)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(219)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(222)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(225)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(225)" fill="#dedede">225</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(228)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(231)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(234)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(237)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(240)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(240)" fill="#dedede">240</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(243)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(246)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(249)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(252)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(255)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(255)" fill="#dedede">255</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(258)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(261)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(264)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(267)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(270)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(270)" fill="#dedede">270</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(273)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(276)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(279)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(282)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(285)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(285)" fill="#dedede">285</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(288)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(291)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(294)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(297)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(300)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(300)" fill="#dedede">300</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(303)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(306)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(309)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(312)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(315)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(315)" fill="#dedede">315</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(318)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(321)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(324)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(327)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(330)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(330)" fill="#dedede">330</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(333)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(336)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(339)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(342)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-468" stroke="#999999" stroke-width="2" transform="rotate(345)"></line>
+                        <text x="0" y="-482" text-anchor="middle" font-size="1rem" transform="rotate(345)" fill="#dedede">345</text>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(348)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(351)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(354)"></line>
+                        <line x1="0" y1="-450" x2="0" y2="-460" stroke="#999999" stroke-width="1" transform="rotate(357)"></line>
+                    </g>
+                    <use href="#icon-ship"></use>
+                    <g transform="rotate(56)" style="cursor: pointer;">
+                        <g transform="translate(0 542)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#36c7d0" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="black" transform="rotate(-56)" style="font-weight: bold;">DIR</text>
+                        </g>
+                    </g>
+                    <g transform="rotate(45)" style="cursor: pointer;">
+                        <g transform="translate(0 542)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#36c7d0" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="black" transform="rotate(-45)" style="font-weight: bold;">RNG</text>
+                        </g>
+                    </g>
+                    <g transform="rotate(34)" style="cursor: pointer;">
+                        <g transform="translate(0 542)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0" transform="rotate(-34)">WPN</text>
+                        </g>
+                    </g>
+                    <g transform="translate(420 420)">
+                        <circle cx="0" cy="0" r="80" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                        <text x="0" y="-45" text-anchor="middle" font-size="1rem" fill="#999999">radar range</text>
+                        <text x="0" y="0" text-anchor="middle" font-size="4rem" fill="#dedede">10</text>
+                        <text x="0" y="40" text-anchor="middle" font-size="1rem" fill="#999999">kilometers</text>
+                    </g>
+                    <g transform="rotate(-56)" style="cursor: pointer;">
+                        <g transform="translate(0 542)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0" transform="rotate(56)">-</text>
+                        </g>
+                    </g>
+                    <g transform="rotate(-34)" style="cursor: pointer;">
+                        <g transform="translate(0 542)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0" transform="rotate(34)">+</text>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- IMPULSE ENGINES -->
+                <g transform="translate(1710 270)">
+                    <path d="M 160 0 A 160 160, 0, 1, 0, 0 160" stroke="#383838" stroke-width="60" fill="none" stroke-linecap="round"/>
+                    <path d="M 160 0 A 160 160, 0, 1, 0, 0 160" stroke="#020202" stroke-width="56" fill="none" stroke-linecap="round"/>
+
+                    <circle cx="0" cy="0" r="110" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                    <text x="0" y="-80" text-anchor="middle" font-size="1rem" fill="#999999">meters/sec</text>
+                    <text x="0" y="-35" text-anchor="middle" font-size="4rem" fill="#dedede">0</text>
+                    <line x1="-100" y1="0" x2="100" y2="0" stroke="#383838" stroke-width="1"/>
+                    <text x="0" y="35" text-anchor="middle" font-size="4rem" fill="#dedede">-</text>
+                    <text x="0" y="80" text-anchor="middle" font-size="1rem" fill="#999999">power</text>
+
+                    <!-- EMERGENCY BREAK -->
+                    <g transform="rotate(-45)" style="cursor: pointer;">
+                        <g transform="translate(0 160)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#ffa48e" fill="none" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#ffa48e" transform="rotate(45)">BRK</text>
+                        </g>
+                    </g>
+
+                    <!-- STOP -->
+                    <g transform="translate(-160 0)">
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">OFF</text>
+                    </g>
+                    <!-- AHEAD -->
+                    <g transform="translate(0 -160) rotate(-54 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(54)">20</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(-18 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(18)">40</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(18 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(-18)">60</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(54 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(-54)">80</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(90 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(-90)">100</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+
+                    <!-- ASTERN -->
+                    <g transform="translate(0 -160) rotate(-108 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(108)">20</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(-126 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(126)">40</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(-144 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(144)">60</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(-162 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(162)">80</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(-180 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(180)">100</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+
+                    <g transform="translate(-160 0)">
+                        <circle cx="0" cy="0" r="30" stroke="#333333" fill="none" stroke-width="2"></circle>
+                        <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
+                    </g>
+                </g>
+
+                <!-- HELM CONTROLS -->
+                <g transform="translate(1550 540)">
+                    <g transform="translate(0 0)" style="cursor: pointer;">
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
+                        <text x="30" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0"><</text>
+                    </g>
+                    <g transform="translate(130 0)" style="cursor: pointer;">
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
+                        <text x="30" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">STOP</text>
+                    </g>
+                    <g transform="translate(260 0)" style="cursor: pointer;">
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
+                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
+                        <text x="30" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0">></text>
+                    </g>
+                </g>
+
+                <!-- WARP DRIVE -->
+                <g transform="translate(1700 810)">
+                    <path d="M -160 0 A 160 160, 0, 0, 1, 160 0" stroke="#383838" stroke-width="60" fill="none" stroke-linecap="round"/>
+                    <path d="M -160 0 A 160 160, 0, 0, 1, 160 0" stroke="#020202" stroke-width="56" fill="none" stroke-linecap="round"/>
+
+                    <circle cx="0" cy="0" r="110" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                    <text x="0" y="-80" text-anchor="middle" font-size="1rem" fill="#999999">warp factor</text>
+                    <text x="0" y="-35" text-anchor="middle" font-size="4rem" fill="#dedede">off</text>
+                    <line x1="-100" y1="0" x2="100" y2="0" stroke="#383838" stroke-width="1"/>
+                    <text x="0" y="35" text-anchor="middle" font-size="4rem" fill="#dedede">-</text>
+                    <text x="0" y="80" text-anchor="middle" font-size="1rem" fill="#999999">waypoint</text>
+
+                    <g transform="rotate(45)" style="cursor: pointer;">
+                        <g transform="translate(0 160)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0" transform="rotate(-45)">LOCK</text>
+                        </g>
+                    </g>
+                    <g style="cursor: pointer;">
+                        <g transform="translate(0 160)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="none" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999">CLR</text>
+                        </g>
+                    </g>
+                    <g transform="rotate(-45)" style="cursor: pointer;">
+                        <g transform="translate(0 160)">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="none" stroke-width="1"></circle>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(45)">ACTV</text>
+                        </g>
+                    </g>
+
+                    <g transform="translate(0 -160) rotate(-60 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(0)">1</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(-30 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(0)">2</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(0 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(0)">3</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(30 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(0)">4</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(60 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(0)">5</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+                    <g transform="translate(0 -160) rotate(90 0 160)">
+                        <line x1="0" y1="-30" x2="0" y2="-22" stroke="#383838" stroke-width="1"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(0)">6</text>
+                        <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
+                    </g>
+
+                    <g transform="translate(-160 0)">
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">OFF</text>
+                    </g>
+                    <g transform="translate(-160 0)">
+                        <circle cx="0" cy="0" r="30" stroke="#333333" fill="none" stroke-width="2"></circle>
+                        <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
+                    </g>
+                </g>
+
+                <!-- FOOTER -->
+                <g transform="translate(0 1080)">
+                    <use href="#header" transform="scale(1 -1)"/>
+                    <g transform="translate(10 0)">
+                        <text x="0" y="-40" font-size="1rem" fill="#999999" dominant-baseline="central">Terran Federation</text>
+                        <text x="0" y="-20" font-size="1rem" fill="#999999" dominant-baseline="central">Omega-class Cruiser</text>
+                        <text x="400" y="-30" font-size="2rem" fill="#dedede" dominant-baseline="central" text-anchor="end">Archimedes</text>
+                    </g>
+
+                    <g transform="translate(1910 0)">
+                        <text x="-400" y="-30" font-size="2rem" fill="#dedede" dominant-baseline="central">Raphael Legatus</text>
+                        <text x="0" y="-40" font-size="1rem" fill="#999999" dominant-baseline="central" text-anchor="end">Lieutenant</text>
+                        <text x="0" y="-20" font-size="1rem" fill="#999999" dominant-baseline="central" text-anchor="end">#32TK3IR1</text>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+</body>
+</html>
