@@ -23,10 +23,10 @@
                     <line x1="30" y1="30" x2="350" y2="30" stroke="#020202" stroke-width="58" stroke-linecap="round"/>
                 </g>
                 <g id="container-numberpicker">
-                    <line x1="45" y1="45" x2="45" y2="105" stroke="#383838" stroke-width="92" stroke-linecap="round"/>
-                    <line x1="45" y1="45" x2="45" y2="105" stroke="#020202" stroke-width="88" stroke-linecap="round"/>
+                    <line x1="45" y1="45" x2="45" y2="75" stroke="#383838" stroke-width="92" stroke-linecap="round"/>
+                    <line x1="45" y1="45" x2="45" y2="75" stroke="#020202" stroke-width="88" stroke-linecap="round"/>
                     <text x="45" y="25" text-anchor="middle" font-size="2rem" fill="#36c7d0" style="cursor: pointer;">▲</text>
-                    <text x="45" y="125" text-anchor="middle" font-size="2rem" fill="#36c7d0" style="cursor: pointer;">▼</text>
+                    <text x="45" y="95" text-anchor="middle" font-size="2rem" fill="#36c7d0" style="cursor: pointer;">▼</text>
                 </g>
                 <g id="icon-helm">
                     <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
@@ -76,15 +76,15 @@
                 <g transform="translate(20 80)">
                     <g transform="translate(0 0)">
                         <use href="#container-numberpicker"/>
-                        <text x="45" y="75" text-anchor="middle" font-size="4rem" fill="#dedede">0</text>
+                        <text x="45" y="60" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
                     </g>
                     <g transform="translate(100 0)">
                         <use href="#container-numberpicker"/>
-                        <text x="45" y="75" text-anchor="middle" font-size="4rem" fill="#dedede">0</text>
+                        <text x="45" y="60" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
                     </g>
                     <g transform="translate(200 0)">
                         <use href="#container-numberpicker"/>
-                        <text x="45" y="75" text-anchor="middle" font-size="4rem" fill="#dedede">0</text>
+                        <text x="45" y="60" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
                     </g>
                     <g transform="translate(320 0)">
                         <g transform="translate(30 30)" style="cursor: pointer;">
@@ -92,16 +92,11 @@
                             <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#020202" stroke-width="1"/>
                             <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">SET</text>
                         </g>
-                        <g transform="translate(30 120)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#020202" stroke-width="1"/>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">CLR</text>
-                        </g>
                     </g>
                 </g>
 
                 <!-- AUTOPILOT -->
-                <g transform="translate(20 265)">
+                <g transform="translate(20 240)">
                     <g transform="translate(30 30)">
                         <g transform="translate(0 0)" style="cursor: pointer;">
                             <line x1="0" y1="0" x2="120" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
@@ -211,6 +206,51 @@
                         </g>
                     </g>
                     <g transform="translate(0 490)">
+                        <use href="#container-waypoint"/>
+                        <g transform="translate(30 30)" style="cursor: pointer;">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
+                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
+                        </g>
+                        <g transform="translate(220 30)">
+                            <text x="-80" y="-5" text-anchor="middle" font-size="2rem" fill="#dedede">-</text>
+                            <text x="-80" y="17" text-anchor="middle" font-size=".75rem" fill="#999999">meters</text>
+                            <line x1="0" y1="-30" x2="0" y2="30" stroke="#383838"></line>
+                            <text x="80" y="-5" text-anchor="middle" font-size="2rem" fill="#dedede">-</text>
+                            <text x="80" y="17" text-anchor="middle" font-size=".75rem" fill="#999999">direction</text>
+                        </g>
+                    </g>
+                    <g transform="translate(0 560)">
+                        <use href="#container-waypoint"/>
+                        <g transform="translate(30 30)" style="cursor: pointer;">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
+                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
+                        </g>
+                        <g transform="translate(220 30)">
+                            <text x="-80" y="-5" text-anchor="middle" font-size="2rem" fill="#dedede">-</text>
+                            <text x="-80" y="17" text-anchor="middle" font-size=".75rem" fill="#999999">meters</text>
+                            <line x1="0" y1="-30" x2="0" y2="30" stroke="#383838"></line>
+                            <text x="80" y="-5" text-anchor="middle" font-size="2rem" fill="#dedede">-</text>
+                            <text x="80" y="17" text-anchor="middle" font-size=".75rem" fill="#999999">direction</text>
+                        </g>
+                    </g>
+                    <g transform="translate(0 630)">
+                        <use href="#container-waypoint"/>
+                        <g transform="translate(30 30)" style="cursor: pointer;">
+                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
+                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
+                        </g>
+                        <g transform="translate(220 30)">
+                            <text x="-80" y="-5" text-anchor="middle" font-size="2rem" fill="#dedede">-</text>
+                            <text x="-80" y="17" text-anchor="middle" font-size=".75rem" fill="#999999">meters</text>
+                            <line x1="0" y1="-30" x2="0" y2="30" stroke="#383838"></line>
+                            <text x="80" y="-5" text-anchor="middle" font-size="2rem" fill="#dedede">-</text>
+                            <text x="80" y="17" text-anchor="middle" font-size=".75rem" fill="#999999">direction</text>
+                        </g>
+                    </g>
+                    <g transform="translate(0 700)">
                         <use href="#container-waypoint"/>
                         <g transform="translate(30 30)" style="cursor: pointer;">
                             <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
