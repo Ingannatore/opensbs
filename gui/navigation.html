@@ -18,15 +18,45 @@
                     <path d="M -1 -1 L -1 60 L 420 60 L 460 20 L 1460 20 L 1500 60 L 1921 60 L 1921 -1 Z" stroke="none" fill="#020202"/>
                     <path d="M -1 60 L 420 60 L 460 20 L 1460 20 L 1500 60 L 1921 60" stroke="#383838" fill="none"/>
                 </g>
-                <g id="container-waypoint">
+                <g id="container-display">
+                    <circle cx="0" cy="0" r="80" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                </g>
+                <g id="container-display-red">
+                    <circle cx="0" cy="0" r="80" stroke="#ffa48e" fill="#020202" stroke-width="2"></circle>
+                </g>
+                <g id="container-button-on">
+                    <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
+                    <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#36c7d0" stroke-width="1"/>
+                </g>
+                <g id="container-button-off">
+                    <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
+                    <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#020202" stroke-width="1"/>
+                </g>
+                <g id="container-button-disabled">
+                    <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
+                    <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                </g>
+                <g id="container-pill">
                     <line x1="30" y1="30" x2="350" y2="30" stroke="#383838" stroke-width="62" stroke-linecap="round"/>
                     <line x1="30" y1="30" x2="350" y2="30" stroke="#020202" stroke-width="58" stroke-linecap="round"/>
                 </g>
-                <g id="container-numberpicker">
-                    <line x1="45" y1="45" x2="45" y2="75" stroke="#383838" stroke-width="92" stroke-linecap="round"/>
-                    <line x1="45" y1="45" x2="45" y2="75" stroke="#020202" stroke-width="88" stroke-linecap="round"/>
-                    <text x="45" y="25" text-anchor="middle" font-size="2rem" fill="#36c7d0" style="cursor: pointer;">▲</text>
-                    <text x="45" y="95" text-anchor="middle" font-size="2rem" fill="#36c7d0" style="cursor: pointer;">▼</text>
+                <g id="container-button-pill">
+                    <line x1="-60" y1="0" x2="60" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
+                    <line x1="-60" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
+                    <line x1="-60" y1="0" x2="60" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
+                    <line x1="-60" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
+                </g>
+                <g id="container-button-pill-md">
+                    <line x1="-40" y1="0" x2="40" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
+                    <line x1="-40" y1="0" x2="40" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
+                    <line x1="-40" y1="0" x2="40" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
+                    <line x1="-40" y1="0" x2="40" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
+                </g>
+                <g id="container-button-pill-sm">
+                    <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
+                    <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
+                    <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
+                    <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
                 </g>
                 <g id="icon-helm">
                     <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
@@ -53,12 +83,12 @@
                 <g transform="translate(0 0)">
                     <use href="#header"/>
                     <use href="#icon-helm" x="20" y="20" transform="scale(1.5)"/>
-                    <text x="70" y="30" font-size="2rem" fill="#dedede" dominant-baseline="central">navigation</text>
+                    <text x="70" y="30" font-size="2rem" fill="#dedede">navigation</text>
                 </g>
 
                 <!-- BEARING -->
                 <g transform="translate(540 120)">
-                    <circle cx="0" cy="0" r="80" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                    <use href="#container-display"/>
                     <text x="0" y="-45" text-anchor="middle" font-size="1rem" fill="#999999">bearing</text>
                     <text x="0" y="0" text-anchor="middle" font-size="4rem" fill="#dedede">000</text>
                     <text x="0" y="40" text-anchor="middle" font-size="1rem" fill="#999999">degrees</text>
@@ -66,7 +96,7 @@
 
                 <!-- ALERT LEVEL -->
                 <g transform="translate(1380 120)">
-                    <circle cx="0" cy="0" r="80" stroke="#ffa48e" fill="#020202" stroke-width="2"></circle>
+                    <use href="#container-display-red"/>
                     <text x="0" y="-45" text-anchor="middle" font-size="1rem" fill="#999999">status</text>
                     <text x="0" y="0" text-anchor="middle" font-size="4rem" fill="#ffa48e">red</text>
                     <text x="0" y="40" text-anchor="middle" font-size="1rem" fill="#999999">alert level</text>
@@ -75,192 +105,81 @@
                 <!-- BEARING SELECTOR -->
                 <g transform="translate(20 80)">
                     <g transform="translate(0 0)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-off"/>
                             <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">CLR</text>
                         </g>
                         <text x="190" y="30" text-anchor="middle" font-size="3rem" fill="#dedede">000</text>
-                        <g transform="translate(350 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#020202" stroke-width="1"/>
+                        <g transform="translate(350 30)" cursor="pointer">
+                            <use href="#container-button-off"/>
                             <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">SET</text>
                         </g>
                     </g>
                     <g transform="translate(20 100)">
-                        <g transform="translate(0 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(0 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">1</text>
                         </g>
-                        <g transform="translate(80 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(80 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">2</text>
                         </g>
-                        <g transform="translate(160 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(160 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">3</text>
                         </g>
-                        <g transform="translate(240 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(240 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">4</text>
                         </g>
-                        <g transform="translate(320 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(320 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">5</text>
                         </g>
                     </g>
                     <g transform="translate(20 160)">
-                        <g transform="translate(0 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(0 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">6</text>
                         </g>
-                        <g transform="translate(80 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(80 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">7</text>
                         </g>
-                        <g transform="translate(160 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(160 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">8</text>
                         </g>
-                        <g transform="translate(240 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(240 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">9</text>
                         </g>
-                        <g transform="translate(320 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#383838" stroke-width="40" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="36" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#36c7d0" stroke-width="32" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="20" y2="0" stroke="#020202" stroke-width="30" stroke-linecap="round"/>
+                        <g transform="translate(320 0)" cursor="pointer">
+                            <use href="#container-button-pill-sm"/>
                             <text x="10" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">0</text>
                         </g>
                     </g>
                 </g>
-                <!--
-                <g transform="translate(20 80)">
-                    <g transform="translate(60 60)">
-                        <circle cx="0" cy="0" r="60" stroke="#383838" fill="#020202" stroke-width="2"/>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">0</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(36)">1</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(72)">2</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(108)">3</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(144)">4</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(180)">5</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(216)">6</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(252)">7</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(288)">8</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(324)">9</text>
-                        <circle cx="0" cy="0" r="32" stroke="#383838" fill="#020202" stroke-width="1"/>
-                        <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
-                    </g>
-                    <g transform="translate(190 60)">
-                        <circle cx="0" cy="0" r="60" stroke="#383838" fill="#020202" stroke-width="2"/>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">0</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(36)">1</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(72)">2</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(108)">3</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(144)">4</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(180)">5</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(216)">6</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(252)">7</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(288)">8</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(324)">9</text>
-                        <circle cx="0" cy="0" r="32" stroke="#383838" fill="#020202" stroke-width="1"/>
-                        <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
-                    </g>
-                    <g transform="translate(320 60)">
-                        <circle cx="0" cy="0" r="60" stroke="#383838" fill="#020202" stroke-width="2"/>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">0</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(36)">1</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(72)">2</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(108)">3</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(144)">4</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(180)">5</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(216)">6</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(252)">7</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(288)">8</text>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(324)">9</text>
-                        <circle cx="0" cy="0" r="32" stroke="#383838" fill="#020202" stroke-width="1"/>
-                        <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
-                    </g>
-                </g>
-                -->
-                <!--
-                <g transform="translate(20 80)">
-                    <g transform="translate(0 0)">
-                        <use href="#container-numberpicker"/>
-                        <text x="45" y="60" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
-                    </g>
-                    <g transform="translate(100 0)">
-                        <use href="#container-numberpicker"/>
-                        <text x="45" y="60" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
-                    </g>
-                    <g transform="translate(200 0)">
-                        <use href="#container-numberpicker"/>
-                        <text x="45" y="60" text-anchor="middle" font-size="3rem" fill="#dedede">0</text>
-                    </g>
-                    <g transform="translate(320 0)">
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#020202" stroke-width="1"/>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">SET</text>
-                        </g>
-                    </g>
-                </g>
-                -->
 
                 <!-- AUTOPILOT -->
                 <g transform="translate(20 310)">
-                    <g transform="translate(30 20)">
-                        <g transform="translate(0 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
-                            <text x="60" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">autopilot</text>
+                    <g transform="translate(190 20)">
+                        <g transform="translate(-100 0)" cursor="pointer">
+                            <use href="#container-button-pill"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">autopilot</text>
                         </g>
-                        <g transform="translate(200 0)" style="cursor: pointer;">
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
-                            <text x="60" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">align</text>
+                        <g transform="translate(100 0)" cursor="pointer">
+                            <use href="#container-button-pill"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">align</text>
                         </g>
                     </g>
 
                     <!-- WAYPOINTS -->
                     <g transform="translate(0 70)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-off"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#36c7d0">A</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -272,10 +191,9 @@
                         </g>
                     </g>
                     <g transform="translate(0 140)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#36c7d0" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-on"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#020202" font-weight="bold">B</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -287,10 +205,9 @@
                         </g>
                     </g>
                     <g transform="translate(0 210)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-disabled"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -302,10 +219,9 @@
                         </g>
                     </g>
                     <g transform="translate(0 280)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-disabled"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -317,10 +233,9 @@
                         </g>
                     </g>
                     <g transform="translate(0 350)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-disabled"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -332,10 +247,9 @@
                         </g>
                     </g>
                     <g transform="translate(0 420)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-disabled"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -347,10 +261,9 @@
                         </g>
                     </g>
                     <g transform="translate(0 490)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-disabled"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -362,10 +275,9 @@
                         </g>
                     </g>
                     <g transform="translate(0 560)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-disabled"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -377,10 +289,9 @@
                         </g>
                     </g>
                     <g transform="translate(0 630)">
-                        <use href="#container-waypoint"/>
-                        <g transform="translate(30 30)" style="cursor: pointer;">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="#020202" stroke-width="1"/>
+                        <use href="#container-pill"/>
+                        <g transform="translate(30 30)" cursor="pointer">
+                            <use href="#container-button-disabled"/>
                             <text x="0" y="0" text-anchor="middle" font-size="2rem" fill="#999999">-</text>
                         </g>
                         <g transform="translate(220 30)">
@@ -427,6 +338,7 @@
                             <path d="M -6 0 L 0 -6 L 6 0 Z" stroke="#ffa48e" stroke-width="2" fill="#020202"></path>
                             <text x="0" y="18" font-size="1rem" fill="#ffa48e" text-anchor="middle">X-789</text>
                         </g>
+                        <use href="#icon-ship"></use>
                     </g>
 
                     <g>
@@ -582,46 +494,37 @@
                         <text x="0" y="17" text-anchor="middle" font-size="1rem" fill="#020202" font-weight="bold">B</text>
                     </g>
 
-                    <use href="#icon-ship"></use>
-                    <g transform="rotate(56)" style="cursor: pointer;">
-                        <g transform="translate(0 542)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#36c7d0" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="black" transform="rotate(-56)" style="font-weight: bold;">DIR</text>
+                    <!-- RADAR TOGGLES -->
+                    <g transform="translate(-420 420)">
+                        <g transform="translate(-40 -120)" cursor="pointer">
+                            <use href="#container-button-on"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="black" font-weight="bold">DIR</text>
+                        </g>
+                        <g transform="translate(30 -30)" cursor="pointer">
+                            <use href="#container-button-on"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="black" font-weight="bold">RNG</text>
+                        </g>
+                        <g transform="translate(120 40)" cursor="pointer">
+                            <use href="#container-button-off"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">WPN</text>
                         </g>
                     </g>
-                    <g transform="rotate(45)" style="cursor: pointer;">
-                        <g transform="translate(0 542)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="#36c7d0" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="black" transform="rotate(-45)" style="font-weight: bold;">RNG</text>
-                        </g>
-                    </g>
-                    <g transform="rotate(34)" style="cursor: pointer;">
-                        <g transform="translate(0 542)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0" transform="rotate(-34)">WPN</text>
-                        </g>
-                    </g>
+
+                    <!-- RADAR ZOOM -->
                     <g transform="translate(420 420)">
-                        <circle cx="0" cy="0" r="80" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                        <text x="0" y="-45" text-anchor="middle" font-size="1rem" fill="#999999">radar range</text>
-                        <text x="0" y="0" text-anchor="middle" font-size="4rem" fill="#dedede">10</text>
-                        <text x="0" y="40" text-anchor="middle" font-size="1rem" fill="#999999">kilometers</text>
-                    </g>
-                    <g transform="rotate(-56)" style="cursor: pointer;">
-                        <g transform="translate(0 542)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0" transform="rotate(56)">-</text>
+                        <g transform="translate(40 -120)" cursor="pointer">
+                            <use href="#container-button-off"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0">-</text>
                         </g>
-                    </g>
-                    <g transform="rotate(-34)" style="cursor: pointer;">
-                        <g transform="translate(0 542)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0" transform="rotate(34)">+</text>
+                        <g transform="translate(0 0)">
+                            <circle cx="0" cy="0" r="80" stroke="#383838" fill="#020202" stroke-width="2"></circle>
+                            <text x="0" y="-45" text-anchor="middle" font-size="1rem" fill="#999999">radar range</text>
+                            <text x="0" y="0" text-anchor="middle" font-size="4rem" fill="#dedede">10</text>
+                            <text x="0" y="40" text-anchor="middle" font-size="1rem" fill="#999999">kilometers</text>
+                        </g>
+                        <g transform="translate(-120 40)" cursor="pointer">
+                            <use href="#container-button-off"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0">+</text>
                         </g>
                     </g>
                 </g>
@@ -639,23 +542,22 @@
                     <text x="0" y="80" text-anchor="middle" font-size="1rem" fill="#999999">power</text>
 
                     <!-- SPEED CONTROLS -->
-                    <g transform="rotate(-60)" style="cursor: pointer;">
-                        <g transform="translate(0 160)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0" transform="rotate(60)">+5%</text>
+                    <g transform="translate(80 140)">
+                        <g cursor="pointer">
+                            <use href="#container-button-off"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">-5%</text>
                         </g>
                     </g>
-                    <g transform="rotate(-30)" style="cursor: pointer;">
-                        <g transform="translate(0 160)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0" transform="rotate(30)">-5%</text>
+                    <g transform="translate(140 80)">
+                        <g cursor="pointer">
+                            <use href="#container-button-off"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">+5%</text>
                         </g>
                     </g>
 
                     <!-- STOP -->
                     <g transform="translate(-160 0)">
+                        <use href="#container-button-off"/>
                         <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">OFF</text>
                     </g>
                     <!-- AHEAD -->
@@ -742,35 +644,23 @@
                         <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(180)">100</text>
                         <line x1="0" y1="22" x2="0" y2="30" stroke="#383838" stroke-width="1"/>
                     </g>
-
-                    <g transform="translate(-160 0)">
-                        <circle cx="0" cy="0" r="30" stroke="#333333" fill="none" stroke-width="2"></circle>
-                        <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
-                    </g>
                 </g>
 
                 <!-- HELM CONTROLS -->
-                <g transform="translate(1550 540)">
-                    <g transform="translate(0 0)" style="cursor: pointer;">
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
-                        <text x="30" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0"><</text>
-                    </g>
-                    <g transform="translate(130 0)" style="cursor: pointer;">
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
-                        <text x="30" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">STOP</text>
-                    </g>
-                    <g transform="translate(260 0)" style="cursor: pointer;">
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#383838" stroke-width="60" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="56" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#36c7d0" stroke-width="52" stroke-linecap="round"/>
-                        <line x1="0" y1="0" x2="60" y2="0" stroke="#020202" stroke-width="50" stroke-linecap="round"/>
-                        <text x="30" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0">></text>
+                <g transform="translate(1520 520)">
+                    <g transform="translate(190 20)">
+                        <g transform="translate(-120 0)" cursor="pointer">
+                            <use href="#container-button-pill-md"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0"><</text>
+                        </g>
+                        <g cursor="pointer">
+                            <use href="#container-button-off"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">stop</text>
+                        </g>
+                        <g transform="translate(120 0)" cursor="pointer">
+                            <use href="#container-button-pill-md"/>
+                            <text x="0" y="0" text-anchor="middle" font-size="3rem" fill="#36c7d0">></text>
+                        </g>
                     </g>
                 </g>
 
@@ -786,26 +676,22 @@
                     <text x="0" y="35" text-anchor="middle" font-size="4rem" fill="#dedede">-</text>
                     <text x="0" y="80" text-anchor="middle" font-size="1rem" fill="#999999">waypoint</text>
 
-                    <g transform="rotate(45)" style="cursor: pointer;">
-                        <g transform="translate(0 160)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0" transform="rotate(-45)">LOCK</text>
-                        </g>
+                    <!-- WARP CONTROLS -->
+                    <g transform="translate(-140 80)" cursor="pointer">
+                        <use href="#container-button-off"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">-1</text>
                     </g>
-                    <g style="cursor: pointer;">
-                        <g transform="translate(0 160)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="none" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999">CLR</text>
-                        </g>
+                    <g transform="translate(-60 150)" cursor="pointer">
+                        <use href="#container-button-off"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">LNK</text>
                     </g>
-                    <g transform="rotate(-45)" style="cursor: pointer;">
-                        <g transform="translate(0 160)">
-                            <circle cx="0" cy="0" r="30" stroke="#383838" fill="#020202" stroke-width="2"></circle>
-                            <circle cx="0" cy="0" r="26" stroke="#999999" fill="none" stroke-width="1"></circle>
-                            <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999" transform="rotate(45)">ACTV</text>
-                        </g>
+                    <g transform="translate(60 150)">
+                        <use href="#container-button-disabled"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#999999">ACTV</text>
+                    </g>
+                    <g transform="translate(140 80)" cursor="pointer">
+                        <use href="#container-button-off"/>
+                        <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">+1</text>
                     </g>
 
                     <g transform="translate(0 -160) rotate(-60 0 160)">
@@ -840,11 +726,8 @@
                     </g>
 
                     <g transform="translate(-160 0)">
+                        <use href="#container-button-off"/>
                         <text x="0" y="0" text-anchor="middle" font-size="1.25rem" fill="#36c7d0">OFF</text>
-                    </g>
-                    <g transform="translate(-160 0)">
-                        <circle cx="0" cy="0" r="30" stroke="#333333" fill="none" stroke-width="2"></circle>
-                        <circle cx="0" cy="0" r="26" stroke="#36c7d0" fill="none" stroke-width="1"></circle>
                     </g>
                 </g>
 
