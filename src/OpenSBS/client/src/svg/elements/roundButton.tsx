@@ -4,6 +4,7 @@ import SvgTransforms from '../../lib/svg-transforms';
 interface ButtonProps {
     x: number,
     y: number,
+    fontSize: number,
     toggled: boolean,
     enabled: boolean,
     onClick: (event: React.MouseEvent<SVGElement, MouseEvent>) => void,
@@ -15,6 +16,7 @@ export default class RoundButton extends React.Component<ButtonProps, {}> {
     public static defaultProps = {
         x: 0,
         y: 0,
+        fontSize: 1.25,
         toggled: false,
         enabled: true,
     };
@@ -37,7 +39,7 @@ export default class RoundButton extends React.Component<ButtonProps, {}> {
                     cx="0" cy="0" r="26"
                     stroke={this.getContainerStroke()} fill={this.getContainerFill()} strokeWidth="1"
                 />
-                <text x="0" y="0" textAnchor="middle" fontSize="1.25rem" fill={this.getTextFill()}>
+                <text x="0" y="0" textAnchor="middle" fontSize={this.props.fontSize + 'rem'} fill={this.getTextFill()}>
                     {this.props.children}
                 </text>
             </g>

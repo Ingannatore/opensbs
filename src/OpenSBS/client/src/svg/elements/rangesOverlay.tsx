@@ -27,6 +27,10 @@ export default class RangesOverlay extends React.Component<RangesOverlayProps, {
     }
 
     public render() {
+        if (!this.props.visible) {
+            return null;
+        }
+
         const deltaRadius = this.props.size / 5;
         const deltaValue = this.props.range / 5;
 
