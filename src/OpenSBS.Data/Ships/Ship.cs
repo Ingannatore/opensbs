@@ -10,6 +10,7 @@ namespace OpenSBS.Data.Ships
             SetMass(1000);
             SetSize(50);
             AddModule(new ManoeuvreEnginesModule("manoeuvre-engines-1"));
+            AddModule(new NavigationModule("navigation-1"));
         }
     }
 }

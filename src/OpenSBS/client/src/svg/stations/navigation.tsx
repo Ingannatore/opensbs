@@ -7,11 +7,13 @@ import ImpulseEngine from '../widgets/impulseEngine';
 import WarpDrive from '../widgets/warpDrive';
 import AlertDisplay from '../widgets/alertDisplay';
 import Radar from '../widgets/radar';
+import WaypointsList from '../widgets/waypointsList';
 
 export default class Navigation extends React.Component<{}, {}> {
     render() {
         return (
             <Station name="Navigation" icon="#icon-navigation">
+                <WaypointsList x={20} y={300}/>
                 <BearingDisplay x={540} y={120}/>
                 <AlertDisplay x={1380} y={120} level={AlertLevels.Normal}/>
                 <Radar x={960} y={540}/>
