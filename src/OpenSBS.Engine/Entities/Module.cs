@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenSBS.Engine.Messages;
+using OpenSBS.Core.Commands;
 
 namespace OpenSBS.Engine.Entities
 {
@@ -28,6 +28,6 @@ namespace OpenSBS.Engine.Entities
         }
 
         public abstract void Update(TimeSpan timeSpan);
-        public abstract void HandleMessage(Message message);
+        public abstract void HandleMessage(GameCommand command);
     }
 }

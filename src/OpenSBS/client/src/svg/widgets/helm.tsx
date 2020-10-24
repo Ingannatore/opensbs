@@ -47,34 +47,34 @@ class Helm extends React.Component<HelmProps> {
         );
     }
 
-    private getRudderValue() : number {
+    private getRudderValue(): number {
         return this.props.module ? this.props.module.rudder : 0;
     }
 
     private turnLeftHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(
+        this.props.dispatch(ShipActions.sendModuleAction(
             this.props.shipId,
             this.props.module.id,
             'set',
-            -1
+            '-1'
         ));
     }
 
     private stopHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(
+        this.props.dispatch(ShipActions.sendModuleAction(
             this.props.shipId,
             this.props.module.id,
             'set',
-            0
+            '0'
         ));
     }
 
     private turnRightHandler() {
-        this.props.dispatch(ShipActions.sendModuleMessage(
+        this.props.dispatch(ShipActions.sendModuleAction(
             this.props.shipId,
             this.props.module.id,
             'set',
-            1
+            '1'
         ));
     }
 }

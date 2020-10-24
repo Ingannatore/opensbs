@@ -2,6 +2,6 @@
 
 export default interface Action {
     type: string;
-    payload?: any;
-    meta?: ActionMetadata;
+    payload: any|null;
+    meta: ActionMetadata|null;
 }

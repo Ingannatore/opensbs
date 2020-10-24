@@ -16,8 +16,8 @@ const parsePayload = (payload: any) => {
 
 export default (state = defaultState, action: any) => {
     if (action.type === ServerActions.Types.SET_MISSIONS) {
-        const missions = parsePayload(action.payload);
-        return { ...state, missions: missions }
+        const payload = parsePayload(action.payload);
+        return { ...state, missions: payload.missions }
     }
 
     if (action.type === ServerActions.Types.REFRESH_SERVER_STATE) {

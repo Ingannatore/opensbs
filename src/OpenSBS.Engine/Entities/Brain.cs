@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Threading.Tasks;
-using OpenSBS.Engine.Messages;
+using OpenSBS.Core.Commands;
 
 namespace OpenSBS.Engine.Entities
 {
     public class Brain : IUpdatable
     {
-        protected readonly MessageQueue MessageQueue;
+        protected readonly GameCommandQueue CommandQueue;
         public Entity Entity { get; }
         public string Id => Entity.Id;
 
         public Brain(Entity entity)
         {
-            MessageQueue = new MessageQueue();
+            CommandQueue = new GameCommandQueue();
             Entity = entity;
         }
 
-        public async Task EnqueueMessage(Message message)
+        public async Task EnqueueCommand(GameCommand command)
         {
-            await MessageQueue.Enqueue(message);
+            await CommandQueue.Enqueue(command);
         }
 
         public virtual void Update(TimeSpan timeSpan)
         {
             if (Entity is ArtificialEntity spaceEntity)
             {
-                while (!MessageQueue.Empty)
+                while (!CommandQueue.Empty)
                 {
-                    spaceEntity.HandleMessage(MessageQueue.Dequeue());
+                    spaceEntity.HandleMessage(CommandQueue.Dequeue());
                 }
             }
 

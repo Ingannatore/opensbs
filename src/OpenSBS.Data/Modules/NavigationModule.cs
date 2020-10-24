@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using OpenSBS.Core.Commands;
 using OpenSBS.Engine.Entities;
 using OpenSBS.Engine.Exceptions;
-using OpenSBS.Engine.Messages;
 
 namespace OpenSBS.Data.Modules
 {
@@ -32,15 +32,15 @@ namespace OpenSBS.Data.Modules
             }
         }
 
-        public override void HandleMessage(Message message)
+        public override void HandleMessage(GameCommand command)
         {
-            switch (message.Command)
+            switch (command.Name)
             {
                 case "selectWaypoint":
-                    SelectWaypoint(message.Content.ToObject<int>());
+                    SelectWaypoint(command.GetPayload<int>());
                     break;
                 default:
-                    throw new UnknownModuleCommandException(this, message);
+                    throw new UnknownModuleCommandException(this, command);
             }
         }
 

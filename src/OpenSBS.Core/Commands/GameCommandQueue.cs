@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenSBS.Engine.Messages
+namespace OpenSBS.Core.Commands
 {
-    public class MessageQueue
+    public class GameCommandQueue
     {
-        private readonly Queue<Message> _queue;
+        private readonly Queue<GameCommand> _queue;
         public bool Empty => !_queue.Any();
 
-        public MessageQueue()
+        public GameCommandQueue()
         {
-            _queue = new Queue<Message>();
+            _queue = new Queue<GameCommand>();
         }
 
-        public async Task Enqueue(Message message)
+        public async Task Enqueue(GameCommand message)
         {
             await Task.Run(() => _queue.Enqueue(message));
         }
 
-        public Message Dequeue()
+        public GameCommand Dequeue()
         {
             try
             {

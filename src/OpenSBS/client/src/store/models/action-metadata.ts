@@ -1,3 +1,5 @@
 ﻿export default interface ActionMetadata {
-    socket: boolean
+    socket: boolean,
+    entity: string|null,
+    module: string|null
 }

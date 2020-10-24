@@ -34,7 +34,7 @@ namespace OpenSBS.Services
                 return;
             }
 
-            _hubContext.Clients.All.SendAsync("RefreshWorldState", state);
+            _hubContext.Clients.All.SendAsync("world/refreshState", state);
             _lastWorldState = state;
         }
 
@@ -46,7 +46,7 @@ namespace OpenSBS.Services
             );
             var state = SerializeState(serverState);
 
-            _hubContext.Clients.All.SendAsync("RefreshServerState", state);
+            _hubContext.Clients.All.SendAsync("server/refreshState", state);
         }
 
         private static WorldState BuildWorldState(ICollection<Entity> entities)

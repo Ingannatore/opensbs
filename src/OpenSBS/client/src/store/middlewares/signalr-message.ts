@@ -1,10 +1,12 @@
 ﻿import Action from '../models/action';
-import Actions from '../lib/actions';
-import Signalr from '../lib/signalr';
+
+const isSocketAction = (action: Action): boolean => {
+    return !!(action.meta?.socket);
+};
 
 export default (hub: any) => (store: any) => (next: any) => (action: Action) => {
-    if (Actions.isSocketAction(action)) {
-        Signalr.invokeMethod(hub, action)
+    if (isSocketAction(action)) {
+        hub.invoke('OnClientAction', action)
         .then((action?: Action) => {
             if (action) {
                 store.dispatch(action);

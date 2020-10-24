@@ -1,20 +1,11 @@
 ﻿import Action from '../models/action';
 
-const Types = {
-    MODULE_MESSAGE: 'ModuleMessage',
-};
-
-const sendModuleMessage = (entityId: string, moduleId: string, command: string, content: any): Action => ({
-    type: Types.MODULE_MESSAGE,
-    payload: {
-        recipient: `${entityId}/${moduleId}`,
-        command: command,
-        content: content
-    },
-    meta: {socket: true}
+const sendModuleAction = (entityId: string, moduleId: string, type: string, payload: any): Action => ({
+    type: type,
+    payload: payload,
+    meta: {socket: true, entity: entityId, module: moduleId}
 });
 
 export default {
-    Types,
-    sendModuleMessage
+    sendModuleAction
 };

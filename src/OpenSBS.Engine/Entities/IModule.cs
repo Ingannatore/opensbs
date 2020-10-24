@@ -1,9 +1,9 @@
-﻿using OpenSBS.Engine.Messages;
+﻿using OpenSBS.Core.Commands;
 
 namespace OpenSBS.Engine.Entities
 {
     public interface IModule : IUpdatable
     {
-        void HandleMessage(Message message);
+        void HandleMessage(GameCommand command);
     }
 }

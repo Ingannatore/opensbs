@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OpenSBS.Engine.Messages;
+using OpenSBS.Core.Commands;
 using OpenSBS.Engine.Entities;
 
 namespace OpenSBS.Engine
@@ -45,9 +45,9 @@ namespace OpenSBS.Engine
             _brains.Add(brain.Id, brain);
         }
 
-        public async Task EnqueueMessage(Message message)
+        public async Task EnqueueCommand(GameCommand command)
         {
-            await _brains[message.Recipient.EntityId].EnqueueMessage(message);
+            await _brains[command.Meta.Entity].EnqueueCommand(command);
         }
 
         public void RegisterStateRefreshEventHandler(EventHandler<ICollection<Entity>> handler)

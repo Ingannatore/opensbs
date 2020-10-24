@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using OpenSBS.Core.Commands;
 using OpenSBS.Data;
 using OpenSBS.Engine;
-using OpenSBS.Engine.Messages;
 
 namespace OpenSBS.Services
 {
@@ -15,53 +15,53 @@ namespace OpenSBS.Services
             _stateService = stateService;
         }
 
-        public async Task<Action> GetMissions()
+        public async Task<GameCommand> OnClientAction(GameCommand command)
         {
-            return await Task.Run(
-                () =>
-                {
-                    MissionsLibrary.Instance.LoadMissions();
-                    return new Action(
-                        "SetMissions",
-                        MissionsLibrary.Instance.AvailableMissions
+            switch (command.Name)
+            {
+                case "server/getMissions":
+                    return await Task.Run(
+                        () =>
+                        {
+                            MissionsLibrary.Instance.LoadMissions();
+                            return GameCommand.CreateInstance(
+                                "server/setMissions",
+                                new MissionsPayload(MissionsLibrary.Instance.AvailableMissions)
+                            );
+                        }
                     );
-                }
-            );
-        }
+                case "server/startMission":
+                    return await Task.Run(
+                        () =>
+                        {
+                            _stateService.ClearState();
 
-        public async Task StartMission(Message message)
-        {
-            await Task.Run(
-                () =>
-                {
-                    _stateService.ClearState();
-                    var mission = MissionsLibrary.Instance
-                        .InstantiateMission(message.Content.ToObject<string>());
+                            GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
+                            Game.Instance.RegisterStateRefreshEventHandler(_stateService.SendWorldState);
 
-                    GameClock.Instance.RegisterTickEventHandler(Game.Instance.OnTick);
-                    Game.Instance.RegisterStateRefreshEventHandler(_stateService.SendWorldState);
-                    Game.Instance.Initialize(mission);
-                    GameClock.Instance.Start();
+                            var mission = MissionsLibrary.Instance.InstantiateMission(command.Payload);
+                            Game.Instance.Initialize(mission);
 
-                    _stateService.SendServerState();
-                }
-            );
-        }
+                            GameClock.Instance.Start();
+                            _stateService.SendServerState();
 
-        public async Task PauseMission()
-        {
-            await Task.Run(
-                () =>
-                {
-                    GameClock.Instance.Stop();
-                    _stateService.SendServerState();
-                }
-            );
-        }
+                            return (GameCommand) null;
+                        }
+                    );
+                case "server/pauseMission":
+                    return await Task.Run(
+                        () =>
+                        {
+                            GameClock.Instance.Stop();
+                            _stateService.SendServerState();
+                            return (GameCommand) null;
+                        }
+                    );
+            }
 
-        public async Task ModuleMessage(Message message)
-        {
-            await Game.Instance.EnqueueMessage(message);
+            await Game.Instance.EnqueueCommand(command);
+
+            return null;
         }
     }
 }

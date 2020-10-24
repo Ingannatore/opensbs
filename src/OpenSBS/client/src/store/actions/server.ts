@@ -1,32 +1,35 @@
 ﻿import Action from '../models/action';
 
 const Types = {
-    GET_MISSIONS: 'GetMissions',
-    SET_MISSIONS: 'SetMissions',
-    START_MISSION: 'StartMission',
-    PAUSE_MISSION: 'PauseMission',
-    REFRESH_SERVER_STATE: 'RefreshServerState'
+    GET_MISSIONS: 'server/getMissions',
+    SET_MISSIONS: 'server/setMissions',
+    START_MISSION: 'server/startMission',
+    PAUSE_MISSION: 'server/pauseMission',
+    REFRESH_SERVER_STATE: 'server/refreshState'
 };
 
 const getMissions = (): Action => ({
     type: Types.GET_MISSIONS,
-    meta: {socket: true}
+    payload: null,
+    meta: {socket: true, entity: null, module: null}
 });
 
 const startMission = (id: string): Action => ({
     type: Types.START_MISSION,
-    payload: {content: id},
-    meta: {socket: true}
+    payload: id,
+    meta: {socket: true, entity: null, module: null}
 });
 
 const pauseMission = (): Action => ({
     type: Types.PAUSE_MISSION,
-    meta: {socket: true}
+    payload: null,
+    meta: {socket: true, entity: null, module: null}
 });
 
 const refreshServerState = (data: string): Action => ({
     type: Types.REFRESH_SERVER_STATE,
-    payload: JSON.parse(data)
+    payload: JSON.parse(data),
+    meta: null
 });
 
 export default {

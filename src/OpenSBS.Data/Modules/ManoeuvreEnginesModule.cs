@@ -1,7 +1,7 @@
 ﻿using System;
+using OpenSBS.Core.Commands;
 using OpenSBS.Engine.Entities;
 using OpenSBS.Engine.Exceptions;
-using OpenSBS.Engine.Messages;
 
 namespace OpenSBS.Data.Modules
 {
@@ -15,18 +15,18 @@ namespace OpenSBS.Data.Modules
             Rudder = 0;
         }
 
-        public override void HandleMessage(Message message)
+        public override void HandleMessage(GameCommand command)
         {
-            switch (message.Command)
+            switch (command.Name)
             {
                 case "set":
-                    Rudder = message.Content.ToObject<int>();
+                    Rudder = command.GetPayload<int>();
                     break;
                 case "add":
-                    Rudder += message.Content.ToObject<int>();
+                    Rudder += command.GetPayload<int>();
                     break;
                 default:
-                    throw new UnknownModuleCommandException(this, message);
+                    throw new UnknownModuleCommandException(this, command);
             }
         }
 

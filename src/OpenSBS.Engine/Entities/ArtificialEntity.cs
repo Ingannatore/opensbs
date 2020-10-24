@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using OpenSBS.Engine.Messages;
+using OpenSBS.Core.Commands;
 
 namespace OpenSBS.Engine.Entities
 {
@@ -19,11 +19,11 @@ namespace OpenSBS.Engine.Entities
             HitPoints = new BoundedValue(hitpoints);
         }
 
-        public void HandleMessage(Message message)
+        public void HandleMessage(GameCommand command)
         {
-            if (message.Recipient.IsModule)
+            if (!string.IsNullOrEmpty(command.Meta.Module))
             {
-                _modules[message.Recipient.ModuleId].HandleMessage(message);
+                _modules[command.Meta.Module].HandleMessage(command);
             }
         }
 
