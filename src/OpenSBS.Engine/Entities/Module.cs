@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenSBS.Core.Commands;
+using OpenSBS.Engine.Commands;
 
 namespace OpenSBS.Engine.Entities
 {

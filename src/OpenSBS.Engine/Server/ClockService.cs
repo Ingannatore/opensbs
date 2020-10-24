@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace OpenSBS.Core
+namespace OpenSBS.Engine.Server
 {
     public class ClockService : IDisposable
     {

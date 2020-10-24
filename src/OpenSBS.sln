@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSBS.Engine", "OpenSBS.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSBS.Data", "OpenSBS.Data\OpenSBS.Data.csproj", "{95A35F7C-46E4-40E9-AB0A-526EB14D376F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSBS.Core", "OpenSBS.Core\OpenSBS.Core.csproj", "{695A61F1-1D91-4DE0-81A9-C162E14292A9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,18 +55,6 @@ Global
 		{95A35F7C-46E4-40E9-AB0A-526EB14D376F}.Release|x64.Build.0 = Release|Any CPU
 		{95A35F7C-46E4-40E9-AB0A-526EB14D376F}.Release|x86.ActiveCfg = Release|Any CPU
 		{95A35F7C-46E4-40E9-AB0A-526EB14D376F}.Release|x86.Build.0 = Release|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Debug|x64.Build.0 = Debug|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Debug|x86.Build.0 = Debug|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Release|x64.ActiveCfg = Release|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Release|x64.Build.0 = Release|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Release|x86.ActiveCfg = Release|Any CPU
-		{695A61F1-1D91-4DE0-81A9-C162E14292A9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

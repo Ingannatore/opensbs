@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using OpenSBS.Core.Commands;
+using OpenSBS.Engine.Commands;
 
 namespace OpenSBS.Engine.Entities
 {

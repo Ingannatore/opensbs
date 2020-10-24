@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using OpenSBS.Core;
-using OpenSBS.Core.Commands;
 using OpenSBS.Data;
 using OpenSBS.Engine;
+using OpenSBS.Engine.Commands;
+using OpenSBS.Engine.Server;
 
 namespace OpenSBS.Services
 {

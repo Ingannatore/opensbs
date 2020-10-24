@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OpenSBS.Core;
+using OpenSBS.Engine.Server;
 using OpenSBS.Services;
 
 namespace OpenSBS

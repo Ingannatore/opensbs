@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Core.Commands
+﻿namespace OpenSBS.Engine.Commands
 {
     public class GameCommandMetadata
     {
