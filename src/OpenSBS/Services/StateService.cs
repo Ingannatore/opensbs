@@ -3,6 +3,8 @@ using System.Linq;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using OpenSBS.Core;
+using OpenSBS.Core.Models;
 using OpenSBS.Engine;
 using OpenSBS.Engine.Entities;
 using OpenSBS.Models;
@@ -12,11 +14,13 @@ namespace OpenSBS.Services
     public class StateService
     {
         private readonly IHubContext<ServerHub> _hubContext;
+        private readonly ClockService _clockService;
         private string _lastWorldState;
 
-        public StateService(IHubContext<ServerHub> hubContext)
+        public StateService(IHubContext<ServerHub> hubContext, ClockService clockService)
         {
             _hubContext = hubContext;
+            _clockService = clockService;
             _lastWorldState = null;
         }
 
@@ -42,7 +46,7 @@ namespace OpenSBS.Services
         {
             var serverState = new ServerState(
                 Game.Instance.IsReady,
-                GameClock.Instance.IsRunning
+                _clockService.IsRunning
             );
             var state = SerializeState(serverState);
 

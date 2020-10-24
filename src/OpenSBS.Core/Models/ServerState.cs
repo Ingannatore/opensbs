@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Models
+﻿namespace OpenSBS.Core.Models
 {
     public class ServerState
     {

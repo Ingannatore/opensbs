@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenSBS.Core;
 using OpenSBS.Services;
 
 namespace OpenSBS
@@ -21,6 +22,7 @@ namespace OpenSBS
         {
             services.AddSignalR().AddNewtonsoftJsonProtocol();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "client"; });
+            services.AddSingleton<ClockService>();
             services.AddSingleton<StateService>();
         }
 
