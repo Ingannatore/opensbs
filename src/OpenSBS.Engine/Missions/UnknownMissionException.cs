@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenSBS.Engine.Exceptions
+namespace OpenSBS.Engine.Missions
 {
     public class UnknownMissionException : Exception
     {

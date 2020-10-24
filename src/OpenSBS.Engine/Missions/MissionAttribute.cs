@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenSBS.Engine.Attributes
+namespace OpenSBS.Engine.Missions
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class MissionAttribute : Attribute

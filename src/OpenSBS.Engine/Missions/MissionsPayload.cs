@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using OpenSBS.Engine.Entities;
 
-namespace OpenSBS.Engine
+namespace OpenSBS.Engine.Missions
 {
     public class MissionsPayload
     {

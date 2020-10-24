@@ -1,8 +1,8 @@
 ﻿using System;
 using OpenSBS.Data.Ships;
 using OpenSBS.Engine;
-using OpenSBS.Engine.Attributes;
 using OpenSBS.Engine.Entities;
+using OpenSBS.Engine.Missions;
 
 namespace OpenSBS.Data.Missions
 {

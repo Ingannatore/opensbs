@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenSBS.Engine.Entities
+namespace OpenSBS.Engine.Missions
 {
     public abstract class Mission
     {

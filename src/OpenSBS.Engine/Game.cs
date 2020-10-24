@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using OpenSBS.Engine.Commands;
 using OpenSBS.Engine.Entities;
+using OpenSBS.Engine.Missions;
 
 namespace OpenSBS.Engine
 {

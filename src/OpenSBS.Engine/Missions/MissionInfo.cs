@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using Newtonsoft.Json;
-using OpenSBS.Engine.Attributes;
 
-namespace OpenSBS.Engine.Entities
+namespace OpenSBS.Engine.Missions
 {
     public class MissionInfo
     {

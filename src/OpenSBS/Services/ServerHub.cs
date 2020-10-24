@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 using OpenSBS.Data;
 using OpenSBS.Engine;
 using OpenSBS.Engine.Commands;
+using OpenSBS.Engine.Missions;
 using OpenSBS.Engine.Server;
 
 namespace OpenSBS.Services
