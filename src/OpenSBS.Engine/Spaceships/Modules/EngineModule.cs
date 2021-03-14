@@ -1,12 +1,12 @@
 ﻿using System;
-using OpenSBS.Engine.Commands;
+using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Engine.Spaceships.Modules
 {
     public abstract class EngineModule : Module
     {
-        private const string SetThrottleCommand = "setThrottle";
-        private const string SetRudderCommand = "setRudder";
+        private const string SetThrottleAction = "setThrottle";
+        private const string SetRudderAction = "setRudder";
 
         public int Throttle { get; protected set; }
         public int Rudder { get; protected set; }
@@ -20,15 +20,15 @@ namespace OpenSBS.Engine.Spaceships.Modules
             Type = ModuleType.Engine;
         }
 
-        public override void HandleCommand(GameCommand command)
+        public override void HandleAction(GameAction action)
         {
-            switch (command.Name)
+            switch (action.Type)
             {
-                case SetThrottleCommand:
-                    Throttle = command.GetPayload<int>();
+                case SetThrottleAction:
+                    Throttle = action.PayloadTo<int>();
                     break;
-                case SetRudderCommand:
-                    Rudder = command.GetPayload<int>();
+                case SetRudderAction:
+                    Rudder = action.PayloadTo<int>();
                     break;
             }
         }

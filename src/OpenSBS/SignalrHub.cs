@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using OpenSBS.Engine;
-using OpenSBS.Engine.Commands;
 using OpenSBS.Engine.Models;
 
 namespace OpenSBS
@@ -19,22 +18,22 @@ namespace OpenSBS
 
         public async Task OnAfterConnect()
         {
-            await Clients.Caller.SendAsync("OnClientAction", CreateServerRefreshAction());
+            await Clients.Caller.SendAsync("OnServerAction", CreateServerRefreshAction());
         }
 
-        public async Task OnClientCommand(GameCommand command)
+        public async Task OnClientAction(GameAction action)
         {
-            await _server.EnqueueIncomingCommand(command);
+            await _server.EnqueueAction(action);
         }
 
         private async void SendState(object sender, EventArgs eventArgs)
         {
-            await Clients.All.SendAsync("OnClientAction", CreateServerRefreshAction());
+            await Clients.All.SendAsync("OnServerAction", CreateServerRefreshAction());
         }
 
-        private ClientAction CreateServerRefreshAction()
+        private GameAction CreateServerRefreshAction()
         {
-            return new ClientAction("server/refresh", _server.State);
+            return new GameAction("server/refresh", _server.State);
         }
     }
 }

@@ -8,7 +8,7 @@ const Types = {
 
 const startMission = (id: string): Action => ({
     type: Types.START_MISSION,
-    payload: id,
+    payload: JSON.stringify(id),
     meta: {socket: true, entity: null, module: null}
 });
 
@@ -18,15 +18,8 @@ const pauseMission = (): Action => ({
     meta: {socket: true, entity: null, module: null}
 });
 
-const refreshServerState = (data: any): Action => ({
-    type: Types.REFRESH_SERVER_STATE,
-    payload: data,
-    meta: null
-});
-
 export default {
     Types,
     startMission,
-    pauseMission,
-    refreshServerState
+    pauseMission
 };

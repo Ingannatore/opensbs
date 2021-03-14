@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenSBS.Engine.Commands;
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Spaceships.Modules;
 
@@ -16,11 +15,11 @@ namespace OpenSBS.Engine.Spaceships
             Modules = new ModulesCollection();
         }
 
-        public void HandleCommand(GameCommand command)
+        public void HandleAction(GameAction action)
         {
-            if (!string.IsNullOrEmpty(command.Meta.Module))
+            if (!string.IsNullOrEmpty(action.Meta.Module))
             {
-                Modules.Get(command.Meta.Module).HandleCommand(command);
+                Modules.Get(action.Meta.Module).HandleAction(action);
             }
         }
 

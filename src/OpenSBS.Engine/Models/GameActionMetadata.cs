@@ -1,6 +1,6 @@
 ﻿namespace OpenSBS.Engine.Models
 {
-    public class ClientActionMetadata
+    public class GameActionMetadata
     {
         public bool Socket { get; set; }
         public string Entity { get; set; }

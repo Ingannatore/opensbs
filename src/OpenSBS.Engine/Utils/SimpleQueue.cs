@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenSBS.Engine.Commands
+namespace OpenSBS.Engine.Utils
 {
-    public class GameCommandQueue
+    public class SimpleQueue<T> where T : class
     {
-        private readonly Queue<GameCommand> _queue;
-        public bool Empty => !_queue.Any();
+        private readonly Queue<T> _queue;
 
-        public GameCommandQueue()
+        public SimpleQueue()
         {
-            _queue = new Queue<GameCommand>();
+            _queue = new Queue<T>();
         }
 
-        public async Task Enqueue(GameCommand message)
+        public async Task Enqueue(T item)
         {
-            await Task.Run(() => _queue.Enqueue(message));
+            await Task.Run(() => _queue.Enqueue(item));
         }
 
-        public GameCommand Dequeue()
+        public T Dequeue()
         {
             try
             {
@@ -32,7 +30,7 @@ namespace OpenSBS.Engine.Commands
             }
         }
 
-        public IEnumerable<GameCommand> DequeueAll()
+        public IEnumerable<T> DequeueAll()
         {
             for (var i = 0; i < _queue.Count && _queue.Count > 0; i++)
             {

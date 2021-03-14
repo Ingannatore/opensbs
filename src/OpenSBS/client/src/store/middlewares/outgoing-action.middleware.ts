@@ -6,7 +6,7 @@ const isSocketAction = (action: Action): boolean => {
 
 export default (hub: any) => (store: any) => (next: any) => (action: Action) => {
     if (isSocketAction(action)) {
-        hub.invoke('OnClientCommand', action)
+        hub.invoke('OnClientAction', action)
         .then((action?: Action) => {
             if (action) {
                 store.dispatch(action);
