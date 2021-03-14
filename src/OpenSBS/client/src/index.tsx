@@ -6,8 +6,8 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import * as signalR from '@microsoft/signalr';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import rootReducer from './store/reducers';
-import RefreshStateMiddleware from './store/middlewares/refresh-state';
-import SignalrMessageMiddleware from './store/middlewares/signalr-message';
+import IncomingActionMiddleware from './store/middlewares/incoming-action.middleware';
+import OutgoingActionMiddleware from './store/middlewares/outgoing-action.middleware';
 import Home from './pages/home';
 import Station from './pages/station';
 import './index.css';
@@ -24,8 +24,8 @@ hub.start().then(() => {
 const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(
-        RefreshStateMiddleware(hub),
-        SignalrMessageMiddleware(hub)
+        IncomingActionMiddleware(hub),
+        OutgoingActionMiddleware(hub)
     ))
 );
 
