@@ -1,8 +1,8 @@
-﻿import EntityModule from '../../models/entity-module';
-import Vector3 from '../../models/vector3';
-import Entity from '../../models/entity';
+﻿import Vector3 from '../../models/vector3';
+import Spaceship from '../../models/spaceship';
+import Thing from '../../models/thing';
 
-const getPlayersShip = (state: any): Entity => state.world.ship;
+const getPlayersShip = (state: any): Spaceship => state.world.ship;
 
 const selectShipId = (state: any): string => {
     const ship = getPlayersShip(state);
@@ -24,28 +24,28 @@ const selectShipRotation = (state: any): Vector3 => {
         return {x: 0, y: 0, z: 0};
     }
 
-    return ship.rotation;
+    return ship.direction;
 };
 
-const selectModulesByType = (type: string, state: any): Array<Partial<EntityModule>> => {
+const selectModulesByType = (type: string, state: any): Array<Partial<Thing>> => {
     const ship = getPlayersShip(state);
     if (!ship) {
         return [];
     }
 
     return ship.modules.filter(
-        (module: Partial<EntityModule>) => module.type === type
+        (module: Partial<Thing>) => module.type === type
     );
 };
 
-const selectModuleById = (id: string, state: any): Partial<EntityModule> | undefined => {
+const selectModuleById = (id: string, state: any): Partial<Thing> | undefined => {
     const ship = getPlayersShip(state);
     if (!ship) {
         return undefined;
     }
 
     return ship.modules.find(
-        (module: Partial<EntityModule>) => module.id === id
+        (module: Partial<Thing>) => module.id === id
     );
 };
 

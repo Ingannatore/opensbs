@@ -1,8 +1,8 @@
-﻿import Vector3 from '../../models/vector3';
-import Entity from '../../models/entity';
-import Coords from '../../lib/coords';
+﻿import Coords from '../../lib/coords';
+import Vector3 from '../../models/vector3';
+import Spaceship from '../../models/spaceship';
 
-const selectEntitiesByDistance = (state: any, from: Vector3, distance: number): Entity[] => {
+const selectEntitiesByDistance = (state: any, from: Vector3, distance: number): Spaceship[] => {
     const entities = state.world.entities;
     if (!entities) {
         return [];

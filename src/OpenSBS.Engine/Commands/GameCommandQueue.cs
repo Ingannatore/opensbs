@@ -31,5 +31,13 @@ namespace OpenSBS.Engine.Commands
                 return null;
             }
         }
+
+        public IEnumerable<GameCommand> DequeueAll()
+        {
+            for (var i = 0; i < _queue.Count && _queue.Count > 0; i++)
+            {
+                yield return _queue.Dequeue();
+            }
+        }
     }
 }

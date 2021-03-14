@@ -20,8 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenSBS.Core\OpenSBS.Core.csproj" />
-    <ProjectReference Include="..\OpenSBS.Data\OpenSBS.Data.csproj" />
     <ProjectReference Include="..\OpenSBS.Engine\OpenSBS.Engine.csproj" />
   </ItemGroup>
 

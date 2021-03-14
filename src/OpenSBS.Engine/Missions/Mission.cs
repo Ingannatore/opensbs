@@ -4,7 +4,13 @@ namespace OpenSBS.Engine.Missions
 {
     public abstract class Mission
     {
-        public abstract void Initialize();
-        public abstract void Update(TimeSpan timeSpan);
+        protected readonly Game Game;
+
+        protected Mission(Game game)
+        {
+            Game = game;
+        }
+
+        public abstract void Update(TimeSpan deltaT);
     }
 }

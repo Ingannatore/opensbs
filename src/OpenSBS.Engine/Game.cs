@@ -7,42 +7,28 @@ using OpenSBS.Engine.Missions;
 
 namespace OpenSBS.Engine
 {
-    public class Game : Singleton<Game>
+    public class Game
     {
-        private readonly ICollection<Entity> _entities;
+        private readonly ICollection<Thing> _entities;
         private readonly IDictionary<string, Brain> _brains;
-        private Mission _mission;
+        private readonly Mission _mission;
 
-        public bool IsReady { get; protected set; }
-        public event EventHandler<ICollection<Entity>> StateRefreshEventHandler;
-
-        public Game()
+        public Game(Type missionType)
         {
-            _entities = new List<Entity>();
+            _entities = new List<Thing>();
             _brains = new Dictionary<string, Brain>();
 
-            IsReady = false;
+            _mission = (Mission) Activator.CreateInstance(missionType, this);
         }
 
-        public void Initialize(Mission mission)
+        public void AddEntity(Thing thing)
         {
-            IsReady = false;
-            _entities.Clear();
-            _brains.Clear();
-
-            _mission = mission;
-            _mission.Initialize();
-            IsReady = true;
-        }
-
-        public void AddEntity(Entity entity)
-        {
-            _entities.Add(entity);
+            _entities.Add(thing);
         }
 
         public void AddBrain(Brain brain)
         {
-            AddEntity(brain.Entity);
+            AddEntity(brain.Thing);
             _brains.Add(brain.Id, brain);
         }
 
@@ -51,21 +37,14 @@ namespace OpenSBS.Engine
             await _brains[command.Meta.Entity].EnqueueCommand(command);
         }
 
-        public void RegisterStateRefreshEventHandler(EventHandler<ICollection<Entity>> handler)
-        {
-            StateRefreshEventHandler -= handler;
-            StateRefreshEventHandler += handler;
-        }
-
-        public void OnTick(object state, TimeSpan timeSpan)
+        public void OnTick(TimeSpan deltaT)
         {
             foreach (var brain in _brains.Values)
             {
-                brain.Update(timeSpan);
+                brain.Update(deltaT);
             }
 
-            _mission.Update(timeSpan);
-            StateRefreshEventHandler?.Invoke(this, _entities);
+            _mission.Update(deltaT);
         }
     }
 }

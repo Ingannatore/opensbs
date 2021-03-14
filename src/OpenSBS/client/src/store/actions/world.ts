@@ -1,4 +1,4 @@
-﻿import Action from '../models/action';
+﻿import Action from '../action.model';
 
 const Types = {
     REFRESH_WORLD_STATE: 'world/refreshState',

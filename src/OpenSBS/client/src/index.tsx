@@ -13,7 +13,14 @@ import Station from './pages/station';
 import './index.css';
 
 const hub = new signalR.HubConnectionBuilder().withUrl('/ws').build();
-hub.start().catch(err => document.write(err));
+hub.start().then(() => {
+    hub.invoke('OnAfterConnect').catch((err: any) => {
+        return console.error(err.toString());
+    });
+}).catch((err: any) => {
+    return console.error(err.toString());
+});
+
 const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(

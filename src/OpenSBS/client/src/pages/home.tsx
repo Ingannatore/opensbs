@@ -2,7 +2,7 @@
 import {connect} from 'react-redux';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {Dispatch} from "redux";
-import ServerActions from '../store/actions/server';
+import ServerActions from '../store/server/server.actions';
 
 interface HomePageProps extends RouteComponentProps {
     missions: any[],
@@ -13,7 +13,6 @@ class Home extends React.Component<HomePageProps, {}> {
     constructor(props: HomePageProps) {
         super(props);
 
-        this.loadButtonHandler = this.loadButtonHandler.bind(this);
         this.startButtonHandler = this.startButtonHandler.bind(this);
     }
 
@@ -22,7 +21,6 @@ class Home extends React.Component<HomePageProps, {}> {
 
         return (
             <div>
-                <p><button onClick={this.loadButtonHandler}>Load Missions</button></p>
                 <ul>{missionsButtons}</ul>
             </div>
         );
@@ -37,10 +35,6 @@ class Home extends React.Component<HomePageProps, {}> {
                     >{mission.title}</button>
                 </li>
         );
-    }
-
-    loadButtonHandler() {
-        this.props.dispatch(ServerActions.getMissions());
     }
 
     startButtonHandler(id: string) {

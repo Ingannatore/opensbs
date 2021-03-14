@@ -34,6 +34,11 @@ namespace OpenSBS.Engine.Commands
             Meta = meta;
         }
 
+        public bool IsServerCommand()
+        {
+            return Name.StartsWith("server/");
+        }
+
         public T GetPayload<T>()
         {
             return JsonConvert.DeserializeObject<T>(

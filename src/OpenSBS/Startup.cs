@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OpenSBS.Engine.Server;
-using OpenSBS.Services;
+using Newtonsoft.Json.Serialization;
 
 namespace OpenSBS
 {
@@ -20,10 +19,15 @@ namespace OpenSBS
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR().AddNewtonsoftJsonProtocol();
+            services.AddSignalR().AddNewtonsoftJsonProtocol(
+                options =>
+                {
+                    options.PayloadSerializerSettings.ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    };
+                });
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "client"; });
-            services.AddSingleton<ClockService>();
-            services.AddSingleton<StateService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,7 +48,7 @@ namespace OpenSBS
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<ServerHub>("/ws");
+                endpoints.MapHub<SignalrHub>("/ws");
             });
 
             app.UseSpa(spa =>

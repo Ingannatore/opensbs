@@ -1,4 +1,4 @@
-﻿import Action from '../models/action';
+﻿import Action from '../action.model';
 
 const isSocketAction = (action: Action): boolean => {
     return !!(action.meta?.socket);
@@ -6,7 +6,7 @@ const isSocketAction = (action: Action): boolean => {
 
 export default (hub: any) => (store: any) => (next: any) => (action: Action) => {
     if (isSocketAction(action)) {
-        hub.invoke('OnClientAction', action)
+        hub.invoke('OnClientCommand', action)
         .then((action?: Action) => {
             if (action) {
                 store.dispatch(action);
