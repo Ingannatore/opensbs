@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OpenSBS.Engine.Utils
 {
@@ -13,9 +12,9 @@ namespace OpenSBS.Engine.Utils
             _queue = new Queue<T>();
         }
 
-        public async Task Enqueue(T item)
+        public void Enqueue(T item)
         {
-            await Task.Run(() => _queue.Enqueue(item));
+            _queue.Enqueue(item);
         }
 
         public T Dequeue()

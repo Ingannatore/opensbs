@@ -14,6 +14,11 @@ namespace OpenSBS.Engine.Models
             Payload = JsonConverter.Serialize(payload);
         }
 
+        public bool IsServerAction()
+        {
+            return Meta == null || Meta.IsServerAction();
+        }
+
         public T PayloadTo<T>()
         {
             return JsonConverter.Deserialize<T>(Payload);

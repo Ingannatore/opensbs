@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
+using OpenSBS.Engine;
+using OpenSBS.Services;
 
 namespace OpenSBS
 {
@@ -28,6 +30,8 @@ namespace OpenSBS
                     };
                 });
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "client"; });
+            services.AddSingleton<Server>();
+            services.AddSingleton<SignalrStateSender>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

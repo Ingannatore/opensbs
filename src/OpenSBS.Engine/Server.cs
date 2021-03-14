@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using OpenSBS.Engine.Missions;
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Utils;
@@ -27,9 +26,21 @@ namespace OpenSBS.Engine
             State = new ServerState(_missionRepository.AvailableMissions);
         }
 
-        public async Task EnqueueAction(GameAction action)
+        public GameAction CreateServerRefreshAction()
         {
-            await _incomingCommands.Enqueue(action);
+            return new GameAction("server/refresh", State);
+        }
+
+        public void HandleAction(GameAction action)
+        {
+            if (action.IsServerAction())
+            {
+                HandleServerAction(action);
+            }
+            else
+            {
+                _incomingCommands.Enqueue(action);
+            }
         }
 
         public void AddOnAfterTickEventHandler(EventHandler handler)
@@ -40,13 +51,7 @@ namespace OpenSBS.Engine
 
         private void OnGameClockTick(object sender, TimeSpan deltaT)
         {
-            foreach (var action in _incomingCommands.DequeueAll())
-            {
-                if (action.Meta == null)
-                {
-                    HandleServerAction(action);
-                }
-            }
+            // TODO: handle incoming actions
 
             _game.Update(deltaT);
             State.Update(

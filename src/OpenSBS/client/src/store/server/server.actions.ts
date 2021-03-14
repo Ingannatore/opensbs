@@ -8,7 +8,7 @@ const Types = {
 
 const startMission = (id: string): Action => ({
     type: Types.START_MISSION,
-    payload: JSON.stringify(id),
+    payload: id,
     meta: {socket: true, entity: null, module: null}
 });
 
