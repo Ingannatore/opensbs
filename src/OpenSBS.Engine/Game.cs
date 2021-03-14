@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using OpenSBS.Engine.Commands;
-using OpenSBS.Engine.Entities;
 using OpenSBS.Engine.Missions;
+using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Engine
 {
@@ -37,7 +37,7 @@ namespace OpenSBS.Engine
             await _brains[command.Meta.Entity].EnqueueCommand(command);
         }
 
-        public void OnTick(TimeSpan deltaT)
+        public void Update(TimeSpan deltaT)
         {
             foreach (var brain in _brains.Values)
             {

@@ -2,7 +2,7 @@
 using System.Numerics;
 using OpenSBS.Engine.Utils;
 
-namespace OpenSBS.Engine.Entities
+namespace OpenSBS.Engine.Models
 {
     public abstract class SpaceThing : Thing
     {

@@ -48,7 +48,7 @@ namespace OpenSBS.Engine
                 }
             }
 
-            _game.OnTick(deltaT);
+            _game.Update(deltaT);
             State.Update(
                 _game != null,
                 _gameClock.IsRunning,

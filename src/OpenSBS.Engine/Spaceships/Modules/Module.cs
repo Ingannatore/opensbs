@@ -1,6 +1,6 @@
 ﻿using System;
 using OpenSBS.Engine.Commands;
-using OpenSBS.Engine.Entities;
+using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Engine.Spaceships.Modules
 {

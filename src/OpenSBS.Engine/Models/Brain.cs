@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using OpenSBS.Engine.Commands;
 using OpenSBS.Engine.Spaceships;
 
-namespace OpenSBS.Engine.Entities
+namespace OpenSBS.Engine.Models
 {
     public class Brain
     {

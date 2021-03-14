@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Engine.Entities
+﻿namespace OpenSBS.Engine.Models
 {
     public class BoundedValue
     {
