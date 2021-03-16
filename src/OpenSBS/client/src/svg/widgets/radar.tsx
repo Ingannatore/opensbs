@@ -1,33 +1,38 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import Entity from '../../../models/entity';
-import Marker from '../../../models/marker';
-import Vector3 from '../../../models/vector3';
-import Coords from '../../../lib/coords';
-import SvgTransforms from '../../../lib/svg-transforms';
-import ShipSelectors from '../../../store/selectors/ship';
-import WorldSelectors from '../../../store/selectors/world';
-import BearingBezel from '../../elements/bearingBezel';
-import DirectionsOverlay from '../../elements/directionsOverlay';
-import Display from '../../elements/display';
-import RangesOverlay from '../../elements/rangesOverlay';
-import RoundButton from '../../elements/roundButton';
-import EntitiesOverlay from '../../elements/entitiesOverlay';
-import {RadarRanges, RadarState} from './state';
-import Actions from './actions';
+import Marker from '../../models/marker';
+import Vector3 from '../../models/vector3';
+import Coords from '../../lib/coords';
+import SvgTransforms from '../../lib/svg-transforms';
+import ShipSelectors from '../../store/selectors/ship';
+import WorldSelectors from '../../store/selectors/world';
+import BearingBezel from '../elements/bearingBezel';
+import DirectionsOverlay from '../elements/directionsOverlay';
+import Display from '../elements/display';
+import RangesOverlay from '../elements/rangesOverlay';
+import RoundButton from '../elements/roundButton';
+import EntitiesOverlay from '../elements/entitiesOverlay';
+import SpaceThing from '../../models/space-thing';
+
+const RadarRanges = [10000, 7500, 5000, 2000, 1000];
 
 interface RadarProps {
     dispatch: any,
     x: number,
     y: number,
-    range: number,
     shipPosition: Vector3,
     rotation: Vector3,
-    radar: RadarState,
-    entities: Entity[],
+    entities: SpaceThing[],
 }
 
-class Radar extends React.Component<RadarProps, {}> {
+interface RadarState {
+    zoomLevel: number,
+    enableDirectionsOverlay: boolean,
+    enableRangesOverlay: boolean,
+    enableWeaponsOverlay: boolean,
+}
+
+class Radar extends React.Component<RadarProps, RadarState> {
     private readonly translation: string;
 
     public static defaultProps = {
@@ -35,10 +40,16 @@ class Radar extends React.Component<RadarProps, {}> {
         y: 0,
     };
 
-    constructor(props: RadarProps) {
+    constructor(props: any) {
         super(props);
-
+        this.state = {
+            zoomLevel: 0,
+            enableDirectionsOverlay: true,
+            enableRangesOverlay: true,
+            enableWeaponsOverlay: false,
+        };
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
+
         this.toggleDirectionsOverlay = this.toggleDirectionsOverlay.bind(this);
         this.toggleRangesOverlay = this.toggleRangesOverlay.bind(this);
         this.toggleWeaponsOverlay = this.toggleWeaponsOverlay.bind(this);
@@ -47,14 +58,15 @@ class Radar extends React.Component<RadarProps, {}> {
     }
 
     render() {
-        const scale = 440 / this.props.range;
+        const radarRange = RadarRanges[this.state.zoomLevel];
+        const scale = 440 / radarRange;
         const markers = this.createMarkers(this.props.entities, this.props.shipPosition, scale);
 
         return (
             <g transform={this.translation}>
                 <BearingBezel rotation={this.props.rotation.y}/>
-                <RangesOverlay range={this.props.range} visible={this.props.radar.enableRangesOverlay}/>
-                <DirectionsOverlay visible={this.props.radar.enableDirectionsOverlay}/>
+                <RangesOverlay range={radarRange} visible={this.state.enableRangesOverlay}/>
+                <DirectionsOverlay visible={this.state.enableDirectionsOverlay}/>
                 <EntitiesOverlay rotation={this.props.rotation.y} markers={markers}/>
                 <use href="#icon-ship" x="-6" y="-6"/>
 
@@ -62,17 +74,17 @@ class Radar extends React.Component<RadarProps, {}> {
                     <RoundButton
                         x={-40} y={-120}
                         onClick={this.toggleDirectionsOverlay}
-                        toggled={this.props.radar.enableDirectionsOverlay}
+                        toggled={this.state.enableDirectionsOverlay}
                     >DIR</RoundButton>
                     <RoundButton
                         x={30} y={-30}
                         onClick={this.toggleRangesOverlay}
-                        toggled={this.props.radar.enableRangesOverlay}
+                        toggled={this.state.enableRangesOverlay}
                     >RNG</RoundButton>
                     <RoundButton
                         x={120} y={40}
                         onClick={this.toggleWeaponsOverlay}
-                        toggled={this.props.radar.enableWeaponsOverlay}
+                        toggled={this.state.enableWeaponsOverlay}
                     >WPN</RoundButton>
                 </g>
 
@@ -81,8 +93,8 @@ class Radar extends React.Component<RadarProps, {}> {
                         x={40} y={-120} fontSize={3}
                         onClick={this.zoomIn}
                     >+</RoundButton>
-                    <Display title="radar range" subtitle={this.props.range <= 1000 ? 'meters' : 'kilometers'}>
-                        {this.props.range <= 1000 ? this.props.range : this.props.range / 1000}
+                    <Display title="radar range" subtitle={radarRange <= 1000 ? 'meters' : 'kilometers'}>
+                        {radarRange <= 1000 ? radarRange : radarRange / 1000}
                     </Display>
                     <RoundButton
                         x={-120} y={40} fontSize={3}
@@ -94,27 +106,42 @@ class Radar extends React.Component<RadarProps, {}> {
     }
 
     private toggleDirectionsOverlay() {
-        this.props.dispatch(Actions.toggleDirectionsOverlay());
+        this.setState({
+            ...this.state,
+            enableDirectionsOverlay: !this.state.enableDirectionsOverlay
+        });
     }
 
     private toggleRangesOverlay() {
-        this.props.dispatch(Actions.toggleRangesOverlay());
+        this.setState({
+            ...this.state,
+            enableRangesOverlay: !this.state.enableRangesOverlay
+        });
     }
 
     private toggleWeaponsOverlay() {
-        this.props.dispatch(Actions.toggleWeaponsOverlay());
+        this.setState({
+            ...this.state,
+            enableWeaponsOverlay: !this.state.enableWeaponsOverlay
+        });
     }
 
     private zoomIn() {
-        this.props.dispatch(Actions.zoomIn());
+        this.setState({
+            ...this.state,
+            zoomLevel: Math.min(this.state.zoomLevel + 1, RadarRanges.length),
+        });
     }
 
     private zoomOut() {
-        this.props.dispatch(Actions.zoomOut());
+        this.setState({
+            ...this.state,
+            zoomLevel: Math.max(this.state.zoomLevel - 1, 0),
+        });
     }
 
-    private createMarkers(entities: Entity[], shipPosition: Vector3, scale: number): Marker[] {
-        return entities.map((entity: Entity) => {
+    private createMarkers(entities: SpaceThing[], shipPosition: Vector3, scale: number): Marker[] {
+        return entities.map((entity: SpaceThing) => {
             const markerPosition = Coords.scale(Coords.translateOrigin(entity.position, shipPosition), scale);
             return {
                 id: entity.id,
@@ -128,14 +155,11 @@ class Radar extends React.Component<RadarProps, {}> {
 
 const mapStateToProps = (state: any) => {
     const shipPosition = ShipSelectors.selectShipPosition(state);
-    const radarRange = RadarRanges[state.radar.zoomLevel];
 
     return {
-        radar: state.radar,
-        range: radarRange,
         shipPosition: shipPosition,
         rotation: ShipSelectors.selectShipRotation(state),
-        entities: WorldSelectors.selectEntitiesByDistance(state, shipPosition, radarRange),
+        entities: WorldSelectors.selectEntitiesByDistance(state, shipPosition, 10000),
     };
 };
 

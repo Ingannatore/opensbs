@@ -7,28 +7,24 @@ namespace OpenSBS.Engine
 {
     public class Server
     {
-        public readonly ServerState State;
+        public ServerState State { get; }
+        public Mission Mission { get; private set; }
 
-        private readonly GameClock _gameClock;
+        private readonly IServerClock _serverClock;
+        private readonly IStateSender _stateSender;
         private readonly SimpleQueue<GameAction> _incomingCommands;
         private readonly MissionRepository _missionRepository;
-        private event EventHandler AfterTickEventHandler;
-        private Game _game;
 
-        public Server()
+        public Server(IServerClock clock, IStateSender stateSender)
         {
-            _gameClock = new GameClock();
-            _gameClock.AddOnTickEventHandler(OnGameClockTick);
+            _serverClock = clock;
+            _serverClock.RegisterOnTickEventHandler(OnClockTick);
+            _stateSender = stateSender;
 
             _incomingCommands = new SimpleQueue<GameAction>();
             _missionRepository = new MissionRepository();
 
             State = new ServerState(_missionRepository.AvailableMissions);
-        }
-
-        public GameAction CreateServerRefreshAction()
-        {
-            return new GameAction("server/refresh", State);
         }
 
         public void HandleAction(GameAction action)
@@ -43,36 +39,37 @@ namespace OpenSBS.Engine
             }
         }
 
-        public void AddOnAfterTickEventHandler(EventHandler handler)
-        {
-            AfterTickEventHandler -= handler;
-            AfterTickEventHandler += handler;
-        }
-
-        private void OnGameClockTick(object sender, TimeSpan deltaT)
+        private void OnClockTick(object sender, TimeSpan deltaT)
         {
             // TODO: handle incoming actions
 
-            _game.Update(deltaT);
+            Mission.Update(deltaT);
             State.Update(
-                _game != null,
-                _gameClock.IsRunning,
-                _gameClock.LastTick.Ticks,
-                _gameClock.LastDeltaT.Milliseconds
+                Mission != null,
+                _serverClock.IsRunning,
+                _serverClock.LastTick.Ticks,
+                _serverClock.LastDeltaT.Milliseconds
             );
 
-            AfterTickEventHandler?.Invoke(this, EventArgs.Empty);
+            _stateSender.Send(new GameAction("server/refresh", State));
+            _stateSender.Send(new GameAction("ship/refresh", Mission.Spaceship));
         }
 
         private void HandleServerAction(GameAction action)
         {
             switch (action.Type)
             {
-                case "server/startMission":
-                    _game = new Game(_missionRepository.CreateInstance(action.PayloadTo<string>()));
-                    _gameClock.Start();
+                case "server/init":
+                    InitServer(action.PayloadTo<string>());
                     break;
             }
+        }
+
+        private void InitServer(string missionId)
+        {
+            Mission = _missionRepository.CreateInstance(missionId);
+            Mission.Init();
+            _serverClock.Start();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace OpenSBS
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "client"; });
             services.AddSignalR().AddNewtonsoftJsonProtocol(
                 options =>
                 {
@@ -28,10 +29,12 @@ namespace OpenSBS
                     {
                         NamingStrategy = new CamelCaseNamingStrategy()
                     };
-                });
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "client"; });
+                }
+            );
+
             services.AddSingleton<Server>();
-            services.AddSingleton<SignalrStateSender>();
+            services.AddSingleton<IServerClock, ServerClock>();
+            services.AddSingleton<IStateSender, SignalrStateSender>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,20 +53,19 @@ namespace OpenSBS
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<SignalrHub>("/ws");
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapHub<SignalrHub>("/ws"); });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "client";
-
-                if (env.IsDevelopment())
+            app.UseSpa(
+                spa =>
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.Options.SourcePath = "client";
+
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseReactDevelopmentServer(npmScript: "start");
+                    }
                 }
-            });
+            );
         }
     }
 }

@@ -18,7 +18,7 @@ namespace OpenSBS.Services
         {
             await Clients.Caller.SendAsync(
                 "OnServerAction",
-                _server.CreateServerRefreshAction()
+                new GameAction("server/refresh", _server.State)
             );
         }
 

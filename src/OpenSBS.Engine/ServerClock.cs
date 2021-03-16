@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace OpenSBS.Engine
 {
-    public class GameClock : IDisposable
+    public class ServerClock : IServerClock, IDisposable
     {
         public bool IsRunning { get; private set; }
         public DateTime LastTick { get; private set; }
@@ -13,7 +13,7 @@ namespace OpenSBS.Engine
         private readonly int _period;
         private readonly Timer _timer;
 
-        public GameClock(int expectedTicksPerSecond = 30)
+        public ServerClock(int expectedTicksPerSecond = 20)
         {
             LastTick = DateTime.MinValue;
             LastDeltaT = TimeSpan.Zero;
@@ -35,7 +35,7 @@ namespace OpenSBS.Engine
             IsRunning = false;
         }
 
-        public void AddOnTickEventHandler(EventHandler<TimeSpan> handler)
+        public void RegisterOnTickEventHandler(EventHandler<TimeSpan> handler)
         {
             TickEventHandler -= handler;
             TickEventHandler += handler;
@@ -49,10 +49,10 @@ namespace OpenSBS.Engine
         private void OnTick(object state)
         {
             var now = DateTime.Now;
-
             LastDeltaT = now - LastTick;
-            TickEventHandler?.Invoke(this, LastDeltaT);
             LastTick = now;
+
+            TickEventHandler?.Invoke(this, LastDeltaT);
         }
     }
 }

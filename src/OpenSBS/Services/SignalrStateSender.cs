@@ -1,27 +1,49 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.SignalR;
 using OpenSBS.Engine;
+using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Services
 {
-    public class SignalrStateSender
+    public class SignalrStateSender : IStateSender
     {
         private readonly IHubContext<SignalrHub> _hubContext;
-        private readonly Server _server;
+        private readonly IDictionary<string, string> _previousStates;
 
-        public SignalrStateSender(IHubContext<SignalrHub> hubContext, Server server)
+        public SignalrStateSender(IHubContext<SignalrHub> hubContext)
         {
             _hubContext = hubContext;
-            _server = server;
-            _server.AddOnAfterTickEventHandler(SendState);
+            _previousStates = new Dictionary<string, string>();
         }
 
-        private async void SendState(object sender, EventArgs eventArgs)
+        public void Send(GameAction action)
         {
-            await _hubContext.Clients.All.SendAsync(
-                "OnServerAction",
-                _server.CreateServerRefreshAction()
-            );
+            if (IsStateUnchanged(action))
+            {
+                return;
+            }
+
+            _hubContext
+                .Clients.All
+                .SendAsync("OnServerAction", action)
+                .Wait();
+        }
+
+        private bool IsStateUnchanged(GameAction action)
+        {
+            if (!_previousStates.ContainsKey(action.Type))
+            {
+                _previousStates.Add(action.Type, action.Payload);
+                return false;
+            }
+
+            if (_previousStates[action.Type] != action.Payload)
+            {
+                _previousStates[action.Type] = action.Payload;
+                return false;
+            }
+
+            return true;
         }
     }
 }

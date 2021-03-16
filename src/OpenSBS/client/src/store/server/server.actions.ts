@@ -1,7 +1,7 @@
 ﻿import Action from '../action.model';
 
 const Types = {
-    START_MISSION: 'server/startMission',
+    START_MISSION: 'server/init',
     PAUSE_MISSION: 'server/pauseMission',
     REFRESH_SERVER_STATE: 'server/refresh'
 };
