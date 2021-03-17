@@ -2,21 +2,21 @@
 
 namespace OpenSBS.Engine.Models
 {
-    public class GameAction
+    public class ClientAction
     {
         public string Type { get; set; }
         public string Payload { get; set; }
-        public GameActionMetadata Meta { get; set; }
+        public ClientActionMetadata Meta { get; set; }
 
-        public GameAction(string type, object payload)
+        public ClientAction(string type, object payload)
         {
             Type = type;
             Payload = JsonConverter.Serialize(payload);
         }
 
-        public bool IsServerAction()
+        public bool IsServerRecipient()
         {
-            return Meta == null || Meta.IsServerAction();
+            return Meta == null || Meta.IsServerRecipient();
         }
 
         public T PayloadTo<T>()

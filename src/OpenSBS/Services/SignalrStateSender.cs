@@ -16,7 +16,7 @@ namespace OpenSBS.Services
             _previousStates = new Dictionary<string, string>();
         }
 
-        public void Send(GameAction action)
+        public void Send(ClientAction action)
         {
             if (IsStateUnchanged(action))
             {
@@ -29,7 +29,7 @@ namespace OpenSBS.Services
                 .Wait();
         }
 
-        private bool IsStateUnchanged(GameAction action)
+        private bool IsStateUnchanged(ClientAction action)
         {
             if (!_previousStates.ContainsKey(action.Type))
             {

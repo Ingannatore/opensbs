@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Engine.Spaceships.Modules
+﻿namespace OpenSBS.Engine.Models
 {
     public class ModuleType
     {

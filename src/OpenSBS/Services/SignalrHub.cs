@@ -18,11 +18,11 @@ namespace OpenSBS.Services
         {
             await Clients.Caller.SendAsync(
                 "OnServerAction",
-                new GameAction("server/refresh", _server.State)
+                new ClientAction("server/refresh", _server.State)
             );
         }
 
-        public async Task OnClientAction(GameAction action)
+        public async Task OnClientAction(ClientAction action)
         {
             await Task.Run(() => _server.HandleAction(action));
         }

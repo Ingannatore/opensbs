@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Spaceships.Modules
+namespace OpenSBS.Engine.Modules
 {
     public abstract class EngineModule : Module
     {
@@ -15,12 +15,9 @@ namespace OpenSBS.Engine.Spaceships.Modules
         public int Deceleration { get; protected set; }
         public int RotationSpeed { get; protected set; }
 
-        protected EngineModule(string id, string name) : base(id, name)
-        {
-            Type = ModuleType.Engine;
-        }
+        protected EngineModule(string id, string name) : base(id, ModuleType.Engine, name) { }
 
-        public override void HandleAction(GameAction action)
+        public override void HandleAction(ClientAction action)
         {
             switch (action.Type)
             {
@@ -33,7 +30,7 @@ namespace OpenSBS.Engine.Spaceships.Modules
             }
         }
 
-        public override void Update(TimeSpan deltaT, Spaceship owner)
+        public override void Update(TimeSpan deltaT, Entity owner)
         {
             owner.AngularSpeed = CalculateAngularSpeed(deltaT);
             owner.LinearSpeed = CalculateLinearSpeed(deltaT, owner);
@@ -50,7 +47,7 @@ namespace OpenSBS.Engine.Spaceships.Modules
             return rudderDirection * RotationSpeed * deltaT.TotalSeconds * (Math.PI / 180);
         }
 
-        private double CalculateLinearSpeed(TimeSpan deltaT, Spaceship owner)
+        private double CalculateLinearSpeed(TimeSpan deltaT, Entity owner)
         {
             var targetSpeed = MaximumSpeed * (Throttle / 100.0);
             var currentLinearSpeed = owner.LinearSpeed;

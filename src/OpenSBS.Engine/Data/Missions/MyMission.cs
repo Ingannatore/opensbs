@@ -1,5 +1,4 @@
-﻿using System;
-using OpenSBS.Engine.Data.Spaceships;
+﻿using OpenSBS.Engine.Data.Spaceships;
 using OpenSBS.Engine.Missions;
 
 namespace OpenSBS.Engine.Data.Missions
@@ -9,21 +8,21 @@ namespace OpenSBS.Engine.Data.Missions
     {
         public override void Init()
         {
-            Spaceship = new ViperInterceptorSpaceship(
+            Spaceship = new ViperInterceptor(
                 "PLAYER_SHIP",
                 "Archimedes",
                 "ARC-927"
             );
 
-            var dummyTarget1 = new DummyTargetSpaceship("DUMMY_1", "Dummy 1", "DT-1");
+            var dummyTarget1 = new DummyTarget("DUMMY_1", "Dummy 1", "DT-1");
             dummyTarget1.MoveTo(2000, 0, 0);
             World.Add(dummyTarget1);
 
-            var dummyTarget2 = new DummyTargetSpaceship("DUMMY_2", "Dummy 2", "DT-2");
+            var dummyTarget2 = new DummyTarget("DUMMY_2", "Dummy 2", "DT-2");
             dummyTarget2.MoveTo(500, -4000, 0);
             World.Add(dummyTarget2);
 
-            var dummyTarget3 = new DummyTargetSpaceship("DUMMY_3", "Dummy 3", "DT-3");
+            var dummyTarget3 = new DummyTarget("DUMMY_3", "Dummy 3", "DT-3");
             dummyTarget3.MoveTo(-8000, 2000, 0);
             World.Add(dummyTarget3);
         }

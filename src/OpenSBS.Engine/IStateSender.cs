@@ -4,6 +4,6 @@ namespace OpenSBS.Engine
 {
     public interface IStateSender
     {
-        void Send(GameAction action);
+        void Send(ClientAction action);
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Spaceships.Modules
+namespace OpenSBS.Engine.Modules
 {
     public class ModulesCollection : IEnumerable<Module>
     {
@@ -32,7 +33,7 @@ namespace OpenSBS.Engine.Spaceships.Modules
             _modulesIndex.Remove(module.Id);
         }
 
-        public void Update(TimeSpan deltaT, Spaceship owner)
+        public void Update(TimeSpan deltaT, Entity owner)
         {
             foreach (var module in _modules)
             {

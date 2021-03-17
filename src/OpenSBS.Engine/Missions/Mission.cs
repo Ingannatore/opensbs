@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenSBS.Engine.Models;
-using OpenSBS.Engine.Spaceships;
 
 namespace OpenSBS.Engine.Missions
 {
     public abstract class Mission
     {
-        public Spaceship Spaceship { get; protected set; }
-        public ICollection<SpaceThing> World { get; }
+        public Entity Spaceship { get; protected set; }
+        public ICollection<Entity> World { get; }
 
         protected Mission()
         {
-            World = new List<SpaceThing>();
+            World = new List<Entity>();
         }
 
         public abstract void Init();

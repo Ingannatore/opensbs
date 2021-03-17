@@ -12,7 +12,7 @@ namespace OpenSBS.Engine
 
         private readonly IServerClock _serverClock;
         private readonly IStateSender _stateSender;
-        private readonly SimpleQueue<GameAction> _incomingCommands;
+        private readonly SimpleQueue<ClientAction> _incomingCommands;
         private readonly MissionRepository _missionRepository;
 
         public Server(IServerClock clock, IStateSender stateSender)
@@ -21,15 +21,15 @@ namespace OpenSBS.Engine
             _serverClock.RegisterOnTickEventHandler(OnClockTick);
             _stateSender = stateSender;
 
-            _incomingCommands = new SimpleQueue<GameAction>();
+            _incomingCommands = new SimpleQueue<ClientAction>();
             _missionRepository = new MissionRepository();
 
             State = new ServerState(_missionRepository.AvailableMissions);
         }
 
-        public void HandleAction(GameAction action)
+        public void HandleAction(ClientAction action)
         {
-            if (action.IsServerAction())
+            if (action.IsServerRecipient())
             {
                 HandleServerAction(action);
             }
@@ -51,11 +51,11 @@ namespace OpenSBS.Engine
                 _serverClock.LastDeltaT.Milliseconds
             );
 
-            _stateSender.Send(new GameAction("server/refresh", State));
-            _stateSender.Send(new GameAction("ship/refresh", Mission.Spaceship));
+            _stateSender.Send(new ClientAction("server/refresh", State));
+            _stateSender.Send(new ClientAction("ship/refresh", Mission.Spaceship));
         }
 
-        private void HandleServerAction(GameAction action)
+        private void HandleServerAction(ClientAction action)
         {
             switch (action.Type)
             {

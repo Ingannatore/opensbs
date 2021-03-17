@@ -1,6 +1,6 @@
-﻿namespace OpenSBS.Engine.Spaceships
+﻿namespace OpenSBS.Engine.Models
 {
-    public static class SpaceshipType
+    public static class EntityType
     {
         public const string Bomber = "spaceship.bomber";
         public const string Carrier = "spaceship.carrier";
