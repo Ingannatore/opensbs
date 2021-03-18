@@ -52,7 +52,7 @@ namespace OpenSBS.Engine
             );
 
             _stateSender.Send(new ClientAction("server/refresh", State));
-            _stateSender.Send(new ClientAction("ship/refresh", Mission.Spaceship));
+            _stateSender.Send(new ClientAction("spaceship/refresh", Mission.Spaceship));
         }
 
         private void HandleServerAction(ClientAction action)

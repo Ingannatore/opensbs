@@ -1,8 +1,8 @@
 ﻿import ServerActions from './server.actions';
-import ServerState from './server-state.model';
-import Action from '../action.model';
+import ServerStateModel from './server-state.model';
+import ActionModel from '../action.model';
 
-const defaultState: ServerState = {
+const defaultState: ServerStateModel = {
     isReady: false,
     isRunning: false,
     lastTick: 0,
@@ -10,7 +10,7 @@ const defaultState: ServerState = {
     missions: [],
 };
 
-export default (state = defaultState, action: Action) => {
+export default (state = defaultState, action: ActionModel) => {
     if (action.type === ServerActions.Types.REFRESH_SERVER_STATE && action.payload) {
         return {...state, ...JSON.parse(action.payload)};
     }

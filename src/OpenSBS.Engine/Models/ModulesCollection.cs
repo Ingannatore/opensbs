@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Modules
+namespace OpenSBS.Engine.Models
 {
     public class ModulesCollection : IEnumerable<Module>
     {
-        private readonly SortedSet<Module> _modules;
+        private readonly ICollection<Module> _modules;
         private readonly IDictionary<string, Module> _modulesIndex;
 
         public ModulesCollection()
         {
-            _modules = new SortedSet<Module>();
+            _modules = new List<Module>();
             _modulesIndex = new Dictionary<string, Module>();
         }
 
@@ -33,11 +32,11 @@ namespace OpenSBS.Engine.Modules
             _modulesIndex.Remove(module.Id);
         }
 
-        public void Update(TimeSpan deltaT, Entity owner)
+        public void Update(TimeSpan deltaT, Entity owner, World world)
         {
             foreach (var module in _modules)
             {
-                module.Update(deltaT, owner);
+                module.Update(deltaT, owner, world);
             }
         }
 

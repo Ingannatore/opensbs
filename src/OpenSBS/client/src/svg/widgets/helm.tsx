@@ -1,17 +1,17 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import ShipActions from '../../store/actions/ship';
-import ShipSelectors from '../../store/selectors/ship';
+import SpaceshipActions from '../../store/spaceship/spaceship.actions';
+import SpaceshipSelectors from '../../store/spaceship/spaceship.selectors';
 import SvgTransforms from '../../lib/svg-transforms';
 import RoundButton from '../elements/roundButton';
 import PillButton from '../elements/pillButton';
 
 interface HelmProps {
+    dispatch: any,
     x: number,
     y: number,
     shipId: string,
     module: any,
-    dispatch: any,
 }
 
 class Helm extends React.Component<HelmProps> {
@@ -52,7 +52,7 @@ class Helm extends React.Component<HelmProps> {
     }
 
     private turnLeftHandler() {
-        this.props.dispatch(ShipActions.sendModuleAction(
+        this.props.dispatch(SpaceshipActions.sendModuleAction(
             this.props.shipId,
             this.props.module.id,
             'set',
@@ -61,7 +61,7 @@ class Helm extends React.Component<HelmProps> {
     }
 
     private stopHandler() {
-        this.props.dispatch(ShipActions.sendModuleAction(
+        this.props.dispatch(SpaceshipActions.sendModuleAction(
             this.props.shipId,
             this.props.module.id,
             'set',
@@ -70,7 +70,7 @@ class Helm extends React.Component<HelmProps> {
     }
 
     private turnRightHandler() {
-        this.props.dispatch(ShipActions.sendModuleAction(
+        this.props.dispatch(SpaceshipActions.sendModuleAction(
             this.props.shipId,
             this.props.module.id,
             'set',
@@ -81,8 +81,8 @@ class Helm extends React.Component<HelmProps> {
 
 const mapStateToProps = (state: any) => {
     return {
-        'shipId': ShipSelectors.selectShipId(state),
-        'module': ShipSelectors.selectModulesByType('engine.manoeuvre', state)[0]
+        shipId: SpaceshipSelectors.getId(state),
+        module: SpaceshipSelectors.getModuleByType(state, 'module.engine')
     };
 };
 

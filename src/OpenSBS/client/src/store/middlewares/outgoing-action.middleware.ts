@@ -1,13 +1,13 @@
-﻿import Action from '../action.model';
+﻿import ActionModel from '../action.model';
 
-const isSocketAction = (action: Action): boolean => {
+const isSocketAction = (action: ActionModel): boolean => {
     return !!(action.meta?.socket);
 };
 
-export default (hub: any) => (store: any) => (next: any) => (action: Action) => {
+export default (hub: any) => (store: any) => (next: any) => (action: ActionModel) => {
     if (isSocketAction(action)) {
         hub.invoke('OnClientAction', action)
-        .then((action?: Action) => {
+        .then((action?: ActionModel) => {
             if (action) {
                 store.dispatch(action);
             }

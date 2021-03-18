@@ -1,4 +1,4 @@
-﻿import Action from '../action.model';
+﻿import ActionModel from '../action.model';
 
 const Types = {
     START_MISSION: 'server/init',
@@ -6,13 +6,13 @@ const Types = {
     REFRESH_SERVER_STATE: 'server/refresh'
 };
 
-const startMission = (id: string): Action => ({
+const startMission = (id: string): ActionModel => ({
     type: Types.START_MISSION,
     payload: id,
     meta: {socket: true, entity: null, module: null}
 });
 
-const pauseMission = (): Action => ({
+const pauseMission = (): ActionModel => ({
     type: Types.PAUSE_MISSION,
     payload: null,
     meta: {socket: true, entity: null, module: null}

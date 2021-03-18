@@ -4,25 +4,24 @@ import Marker from '../../models/marker';
 import Vector3 from '../../models/vector3';
 import Coords from '../../lib/coords';
 import SvgTransforms from '../../lib/svg-transforms';
-import ShipSelectors from '../../store/selectors/ship';
-import WorldSelectors from '../../store/selectors/world';
 import BearingBezel from '../elements/bearingBezel';
 import DirectionsOverlay from '../elements/directionsOverlay';
 import Display from '../elements/display';
 import RangesOverlay from '../elements/rangesOverlay';
 import RoundButton from '../elements/roundButton';
 import EntitiesOverlay from '../elements/entitiesOverlay';
-import SpaceThing from '../../models/space-thing';
+import SpaceshipSelectors from '../../store/spaceship/spaceship.selectors';
+import {SensorsModuleModel} from '../../modules/sensors-module.model';
+import {SensorsTraceModel} from '../../modules/sensors-trace.model';
 
 const RadarRanges = [10000, 7500, 5000, 2000, 1000];
 
 interface RadarProps {
-    dispatch: any,
     x: number,
     y: number,
-    shipPosition: Vector3,
-    rotation: Vector3,
-    entities: SpaceThing[],
+    position: Vector3,
+    direction: Vector3,
+    sensorsModule: SensorsModuleModel,
 }
 
 interface RadarState {
@@ -60,14 +59,18 @@ class Radar extends React.Component<RadarProps, RadarState> {
     render() {
         const radarRange = RadarRanges[this.state.zoomLevel];
         const scale = 440 / radarRange;
-        const markers = this.createMarkers(this.props.entities, this.props.shipPosition, scale);
+        const markers = this.createMarkers(
+            this.props.sensorsModule?.traces ?? [],
+            this.props.position,
+            scale
+        );
 
         return (
             <g transform={this.translation}>
-                <BearingBezel rotation={this.props.rotation.y}/>
+                <BearingBezel rotation={this.props.direction.y}/>
                 <RangesOverlay range={radarRange} visible={this.state.enableRangesOverlay}/>
                 <DirectionsOverlay visible={this.state.enableDirectionsOverlay}/>
-                <EntitiesOverlay rotation={this.props.rotation.y} markers={markers}/>
+                <EntitiesOverlay rotation={this.props.direction.y} markers={markers}/>
                 <use href="#icon-ship" x="-6" y="-6"/>
 
                 <g transform="translate(-420 420)">
@@ -140,26 +143,24 @@ class Radar extends React.Component<RadarProps, RadarState> {
         });
     }
 
-    private createMarkers(entities: SpaceThing[], shipPosition: Vector3, scale: number): Marker[] {
-        return entities.map((entity: SpaceThing) => {
-            const markerPosition = Coords.scale(Coords.translateOrigin(entity.position, shipPosition), scale);
+    private createMarkers(traces: SensorsTraceModel[], shipPosition: Vector3, scale: number): Marker[] {
+        return traces.map((trace: SensorsTraceModel) => {
+            const markerPosition = Coords.scale(Coords.translateOrigin(trace.position, shipPosition), scale);
             return {
-                id: entity.id,
+                id: trace.id,
                 x: markerPosition.x,
                 y: markerPosition.y,
-                text: entity.name
+                text: trace.callSign
             };
         });
     }
 }
 
 const mapStateToProps = (state: any) => {
-    const shipPosition = ShipSelectors.selectShipPosition(state);
-
     return {
-        shipPosition: shipPosition,
-        rotation: ShipSelectors.selectShipRotation(state),
-        entities: WorldSelectors.selectEntitiesByDistance(state, shipPosition, 10000),
+        position: SpaceshipSelectors.getPosition(state),
+        direction: SpaceshipSelectors.getDirection(state),
+        sensorsModule: SpaceshipSelectors.getModuleByType(state, 'module.sensors') as SensorsModuleModel
     };
 };
 

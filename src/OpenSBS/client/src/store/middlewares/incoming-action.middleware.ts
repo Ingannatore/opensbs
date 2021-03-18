@@ -1,9 +1,9 @@
-﻿import Action from '../action.model';
+﻿import ActionModel from '../action.model';
 
 export default (hub: any) => (store: any) => {
-    hub.on('OnServerAction', (data: Action) => {
+    hub.on('OnServerAction', (data: ActionModel) => {
         return store.dispatch(data);
     });
 
-    return (next: any) => (action: Action) => next(action);
+    return (next: any) => (action: ActionModel) => next(action);
 };

@@ -2,7 +2,7 @@
 import {connect} from 'react-redux';
 import SvgTransforms from '../../lib/svg-transforms';
 import Waypoint from '../../models/waypoint';
-import ShipSelectors from '../../store/selectors/ship';
+import SpaceshipSelectors from '../../store/spaceship/spaceship.selectors';
 import PillButton from '../elements/pillButton';
 import WaypointDisplay from '../elements/waypointDisplay';
 import RoundButton from '../elements/roundButton';
@@ -87,8 +87,8 @@ class WaypointsList extends React.Component<WaypointsListProps, {}> {
 
 const mapStateToProps = (state: any) => {
     return {
-        'shipId': ShipSelectors.selectShipId(state),
-        'module': ShipSelectors.selectModulesByType('navigation', state)[0]
+        shipId: SpaceshipSelectors.getId(state),
+        module: SpaceshipSelectors.getModuleByType(state, 'module.navigation')
     };
 };
 

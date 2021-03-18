@@ -1,6 +1,6 @@
 ﻿import Mission from './mission.model';
 
-export default interface ServerState {
+export default interface ServerStateModel {
     isReady: boolean;
     isRunning: boolean;
     lastTick: number;

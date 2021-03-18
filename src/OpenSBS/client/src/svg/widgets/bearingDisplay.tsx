@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import ShipSelectors from '../../store/selectors/ship';
+import SpaceshipSelectors from '../../store/spaceship/spaceship.selectors';
 import Display from '../elements/display';
 
 interface BearingDisplayProps {
@@ -30,7 +30,7 @@ class BearingDisplay extends React.Component<BearingDisplayProps> {
 
 const mapStateToProps = (state: any) => {
     return {
-        bearing: ShipSelectors.selectShipRotation(state).y
+        bearing: SpaceshipSelectors.getDirection(state).y
     };
 };
 

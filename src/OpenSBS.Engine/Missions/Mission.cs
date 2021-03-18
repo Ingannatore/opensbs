@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Engine.Missions
@@ -7,22 +6,19 @@ namespace OpenSBS.Engine.Missions
     public abstract class Mission
     {
         public Entity Spaceship { get; protected set; }
-        public ICollection<Entity> World { get; }
+        public World World { get; }
 
         protected Mission()
         {
-            World = new List<Entity>();
+            World = new World();
         }
 
         public abstract void Init();
 
         public virtual void Update(TimeSpan deltaT)
         {
-            Spaceship.Update(deltaT);
-            foreach (var thing in World)
-            {
-                thing.Update(deltaT);
-            }
+            Spaceship.Update(deltaT, World);
+            World.Update(deltaT);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
-using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Modules
+namespace OpenSBS.Engine.Models
 {
     public abstract class Module
     {
@@ -19,6 +18,6 @@ namespace OpenSBS.Engine.Modules
         }
 
         public abstract void HandleAction(ClientAction action);
-        public abstract void Update(TimeSpan deltaT, Entity owner);
+        public abstract void Update(TimeSpan deltaT, Entity owner, World world);
     }
 }

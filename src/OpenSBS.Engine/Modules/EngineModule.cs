@@ -30,7 +30,7 @@ namespace OpenSBS.Engine.Modules
             }
         }
 
-        public override void Update(TimeSpan deltaT, Entity owner)
+        public override void Update(TimeSpan deltaT, Entity owner, World world)
         {
             owner.AngularSpeed = CalculateAngularSpeed(deltaT);
             owner.LinearSpeed = CalculateLinearSpeed(deltaT, owner);

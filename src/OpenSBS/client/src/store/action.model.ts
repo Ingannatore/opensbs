@@ -1,7 +1,7 @@
-﻿import ActionMetadata from './action-metadata.model';
+﻿import ActionMetadataModel from './action-metadata.model';
 
-export default interface Action {
+export default interface ActionModel {
     type: string;
     payload: string | null;
-    meta: ActionMetadata | null;
+    meta: ActionMetadataModel | null;
 }

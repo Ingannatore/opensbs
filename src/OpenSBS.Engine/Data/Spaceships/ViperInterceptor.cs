@@ -13,6 +13,7 @@ namespace OpenSBS.Engine.Data.Spaceships
             Size = 50;
 
             Modules.Add(new SmallIonEngine("engine1"));
+            Modules.Add(new SmallRadarSensors("radar1"));
         }
     }
 }

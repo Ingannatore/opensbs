@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Numerics;
-using OpenSBS.Engine.Modules;
 using OpenSBS.Engine.Utils;
 
 namespace OpenSBS.Engine.Models
@@ -39,11 +38,11 @@ namespace OpenSBS.Engine.Models
             }
         }
 
-        public void Update(TimeSpan deltaT)
+        public void Update(TimeSpan deltaT, World world)
         {
             RotateBody(deltaT);
             MoveBody(deltaT);
-            Modules.Update(deltaT, this);
+            Modules.Update(deltaT, this, world);
         }
 
         public void MoveTo(float x, float y, float z)
