@@ -19,11 +19,11 @@ namespace OpenSBS.Engine.Data.Missions
             World.AddEntity(dummyTarget1);
 
             var dummyTarget2 = new DummyTarget("DUMMY_2", "Dummy 2", "DT-2");
-            dummyTarget2.MoveTo(500, -4000, 0);
+            dummyTarget2.MoveTo(500, -3000, 0);
             World.AddEntity(dummyTarget2);
 
             var dummyTarget3 = new DummyTarget("DUMMY_3", "Dummy 3", "DT-3");
-            dummyTarget3.MoveTo(-8000, 2000, 0);
+            dummyTarget3.MoveTo(-6000, 2000, 0);
             World.AddEntity(dummyTarget3);
         }
     }

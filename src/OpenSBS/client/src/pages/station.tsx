@@ -1,13 +1,13 @@
 import * as React from 'react';
-import SvgRoot from '../svg/elements/svgRoot'
+import SvgElement from '../svg/elements/svg.element'
 import Navigation from '../svg/stations/navigation';
 
 class Station extends React.Component<{}, {}> {
     render() {
         return (
-            <SvgRoot>
+            <SvgElement>
                 <Navigation/>
-            </SvgRoot>
+            </SvgElement>
         );
     }
 }

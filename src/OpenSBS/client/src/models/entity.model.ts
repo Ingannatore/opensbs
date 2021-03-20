@@ -8,6 +8,7 @@ export interface EntityModel {
     callSign: string,
     mass: number,
     size: number,
+    bearing: number,
     position: Vector3,
     direction: Vector3,
     linearSpeed: number,

@@ -10,8 +10,8 @@ const getPosition = (state: StateModel): Vector3 => {
     return state.spaceship.position;
 }
 
-const getDirection = (state: StateModel): Vector3 => {
-    return state.spaceship.direction;
+const getBearing = (state: StateModel): number => {
+    return state.spaceship.bearing;
 }
 
 const getModuleByType = (state: StateModel, type: string): Partial<EntityModuleModel> | undefined => {
@@ -23,6 +23,6 @@ const getModuleByType = (state: StateModel, type: string): Partial<EntityModuleM
 export default {
     getId,
     getPosition,
-    getDirection,
-    getModuleByType
+    getBearing,
+    getModuleByType,
 }

@@ -12,6 +12,7 @@ namespace OpenSBS.Engine.Models
         public string CallSign { get; }
         public int Mass { get; protected set; }
         public int Size { get; protected set; }
+        public int Bearing { get; protected set; }
         public Vector3 Position { get; protected set; }
         public Vector3 Direction { get; protected set; }
         public double LinearSpeed { get; set; }
@@ -25,6 +26,7 @@ namespace OpenSBS.Engine.Models
             Name = name;
             CallSign = callSign;
 
+            Bearing = 0;
             Position = Vector3.Zero;
             Direction = Vector3.Zero;
             Modules = new ModulesCollection();
@@ -53,6 +55,7 @@ namespace OpenSBS.Engine.Models
         public void PointTo(float x, float y, float z)
         {
             Direction = new Vector3(x, y, z);
+            Bearing = (int)Angles.FromVector(Direction);
         }
 
         private void RotateBody(TimeSpan deltaT)

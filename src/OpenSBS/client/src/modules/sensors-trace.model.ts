@@ -5,5 +5,6 @@ export interface SensorsTraceModel {
     type: string,
     callSign: string,
     position: Vector3,
+    relativePosition: Vector3,
     distance: number,
 }

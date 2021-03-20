@@ -10,6 +10,7 @@ namespace OpenSBS.Engine.Modules
         public string Type { get; }
         public string CallSign { get; }
         public Vector3 Position { get; protected set; }
+        public Vector3 RelativePosition { get; protected set; }
         public int Distance { get; protected set; }
 
         public static SensorsTrace ForEntity(Entity entity)
@@ -28,6 +29,7 @@ namespace OpenSBS.Engine.Modules
         public void Update(Entity owner, Entity target)
         {
             Position = target.Position;
+            RelativePosition = target.Position - owner.Position;
             Distance = (int) Math.Round(Vector3.Distance(owner.Position, target.Position));
         }
     }
