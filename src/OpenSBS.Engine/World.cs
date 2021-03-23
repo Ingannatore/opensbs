@@ -7,21 +7,21 @@ namespace OpenSBS.Engine
 {
     public class World : IEnumerable<Entity>
     {
-        private readonly ICollection<Entity> _entities;
+        private readonly IDictionary<string, Entity> _entities;
 
         public World()
         {
-            _entities = new List<Entity>();
+            _entities = new Dictionary<string, Entity>();
         }
 
         public void AddEntity(Entity entity)
         {
-            _entities.Add(entity);
+            _entities[entity.Id] = entity;
         }
 
         public void Update(TimeSpan deltaT)
         {
-            foreach (var entity in _entities)
+            foreach (var entity in _entities.Values)
             {
                 entity.Update(deltaT, this);
             }
@@ -29,7 +29,7 @@ namespace OpenSBS.Engine
 
         public IEnumerator<Entity> GetEnumerator()
         {
-            return _entities.GetEnumerator();
+            return _entities.Values.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

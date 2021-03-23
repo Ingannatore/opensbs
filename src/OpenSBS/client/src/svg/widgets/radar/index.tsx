@@ -7,11 +7,12 @@ import ButtonElement from '../../elements/button.element';
 import TracesOverlay from './traces.overlay';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 import {SensorsModuleModel} from '../../../modules/sensors-module.model';
+import Vector3 from '../../../models/vector3';
 
 interface RadarProps {
     x: number,
     y: number,
-    bearing: number,
+    direction: Vector3,
     sensorsModule: SensorsModuleModel,
 }
 
@@ -52,11 +53,7 @@ class Radar extends React.Component<RadarProps, RadarState> {
                 <g transform="translate(470 470)">
                     <circle
                         cx="0" cy="0" r="470"
-                        stroke="none" fill="black" opacity="0.25"
-                    />
-                    <circle
-                        cx="0" cy="0" r="470"
-                        stroke="#383838" strokeWidth="2" fill="none"
+                        stroke="#383838" strokeWidth="2" fill="black"
                     />
                     <RangesOverlay
                         range={this.state.range}
@@ -68,56 +65,56 @@ class Radar extends React.Component<RadarProps, RadarState> {
                     />
                     <TracesOverlay
                         range={this.state.range}
-                        rotation={this.props.bearing}
+                        direction={this.props.direction}
                         markers={this.props.sensorsModule?.traces ?? []}
                     />
                     <use href="#icon-ship" x="-6" y="-6"/>
-                </g>
 
-                <g transform="translate(50 910)">
-                    <ButtonElement
-                        x={0} y={0}
-                        subtitle="OVERLAY"
-                        onClick={this.toggleDirectionsOverlay}
-                        toggled={this.state.enableDirectionsOverlay}
-                    >DIR</ButtonElement>
-                    <ButtonElement
-                        x={60} y={0}
-                        subtitle="OVERLAY"
-                        onClick={this.toggleRangesOverlay}
-                        toggled={this.state.enableRangesOverlay}
-                    >RNG</ButtonElement>
-                    <ButtonElement
-                        x={120} y={0}
-                        subtitle="OVERLAY"
-                        enabled={false}
-                        onClick={this.toggleWeaponsOverlay}
-                        toggled={this.state.enableWeaponsOverlay}
-                    >WPN</ButtonElement>
-                </g>
+                    <g transform="translate(-370 370)">
+                        <ButtonElement
+                            x={-70} y={-70}
+                            subtitle="OVERLAY"
+                            onClick={this.toggleDirectionsOverlay}
+                            toggled={this.state.enableDirectionsOverlay}
+                        >DIR</ButtonElement>
+                        <ButtonElement
+                            x={0} y={0}
+                            subtitle="OVERLAY"
+                            onClick={this.toggleRangesOverlay}
+                            toggled={this.state.enableRangesOverlay}
+                        >RNG</ButtonElement>
+                        <ButtonElement
+                            x={70} y={70}
+                            subtitle="OVERLAY"
+                            enabled={false}
+                            onClick={this.toggleWeaponsOverlay}
+                            toggled={this.state.enableWeaponsOverlay}
+                        >WPN</ButtonElement>
+                    </g>
 
-                <g transform="translate(890 910)">
-                    <ButtonElement
-                        id="btn-radar-range-8000"
-                        x={0} y={0}
-                        subtitle="RANGE"
-                        onClick={this.setRange}
-                        toggled={this.state.range == 8000}
-                    >8km</ButtonElement>
-                    <ButtonElement
-                        id="btn-radar-range-4000"
-                        x={-60} y={0}
-                        subtitle="RANGE"
-                        onClick={this.setRange}
-                        toggled={this.state.range == 4000}
-                    >4km</ButtonElement>
-                    <ButtonElement
-                        id="btn-radar-range-2000"
-                        x={-120} y={0}
-                        subtitle="RANGE"
-                        onClick={this.setRange}
-                        toggled={this.state.range == 2000}
-                    >2km</ButtonElement>
+                    <g transform="translate(370 370)">
+                        <ButtonElement
+                            id="btn-radar-range-8000"
+                            x={70} y={-70}
+                            subtitle="RANGE"
+                            onClick={this.setRange}
+                            toggled={this.state.range === 8000}
+                        >8km</ButtonElement>
+                        <ButtonElement
+                            id="btn-radar-range-4000"
+                            x={0} y={0}
+                            subtitle="RANGE"
+                            onClick={this.setRange}
+                            toggled={this.state.range === 4000}
+                        >4km</ButtonElement>
+                        <ButtonElement
+                            id="btn-radar-range-2000"
+                            x={-70} y={70}
+                            subtitle="RANGE"
+                            onClick={this.setRange}
+                            toggled={this.state.range === 2000}
+                        >2km</ButtonElement>
+                    </g>
                 </g>
             </g>
         );
@@ -160,7 +157,7 @@ class Radar extends React.Component<RadarProps, RadarState> {
 
 const mapStateToProps = (state: any) => {
     return {
-        bearing: SpaceshipSelectors.getBearing(state),
+        direction: SpaceshipSelectors.getDirection(state),
         sensorsModule: SpaceshipSelectors.getModuleByType(state, 'module.sensors') as SensorsModuleModel
     };
 };

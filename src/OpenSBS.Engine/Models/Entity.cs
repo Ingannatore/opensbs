@@ -12,11 +12,10 @@ namespace OpenSBS.Engine.Models
         public string CallSign { get; }
         public int Mass { get; protected set; }
         public int Size { get; protected set; }
-        public int Bearing { get; protected set; }
         public Vector3 Position { get; protected set; }
         public Vector3 Direction { get; protected set; }
-        public double LinearSpeed { get; set; }
-        public double AngularSpeed { get; set; }
+        public float LinearSpeed { get; set; }
+        public float AngularSpeed { get; set; }
         public ModulesCollection Modules { get; }
 
         public Entity(string id, string type, string name, string callSign)
@@ -26,9 +25,8 @@ namespace OpenSBS.Engine.Models
             Name = name;
             CallSign = callSign;
 
-            Bearing = 0;
             Position = Vector3.Zero;
-            Direction = Vector3.Zero;
+            Direction = Vector3.UnitX;
             Modules = new ModulesCollection();
         }
 
@@ -52,12 +50,6 @@ namespace OpenSBS.Engine.Models
             Position = new Vector3(x, y, z);
         }
 
-        public void PointTo(float x, float y, float z)
-        {
-            Direction = new Vector3(x, y, z);
-            Bearing = (int)Angles.FromVector(Direction);
-        }
-
         private void RotateBody(TimeSpan deltaT)
         {
             if (AngularSpeed == 0)
@@ -65,8 +57,8 @@ namespace OpenSBS.Engine.Models
                 return;
             }
 
-            var deltaYaw = AngularSpeed * deltaT.TotalSeconds;
-            Direction = Vectors.ChangeDirection(Direction, deltaYaw, 0, 0);
+            var deltaYaw = Angles.ToRadians(AngularSpeed * (float) deltaT.TotalSeconds);
+            Direction = Vectors.Rotate(Direction, deltaYaw, 0, 0);
         }
 
         private void MoveBody(TimeSpan deltaT)
@@ -76,7 +68,7 @@ namespace OpenSBS.Engine.Models
                 return;
             }
 
-            var deltaMovement = LinearSpeed * deltaT.TotalSeconds;
+            var deltaMovement = LinearSpeed * (float) deltaT.TotalSeconds;
             Position = Vectors.Move(Position, Direction, deltaMovement);
         }
     }

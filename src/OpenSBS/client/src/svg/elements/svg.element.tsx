@@ -29,10 +29,20 @@ export default class SvgElement extends React.Component<{}, {}> {
                     <path d="M 0 -6 L 6 6 L 0 3 L -6 6 Z" stroke="white" strokeWidth="1" fill="white"/>
                 </symbol>
                 {this.props.children}
-                <g opacity="0">
-                    <line x1="480" y1="10" x2="480" y2="1070" stroke="red"/>
+                <g opacity="1">
+                    <line x1="10" y1="10" x2="10" y2="1070" stroke="red"/>
+
+                    <line x1="470" y1="10" x2="470" y2="1070" stroke="red"/>
+                    <line x1="490" y1="10" x2="490" y2="1070" stroke="red"/>
+
                     <line x1="960" y1="10" x2="960" y2="1070" stroke="red"/>
-                    <line x1="1440" y1="10" x2="1440" y2="1070" stroke="red"/>
+
+                    <line x1="1430" y1="10" x2="1430" y2="1070" stroke="red"/>
+                    <line x1="1450" y1="10" x2="1450" y2="1070" stroke="red"/>
+
+                    <line x1="1680" y1="10" x2="1680" y2="1070" stroke="red"/>
+
+                    <line x1="1910" y1="10" x2="1910" y2="1070" stroke="red"/>
                 </g>
             </svg>
         );

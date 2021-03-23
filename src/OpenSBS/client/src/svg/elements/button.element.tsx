@@ -32,34 +32,29 @@ export default class ButtonElement extends React.Component<ButtonElementModel, {
 
     public render() {
         return (
-            <g transform={this.translation} cursor={this.props.enabled ? 'pointer' : 'not-allowed'} onClick={this.clickHandler}>
+            <g transform={this.translation} cursor={this.props.enabled ? 'pointer' : 'not-allowed'}
+               onClick={this.clickHandler}>
                 <rect
-                    x="-30" y="-30"
+                    x="-30" y="-30" rx="10"
                     width="60" height="60"
-                    fill="#2d2f2f" stroke="none"
-                    opacity={this.props.enabled ? 0.4 : 0}
+                    fill="black" stroke="#383838" strokeWidth="2"
                 />
                 <rect
-                    x="-30" y="-30"
-                    width="60" height="60"
-                    stroke="#6f6971" strokeWidth="1"
-                    fill="none"
-                />
-                <rect
-                    x="-30" y="-30"
-                    width="60" height="60"
-                    fill="url('#shadow-gradient')" stroke="none"
+                    x="-26" y="-26" rx="6"
+                    width="52" height="52" strokeWidth="1"
+                    fill={this.props.toggled ? 'darkturquoise' : 'none'}
+                    stroke={this.props.toggled ? 'none' : this.props.enabled ? 'darkturquoise' : 'black'}
                 />
                 <text
                     x="0" y="-10"
                     textAnchor="middle" fontSize="1.5rem"
-                    fill={this.props.toggled ? 'darkturquoise' : 'darkgray'}
+                    fill={this.props.toggled ? 'black' : this.props.enabled ? 'darkturquoise' : 'darkgrey'}
                     opacity={this.props.enabled ? 1 : 0.2}
                 >{this.props.children}</text>
                 {this.props.subtitle && <text
                     x="0" y="15"
                     textAnchor="middle" fontSize=".75rem"
-                    fill={this.props.toggled ? 'darkturquoise' : 'darkgray'}
+                    fill={this.props.toggled ? 'black' : this.props.enabled ? 'darkturquoise' : 'darkgrey'}
                     opacity={this.props.enabled ? 1 : 0.2}
                 >{this.props.subtitle}</text>}
             </g>

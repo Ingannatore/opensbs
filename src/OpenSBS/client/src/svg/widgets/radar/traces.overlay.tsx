@@ -1,31 +1,35 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svg-transforms';
 import {SensorsTraceModel} from '../../../modules/sensors-trace.model';
+import Vector3 from '../../../models/vector3';
+import Vectors from '../../../lib/vectors';
+import Angles from '../../../lib/angles';
 
 interface TracesOverlayModel {
     range: number,
-    rotation: number,
+    direction: Vector3,
     markers: SensorsTraceModel[]
 }
 
 export default class TracesOverlay extends React.Component<TracesOverlayModel, {}> {
     public render() {
+        const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
         const scale = 440 / this.props.range;
         const markers = this.props.markers
         .filter((trace: SensorsTraceModel) => trace.distance <= this.props.range)
-        .map((trace: SensorsTraceModel) => this.renderMarker(trace, scale));
+        .map((trace: SensorsTraceModel) => TracesOverlay.renderMarker(trace, scale, yaw));
 
         return (
-            <g transform={SvgTransforms.rotate(-this.props.rotation)}>
+            <g transform={SvgTransforms.rotate(-yaw)}>
                 {markers}
             </g>
         );
     }
 
-    private renderMarker(trace: SensorsTraceModel, scale: number) {
+    private static renderMarker(trace: SensorsTraceModel, scale: number, yaw: number) {
         const transform = SvgTransforms.translate(
             trace.relativePosition.x * scale,
-            trace.relativePosition.y * scale
+            trace.relativePosition.z * scale
         );
 
         return (
@@ -34,7 +38,7 @@ export default class TracesOverlay extends React.Component<TracesOverlayModel, {
                 <text
                     x="0" y="18"
                     fontSize="1rem" fill="#dedede" textAnchor="middle"
-                    transform={SvgTransforms.rotate(this.props.rotation)}
+                    transform={SvgTransforms.rotate(yaw)}
                 >{trace.callSign}</text>
             </g>
         );

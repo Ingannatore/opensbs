@@ -15,21 +15,21 @@ export default class DirectionsOverlay extends React.Component<DirectionsOverlay
             <g>
                 <line
                     x1={-this.props.r} y1="0" x2={this.props.r} y2="0"
-                    stroke="#616161" strokeWidth="1"
+                    stroke="#383838" strokeWidth="1"
                 />
                 <line
                     x1={-this.props.r} y1="0" x2={this.props.r} y2="0"
-                    stroke="#616161" strokeWidth="1"
+                    stroke="#383838" strokeWidth="1"
                     transform="rotate(45)"
                 />
                 <line
                     x1={-this.props.r} y1="0" x2={this.props.r} y2="0"
-                    stroke="#616161" strokeWidth="1"
+                    stroke="#383838" strokeWidth="1"
                     transform="rotate(-45)"
                 />
                 <line
                     x1={-this.props.r} y1="0" x2={this.props.r} y2="0"
-                    stroke="#616161" strokeWidth="1"
+                    stroke="#383838" strokeWidth="1"
                     transform="rotate(90)"
                 />
             </g>

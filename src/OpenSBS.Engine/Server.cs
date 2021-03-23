@@ -41,7 +41,10 @@ namespace OpenSBS.Engine
 
         private void OnClockTick(object sender, TimeSpan deltaT)
         {
-            // TODO: handle incoming actions
+            foreach (var action in _incomingCommands.DequeueAll())
+            {
+                Mission.Spaceship.HandleAction(action);
+            }
 
             Mission.Update(deltaT);
             State.Update(

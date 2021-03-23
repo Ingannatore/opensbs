@@ -18,11 +18,6 @@ namespace OpenSBS.Services
 
         public void Send(ClientAction action)
         {
-            if (IsStateUnchanged(action))
-            {
-                return;
-            }
-
             _hubContext
                 .Clients.All
                 .SendAsync("OnServerAction", action)
