@@ -50,7 +50,7 @@ class HelmWidget extends React.Component<HelmWidgetModel, HelmWidgetState> {
                     x={0} y={-120}
                     toggled={this.state.isLocked}
                     onClick={this.onRudderLockClick}
-                >RUDDER LOCK</RudderLockElement>
+                >HELM LOCK</RudderLockElement>
 
                 <CurvedButtonElement
                     x={-140} y={0}
