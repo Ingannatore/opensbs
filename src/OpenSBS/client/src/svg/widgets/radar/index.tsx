@@ -39,15 +39,15 @@ class Radar extends React.Component<RadarProps, RadarState> {
             enableRangesOverlay: true,
             enableWeaponsOverlay: false,
         };
-        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
 
+        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.toggleDirectionsOverlay = this.toggleDirectionsOverlay.bind(this);
         this.toggleRangesOverlay = this.toggleRangesOverlay.bind(this);
         this.toggleWeaponsOverlay = this.toggleWeaponsOverlay.bind(this);
         this.setRange = this.setRange.bind(this);
     }
 
-    render() {
+    public render() {
         return (
             <g transform={this.translation}>
                 <g transform="translate(470 470)">
@@ -70,7 +70,7 @@ class Radar extends React.Component<RadarProps, RadarState> {
                     />
                     <use href="#icon-ship" x="-6" y="-6"/>
 
-                    <g transform="translate(-370 370)">
+                    <g transform="translate(-390 390)">
                         <ButtonElement
                             x={-70} y={-70}
                             subtitle="OVERLAY"
@@ -92,7 +92,7 @@ class Radar extends React.Component<RadarProps, RadarState> {
                         >WPN</ButtonElement>
                     </g>
 
-                    <g transform="translate(370 370)">
+                    <g transform="translate(390 390)">
                         <ButtonElement
                             id="btn-radar-range-8000"
                             x={70} y={-70}

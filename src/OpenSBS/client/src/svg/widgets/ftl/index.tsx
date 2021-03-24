@@ -19,7 +19,7 @@ export default class FtlWidget extends React.Component<FtlWidgetModel, {}> {
     public render() {
         return (
             <g transform={this.translation}>
-                <DisplayElement x={0} y={0} topLabel="FTL FACTOR" bottomLabel="au/sec">9999</DisplayElement>
+                <DisplayElement x={0} y={0} topLabel="FTL FACTOR" bottomLabel="AU/sec">9999</DisplayElement>
             </g>
         );
     }

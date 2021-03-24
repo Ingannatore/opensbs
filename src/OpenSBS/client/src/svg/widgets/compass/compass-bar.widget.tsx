@@ -1,18 +1,18 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../lib/svg-transforms';
-import SpaceshipSelectors from '../../store/spaceship/spaceship.selectors';
-import Vector3 from '../../models/vector3';
-import Angles from '../../lib/angles';
-import Vectors from '../../lib/vectors';
+import SvgTransforms from '../../../lib/svg-transforms';
+import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
+import Vector3 from '../../../models/vector3';
+import Angles from '../../../lib/angles';
+import Vectors from '../../../lib/vectors';
 
-interface CompassWidgetModel {
+interface CompassBarWidgetModel {
     x: number,
     y: number,
     direction: Vector3,
 }
 
-class CompassWidget extends React.Component<CompassWidgetModel, {}> {
+class CompassBarWidget extends React.Component<CompassBarWidgetModel, {}> {
     private readonly translation: string;
 
     public static defaultProps = {
@@ -45,7 +45,7 @@ class CompassWidget extends React.Component<CompassWidgetModel, {}> {
                 }
             }
 
-            return CompassWidget.renderMarker(x, value);
+            return CompassBarWidget.renderMarker(x, value);
         });
 
         return (
@@ -62,8 +62,6 @@ class CompassWidget extends React.Component<CompassWidgetModel, {}> {
                     width="940" height="40"
                     stroke="#383838" strokeWidth="2" fill="black"
                 />
-                <text x="-470" y="60" textAnchor="start" fontSize="1rem" fill="red">{yaw}</text>
-                <text x="-470" y="80" textAnchor="start" fontSize="1rem" fill="red">{centerDegrees}</text>
                 <g mask="url(#compass-mask)">
                     <g transform={translation}>
                         {markers}
@@ -97,4 +95,4 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect(mapStateToProps)(CompassWidget);
+export default connect(mapStateToProps)(CompassBarWidget);
