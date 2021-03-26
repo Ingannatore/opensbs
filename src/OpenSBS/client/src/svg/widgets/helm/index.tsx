@@ -8,9 +8,9 @@ import DisplayElement from '../../elements/display.element';
 import Vector3 from '../../../models/vector3';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
-import CurvedButtonElement from '../../elements/curved-button.element';
-import RudderLockElement from './rudder-lock.element';
 import StatusElement from './status.element';
+import HolobuttonElement from '../../elements/holobutton.element';
+import PanelElement from '../../elements/panel.element';
 
 interface HelmWidgetModel {
     x: number,
@@ -45,37 +45,46 @@ class HelmWidget extends React.Component<HelmWidgetModel, HelmWidgetState> {
         const rudder = this.props.engineModule?.rudder ?? 0;
 
         return (
-            <g transform={this.translation}>
-                <RudderLockElement
-                    x={0} y={-120}
+            <PanelElement x={this.props.x} y={this.props.y} width={440} height={300}>
+                <HolobuttonElement
+                    x={10} y={10}
+                    width={420} height={60}
+                    color='darkorange'
                     toggled={this.state.isLocked}
                     onClick={this.onRudderLockClick}
-                >HELM LOCK</RudderLockElement>
+                >HELM LOCK</HolobuttonElement>
 
-                <CurvedButtonElement
-                    x={-140} y={0}
+                <HolobuttonElement
+                    x={10} y={80}
+                    width={100} height={140}
+                    fontSize={3} color='darkturquoise'
                     toggled={rudder < 0}
                     enabled={!this.state.isLocked}
                     onClick={this.onRudderLeftClick}
-                >◄</CurvedButtonElement>
+                >◄</HolobuttonElement>
                 <DisplayElement
-                    x={0} y={0}
+                    x={220} y={150}
                     topLabel="BEARING"
                     bottomLabel="degrees"
                 >{Math.round(yaw).toString().padStart(3, '0')}</DisplayElement>
-                <CurvedButtonElement
-                    x={140} y={0}
+                <HolobuttonElement
+                    x={330} y={80}
+                    width={100} height={140}
+                    fontSize={3} color='darkturquoise'
                     toggled={rudder > 0}
                     enabled={!this.state.isLocked}
                     onClick={this.onRudderRightClick}
-                    mirrored={true}
-                >►</CurvedButtonElement>
-
+                >►</HolobuttonElement>
+                <line
+                    x1="0" y1="230"
+                    x2="441" y2="230"
+                    stroke="#383838" strokeWidth="2"
+                />
                 <StatusElement
-                    x={0} y={120}
+                    x={10} y={240}
                     label="helm status"
                 >{HelmWidget.getHelmStatus(rudder)}</StatusElement>
-            </g>
+            </PanelElement>
         );
     }
 

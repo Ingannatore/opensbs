@@ -14,6 +14,10 @@ const getDirection = (state: StateModel): Vector3 => {
     return state.spaceship?.direction ?? {x: 0, y: 0, z: 0};
 }
 
+const getLinearSpeed = (state: StateModel): number => {
+    return state.spaceship?.linearSpeed ?? 0;
+}
+
 const getModuleByType = (state: StateModel, type: string): Partial<EntityModuleModel> | undefined => {
     return state.spaceship.modules.find(
         (module: Partial<EntityModuleModel>) => module.type === type
@@ -24,5 +28,6 @@ export default {
     getId,
     getPosition,
     getDirection,
+    getLinearSpeed,
     getModuleByType,
 }

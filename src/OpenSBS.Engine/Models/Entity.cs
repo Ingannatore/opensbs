@@ -14,8 +14,8 @@ namespace OpenSBS.Engine.Models
         public int Size { get; protected set; }
         public Vector3 Position { get; protected set; }
         public Vector3 Direction { get; protected set; }
-        public float LinearSpeed { get; set; }
-        public float AngularSpeed { get; set; }
+        public double LinearSpeed { get; set; }
+        public double AngularSpeed { get; set; }
         public ModulesCollection Modules { get; }
 
         public Entity(string id, string type, string name, string callSign)
@@ -57,7 +57,7 @@ namespace OpenSBS.Engine.Models
                 return;
             }
 
-            var deltaYaw = Angles.ToRadians(AngularSpeed * (float) deltaT.TotalSeconds);
+            var deltaYaw = Angles.ToRadians(AngularSpeed * deltaT.TotalSeconds);
             Direction = Vectors.Rotate(Direction, deltaYaw, 0, 0);
         }
 
@@ -68,7 +68,7 @@ namespace OpenSBS.Engine.Models
                 return;
             }
 
-            var deltaMovement = LinearSpeed * (float) deltaT.TotalSeconds;
+            var deltaMovement = LinearSpeed * deltaT.TotalSeconds;
             Position = Vectors.Move(Position, Direction, deltaMovement);
         }
     }

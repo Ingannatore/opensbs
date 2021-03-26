@@ -5,19 +5,19 @@ namespace OpenSBS.Engine.Utils
 {
     public static class Angles
     {
-        public static float ToRadians(float value)
+        public static double ToRadians(double value)
         {
             return (float) (value * (Math.PI / 180));
         }
 
-        public static float ToDegrees(float value)
+        public static double ToDegrees(double value)
         {
             return (float) (value * (180 / Math.PI));
         }
 
-        public static float FromVector(Vector3 vector)
+        public static double FromVector(Vector3 vector)
         {
-            return ToDegrees((float) Math.Atan2(vector.Z, vector.X));
+            return ToDegrees(Math.Atan2(vector.Z, vector.X));
         }
     }
 }

@@ -36,7 +36,7 @@ namespace OpenSBS.Engine.Modules
             owner.LinearSpeed = CalculateLinearSpeed(deltaT, owner);
         }
 
-        private float CalculateAngularSpeed(TimeSpan deltaT)
+        private double CalculateAngularSpeed(TimeSpan deltaT)
         {
             var rudderDirection = -Math.Sign(Rudder);
             if (rudderDirection == 0)
@@ -44,25 +44,25 @@ namespace OpenSBS.Engine.Modules
                 return 0;
             }
 
-            return rudderDirection * RotationSpeed * (float) deltaT.TotalSeconds;
+            return rudderDirection * RotationSpeed * deltaT.TotalSeconds;
         }
 
-        private float CalculateLinearSpeed(TimeSpan deltaT, Entity owner)
+        private double CalculateLinearSpeed(TimeSpan deltaT, Entity owner)
         {
             var targetSpeed = MaximumSpeed * (Throttle / 100.0);
             var currentLinearSpeed = owner.LinearSpeed;
-
             var linearSpeedDirection = Math.Sign(targetSpeed - currentLinearSpeed);
-            if (linearSpeedDirection < 0)
-            {
-                var deltaSpeed = Deceleration * (float) deltaT.TotalSeconds;
-                return Math.Max(currentLinearSpeed - deltaSpeed, -MaximumSpeed);
-            }
 
             if (linearSpeedDirection > 0)
             {
-                var deltaSpeed = Acceleration * (float) deltaT.TotalSeconds;
-                return Math.Min(currentLinearSpeed + deltaSpeed, MaximumSpeed);
+                var deltaSpeed = Acceleration * deltaT.TotalSeconds;
+                return Math.Min(currentLinearSpeed + deltaSpeed, targetSpeed);
+            }
+
+            if (linearSpeedDirection < 0)
+            {
+                var deltaSpeed = Deceleration * deltaT.TotalSeconds;
+                return Math.Max(currentLinearSpeed - deltaSpeed, targetSpeed);
             }
 
             return currentLinearSpeed;

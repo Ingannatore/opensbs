@@ -2,6 +2,6 @@
 
 export default class Vectors {
     public static getYaw(vector: Vector3): number {
-        return Math.atan2(vector.z, vector.x);
+        return Math.atan2(-vector.z, vector.x);
     }
 }

@@ -29,7 +29,7 @@ export default class TracesOverlay extends React.Component<TracesOverlayModel, {
     private static renderMarker(trace: SensorsTraceModel, scale: number, yaw: number) {
         const transform = SvgTransforms.translate(
             trace.relativePosition.x * scale,
-            trace.relativePosition.z * scale
+            -trace.relativePosition.z * scale
         );
 
         return (
