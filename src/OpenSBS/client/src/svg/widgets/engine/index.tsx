@@ -56,27 +56,26 @@ class EngineWidget extends React.Component<EngineWidgetModel, {}> {
                 >{Math.round(this.props.linearSpeed)}</DisplayElement>
 
                 <HolobuttonElement
-                    x={220} y={230}
+                    x={220} y={175}
                     width={200} height={60}
                     fontSize={1.75} color='darkturquoise'
                     toggled={false}
                     onClick={this.onFullAheadClick}
                 >FULL AHEAD</HolobuttonElement>
                 <HolobuttonElement
-                    x={220} y={320}
-                    width={200} height={60}
-                    fontSize={1.75} color='darkturquoise'
-                    toggled={false}
-                    onClick={this.onFullAsternClick}
-                >FULL ASTERN</HolobuttonElement>
-
-                <HolobuttonElement
-                    x={220} y={540}
+                    x={220} y={275}
                     width={200} height={60}
                     fontSize={1.75} color='darkorange'
                     toggled={false}
                     onClick={this.onFullStopClick}
                 >FULL STOP</HolobuttonElement>
+                <HolobuttonElement
+                    x={220} y={375}
+                    width={200} height={60}
+                    fontSize={1.75} color='darkturquoise'
+                    toggled={false}
+                    onClick={this.onFullAsternClick}
+                >FULL ASTERN</HolobuttonElement>
             </PanelElement>
         );
     }
