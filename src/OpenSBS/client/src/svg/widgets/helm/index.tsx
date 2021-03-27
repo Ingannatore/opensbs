@@ -21,23 +21,16 @@ interface HelmWidgetModel {
     engineModule: EngineModuleModel,
 }
 
-interface HelmWidgetState {
-    isLocked: boolean,
-}
-
-class HelmWidget extends React.Component<HelmWidgetModel, HelmWidgetState> {
+class HelmWidget extends React.Component<HelmWidgetModel, {}> {
     private readonly translation: string;
 
     constructor(props: HelmWidgetModel) {
         super(props);
-        this.state = {
-            isLocked: false,
-        };
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.onRudderLeftClick = this.onRudderLeftClick.bind(this);
         this.onRudderRightClick = this.onRudderRightClick.bind(this);
-        this.onRudderLockClick = this.onRudderLockClick.bind(this);
+        this.onStopClick = this.onStopClick.bind(this);
     }
 
     public render() {
@@ -49,17 +42,15 @@ class HelmWidget extends React.Component<HelmWidgetModel, HelmWidgetState> {
                 <HolobuttonElement
                     x={10} y={10}
                     width={420} height={60}
-                    color='darkorange'
-                    toggled={this.state.isLocked}
-                    onClick={this.onRudderLockClick}
-                >HELM LOCK</HolobuttonElement>
+                    fontSize={2} color='darkorange'
+                    onClick={this.onStopClick}
+                >STOP</HolobuttonElement>
 
                 <HolobuttonElement
                     x={10} y={80}
                     width={100} height={140}
                     fontSize={3} color='darkturquoise'
                     toggled={rudder < 0}
-                    enabled={!this.state.isLocked}
                     onClick={this.onRudderLeftClick}
                 >◄</HolobuttonElement>
                 <DisplayElement
@@ -72,7 +63,6 @@ class HelmWidget extends React.Component<HelmWidgetModel, HelmWidgetState> {
                     width={100} height={140}
                     fontSize={3} color='darkturquoise'
                     toggled={rudder > 0}
-                    enabled={!this.state.isLocked}
                     onClick={this.onRudderRightClick}
                 >►</HolobuttonElement>
                 <line
@@ -88,18 +78,16 @@ class HelmWidget extends React.Component<HelmWidgetModel, HelmWidgetState> {
         );
     }
 
-    private onRudderLockClick() {
-        this.setState({
-            ...this.state,
-            isLocked: !this.state.isLocked
-        });
+    private onStopClick() {
+        this.props.dispatch(SpaceshipActions.sendModuleAction(
+            this.props.entityId,
+            this.props.engineModule.id,
+            'setRudder',
+            0
+        ));
     }
 
     private onRudderLeftClick() {
-        if (this.state.isLocked) {
-            return;
-        }
-
         const rudder = this.props.engineModule?.rudder ?? 0;
         if (rudder < 0) {
             this.props.dispatch(SpaceshipActions.sendModuleAction(
@@ -119,10 +107,6 @@ class HelmWidget extends React.Component<HelmWidgetModel, HelmWidgetState> {
     }
 
     private onRudderRightClick() {
-        if (this.state.isLocked) {
-            return;
-        }
-
         const rudder = this.props.engineModule?.rudder ?? 0;
         if (rudder > 0) {
             this.props.dispatch(SpaceshipActions.sendModuleAction(

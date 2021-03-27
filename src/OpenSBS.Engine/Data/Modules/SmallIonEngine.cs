@@ -9,7 +9,7 @@ namespace OpenSBS.Engine.Data.Modules
             Mass = 5000;
             Size = 5;
             MaximumSpeed = 1000;
-            Acceleration = 100;
+            Acceleration = 50;
             Deceleration = 50;
             RotationSpeed = 60;
         }

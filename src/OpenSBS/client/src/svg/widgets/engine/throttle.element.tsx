@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svg-transforms';
+import ThrottleSliderElement from './throttle-slider.element';
 
 interface ThrottleElementModel {
     x: number,
@@ -20,8 +21,10 @@ export default class ThrottleElement extends React.Component<ThrottleElementMode
     }
 
     public render() {
+        const sliderY = 30 + (530 * ((100 - this.props.throttle) / 200));
+
         const markers = Array
-        .from({length: 21}, (value, key) => (key * 26.4) + 30)
+        .from({length: 17}, (value, key) => (key * 33) + 30)
         .map((y: number, index: number) => ThrottleElement.renderMarker(y, index));
 
         return (
@@ -29,7 +32,7 @@ export default class ThrottleElement extends React.Component<ThrottleElementMode
                 <rect x="0" y="0" width="200" height="590" fill="black"/>
                 {markers}
 
-                <text x="100" y="30" textAnchor="middle" fontSize="1.75rem" fill="darkgrey">AHEAD</text>
+                <text x="100" y="30" textAnchor="middle" fontSize="1.75rem" fill="#121212">AHEAD</text>
                 <text x="100" y="200" textAnchor="middle" fontSize="8rem" fill="#121212">^</text>
                 <text
                     x="100" y="-390"
@@ -37,15 +40,18 @@ export default class ThrottleElement extends React.Component<ThrottleElementMode
                     fill="#121212"
                     transform="scale(1, -1)"
                 >^</text>
-                <text x="100" y="560" textAnchor="middle" fontSize="1.75rem" fill="darkgrey">ASTERN</text>
+                <text x="100" y="560" textAnchor="middle" fontSize="1.75rem" fill="#121212">ASTERN</text>
 
-                {ThrottleElement.renderSlider(this.props.throttle, this.props.targetSpeed)}
+                <ThrottleSliderElement
+                    x={0} y={sliderY}
+                    color={'darkturquoise'}
+                >{this.props.targetSpeed}</ThrottleSliderElement>
             </g>
         );
     }
 
     private static renderMarker(y: number, index: number) {
-        const fill = index % 5 === 0 ? 'darkgrey' : '#121212';
+        const fill = index % 4 === 0 ? 'darkgrey' : '#121212';
         return (
             <g key={'throttle-marker-' + y} transform={SvgTransforms.translate(0, y)}>
                 <rect x="0" y="0" width="30" height="2" fill={fill} stroke="none"/>
@@ -54,47 +60,11 @@ export default class ThrottleElement extends React.Component<ThrottleElementMode
         );
     }
 
-    private static renderSlider(throttle: number, targetSpeed: number) {
-        const factor = (100 - throttle) / 200;
-        const sliderY = 30 + (530 * factor);
-
-        return (
-            <g transform={SvgTransforms.translate(0, sliderY)}>
-                <rect
-                    x="40" y="-30"
-                    width="120" height="60" rx="5"
-                    stroke="none" fill="black"
-                />
-                <rect
-                    x="40" y="-30"
-                    width="120" height="60" rx="5"
-                    stroke="none" fill="burlywood"
-                    opacity={0.05}
-                />
-                <rect
-                    x="40" y="-30"
-                    width="120" height="60" rx="5"
-                    stroke="burlywood" strokeWidth="2"
-                    fill="none"
-                />
-                <text
-                    x="100" y="0"
-                    textAnchor="middle" fontSize="3rem"
-                    fill="burlywood"
-                >{targetSpeed}</text>
-            </g>
-        );
-    }
-
     private clickHandler(event: React.MouseEvent<SVGElement, MouseEvent>) {
-        const relativeY = 390 + 305 - event.clientY;
-        const absRelativeY = Math.abs(relativeY);
+        const relativeY = 695 - event.clientY;
+        const throttle = Math.round(relativeY / 2.65);
+        const normalizedThrottle = Math.max(Math.min(throttle, 100), -100);
 
-        let throttle = 0;
-        if (absRelativeY > 5) {
-            throttle = Math.round((absRelativeY - 5) / 3) * Math.sign(relativeY);
-        }
-
-        this.props.onClick(event, throttle);
+        this.props.onClick(event, normalizedThrottle);
     }
 }

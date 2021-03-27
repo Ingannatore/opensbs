@@ -33,7 +33,7 @@ class EngineWidget extends React.Component<EngineWidgetModel, {}> {
 
     public render() {
         const throttle = this.props.engineModule?.throttle ?? 0;
-        const targetSpeed = Math.round(this.props.engineModule?.maximumSpeed * (throttle / 100) ?? 0);
+        const targetSpeed = Math.round((this.props.engineModule?.maximumSpeed ?? 0) * (throttle / 100));
 
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={440} height={610} mirror={true}>
