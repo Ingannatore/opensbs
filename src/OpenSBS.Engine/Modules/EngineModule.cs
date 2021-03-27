@@ -38,7 +38,7 @@ namespace OpenSBS.Engine.Modules
 
         private double CalculateAngularSpeed(TimeSpan deltaT)
         {
-            var rudderDirection = -Math.Sign(Rudder);
+            var rudderDirection = Math.Sign(Rudder);
             if (rudderDirection == 0)
             {
                 return 0;
