@@ -8,6 +8,7 @@ const defaultState: ServerStateModel = {
     lastTick: 0,
     lastDeltaT: 0,
     missions: [],
+    spaceships: [],
 };
 
 export default (state = defaultState, action: ActionModel) => {

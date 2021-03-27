@@ -2,6 +2,6 @@
 
 export default interface ActionModel {
     type: string;
-    payload: string | null;
+    payload: any | null;
     meta: ActionMetadataModel | null;
 }

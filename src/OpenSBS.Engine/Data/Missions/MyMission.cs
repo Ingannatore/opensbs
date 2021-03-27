@@ -1,9 +1,13 @@
 ﻿using OpenSBS.Engine.Data.Spaceships;
-using OpenSBS.Engine.Missions;
+using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Engine.Data.Missions
 {
-    [Mission("My Test Mission", Description = "Just a simple test mission, nothing fancy.")]
+    [DataEntry(
+        DataEntryCategory.Mission,
+        "My Test Mission",
+        Description = "Just a simple test mission, nothing fancy."
+    )]
     public class MyMission : Mission
     {
         public override void Init()

@@ -2,13 +2,15 @@
 
 const Types = {
     START_MISSION: 'server/init',
-    PAUSE_MISSION: 'server/pauseMission',
+    PAUSE_MISSION: 'server/pause',
     REFRESH_SERVER_STATE: 'server/refresh'
 };
 
-const startMission = (id: string): ActionModel => ({
+const startMission = (missionId: string): ActionModel => ({
     type: Types.START_MISSION,
-    payload: id,
+    payload: {
+        mission: missionId
+    },
     meta: {socket: true, entity: null, module: null}
 });
 

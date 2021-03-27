@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {Dispatch} from "redux";
 import ServerActions from '../store/server/server.actions';
+import DataEntryInfoModel from '../store/server/data-entry-info.model';
 
 interface HomePageProps extends RouteComponentProps {
-    missions: any[],
+    missions: DataEntryInfoModel[],
     dispatch: Dispatch,
 }
 
@@ -26,13 +27,13 @@ class Home extends React.Component<HomePageProps, {}> {
         );
     }
 
-    renderMissionButton(mission: any) {
+    renderMissionButton(mission: DataEntryInfoModel) {
         return (
                 <li key={`mission-${mission.guid}`}>
                     <button
                         id={mission.guid}
                         onClick={() => this.startButtonHandler(mission.guid)}
-                    >{mission.title}</button>
+                    >{mission.name}</button>
                 </li>
         );
     }

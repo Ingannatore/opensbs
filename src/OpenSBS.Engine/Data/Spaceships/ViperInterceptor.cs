@@ -3,6 +3,11 @@ using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Engine.Data.Spaceships
 {
+    [DataEntry(
+        DataEntryCategory.Spaceship,
+        "Viper-class Interceptor",
+        Description = "A fast and agile ship used mainly against fighters and bombers"
+    )]
     public class ViperInterceptor : Entity
     {
         public ViperInterceptor(string id, string name, string callsign) : base(

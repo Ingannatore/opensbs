@@ -1,9 +1,10 @@
-﻿import Mission from './mission.model';
+﻿import DataEntryInfoModel from './data-entry-info.model';
 
 export default interface ServerStateModel {
     isReady: boolean;
     isRunning: boolean;
     lastTick: number;
     lastDeltaT: number;
-    missions: Mission[];
+    missions: DataEntryInfoModel[];
+    spaceships: DataEntryInfoModel[];
 }

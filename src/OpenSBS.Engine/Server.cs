@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenSBS.Engine.Missions;
+using OpenSBS.Engine.Data;
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Utils;
 
@@ -13,7 +13,7 @@ namespace OpenSBS.Engine
         private readonly IServerClock _serverClock;
         private readonly IStateSender _stateSender;
         private readonly SimpleQueue<ClientAction> _incomingCommands;
-        private readonly MissionRepository _missionRepository;
+        private readonly DataLibrary _dataLibrary;
 
         public Server(IServerClock clock, IStateSender stateSender)
         {
@@ -22,9 +22,12 @@ namespace OpenSBS.Engine
             _stateSender = stateSender;
 
             _incomingCommands = new SimpleQueue<ClientAction>();
-            _missionRepository = new MissionRepository();
+            _dataLibrary = new DataLibrary();
 
-            State = new ServerState(_missionRepository.AvailableMissions);
+            State = new ServerState(
+                _dataLibrary.AvailableMissions,
+                _dataLibrary.AvailableSpaceships
+            );
         }
 
         public void HandleAction(ClientAction action)
@@ -63,14 +66,14 @@ namespace OpenSBS.Engine
             switch (action.Type)
             {
                 case "server/init":
-                    InitServer(action.PayloadTo<string>());
+                    InitServer(action.PayloadTo<ServerInitPayload>());
                     break;
             }
         }
 
-        private void InitServer(string missionId)
+        private void InitServer(ServerInitPayload payload)
         {
-            Mission = _missionRepository.CreateInstance(missionId);
+            Mission = _dataLibrary.CreateMission(payload.Mission);
             Mission.Init();
             _serverClock.Start();
         }
