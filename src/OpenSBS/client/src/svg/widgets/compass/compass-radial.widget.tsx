@@ -36,10 +36,6 @@ class CompassRadialWidget extends React.Component<CompassRadialWidgetModel, {}> 
 
         return (
             <g transform={this.translation}>
-                <circle
-                    cx="0" cy="0" r="500"
-                    stroke="#383838" strokeWidth="2" fill="black"
-                />
                 <g transform={SvgTransforms.rotate(-yaw)}>
                     {markers}
                 </g>
@@ -52,7 +48,7 @@ class CompassRadialWidget extends React.Component<CompassRadialWidgetModel, {}> 
             return (
                 <g key={'compass-radial-marker-' + degrees} transform={SvgTransforms.rotate(degrees)}>
                     <text
-                        x="0" y="-485"
+                        x="0" y="-484"
                         textAnchor="middle"
                         fontSize="1.5rem"
                         fill="whitesmoke"

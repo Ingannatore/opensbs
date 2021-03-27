@@ -11,8 +11,8 @@ export default class Navigation extends React.Component<{}, {}> {
             <StationElement name="NAVIGATION TERMINAL" icon="#icon-navigation">
                 <EngineWidget x={10} y={390}/>
 
+                <RadarWidget x={460} y={40}/>
                 <CompassRadialWidget x={960} y={540}/>
-                <RadarWidget x={490} y={70}/>
 
                 <HelmWidget x={1480} y={700}/>
             </StationElement>

@@ -41,8 +41,8 @@ export default class HolobuttonElement extends React.Component<HolobuttonElement
                 <rect
                     x="0" y="0" rx="6"
                     width={this.props.width} height={this.props.height} strokeWidth="2"
-                    fill={!this.props.toggled ? 'none' : this.props.enabled ? this.props.color : 'darkgrey'}
-                    stroke={this.props.toggled ? 'none' : this.props.enabled ? this.props.color : 'black'}
+                    fill="none"
+                    stroke={this.props.enabled ? this.props.color : 'grey'}
                 />
                 <rect
                     x="0" y="0" rx="6"
@@ -51,10 +51,16 @@ export default class HolobuttonElement extends React.Component<HolobuttonElement
                     opacity={0.05}
                     stroke="none"
                 />
+                <rect
+                    x="4" y="4" rx="4"
+                    width={this.props.width - 8} height={this.props.height - 8}
+                    fill={!this.props.toggled ? 'none' : this.props.enabled ? this.props.color : 'darkgrey'}
+                    stroke="none"
+                />
                 <text
                     x={this.props.width / 2} y={this.props.height / 2}
                     textAnchor="middle" fontSize={this.props.fontSize + 'rem'}
-                    fill={this.props.toggled ? 'black' : this.props.enabled ? this.props.color : 'darkgrey'}
+                    fill={this.props.toggled ? 'black' : this.props.enabled ? this.props.color : 'grey'}
                     opacity={this.props.enabled ? 1 : 0.2}
                 >{this.props.children}</text>
             </g>
