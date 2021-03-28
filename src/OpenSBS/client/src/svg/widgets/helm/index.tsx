@@ -34,7 +34,10 @@ class HelmWidget extends React.Component<HelmWidgetModel, {}> {
     }
 
     public render() {
-        const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
+        let yaw = Math.round(Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction))));
+        if (yaw === 360) {
+            yaw = 0;
+        }
         const rudder = this.props.engineModule?.rudder ?? 0;
 
         return (
@@ -57,7 +60,7 @@ class HelmWidget extends React.Component<HelmWidgetModel, {}> {
                     x={220} y={150}
                     topLabel="BEARING"
                     bottomLabel="degrees"
-                >{Math.round(yaw).toString().padStart(3, '0')}</DisplayElement>
+                >{yaw.toString().padStart(3, '0')}</DisplayElement>
                 <HolobuttonElement
                     x={330} y={80}
                     width={100} height={140}
