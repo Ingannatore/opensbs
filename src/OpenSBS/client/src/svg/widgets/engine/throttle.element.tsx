@@ -7,7 +7,7 @@ interface ThrottleElementModel {
     y: number,
     throttle: number,
     targetSpeed: number,
-    onClick: (event: React.MouseEvent<SVGElement, MouseEvent>, throttle: number) => void,
+    onClick: (throttle: number) => void,
 }
 
 export default class ThrottleElement extends React.Component<ThrottleElementModel, {}> {
@@ -65,6 +65,6 @@ export default class ThrottleElement extends React.Component<ThrottleElementMode
         const throttle = Math.round(relativeY / 2.65);
         const normalizedThrottle = Math.max(Math.min(throttle, 100), -100);
 
-        this.props.onClick(event, normalizedThrottle);
+        this.props.onClick(normalizedThrottle);
     }
 }

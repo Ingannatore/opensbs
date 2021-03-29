@@ -1,16 +1,16 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svg-transforms';
 
-interface StatusElementModel {
+interface HelmStatusElementModel {
     x: number,
     y: number,
-    label: string,
+    rudder: number,
 }
 
-export default class StatusElement extends React.Component<StatusElementModel, {}> {
+export default class HelmStatusElement extends React.Component<HelmStatusElementModel, {}> {
     private readonly translation: string;
 
-    constructor(props: StatusElementModel) {
+    constructor(props: HelmStatusElementModel) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -23,13 +23,24 @@ export default class StatusElement extends React.Component<StatusElementModel, {
                     x="210" y="12"
                     textAnchor="middle" fontSize="1.75rem"
                     fill="whitesmoke"
-                >{this.props.children}</text>
+                >{this.getStatus()}</text>
                 <text
                     x="210" y="44"
                     textAnchor="middle" fontSize="1rem"
                     fill="grey"
-                >{this.props.label}</text>
+                >helm status</text>
             </g>
         );
+    }
+
+    private getStatus(): string {
+        if (this.props.rudder < 0) {
+            return 'Turning to Port';
+        }
+        if (this.props.rudder > 0) {
+            return 'Turning to Starboard';
+        }
+
+        return 'Idle';
     }
 }

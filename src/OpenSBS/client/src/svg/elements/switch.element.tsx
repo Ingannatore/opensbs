@@ -1,8 +1,7 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svg-transforms';
 
-interface HolobuttonElementModel {
-    id: string | null,
+interface SwitchElementModel {
     x: number,
     y: number,
     width: number,
@@ -11,14 +10,13 @@ interface HolobuttonElementModel {
     color: string,
     toggled: boolean,
     enabled: boolean,
-    onClick: (event: React.MouseEvent<SVGElement, MouseEvent>, id: string | null) => void,
+    onClick: (event: React.MouseEvent<SVGElement, MouseEvent>) => void,
 }
 
-export default class HolobuttonElement extends React.Component<HolobuttonElementModel, {}> {
+export default class SwitchElement extends React.Component<SwitchElementModel, {}> {
     private readonly translation: string;
 
     public static defaultProps = {
-        id: null,
         x: 0,
         y: 0,
         fontSize: 1.5,
@@ -27,7 +25,7 @@ export default class HolobuttonElement extends React.Component<HolobuttonElement
         enabled: true,
     };
 
-    constructor(props: HolobuttonElementModel) {
+    constructor(props: SwitchElementModel) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -69,7 +67,7 @@ export default class HolobuttonElement extends React.Component<HolobuttonElement
 
     private clickHandler(event: React.MouseEvent<SVGElement, MouseEvent>) {
         if (this.props.enabled) {
-            this.props.onClick(event, this.props.id);
+            this.props.onClick(event);
         }
     }
 }

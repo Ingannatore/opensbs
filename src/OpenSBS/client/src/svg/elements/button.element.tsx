@@ -2,68 +2,94 @@
 import SvgTransforms from '../../lib/svg-transforms';
 
 interface ButtonElementModel {
-    id: string | null,
     x: number,
     y: number,
-    subtitle: string,
-    toggled: boolean,
+    width: number,
+    height: number,
+    fontSize: number,
+    color: string,
     enabled: boolean,
-    onClick: (event: React.MouseEvent<SVGElement, MouseEvent>, id: string | null) => void,
+    onClick: () => void,
 }
 
-export default class ButtonElement extends React.Component<ButtonElementModel, {}> {
+interface ButtonElementState {
+    pressed: boolean,
+}
+
+export default class ButtonElement extends React.Component<ButtonElementModel, ButtonElementState> {
     private readonly translation: string;
 
     public static defaultProps = {
-        id: null,
         x: 0,
         y: 0,
-        subtitle: '',
-        toggled: false,
+        fontSize: 1.5,
+        color: 'darkturquoise',
         enabled: true,
     };
 
     constructor(props: ButtonElementModel) {
         super(props);
+        this.state = {
+            pressed: false,
+        }
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
-        this.clickHandler = this.clickHandler.bind(this);
+        this.mouseDownHandler = this.mouseDownHandler.bind(this);
+        this.mouseUpHandler = this.mouseUpHandler.bind(this);
     }
 
     public render() {
         return (
-            <g transform={this.translation} cursor={this.props.enabled ? 'pointer' : 'not-allowed'}
-               onClick={this.clickHandler}>
+            <g
+                transform={this.translation}
+                cursor={this.props.enabled ? 'pointer' : 'not-allowed'}
+                onMouseDown={this.mouseDownHandler}
+                onMouseUp={this.mouseUpHandler}
+            >
                 <rect
-                    x="-30" y="-30" rx="10"
-                    width="60" height="60"
-                    fill="black" stroke="#383838" strokeWidth="2"
+                    x="0" y="0" rx="6"
+                    width={this.props.width} height={this.props.height} strokeWidth="2"
+                    fill="none"
+                    stroke={this.props.enabled ? this.props.color : 'grey'}
                 />
                 <rect
-                    x="-26" y="-26" rx="6"
-                    width="52" height="52" strokeWidth="1"
-                    fill={!this.props.toggled ? 'none' : this.props.enabled ? 'darkturquoise' : 'darkgrey'}
-                    stroke={this.props.toggled ? 'none' : this.props.enabled ? 'darkturquoise' : 'black'}
+                    x="0" y="0" rx="6"
+                    width={this.props.width} height={this.props.height} strokeWidth="2"
+                    fill={this.state.pressed ? 'none' : this.props.enabled ? this.props.color : 'darkgrey'}
+                    opacity={0.05}
+                    stroke="none"
+                />
+                <rect
+                    x="4" y="4" rx="4"
+                    width={this.props.width - 8} height={this.props.height - 8}
+                    fill={!this.state.pressed ? 'none' : this.props.enabled ? this.props.color : 'darkgrey'}
+                    stroke="none"
                 />
                 <text
-                    x="0" y="-10"
-                    textAnchor="middle" fontSize="1.5rem"
-                    fill={this.props.toggled ? 'black' : this.props.enabled ? 'darkturquoise' : 'darkgrey'}
+                    x={this.props.width / 2} y={this.props.height / 2}
+                    textAnchor="middle" fontSize={this.props.fontSize + 'rem'}
+                    fill={this.state.pressed ? 'black' : this.props.enabled ? this.props.color : 'grey'}
                     opacity={this.props.enabled ? 1 : 0.2}
                 >{this.props.children}</text>
-                {this.props.subtitle && <text
-                    x="0" y="15"
-                    textAnchor="middle" fontSize=".75rem"
-                    fill={this.props.toggled ? 'black' : this.props.enabled ? 'darkturquoise' : 'darkgrey'}
-                    opacity={this.props.enabled ? 1 : 0.2}
-                >{this.props.subtitle}</text>}
             </g>
         );
     }
 
-    private clickHandler(event: React.MouseEvent<SVGElement, MouseEvent>) {
+    private mouseDownHandler() {
         if (this.props.enabled) {
-            this.props.onClick(event, this.props.id);
+            this.setState({
+                ...this.state,
+                pressed: true
+            });
+
+            this.props.onClick();
         }
+    }
+
+    private mouseUpHandler() {
+        this.setState({
+            ...this.state,
+            pressed: false
+        });
     }
 }

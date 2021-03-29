@@ -7,7 +7,7 @@ import TracesOverlay from './traces.overlay';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 import {SensorsModuleModel} from '../../../modules/sensors-module.model';
 import Vector3 from '../../../models/vector3';
-import HolobuttonElement from '../../elements/holobutton.element';
+import SwitchElement from '../../elements/switch.element';
 import DisplayElement from '../../elements/display.element';
 
 interface RadarProps {
@@ -95,49 +95,46 @@ class Radar extends React.Component<RadarProps, RadarState> {
                 </g>
 
                 <g transform="translate(0 1000)">
-                    <HolobuttonElement
+                    <SwitchElement
                         x={10} y={-150}
                         width={120} height={40}
                         onClick={this.toggleDirectionsOverlay}
                         toggled={this.state.enableDirectionsOverlay}
-                    >SECTORS</HolobuttonElement>
-                    <HolobuttonElement
+                    >SECTORS</SwitchElement>
+                    <SwitchElement
                         x={10} y={-100}
                         width={120} height={40}
                         onClick={this.toggleRangesOverlay}
                         toggled={this.state.enableRangesOverlay}
-                    >RANGES</HolobuttonElement>
-                    <HolobuttonElement
+                    >RANGES</SwitchElement>
+                    <SwitchElement
                         x={10} y={-50}
                         width={120} height={40}
                         enabled={false}
                         onClick={this.toggleWeaponsOverlay}
                         toggled={this.state.enableWeaponsOverlay}
-                    >WEAPONS</HolobuttonElement>
+                    >WEAPONS</SwitchElement>
                 </g>
 
                 <g transform="translate(1000 1000)">
-                    <HolobuttonElement
-                        id="btn-radar-range-8000"
+                    <SwitchElement
                         x={-130} y={-150}
                         width={120} height={40}
-                        onClick={this.setRange}
+                        onClick={() => this.setRange(8000)}
                         toggled={this.state.range === 8000}
-                    >NO ZOOM</HolobuttonElement>
-                    <HolobuttonElement
-                        id="btn-radar-range-4000"
+                    >NO ZOOM</SwitchElement>
+                    <SwitchElement
                         x={-130} y={-100}
                         width={120} height={40}
-                        onClick={this.setRange}
+                        onClick={() => this.setRange(4000)}
                         toggled={this.state.range === 4000}
-                    >ZOOM ×2</HolobuttonElement>
-                    <HolobuttonElement
-                        id="btn-radar-range-2000"
+                    >ZOOM ×2</SwitchElement>
+                    <SwitchElement
                         x={-130} y={-50}
                         width={120} height={40}
-                        onClick={this.setRange}
+                        onClick={() => this.setRange(2000)}
                         toggled={this.state.range === 2000}
-                    >ZOOM ×4</HolobuttonElement>
+                    >ZOOM ×4</SwitchElement>
                 </g>
             </g>
         );
@@ -164,17 +161,8 @@ class Radar extends React.Component<RadarProps, RadarState> {
         });
     }
 
-    private setRange(event: React.MouseEvent<SVGElement, MouseEvent>, id: string | null) {
-        switch (id) {
-            case 'btn-radar-range-4000':
-                this.setState({...this.state, range: 4000});
-                break;
-            case 'btn-radar-range-2000':
-                this.setState({...this.state, range: 2000});
-                break;
-            default:
-                this.setState({...this.state, range: 8000});
-        }
+    private setRange(range: number) {
+        this.setState({...this.state, range: range});
     }
 
     private selectTrace(event: React.MouseEvent<SVGElement, MouseEvent>, id: string | null) {

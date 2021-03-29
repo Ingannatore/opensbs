@@ -1,13 +1,13 @@
 ﻿import * as React from 'react';
+import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svg-transforms';
 import DisplayElement from '../../elements/display.element';
 import {EngineModuleModel} from '../../../modules/engine-module.model';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import {connect} from 'react-redux';
 import PanelElement from '../../elements/panel.element';
-import HolobuttonElement from '../../elements/holobutton.element';
 import ThrottleElement from './throttle.element';
 import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
+import ButtonElement from '../../elements/button.element';
 
 interface EngineWidgetModel {
     x: number,
@@ -25,10 +25,6 @@ class EngineWidget extends React.Component<EngineWidgetModel, {}> {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
-        this.onThrottleClick = this.onThrottleClick.bind(this);
-        this.onFullAheadClick = this.onFullAheadClick.bind(this);
-        this.onFullAsternClick = this.onFullAsternClick.bind(this);
-        this.onFullStopClick = this.onFullStopClick.bind(this);
     }
 
     public render() {
@@ -41,7 +37,7 @@ class EngineWidget extends React.Component<EngineWidgetModel, {}> {
                     x={0} y={10}
                     throttle={throttle}
                     targetSpeed={targetSpeed}
-                    onClick={this.onThrottleClick}
+                    onClick={(value) => this.setThrottle(value)}
                 />
                 <line
                     x1="210" y1="0"
@@ -55,64 +51,34 @@ class EngineWidget extends React.Component<EngineWidgetModel, {}> {
                     bottomLabel="meters/sec"
                 >{Math.round(this.props.linearSpeed)}</DisplayElement>
 
-                <HolobuttonElement
+                <ButtonElement
                     x={220} y={175}
                     width={200} height={60}
                     fontSize={1.75} color='darkturquoise'
-                    toggled={false}
-                    onClick={this.onFullAheadClick}
-                >FULL AHEAD</HolobuttonElement>
-                <HolobuttonElement
+                    onClick={() => this.setThrottle(100)}
+                >FULL AHEAD</ButtonElement>
+                <ButtonElement
                     x={220} y={275}
                     width={200} height={60}
                     fontSize={1.75} color='darkorange'
-                    toggled={false}
-                    onClick={this.onFullStopClick}
-                >FULL STOP</HolobuttonElement>
-                <HolobuttonElement
+                    onClick={() => this.setThrottle(0)}
+                >FULL STOP</ButtonElement>
+                <ButtonElement
                     x={220} y={375}
                     width={200} height={60}
                     fontSize={1.75} color='darkturquoise'
-                    toggled={false}
-                    onClick={this.onFullAsternClick}
-                >FULL ASTERN</HolobuttonElement>
+                    onClick={() => this.setThrottle(-100)}
+                >FULL ASTERN</ButtonElement>
             </PanelElement>
         );
     }
 
-    private onThrottleClick(event: React.MouseEvent<SVGElement, MouseEvent>, throttle: number) {
+    private setThrottle(value: number) {
         this.props.dispatch(SpaceshipActions.sendModuleAction(
             this.props.entityId,
             this.props.engineModule.id,
             'setThrottle',
-            throttle
-        ));
-    }
-
-    private onFullAheadClick() {
-        this.props.dispatch(SpaceshipActions.sendModuleAction(
-            this.props.entityId,
-            this.props.engineModule.id,
-            'setThrottle',
-            100
-        ));
-    }
-
-    private onFullAsternClick() {
-        this.props.dispatch(SpaceshipActions.sendModuleAction(
-            this.props.entityId,
-            this.props.engineModule.id,
-            'setThrottle',
-            -100
-        ));
-    }
-
-    private onFullStopClick() {
-        this.props.dispatch(SpaceshipActions.sendModuleAction(
-            this.props.entityId,
-            this.props.engineModule.id,
-            'setThrottle',
-            0
+            value
         ));
     }
 }
