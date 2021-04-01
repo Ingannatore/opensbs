@@ -73,7 +73,13 @@ namespace OpenSBS.Engine
 
         private void InitServer(ServerInitPayload payload)
         {
-            Mission = _dataLibrary.CreateMission(payload.Mission);
+            Mission = _dataLibrary.CreateMission(
+                payload.Mission,
+                payload.Spaceship,
+                payload.Name,
+                payload.Callsign
+            );
+
             Mission.Init();
             _serverClock.Start();
         }

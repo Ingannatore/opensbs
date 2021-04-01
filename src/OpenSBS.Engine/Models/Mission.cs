@@ -4,11 +4,12 @@ namespace OpenSBS.Engine.Models
 {
     public abstract class Mission
     {
-        public Entity Spaceship { get; protected set; }
+        public Entity Spaceship { get; }
         public World World { get; }
 
-        protected Mission()
+        protected Mission(Entity spaceship)
         {
+            Spaceship = spaceship;
             World = new World();
         }
 

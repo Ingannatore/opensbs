@@ -1,56 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
-
 html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background: black;
-    font-family: 'Share Tech Mono', monospace;
-}
-
-svg {
     height: 100%;
-    width: 100%;
-    user-select: none;
+    background: #000 url("/grid.svg") repeat;
+    color: whitesmoke;
 }
 
-/* TEXT */
-
-text {
-    dominant-baseline: central;
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-text.text-white {
-    fill: white;
-}
-
-text.text-azure {
-    fill: #c0daf1;
-}
-
-/* FILL */
-
-.fill-light-blue {
-    fill: #122127;
-}
-.fill-medium-blue {
-    fill: #0b1519;
-}
-.fill-dark-blue {
-    fill: #091215;
-}
-.fill-darker-blue {
-    fill: #070d0f;
-}
-.fill-medium-grey {
-    fill: #76797c;
-}
-.fill-dark-yellow {
-    fill: #c9c571;
-}
-.fill-azure {
-    fill: #c0daf1;
-}
-.fill-dirty-white {
-    fill: #aaadae;
+.panel {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #383838;
 }

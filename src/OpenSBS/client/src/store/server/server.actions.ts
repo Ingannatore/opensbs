@@ -6,10 +6,13 @@ const Types = {
     REFRESH_SERVER_STATE: 'server/refresh'
 };
 
-const startMission = (missionId: string): ActionModel => ({
+const startMission = (missionId: string, spaceshipId: string, spaceshipName: string, spaceshipCallsign: string): ActionModel => ({
     type: Types.START_MISSION,
     payload: {
-        mission: missionId
+        mission: missionId,
+        spaceship: spaceshipId,
+        name: spaceshipName,
+        callsign: spaceshipCallsign,
     },
     meta: {socket: true, entity: null, module: null}
 });

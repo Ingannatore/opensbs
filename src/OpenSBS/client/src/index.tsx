@@ -8,7 +8,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import rootReducer from './store/reducers';
 import IncomingActionMiddleware from './store/middlewares/incoming-action.middleware';
 import OutgoingActionMiddleware from './store/middlewares/outgoing-action.middleware';
-import Home from './pages/home';
+import HomePage from './pages/home';
 import Station from './pages/station';
 import './index.css';
 
@@ -32,7 +32,7 @@ const store = createStore(
 render(
     <Provider store={store}>
         <Router>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={HomePage}/>
             <Route exact path="/station" component={Station}/>
         </Router>
     </Provider>,

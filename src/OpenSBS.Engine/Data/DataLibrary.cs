@@ -42,24 +42,32 @@ namespace OpenSBS.Engine.Data
                 .Where(t => t.IsDefined(typeof(DataEntryAttribute), false));
         }
 
-        public Mission CreateMission(string id)
+        public Mission CreateMission(string mission, string spaceship, string name, string callsign)
         {
-            if (!_missions.ContainsKey(id))
+            if (!_missions.ContainsKey(mission))
             {
-                throw new Exception($"Unknown mission ID: {id}");
+                throw new Exception($"Unknown mission ID: {mission}");
             }
 
-            return (Mission) Activator.CreateInstance(_missions[id].Type);
+            return (Mission) Activator.CreateInstance(
+                _missions[mission].Type,
+                CreateSpaceship(spaceship, name, callsign)
+            );
         }
 
-        public Entity CreateSpaceship(string id)
+        private Entity CreateSpaceship(string id, string name, string callsign)
         {
             if (!_spaceships.ContainsKey(id))
             {
                 throw new Exception($"Unknown spaceship ID: {id}");
             }
 
-            return (Entity) Activator.CreateInstance(_spaceships[id].Type);
+            return (Entity) Activator.CreateInstance(
+                _spaceships[id].Type,
+                Guid.NewGuid().ToString("N"),
+                name,
+                callsign
+            );
         }
     }
 }

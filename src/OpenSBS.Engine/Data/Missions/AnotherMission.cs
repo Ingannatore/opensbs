@@ -10,14 +10,10 @@ namespace OpenSBS.Engine.Data.Missions
     )]
     public class AnotherMission : Mission
     {
+        public AnotherMission(Entity spaceship) : base(spaceship) { }
+
         public override void Init()
         {
-            Spaceship = new ViperInterceptor(
-                "PLAYER_SHIP",
-                "Archimedes",
-                "ARC-927"
-            );
-
             var dummyTarget1 = new DummyTarget("DUMMY_A", "Dummy A", "DT-A");
             dummyTarget1.MoveTo(1000, 0, 1000);
             World.AddEntity(dummyTarget1);
