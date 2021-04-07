@@ -19,7 +19,7 @@ interface HelmWidgetModel {
     dispatch: any,
     entityId: string,
     direction: Vector3,
-    engineModule: EngineModuleModel,
+    engineModule: EngineModuleModel | undefined,
 }
 
 class HelmWidget extends React.Component<HelmWidgetModel, {}> {
@@ -35,10 +35,7 @@ class HelmWidget extends React.Component<HelmWidgetModel, {}> {
 
     public render() {
         const rudder = this.getRudderValue();
-        let yaw = Math.round(Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction))));
-        if (yaw === 360) {
-            yaw = 0;
-        }
+        const yaw = Angles.normalizeYaw(Vectors.getYaw(this.props.direction));
 
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={440} height={300}>
@@ -104,6 +101,10 @@ class HelmWidget extends React.Component<HelmWidgetModel, {}> {
     }
 
     private setRudder(value: number) {
+        if (!this.props.engineModule) {
+            return;
+        }
+
         this.props.dispatch(SpaceshipActions.sendModuleAction(
             this.props.entityId,
             this.props.engineModule.id,
@@ -117,7 +118,7 @@ const mapStateToProps = (state: any) => {
     return {
         entityId: SpaceshipSelectors.getId(state),
         direction: SpaceshipSelectors.getDirection(state),
-        engineModule: SpaceshipSelectors.getModuleByType(state, 'module.engine') as EngineModuleModel,
+        engineModule: SpaceshipSelectors.getModuleByType<EngineModuleModel>(state, 'module.engine'),
     };
 };
 

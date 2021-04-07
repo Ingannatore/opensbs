@@ -10,14 +10,14 @@ import Vector3 from '../../../models/vector3';
 import SwitchElement from '../../elements/switch.element';
 import DisplayElement from '../../elements/display.element';
 
-interface RadarProps {
+interface RadarWidgetModel {
     x: number,
     y: number,
     direction: Vector3,
-    sensorsModule: SensorsModuleModel,
+    sensorsModule: SensorsModuleModel | undefined,
 }
 
-interface RadarState {
+interface RadarWidgetState {
     range: number,
     enableDirectionsOverlay: boolean,
     enableRangesOverlay: boolean,
@@ -25,7 +25,7 @@ interface RadarState {
     selectedTraceId: string | null,
 }
 
-class Radar extends React.Component<RadarProps, RadarState> {
+class RadarWidget extends React.Component<RadarWidgetModel, RadarWidgetState> {
     private readonly translation: string;
 
     public static defaultProps = {
@@ -165,7 +165,7 @@ class Radar extends React.Component<RadarProps, RadarState> {
         this.setState({...this.state, range: range});
     }
 
-    private selectTrace(event: React.MouseEvent<SVGElement, MouseEvent>, id: string | null) {
+    private selectTrace(id: string | null) {
         this.setState({
             ...this.state,
             selectedTraceId: id
@@ -180,15 +180,15 @@ class Radar extends React.Component<RadarProps, RadarState> {
         const traces = this.props.sensorsModule?.traces ?? [];
         const selectedTrace = traces.find((trace) => trace.id === this.state.selectedTraceId);
 
-        return selectedTrace ? selectedTrace.distance.toString() : '-';
+        return selectedTrace?.distance.toString() ?? '-';
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
         direction: SpaceshipSelectors.getDirection(state),
-        sensorsModule: SpaceshipSelectors.getModuleByType(state, 'module.sensors') as SensorsModuleModel
+        sensorsModule: SpaceshipSelectors.getModuleByType<SensorsModuleModel>(state, 'module.sensors')
     };
 };
 
-export default connect(mapStateToProps)(Radar);
+export default connect(mapStateToProps)(RadarWidget);

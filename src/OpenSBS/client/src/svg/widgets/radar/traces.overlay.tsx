@@ -10,7 +10,7 @@ interface TracesOverlayModel {
     direction: Vector3,
     traces: SensorsTraceModel[],
     selectedTraceId: string | null,
-    onTraceClick: (event: React.MouseEvent<SVGElement, MouseEvent>, id: string | null) => void,
+    onTraceClick: (id: string | null) => void,
 }
 
 export default class TracesOverlay extends React.Component<TracesOverlayModel, {}> {
@@ -47,9 +47,9 @@ export default class TracesOverlay extends React.Component<TracesOverlayModel, {
 
         return (
             <g
-                id={trace.id} key={`trace-${trace.id}`}
+                key={`trace-${trace.id}`}
                 transform={transform} cursor="pointer"
-                onClick={this.onTraceClick}
+                onClick={() => this.onTraceClick(trace.id)}
             >
                 <circle
                     x="0" y="0" r="4"
@@ -71,12 +71,11 @@ export default class TracesOverlay extends React.Component<TracesOverlayModel, {
         );
     }
 
-    private onTraceClick(event: React.MouseEvent<SVGElement, MouseEvent>) {
-        const target = event.currentTarget as SVGElement;
-        if (target.id === this.props.selectedTraceId) {
-            this.props.onTraceClick(event, null);
+    private onTraceClick(id: string) {
+        if (id === this.props.selectedTraceId) {
+            this.props.onTraceClick(null);
         } else {
-            this.props.onTraceClick(event, target.id);
+            this.props.onTraceClick(id);
         }
     }
 }

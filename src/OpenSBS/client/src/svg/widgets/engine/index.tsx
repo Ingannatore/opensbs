@@ -15,7 +15,7 @@ interface EngineWidgetModel {
     dispatch: any,
     entityId: string,
     linearSpeed: number,
-    engineModule: EngineModuleModel,
+    engineModule: EngineModuleModel | undefined,
 }
 
 class EngineWidget extends React.Component<EngineWidgetModel, {}> {
@@ -74,6 +74,10 @@ class EngineWidget extends React.Component<EngineWidgetModel, {}> {
     }
 
     private setThrottle(value: number) {
+        if (!this.props.engineModule) {
+            return;
+        }
+
         this.props.dispatch(SpaceshipActions.sendModuleAction(
             this.props.entityId,
             this.props.engineModule.id,
@@ -87,7 +91,7 @@ const mapStateToProps = (state: any) => {
     return {
         entityId: SpaceshipSelectors.getId(state),
         linearSpeed: SpaceshipSelectors.getLinearSpeed(state),
-        engineModule: SpaceshipSelectors.getModuleByType(state, 'module.engine') as EngineModuleModel,
+        engineModule: SpaceshipSelectors.getModuleByType<EngineModuleModel>(state, 'module.engine'),
     };
 };
 

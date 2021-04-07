@@ -18,10 +18,10 @@ const getLinearSpeed = (state: StateModel): number => {
     return state.spaceship?.linearSpeed ?? 0;
 }
 
-const getModuleByType = (state: StateModel, type: string): Partial<EntityModuleModel> | undefined => {
+const getModuleByType = <T extends EntityModuleModel>(state: StateModel, type: string): T | undefined => {
     return state.spaceship.modules.find(
         (module: Partial<EntityModuleModel>) => module.type === type
-    );
+    ) as T;
 }
 
 export default {
