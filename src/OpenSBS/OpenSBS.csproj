@@ -28,6 +28,8 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <None Include="client\src\pages\station\station.css" />
+    <None Include="client\src\pages\station\station.tsx" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Release'">

@@ -1,25 +1,13 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import {withRouter, RouteComponentProps} from 'react-router-dom';
-import {Dispatch} from "redux";
+import {withRouter} from 'react-router-dom';
 import ServerActions from '../../store/server/server.actions';
 import DataEntryInfoModel from '../../store/server/data-entry-info.model';
+import HomeStateModel from './home-state.model';
+import HomePropsModel from './home-props.model';
 
-interface HomePageProps extends RouteComponentProps {
-    missions: DataEntryInfoModel[],
-    spaceships: DataEntryInfoModel[],
-    dispatch: Dispatch,
-}
-
-interface HomePageState {
-    mission: string,
-    spaceship: string,
-    spaceshipName: string,
-    spaceshipCallsign: string,
-}
-
-class HomePage extends React.Component<HomePageProps, HomePageState> {
-    constructor(props: HomePageProps) {
+class HomePage extends React.Component<HomePropsModel, HomeStateModel> {
+    constructor(props: HomePropsModel) {
         super(props);
         this.state = {
             mission: '',
@@ -33,6 +21,10 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     }
 
     render() {
+        if (this.props.isReady) {
+            this.props.history.push('/station');
+        }
+
         const missions = this.props.missions.map((info) => this.renderCheckbox(
             'mission',
             info,
@@ -121,7 +113,6 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
                     this.state.spaceshipCallsign,
                 )
             );
-            this.props.history.push('/station');
         }
 
         event.preventDefault();
@@ -139,6 +130,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
 
 const mapStateToProps = (state: any) => {
     return {
+        isReady: state.server.isReady,
         missions: state.server.missions ?? [],
         spaceships: state.server.spaceships ?? [],
     };
