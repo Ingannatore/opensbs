@@ -9,7 +9,8 @@ import rootReducer from './store/reducers';
 import IncomingActionMiddleware from './store/middlewares/incoming-action.middleware';
 import OutgoingActionMiddleware from './store/middlewares/outgoing-action.middleware';
 import HomePage from './pages/home';
-import StationPage from './pages/station';
+import JoinPage from './pages/join';
+import NavigationTerminal from './pages/terminals/navigation.terminal';
 import './index.css';
 
 const hub = new signalR.HubConnectionBuilder().withUrl('/ws').build();
@@ -33,7 +34,8 @@ render(
     <Provider store={store}>
         <Router>
             <Route exact path="/" component={HomePage}/>
-            <Route exact path="/station" component={StationPage}/>
+            <Route exact path="/join" component={JoinPage}/>
+            <Route exact path="/terminal/navigation" component={NavigationTerminal}/>
         </Router>
     </Provider>,
     document.getElementById('root')

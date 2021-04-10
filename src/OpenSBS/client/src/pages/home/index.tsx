@@ -20,11 +20,7 @@ class HomePage extends React.Component<HomePropsModel, HomeStateModel> {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    render() {
-        if (this.props.isReady) {
-            this.props.history.push('/station');
-        }
-
+    public render() {
         const missions = this.props.missions.map((info) => this.renderCheckbox(
             'mission',
             info,
@@ -35,6 +31,14 @@ class HomePage extends React.Component<HomePropsModel, HomeStateModel> {
             info,
             this.state.spaceship === info.guid
         ));
+
+        if (missions.length == 0 || spaceships.length == 0) {
+            return (
+                <div className="panel">
+                    <h2>Loading...</h2>
+                </div>
+            );
+        }
 
         return (
             <form onSubmit={this.handleSubmit} className="panel">
@@ -113,6 +117,8 @@ class HomePage extends React.Component<HomePropsModel, HomeStateModel> {
                     this.state.spaceshipCallsign,
                 )
             );
+
+            this.props.history.push('/join');
         }
 
         event.preventDefault();
