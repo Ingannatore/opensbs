@@ -8,7 +8,7 @@
     }
 
     public static normalize(degrees: number): number {
-        return degrees < 0 ? 360 + degrees : degrees;
+        return degrees > 0 ? 360 - degrees : -degrees;
     }
 
     public static normalizeYaw(yaw: number): number {

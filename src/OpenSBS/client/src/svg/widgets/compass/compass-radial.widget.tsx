@@ -32,7 +32,7 @@ class CompassRadialWidget extends React.Component<CompassRadialWidgetModel, {}> 
         const markers = this.markersDegrees.map((degrees: number) => {
             return CompassRadialWidget.renderMarker(degrees);
         });
-        const yaw = Angles.toDegrees(Vectors.getYaw(this.props.direction));
+        const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
 
         return (
             <g transform={this.translation}>
