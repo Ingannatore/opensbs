@@ -1,6 +1,5 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svg-transforms';
 import DirectionsOverlay from './directions.overlay';
 import RangesOverlay from './ranges.overlay';
 import TracesOverlay from './traces.overlay';
@@ -9,6 +8,7 @@ import {SensorsModuleModel} from '../../../modules/sensors-module.model';
 import Vector3 from '../../../models/vector3';
 import SwitchElement from '../../elements/switch.element';
 import DisplayElement from '../../elements/display.element';
+import PanelElement from '../../elements/panel.element';
 
 interface RadarWidgetModel {
     x: number,
@@ -26,8 +26,6 @@ interface RadarWidgetState {
 }
 
 class RadarWidget extends React.Component<RadarWidgetModel, RadarWidgetState> {
-    private readonly translation: string;
-
     public static defaultProps = {
         x: 0,
         y: 0,
@@ -43,7 +41,6 @@ class RadarWidget extends React.Component<RadarWidgetModel, RadarWidgetState> {
             selectedTraceId: null,
         };
 
-        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.toggleDirectionsOverlay = this.toggleDirectionsOverlay.bind(this);
         this.toggleRangesOverlay = this.toggleRangesOverlay.bind(this);
         this.toggleWeaponsOverlay = this.toggleWeaponsOverlay.bind(this);
@@ -53,9 +50,9 @@ class RadarWidget extends React.Component<RadarWidgetModel, RadarWidgetState> {
 
     public render() {
         return (
-            <g transform={this.translation}>
+            <PanelElement x={this.props.x} y={this.props.y} width={1000} height={1000}>
                 <path
-                    d="M 0 500 L 0 10 L 10 0 L 990 0 L 1000 10 L 1000 990 L 990 1000 L 10 1000 L 0 990 Z"
+                    d="M 0 10 L 10 0 L 990 0 L 1000 10 L 1000 990 L 990 1000 L 10 1000 L 0 990 Z"
                     stroke="#383838" strokeWidth="2" fill="black"
                     shapeRendering="crispEdges"
                 />
@@ -136,7 +133,7 @@ class RadarWidget extends React.Component<RadarWidgetModel, RadarWidgetState> {
                         toggled={this.state.range === 2000}
                     >ZOOM ×4</SwitchElement>
                 </g>
-            </g>
+            </PanelElement>
         );
     }
 

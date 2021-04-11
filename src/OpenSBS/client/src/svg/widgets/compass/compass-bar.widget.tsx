@@ -1,18 +1,12 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
+import CompassPropsModel from './compass-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import Vector3 from '../../../models/vector3';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
 
-interface CompassBarWidgetModel {
-    x: number,
-    y: number,
-    direction: Vector3,
-}
-
-class CompassBarWidget extends React.Component<CompassBarWidgetModel, {}> {
+class CompassBarWidget extends React.Component<CompassPropsModel, {}> {
     private readonly translation: string;
 
     public static defaultProps = {
@@ -20,12 +14,12 @@ class CompassBarWidget extends React.Component<CompassBarWidgetModel, {}> {
         y: 0,
     };
 
-    constructor(props: any) {
+    constructor(props: CompassPropsModel) {
         super(props);
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
     }
 
-    render() {
+    public render() {
         const step = 21;
         const majorStep = step * 5;
         const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));

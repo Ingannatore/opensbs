@@ -1,34 +1,23 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
+import CompassPropsModel from './compass-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import Vector3 from '../../../models/vector3';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
 
-interface CompassRadialWidgetModel {
-    x: number,
-    y: number,
-    direction: Vector3,
-}
-
-class CompassRadialWidget extends React.Component<CompassRadialWidgetModel, {}> {
+class CompassRadialWidget extends React.Component<CompassPropsModel, {}> {
     private readonly translation: string;
     private readonly markersDegrees: number[];
 
-    public static defaultProps = {
-        x: 0,
-        y: 0,
-    };
-
-    constructor(props: any) {
+    constructor(props: CompassPropsModel) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.markersDegrees = Array.from({length: 24}, (value, key) => key * 15);
     }
 
-    render() {
+    public render() {
         const markers = this.markersDegrees.map((degrees: number) => {
             return CompassRadialWidget.renderMarker(degrees);
         });

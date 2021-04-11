@@ -19,7 +19,7 @@ export default class StationElement extends React.Component<StationElementModel,
         this.path = 'M -1 -1 L -1 60 L 430 60 L 440 50 L 440 30 L 450 20 L 1470 20 L 1480 30 L 1480 50 L 1490 60 L 1921 60 L 1921 -1 Z';
     }
 
-    render() {
+    public render() {
         return (
             <g>
                 <rect x="0" y="0" width="1920" height="1080" fill="#121212"/>

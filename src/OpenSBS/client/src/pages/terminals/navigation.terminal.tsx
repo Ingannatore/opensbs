@@ -8,11 +8,11 @@ import HelmWidget from '../../svg/widgets/helm';
 import './terminal.css';
 
 export default class NavigationTerminal extends React.Component<{}, {}> {
-    render() {
+    public render() {
         return (
             <SvgElement>
                 <StationElement name="NAVIGATION TERMINAL" icon="#icon-navigation">
-                    <EngineWidget x={10} y={390}/>
+                    <EngineWidget x={-10} y={390}/>
 
                     <RadarWidget x={460} y={40}/>
                     <CompassRadialWidget x={960} y={540}/>

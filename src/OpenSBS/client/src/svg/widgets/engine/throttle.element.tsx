@@ -1,19 +1,12 @@
 ﻿import * as React from 'react';
+import ThrottlePropsModel from './throttle-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import ThrottleSliderElement from './throttle-slider.element';
 
-interface ThrottleElementModel {
-    x: number,
-    y: number,
-    throttle: number,
-    targetSpeed: number,
-    onClick: (throttle: number) => void,
-}
-
-export default class ThrottleElement extends React.Component<ThrottleElementModel, {}> {
+export default class ThrottleElement extends React.Component<ThrottlePropsModel, {}> {
     private readonly translation: string;
 
-    constructor(props: ThrottleElementModel) {
+    constructor(props: ThrottlePropsModel) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -42,10 +35,7 @@ export default class ThrottleElement extends React.Component<ThrottleElementMode
                 >^</text>
                 <text x="100" y="560" textAnchor="middle" fontSize="1.75rem" fill="#121212">ASTERN</text>
 
-                <ThrottleSliderElement
-                    x={0} y={sliderY}
-                    color={'darkturquoise'}
-                >{this.props.targetSpeed}</ThrottleSliderElement>
+                <ThrottleSliderElement x={0} y={sliderY}>{this.props.targetSpeed}</ThrottleSliderElement>
             </g>
         );
     }

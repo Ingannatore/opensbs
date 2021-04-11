@@ -1,15 +1,10 @@
 ﻿import * as React from 'react';
+import ThrottleSliderPropsModel from './throttle-slider-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 
-interface ThrottleSliderElementModel {
-    x: number,
-    y: number,
-    color: string,
-}
-
-export default class ThrottleSliderElement extends React.Component<ThrottleSliderElementModel, {}> {
+export default class ThrottleSliderElement extends React.Component<ThrottleSliderPropsModel, {}> {
     public static defaultProps = {
-        color: 'burlywood',
+        color: 'darkturquoise',
     };
 
     public render() {

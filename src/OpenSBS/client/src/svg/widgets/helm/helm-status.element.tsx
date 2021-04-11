@@ -1,16 +1,11 @@
 ﻿import * as React from 'react';
+import HelmStatusPropsModel from './helm-status-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 
-interface HelmStatusElementModel {
-    x: number,
-    y: number,
-    rudder: number,
-}
-
-export default class HelmStatusElement extends React.Component<HelmStatusElementModel, {}> {
+export default class HelmStatusElement extends React.Component<HelmStatusPropsModel, {}> {
     private readonly translation: string;
 
-    constructor(props: HelmStatusElementModel) {
+    constructor(props: HelmStatusPropsModel) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

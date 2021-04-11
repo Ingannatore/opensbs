@@ -1,11 +1,11 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
+import HelmPropsModel from './helm-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 import {EngineModuleModel} from '../../../modules/engine-module.model';
 import DisplayElement from '../../elements/display.element';
-import Vector3 from '../../../models/vector3';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
 import HelmStatusElement from './helm-status.element';
@@ -13,19 +13,10 @@ import SwitchElement from '../../elements/switch.element';
 import PanelElement from '../../elements/panel.element';
 import ButtonElement from '../../elements/button.element';
 
-interface HelmWidgetModel {
-    x: number,
-    y: number,
-    dispatch: any,
-    entityId: string,
-    direction: Vector3,
-    engineModule: EngineModuleModel | undefined,
-}
-
-class HelmWidget extends React.Component<HelmWidgetModel, {}> {
+class HelmWidget extends React.Component<HelmPropsModel, {}> {
     private readonly translation: string;
 
-    constructor(props: HelmWidgetModel) {
+    constructor(props: HelmPropsModel) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -38,7 +29,7 @@ class HelmWidget extends React.Component<HelmWidgetModel, {}> {
         const yaw = Angles.normalizeYaw(Vectors.getYaw(this.props.direction));
 
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={440} height={300}>
+            <PanelElement x={this.props.x} y={this.props.y} width={450} height={300} isOffline={!this.props.engineModule}>
                 <ButtonElement
                     x={10} y={10}
                     width={420} height={60}

@@ -84,7 +84,7 @@ class HomePage extends React.Component<HomePropsModel, HomeStateModel> {
         );
     }
 
-    renderCheckbox(name: string, info: DataEntryInfoModel, checked: boolean) {
+    private renderCheckbox(name: string, info: DataEntryInfoModel, checked: boolean) {
         return (
             <p key={name + '-' + info.guid}>
                 <input

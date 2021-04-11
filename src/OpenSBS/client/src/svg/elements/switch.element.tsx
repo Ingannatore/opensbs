@@ -41,6 +41,7 @@ export default class SwitchElement extends React.Component<SwitchElementModel, {
                     width={this.props.width} height={this.props.height} strokeWidth="2"
                     fill="none"
                     stroke={this.props.enabled ? this.props.color : 'grey'}
+                    opacity={this.props.enabled ? 1 : 0.2}
                 />
                 <rect
                     x="0" y="0" rx="6"

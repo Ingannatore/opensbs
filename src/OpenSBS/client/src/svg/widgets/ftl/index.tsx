@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svg-transforms';
-import DisplayElement from '../../elements/display.element';
+import PanelElement from '../../elements/panel.element';
 
 interface FtlWidgetModel {
     x: number,
@@ -18,9 +18,7 @@ export default class FtlWidget extends React.Component<FtlWidgetModel, {}> {
 
     public render() {
         return (
-            <g transform={this.translation}>
-                <DisplayElement x={0} y={0} topLabel="FTL FACTOR" bottomLabel="AU/sec">9999</DisplayElement>
-            </g>
+            <PanelElement x={this.props.x} y={this.props.y} width={450} height={300} isOffline={true}/>
         );
     }
 }

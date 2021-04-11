@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
+import EnginePropsModel from './engine-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import DisplayElement from '../../elements/display.element';
 import {EngineModuleModel} from '../../../modules/engine-module.model';
@@ -9,19 +10,10 @@ import ThrottleElement from './throttle.element';
 import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
 import ButtonElement from '../../elements/button.element';
 
-interface EngineWidgetModel {
-    x: number,
-    y: number,
-    dispatch: any,
-    entityId: string,
-    linearSpeed: number,
-    engineModule: EngineModuleModel | undefined,
-}
-
-class EngineWidget extends React.Component<EngineWidgetModel, {}> {
+class EngineWidget extends React.Component<EnginePropsModel, {}> {
     private readonly translation: string;
 
-    constructor(props: EngineWidgetModel) {
+    constructor(props: EnginePropsModel) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -32,43 +24,45 @@ class EngineWidget extends React.Component<EngineWidgetModel, {}> {
         const targetSpeed = Math.round((this.props.engineModule?.maximumSpeed ?? 0) * (throttle / 100));
 
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={440} height={610} mirror={true}>
-                <ThrottleElement
-                    x={0} y={10}
-                    throttle={throttle}
-                    targetSpeed={targetSpeed}
-                    onClick={(value) => this.setThrottle(value)}
-                />
-                <line
-                    x1="210" y1="0"
-                    x2="210" y2="610"
-                    stroke="#383838" strokeWidth="2"
-                />
+            <PanelElement x={this.props.x} y={this.props.y} width={450} height={610} isOffline={!this.props.engineModule}>
+                <g transform="translate(20 0)">
+                    <ThrottleElement
+                        x={0} y={10}
+                        throttle={throttle}
+                        targetSpeed={targetSpeed}
+                        onClick={(value) => this.setThrottle(value)}
+                    />
+                    <line
+                        x1="210" y1="0"
+                        x2="210" y2="610"
+                        stroke="#383838" strokeWidth="2"
+                    />
 
-                <DisplayElement
-                    x={320} y={80}
-                    topLabel=" CURRENT SPEED"
-                    bottomLabel="meters/sec"
-                >{Math.round(this.props.linearSpeed)}</DisplayElement>
+                    <DisplayElement
+                        x={320} y={80}
+                        topLabel=" CURRENT SPEED"
+                        bottomLabel="meters/sec"
+                    >{Math.round(this.props.linearSpeed)}</DisplayElement>
 
-                <ButtonElement
-                    x={220} y={175}
-                    width={200} height={60}
-                    fontSize={1.75} color='darkturquoise'
-                    onClick={() => this.setThrottle(100)}
-                >FULL AHEAD</ButtonElement>
-                <ButtonElement
-                    x={220} y={275}
-                    width={200} height={60}
-                    fontSize={1.75} color='darkorange'
-                    onClick={() => this.setThrottle(0)}
-                >FULL STOP</ButtonElement>
-                <ButtonElement
-                    x={220} y={375}
-                    width={200} height={60}
-                    fontSize={1.75} color='darkturquoise'
-                    onClick={() => this.setThrottle(-100)}
-                >FULL ASTERN</ButtonElement>
+                    <ButtonElement
+                        x={220} y={175}
+                        width={200} height={60}
+                        fontSize={1.75} color='darkturquoise'
+                        onClick={() => this.setThrottle(100)}
+                    >FULL AHEAD</ButtonElement>
+                    <ButtonElement
+                        x={220} y={275}
+                        width={200} height={60}
+                        fontSize={1.75} color='darkorange'
+                        onClick={() => this.setThrottle(0)}
+                    >FULL STOP</ButtonElement>
+                    <ButtonElement
+                        x={220} y={375}
+                        width={200} height={60}
+                        fontSize={1.75} color='darkturquoise'
+                        onClick={() => this.setThrottle(-100)}
+                    >FULL ASTERN</ButtonElement>
+                </g>
             </PanelElement>
         );
     }
