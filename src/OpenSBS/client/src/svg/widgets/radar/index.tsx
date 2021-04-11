@@ -51,12 +51,6 @@ class RadarWidget extends React.Component<RadarWidgetModel, RadarWidgetState> {
     public render() {
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={1000} height={1000}>
-                <path
-                    d="M 0 10 L 10 0 L 990 0 L 1000 10 L 1000 990 L 990 1000 L 10 1000 L 0 990 Z"
-                    stroke="#383838" strokeWidth="2" fill="black"
-                    shapeRendering="crispEdges"
-                />
-
                 <DisplayElement
                     x={100} y={70}
                     topLabel="TARGET DISTANCE"
@@ -88,7 +82,7 @@ class RadarWidget extends React.Component<RadarWidgetModel, RadarWidgetState> {
                         selectedTraceId={this.state.selectedTraceId}
                         onTraceClick={this.selectTrace}
                     />
-                    <use href="#icon-ship" x="-6" y="-6"/>
+                    <use href="/images/icons.svg#icon-ship" x="-6" y="-6"/>
                 </g>
 
                 <g transform="translate(0 1000)">

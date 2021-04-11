@@ -1,0 +1,17 @@
+﻿<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="ui-terminal" width="1920" height="1080" viewBox="0 0 1920 1080">
+        <path
+            d="M -1 -1 L -1 60 L 430 60 L 440 50 L 440 30 L 450 20 L 1470 20 L 1480 30 L 1480 50 L 1490 60 L 1921 60 L 1921 -1 Z"
+            stroke="#383838" stroke-width="2" fill="black"
+            shape-rendering="crispEdges"
+        />
+        <g transform="translate(0 1080)">
+            <path
+                d="M -1 -1 L -1 60 L 430 60 L 440 50 L 440 30 L 450 20 L 1470 20 L 1480 30 L 1480 50 L 1490 60 L 1921 60 L 1921 -1 Z"
+                stroke="#383838" stroke-width="2" fill="black"
+                shape-rendering="crispEdges"
+                transform="scale(1,-1)"
+            />
+        </g>
+    </symbol>
+</svg>
