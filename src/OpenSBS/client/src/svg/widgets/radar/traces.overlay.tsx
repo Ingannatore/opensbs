@@ -27,18 +27,18 @@ export default class TracesOverlay extends React.Component<TracesOverlayModel, {
     public render() {
         const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
         const scale = 440 / this.props.range;
-        const markers = this.props.traces
+        const traces = this.props.traces
         .filter((trace: SensorsTraceModel) => trace.distance <= this.props.range)
-        .map((trace: SensorsTraceModel) => this.renderMarker(trace, scale, yaw));
+        .map((trace: SensorsTraceModel) => this.renderTrace(trace, scale, yaw));
 
         return (
             <g transform={SvgTransforms.rotate(-yaw)}>
-                {markers}
+                {traces}
             </g>
         );
     }
 
-    private renderMarker(trace: SensorsTraceModel, scale: number, yaw: number) {
+    private renderTrace(trace: SensorsTraceModel, scale: number, yaw: number) {
         const isSelected = trace.id === this.props.selectedTraceId;
         const transform = SvgTransforms.translate(
             trace.relativePosition.x * scale,

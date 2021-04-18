@@ -32,7 +32,7 @@ class HomePage extends React.Component<HomePropsModel, HomeStateModel> {
             this.state.spaceship === info.guid
         ));
 
-        if (missions.length == 0 || spaceships.length == 0) {
+        if (missions.length === 0 || spaceships.length === 0) {
             return (
                 <div className="panel">
                     <h2>Loading...</h2>

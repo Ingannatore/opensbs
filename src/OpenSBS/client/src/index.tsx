@@ -11,6 +11,7 @@ import OutgoingActionMiddleware from './store/middlewares/outgoing-action.middle
 import HomePage from './pages/home';
 import JoinPage from './pages/join';
 import NavigationTerminal from './pages/terminals/navigation.terminal';
+import TacticalTerminal from './pages/terminals/tactical.terminal';
 import './index.css';
 
 const hub = new signalR.HubConnectionBuilder().withUrl('/ws').build();
@@ -36,6 +37,7 @@ render(
             <Route exact path="/" component={HomePage}/>
             <Route exact path="/join" component={JoinPage}/>
             <Route exact path="/terminal/navigation" component={NavigationTerminal}/>
+            <Route exact path="/terminal/tactical" component={TacticalTerminal}/>
         </Router>
     </Provider>,
     document.getElementById('root')

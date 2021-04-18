@@ -1,5 +1,6 @@
 ﻿using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Modules;
+using OpenSBS.Engine.Modules.Sensors;
 
 namespace OpenSBS.Engine.Data.Modules
 {

@@ -19,6 +19,11 @@ namespace OpenSBS.Engine.Data.Spaceships
 
             Modules.Add(new SmallIonEngine("engine1"));
             Modules.Add(new SmallRadarSensors("radar1"));
+            Modules.Add(new SmallMonoemitterLaser("laser1"));
+            Modules.Add(new SmallMonoemitterLaser("laser2"));
+            Modules.Add(new SmallMonoemitterLaser("laser3"));
+            Modules.Add(new SmallMonoemitterLaser("laser4"));
+            Modules.Add(new SmallMonoemitterLaser("laser5"));
         }
     }
 }

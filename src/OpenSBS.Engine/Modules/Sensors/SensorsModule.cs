@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Modules
+namespace OpenSBS.Engine.Modules.Sensors
 {
     public abstract class SensorsModule : Module
     {

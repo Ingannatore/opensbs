@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Engine.Models
+﻿namespace OpenSBS.Engine.Modules
 {
     public class ModuleType
     {

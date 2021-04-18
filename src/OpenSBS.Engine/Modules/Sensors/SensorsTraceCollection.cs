@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Modules
+namespace OpenSBS.Engine.Modules.Sensors
 {
     public class SensorsTraceCollection : IEnumerable<SensorsTrace>
     {

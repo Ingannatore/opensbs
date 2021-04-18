@@ -14,9 +14,12 @@ class JoinPage extends React.Component<JoinPropsModel, {}> {
         return (
             <div className="panel">
                 <h3>Terminals</h3>
-                <button
-                    onClick={() => this.handleSelectTerminal('navigation')}
-                >Navigation</button>
+                <p>
+                    <button onClick={() => this.handleSelectTerminal('navigation')}>Navigation</button>
+                </p>
+                <p>
+                    <button onClick={() => this.handleSelectTerminal('tactical')}>Tactical</button>
+                </p>
             </div>
         );
     }

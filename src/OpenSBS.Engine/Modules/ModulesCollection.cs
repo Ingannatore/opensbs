@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Models
+namespace OpenSBS.Engine.Modules
 {
     public class ModulesCollection : IEnumerable<Module>
     {

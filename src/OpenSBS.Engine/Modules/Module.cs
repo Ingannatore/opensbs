@@ -1,6 +1,7 @@
 ﻿using System;
+using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Models
+namespace OpenSBS.Engine.Modules
 {
     public abstract class Module
     {

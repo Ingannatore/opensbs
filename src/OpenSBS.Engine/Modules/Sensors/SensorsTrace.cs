@@ -2,7 +2,7 @@
 using System.Numerics;
 using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Modules
+namespace OpenSBS.Engine.Modules.Sensors
 {
     public class SensorsTrace
     {
