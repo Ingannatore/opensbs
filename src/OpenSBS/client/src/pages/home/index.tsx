@@ -1,8 +1,8 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import DataEntryInfoModel from '../../models/data-entry-info.model';
 import ServerActions from '../../store/server/server.actions';
-import DataEntryInfoModel from '../../store/server/data-entry-info.model';
 import HomeStateModel from './home-state.model';
 import HomePropsModel from './home-props.model';
 

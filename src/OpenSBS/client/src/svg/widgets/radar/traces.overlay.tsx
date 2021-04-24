@@ -4,20 +4,21 @@ import {SensorsTraceModel} from '../../../modules/sensors-trace.model';
 import Vector3 from '../../../models/vector3';
 import Vectors from '../../../lib/vectors';
 import Angles from '../../../lib/angles';
+import ClientActions from '../../../store/client/client.actions';
+import ClientSelectors from '../../../store/client/client.selectors';
+import {connect} from 'react-redux';
+import {SensorsModuleModel} from '../../../modules/sensors-module.model';
+import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 
 interface TracesOverlayModel {
+    dispatch: any,
     range: number,
     direction: Vector3,
-    traces: SensorsTraceModel[],
-    selectedTraceId: string | null,
-    onTraceClick: (id: string | null) => void,
+    target: string | null,
+    sensorsModule: SensorsModuleModel | undefined,
 }
 
-export default class TracesOverlay extends React.Component<TracesOverlayModel, {}> {
-    public static defaultProps = {
-        selectedTraceId: null,
-    };
-
+class TracesOverlay extends React.Component<TracesOverlayModel, {}> {
     constructor(props: TracesOverlayModel) {
         super(props);
 
@@ -25,9 +26,13 @@ export default class TracesOverlay extends React.Component<TracesOverlayModel, {
     }
 
     public render() {
+        if (!this.props.sensorsModule) {
+            return null;
+        }
+
         const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
         const scale = 440 / this.props.range;
-        const traces = this.props.traces
+        const traces = this.props.sensorsModule.traces
         .filter((trace: SensorsTraceModel) => trace.distance <= this.props.range)
         .map((trace: SensorsTraceModel) => this.renderTrace(trace, scale, yaw));
 
@@ -39,7 +44,7 @@ export default class TracesOverlay extends React.Component<TracesOverlayModel, {
     }
 
     private renderTrace(trace: SensorsTraceModel, scale: number, yaw: number) {
-        const isSelected = trace.id === this.props.selectedTraceId;
+        const isSelected = trace.id === this.props.target;
         const transform = SvgTransforms.translate(
             trace.relativePosition.x * scale,
             -trace.relativePosition.z * scale
@@ -72,10 +77,19 @@ export default class TracesOverlay extends React.Component<TracesOverlayModel, {
     }
 
     private onTraceClick(id: string) {
-        if (id === this.props.selectedTraceId) {
-            this.props.onTraceClick(null);
+        if (id === this.props.target) {
+            this.props.dispatch(ClientActions.resetTarget());
         } else {
-            this.props.onTraceClick(id);
+            this.props.dispatch(ClientActions.setTarget(id));
         }
     }
 }
+
+const mapStateToProps = (state: any) => {
+    return {
+        target: ClientSelectors.getTarget(state),
+        sensorsModule: SpaceshipSelectors.getModuleByType<SensorsModuleModel>(state, 'module.sensors')
+    };
+};
+
+export default connect(mapStateToProps)(TracesOverlay);
