@@ -1,12 +1,10 @@
-﻿using OpenSBS.Engine.Models;
-using OpenSBS.Engine.Modules;
-using OpenSBS.Engine.Modules.Sensors;
+﻿using OpenSBS.Engine.Modules.Sensors;
 
 namespace OpenSBS.Engine.Data.Modules
 {
     public class SmallRadarSensors : SensorsModule
     {
-        public SmallRadarSensors(string id) : base(id, ModuleType.Sensors, "2GHz Radar Array Sensors")
+        public SmallRadarSensors(string id) : base(id, "2GHz Radar Array Sensors")
         {
             Mass = 2500;
             Size = 5;

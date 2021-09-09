@@ -27,7 +27,6 @@ export default class CounterElement extends React.Component<CounterPropsModel, {
                     x2={endingX} y2="0"
                     stroke="grey" strokeWidth="8"
                     strokeLinecap="round"
-                    strokeDasharray="19 10"
                 />}
             </g>
         );

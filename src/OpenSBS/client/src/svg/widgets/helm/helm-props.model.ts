@@ -1,5 +1,5 @@
 ﻿import Vector3 from '../../../models/vector3';
-import {EngineModuleModel} from '../../../modules/engine-module.model';
+import EngineModuleModel from '../../../modules/engine-module.model';
 
 export default interface HelmPropsModel {
     x: number,

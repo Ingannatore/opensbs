@@ -8,7 +8,7 @@ namespace OpenSBS.Engine.Modules.Sensors
         public int Range { get; protected set; }
         public SensorsTraceCollection Traces { get; }
 
-        protected SensorsModule(string id, string type, string name) : base(id, ModuleType.Sensors, name)
+        protected SensorsModule(string id, string name) : base(id, ModuleType.Sensors, name)
         {
             Traces = new SensorsTraceCollection();
         }

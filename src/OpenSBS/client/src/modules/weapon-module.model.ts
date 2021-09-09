@@ -6,8 +6,9 @@ export default interface WeaponModuleModel extends EntityModuleModel {
     damage: number,
     range: number,
     rateOfFire: number,
+    state: string,
     target: string | null,
-    engaged: boolean,
+    isEngaged: boolean,
     magazine: WeaponMagazineModel | null,
     counter: CounterModel,
 }

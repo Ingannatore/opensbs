@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svg-transforms';
+import ColorPalette from '../color-palette';
 
 interface DisplayElementModel {
     x: number,
@@ -20,9 +21,21 @@ export default class DisplayElement extends React.Component<DisplayElementModel,
     public render() {
         return (
             <g transform={this.translation}>
-                <text x="0" y="-55" textAnchor="middle" fontSize="1rem" fill="grey">{this.props.topLabel}</text>
-                <text x="0" y="0" textAnchor="middle" fontSize="5rem" fill="whitesmoke">{this.props.children}</text>
-                <text x="0" y="55" textAnchor="middle" fontSize="1rem" fill="grey">{this.props.bottomLabel}</text>
+                <text
+                    x="0" y="-55"
+                    fontSize="1rem" textAnchor="middle"
+                    fill={ColorPalette.HEADER}
+                >{this.props.topLabel}</text>
+                <text
+                    x="0" y="0"
+                    fontSize="5rem" textAnchor="middle"
+                    fill={ColorPalette.TEXT}
+                >{this.props.children}</text>
+                <text
+                    x="0" y="55"
+                    fontSize="1rem" textAnchor="middle"
+                    fill={ColorPalette.TEXT}
+                >{this.props.bottomLabel}</text>
             </g>
         );
     }

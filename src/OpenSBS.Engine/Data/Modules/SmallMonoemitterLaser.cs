@@ -1,5 +1,4 @@
-﻿using OpenSBS.Engine.Modules;
-using OpenSBS.Engine.Modules.Weapons;
+﻿using OpenSBS.Engine.Modules.Weapons;
 
 namespace OpenSBS.Engine.Data.Modules
 {

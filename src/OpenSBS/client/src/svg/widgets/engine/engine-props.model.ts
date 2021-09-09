@@ -1,4 +1,4 @@
-﻿import {EngineModuleModel} from '../../../modules/engine-module.model';
+﻿import EngineModuleModel from '../../../modules/engine-module.model';
 
 export default interface EnginePropsModel {
     x: number,

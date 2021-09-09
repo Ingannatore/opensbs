@@ -1,6 +1,6 @@
 ﻿import {EntityModuleModel} from '../models/entity-module.model';
 
-export interface EngineModuleModel extends EntityModuleModel {
+export default interface EngineModuleModel extends EntityModuleModel {
     throttle: number,
     rudder: number,
     maximumSpeed: number,

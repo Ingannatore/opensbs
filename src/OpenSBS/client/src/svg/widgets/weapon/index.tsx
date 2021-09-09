@@ -8,6 +8,8 @@ import SwitchElement from '../../elements/switch.element';
 import ButtonElement from '../../elements/button.element';
 import MagazineElement from './magazine.element';
 import CounterElement from './counter.element';
+import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
+import ClientSelectors from '../../../store/client/client.selectors';
 
 class WeaponWidget extends React.Component<WeaponPropsModel, {}> {
     private readonly translation: string;
@@ -42,7 +44,7 @@ class WeaponWidget extends React.Component<WeaponPropsModel, {}> {
                     x="130" y="95"
                     fontSize="1.5rem" fill="grey"
                     textAnchor="middle"
-                >Idle</text>
+                >{this.props.weapon.state}</text>
 
                 <MagazineElement
                     x={270} y={10}
@@ -60,15 +62,15 @@ class WeaponWidget extends React.Component<WeaponPropsModel, {}> {
                     x={390} y={10}
                     width={50} height={50}
                     fontSize={1} color='darkorange'
-                    toggled={this.props.weapon.engaged}
-                    enabled={false}
+                    enabled={this.props.weapon.isEngaged || !!this.props.target}
+                    toggled={this.props.weapon.isEngaged}
                     onClick={this.onWeaponFire}
                 >FIRE</SwitchElement>
                 <SwitchElement
                     x={390} y={80}
                     width={50} height={30}
                     fontSize={1} color='darkorange'
-                    toggled={true}
+                    enabled={false}
                     onClick={this.onToggleAuto}
                 >AUTO</SwitchElement>
             </PanelElement>
@@ -79,11 +81,36 @@ class WeaponWidget extends React.Component<WeaponPropsModel, {}> {
 
     private onToggleAuto() {}
 
-    private onWeaponFire() {}
+    private onWeaponFire() {
+        if (!this.props.weapon) {
+            return;
+        }
+
+        if (this.props.weapon.isEngaged) {
+            this.props.dispatch(SpaceshipActions.sendModuleAction(
+                this.props.entityId,
+                this.props.weapon.id,
+                'disengage',
+                null
+            ));
+
+            return;
+        }
+
+        if (this.props.target) {
+            this.props.dispatch(SpaceshipActions.sendModuleAction(
+                this.props.entityId,
+                this.props.weapon.id,
+                'engage',
+                this.props.target
+            ));
+        }
+    }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => {
     return {
+        target: ClientSelectors.getTarget(state),
         entityId: SpaceshipSelectors.getId(state),
         weapon: SpaceshipSelectors.getWeapon(state, ownProps.index),
     };

@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svg-transforms';
+import ColorPalette from '../color-palette';
 
 interface PanelElementModel {
     x: number,
@@ -29,7 +30,8 @@ export default class PanelElement extends React.Component<PanelElementModel, {}>
             <g transform={this.translation}>
                 <path
                     d={this.path}
-                    stroke="#383838" strokeWidth="2" fill="black"
+                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                    fill={ColorPalette.BACKGROUND}
                     shapeRendering="crispEdges"
                 />
                 {this.props.children}
@@ -47,19 +49,21 @@ export default class PanelElement extends React.Component<PanelElementModel, {}>
             <g>
                 <path
                     d={this.path}
-                    stroke="none" fill="black"
+                    stroke="none"
+                    fill={ColorPalette.BACKGROUND}
                     shapeRendering="crispEdges"
                     opacity="0.95"
                 />
                 <path
                     d={this.path}
-                    stroke="#383838" strokeWidth="2" fill="none"
+                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                    fill="none"
                     shapeRendering="crispEdges"
                 />
                 <text
                     x={this.props.width / 2} y={this.props.height / 2}
                     textAnchor="middle" fontSize="5rem"
-                    fill="red"
+                    fill={ColorPalette.DANGER}
                 >OFFLINE</text>
             </g>
         );

@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import EnginePropsModel from './engine-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import DisplayElement from '../../elements/display.element';
-import {EngineModuleModel} from '../../../modules/engine-module.model';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 import PanelElement from '../../elements/panel.element';
 import ThrottleElement from './throttle.element';
@@ -85,7 +84,7 @@ const mapStateToProps = (state: any) => {
     return {
         entityId: SpaceshipSelectors.getId(state),
         linearSpeed: SpaceshipSelectors.getLinearSpeed(state),
-        engineModule: SpaceshipSelectors.getModuleByType<EngineModuleModel>(state, 'module.engine'),
+        engineModule: SpaceshipSelectors.getEngine(state),
     };
 };
 

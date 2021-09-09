@@ -4,6 +4,9 @@ import {EntityModuleModel} from '../../models/entity-module.model';
 import WeaponModuleModel from '../../modules/weapon-module.model';
 import {SensorsTraceModel} from '../../modules/sensors-trace.model';
 import {SensorsModuleModel} from '../../modules/sensors-module.model';
+import ModuleType from '../../modules/module-type';
+import EngineModuleModel from '../../modules/engine-module.model';
+import ShieldModuleModel from '../../modules/shield-module.model';
 
 const getId = (state: StateModel): string => {
     return state.spaceship.id;
@@ -33,13 +36,21 @@ const getModulesByType = <T extends EntityModuleModel>(state: StateModel, type: 
     ) as [T];
 }
 
+const getEngine = (state: StateModel): EngineModuleModel | undefined => {
+    return getModuleByType<EngineModuleModel>(state, ModuleType.ENGINE)
+}
+
+const getShield = (state: StateModel): ShieldModuleModel | undefined => {
+    return getModuleByType<ShieldModuleModel>(state, ModuleType.SHIELD)
+}
+
 const getWeapon = (state: StateModel, index: number): WeaponModuleModel | undefined => {
-    const weapons = getModulesByType<WeaponModuleModel>(state, 'module.weapon');
+    const weapons = getModulesByType<WeaponModuleModel>(state, ModuleType.WEAPON);
     return weapons.length > index ? weapons[index] : undefined
 }
 
 const getTrace = (state: StateModel, id: string): SensorsTraceModel | undefined => {
-    const sensors = getModuleByType<SensorsModuleModel>(state, 'module.sensors');
+    const sensors = getModuleByType<SensorsModuleModel>(state, ModuleType.SENSORS);
     if (!sensors) {
         return undefined;
     }
@@ -54,6 +65,8 @@ export default {
     getLinearSpeed,
     getModuleByType,
     getModulesByType,
+    getEngine,
+    getShield,
     getWeapon,
     getTrace,
 }

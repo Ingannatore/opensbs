@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svg-transforms';
+import ColorPalette from '../color-palette';
 
 interface ButtonElementModel {
     x: number,
@@ -23,7 +24,7 @@ export default class ButtonElement extends React.Component<ButtonElementModel, B
         x: 0,
         y: 0,
         fontSize: 1.5,
-        color: 'darkturquoise',
+        color: ColorPalette.MAIN,
         enabled: true,
     };
 

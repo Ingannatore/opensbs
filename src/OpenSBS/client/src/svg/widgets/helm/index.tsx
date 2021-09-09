@@ -4,7 +4,7 @@ import HelmPropsModel from './helm-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import {EngineModuleModel} from '../../../modules/engine-module.model';
+import EngineModuleModel from '../../../modules/engine-module.model';
 import DisplayElement from '../../elements/display.element';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
