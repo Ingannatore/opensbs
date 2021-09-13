@@ -4,6 +4,7 @@ import SvgTransforms from '../../lib/svg-transforms';
 interface SwitchElementModel {
     x: number,
     y: number,
+    rx: number,
     width: number,
     height: number,
     fontSize: number,
@@ -19,6 +20,7 @@ export default class SwitchElement extends React.Component<SwitchElementModel, {
     public static defaultProps = {
         x: 0,
         y: 0,
+        rx: 6,
         fontSize: 1.5,
         color: 'darkturquoise',
         toggled: false,
@@ -37,21 +39,21 @@ export default class SwitchElement extends React.Component<SwitchElementModel, {
             <g transform={this.translation} cursor={this.props.enabled ? 'pointer' : 'not-allowed'}
                onClick={this.clickHandler}>
                 <rect
-                    x="0" y="0" rx="6"
+                    x="0" y="0" rx={this.props.rx}
                     width={this.props.width} height={this.props.height} strokeWidth="2"
                     fill="none"
                     stroke={this.props.enabled ? this.props.color : 'grey'}
                     opacity={this.props.enabled ? 1 : 0.2}
                 />
                 <rect
-                    x="0" y="0" rx="6"
+                    x="0" y="0" rx={this.props.rx}
                     width={this.props.width} height={this.props.height} strokeWidth="2"
                     fill={this.props.toggled ? 'none' : this.props.enabled ? this.props.color : 'darkgrey'}
                     opacity={0.05}
                     stroke="none"
                 />
                 <rect
-                    x="4" y="4" rx="4"
+                    x="4" y="4" rx={this.props.rx - 2}
                     width={this.props.width - 8} height={this.props.height - 8}
                     fill={!this.props.toggled ? 'none' : this.props.enabled ? this.props.color : 'darkgrey'}
                     stroke="none"

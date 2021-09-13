@@ -2,16 +2,20 @@
 import SvgTransforms from '../../lib/svg-transforms';
 import ColorPalette from '../color-palette';
 
-interface SmallDisplayElementProps {
+interface ValueProps {
     x: number,
     y: number,
-    label: string,
+    label: string | undefined,
 }
 
-export default class SmallDisplayElement extends React.Component<SmallDisplayElementProps, {}> {
+export default class ValueElement extends React.Component<ValueProps, {}> {
     private readonly translation: string;
 
-    constructor(props: SmallDisplayElementProps) {
+    public static defaultProps = {
+        label: undefined,
+    };
+
+    constructor(props: ValueProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -21,15 +25,15 @@ export default class SmallDisplayElement extends React.Component<SmallDisplayEle
         return (
             <g transform={this.translation}>
                 <text
-                    x="0" y="-6"
-                    fontSize="1.75rem" textAnchor="middle"
+                    x="0" y="-15"
+                    fontSize="1.5rem" textAnchor="middle"
                     fill={ColorPalette.TEXT}
                 >{this.props.children}</text>
-                <text
-                    x="0" y="16"
+                {this.props.label && <text
+                    x="0" y="10"
                     fontSize="0.75rem" textAnchor="middle"
                     fill={ColorPalette.TEXT}
-                >{this.props.label}</text>
+                >{this.props.label}</text>}
             </g>
         );
     }

@@ -37,11 +37,11 @@ const getModulesByType = <T extends EntityModuleModel>(state: StateModel, type: 
 }
 
 const getEngine = (state: StateModel): EngineModuleModel | undefined => {
-    return getModuleByType<EngineModuleModel>(state, ModuleType.ENGINE)
+    return getModuleByType<EngineModuleModel>(state, ModuleType.ENGINE);
 }
 
 const getShield = (state: StateModel): ShieldModuleModel | undefined => {
-    return getModuleByType<ShieldModuleModel>(state, ModuleType.SHIELD)
+    return getModuleByType<ShieldModuleModel>(state, ModuleType.SHIELD);
 }
 
 const getWeapon = (state: StateModel, index: number): WeaponModuleModel | undefined => {

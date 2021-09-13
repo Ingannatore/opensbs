@@ -1,26 +1,24 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import WeaponPropsModel from './weapon-props.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import PanelElement from '../../elements/panel.element';
-import SwitchElement from '../../elements/switch.element';
-import ButtonElement from '../../elements/button.element';
-import MagazineElement from './magazine.element';
-import CounterElement from './counter.element';
 import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
 import ClientSelectors from '../../../store/client/client.selectors';
+import WeaponModuleModel from '../../../modules/weapon-module.model';
+import PanelElement from '../../elements/panel.element';
+import GaugeElement from '../../elements/gauge.element';
+import SwitchElement from '../../elements/switch.element';
+import ValueElement from '../../elements/value.element';
+import ColorPalette from '../../color-palette';
 
-class WeaponWidget extends React.Component<WeaponPropsModel, {}> {
+class WeaponWidget extends React.Component<WeaponProps, {}> {
     private readonly translation: string;
 
-    constructor(props: WeaponPropsModel) {
+    constructor(props: WeaponProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
-        this.onSwitchAmmo = this.onSwitchAmmo.bind(this);
-        this.onToggleAuto = this.onToggleAuto.bind(this);
-        this.onWeaponFire = this.onWeaponFire.bind(this);
+        this.fire = this.fire.bind(this);
     }
 
     public render() {
@@ -29,59 +27,52 @@ class WeaponWidget extends React.Component<WeaponPropsModel, {}> {
         }
 
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={450} height={120}>
-                <line x1="260" y1="0" x2="260" y2="120" stroke="#383838"/>
-                <line x1="380" y1="0" x2="380" y2="120" stroke="#383838"/>
-
-                <text x="130" y="30" fontSize="1rem" fill="whitesmoke" textAnchor="middle">
-                    {this.props.weapon.name}
-                </text>
-                <CounterElement
-                    x={25} y={56}
-                    counter={this.props.weapon.counter}
-                />
+            <PanelElement x={this.props.x} y={this.props.y} width={450} height={150}>
                 <text
-                    x="130" y="95"
-                    fontSize="1.5rem" fill="grey"
-                    textAnchor="middle"
-                >{this.props.weapon.state}</text>
+                    x="230" y="15"
+                    fontSize="1rem" textAnchor="middle"
+                    fill={ColorPalette.HEADER}
+                >{this.props.weapon.name.toUpperCase()}</text>
+                <ValueElement
+                    x={230} y={60}
+                    label="target"
+                >{this.props.weapon.target ? this.props.weapon.target : '-'}</ValueElement>
+                <ValueElement
+                    x={230} y={120}
+                    label="ammo"
+                >Argon</ValueElement>
 
-                <MagazineElement
-                    x={270} y={10}
-                    magazine={this.props.weapon.magazine}
-                >Gamma-Ray Core</MagazineElement>
-                <ButtonElement
-                    x={270} y={80}
-                    width={100} height={30}
-                    fontSize={1} color='darkturquoise'
-                    enabled={!!this.props.weapon.magazine}
-                    onClick={this.onSwitchAmmo}
-                >CHANGE</ButtonElement>
+                <g transform="translate(80 90)">
+                    <GaugeElement
+                        x={0} y={0}
+                        ratio={this.props.weapon.counter.ratio}
+                    />
+                    <SwitchElement
+                        x={-30} y={-30} rx={30}
+                        width={60} height={60}
+                        fontSize={1}
+                        color={ColorPalette.WARNING}
+                        onClick={this.fire}
+                        enabled={this.props.weapon.target != null || this.props.target != null}
+                        toggled={!!this.props.weapon.target}
+                    >FIRE</SwitchElement>
+                </g>
 
-                <SwitchElement
-                    x={390} y={10}
-                    width={50} height={50}
-                    fontSize={1} color='darkorange'
-                    enabled={this.props.weapon.isEngaged || !!this.props.target}
-                    toggled={this.props.weapon.isEngaged}
-                    onClick={this.onWeaponFire}
-                >FIRE</SwitchElement>
-                <SwitchElement
-                    x={390} y={80}
-                    width={50} height={30}
-                    fontSize={1} color='darkorange'
-                    enabled={false}
-                    onClick={this.onToggleAuto}
-                >AUTO</SwitchElement>
+                <g transform="translate(380 90)">
+                    <GaugeElement x={0} y={0} ratio={0}/>
+                    <SwitchElement
+                        x={-30} y={-30} rx={30}
+                        width={60} height={60}
+                        fontSize={1}
+                        onClick={this.fire}
+                    >RELOAD</SwitchElement>
+                </g>
+
             </PanelElement>
         );
     }
 
-    private onSwitchAmmo() {}
-
-    private onToggleAuto() {}
-
-    private onWeaponFire() {
+    private fire() {
         if (!this.props.weapon) {
             return;
         }
@@ -106,6 +97,16 @@ class WeaponWidget extends React.Component<WeaponPropsModel, {}> {
             ));
         }
     }
+}
+
+interface WeaponProps {
+    x: number,
+    y: number,
+    dispatch: any,
+    entityId: string,
+    target: string | null,
+    index: number,
+    weapon: WeaponModuleModel | undefined,
 }
 
 const mapStateToProps = (state: any, ownProps: any) => {

@@ -9,6 +9,7 @@ import ClientSelectors from '../../../store/client/client.selectors';
 import {connect} from 'react-redux';
 import {SensorsModuleModel} from '../../../modules/sensors-module.model';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
+import ColorPalette from '../../color-palette';
 
 interface TracesOverlayModel {
     dispatch: any,
@@ -66,12 +67,7 @@ class TracesOverlay extends React.Component<TracesOverlayModel, {}> {
                     fontSize="1rem" fill="#dedede" textAnchor="middle"
                     transform={SvgTransforms.rotate(yaw)}
                 >{trace.callSign}</text>
-                {isSelected && <rect
-                    x="-8" y="-8"
-                    width="16" height="16"
-                    stroke="darkturquoise" strokeWidth="2" fill="none"
-                    transform={SvgTransforms.rotate(yaw + 45)}
-                />}
+                {isSelected && <use href="/images/icons.svg#brackets" x="-50" y="-18" stroke={ColorPalette.DANGER}/>}
             </g>
         );
     }

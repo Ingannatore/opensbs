@@ -43,32 +43,32 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
 
                 <AmmunitionElement
                     x={0} y={30}
-                    name="Argon" type="ammo.plasma"
+                    name="Scarlet" type="ammo.plasma"
                     quantity={99999}
                 />
                 <AmmunitionElement
                     x={0} y={70}
-                    name="Xenon" type="ammo.plasma"
+                    name="Violet" type="ammo.plasma"
                     quantity={99999}
                 />
                 <AmmunitionElement
                     x={0} y={110}
-                    name="Tungsten" type="ammo.projectile"
+                    name="Lance" type="ammo.projectile"
                     quantity={99999}
                 />
                 <AmmunitionElement
                     x={0} y={150}
-                    name="Thermite" type="ammo.projectile"
+                    name="Torch" type="ammo.projectile"
                     quantity={99999}
                 />
                 <AmmunitionElement
                     x={0} y={190}
-                    name="Electromagnetic" type="ammo.torpedo"
+                    name="Shock" type="ammo.torpedo"
                     quantity={99999}
                 />
                 <AmmunitionElement
                     x={0} y={230}
-                    name="Antimatter" type="ammo.torpedo"
+                    name="Vortex" type="ammo.torpedo"
                     quantity={99999}
                 />
             </PanelElement>

@@ -36,8 +36,8 @@ export default class CalibrationSegmentElement extends React.Component<Calibrati
                 {
                     this.props.toggled &&
                     <rect
-                        x="2" y="2"
-                        width="16" height="36"
+                        x="3" y="3"
+                        width="14" height="34"
                         fill={ColorPalette.SECONDARY}
                         rx="3" ry="3"
                     />
@@ -45,8 +45,8 @@ export default class CalibrationSegmentElement extends React.Component<Calibrati
                 {
                     !this.props.enabled &&
                     <rect
-                        x="2" y="2"
-                        width="16" height="36"
+                        x="3" y="3"
+                        width="14" height="34"
                         fill={ColorPalette.MUTE_DARK}
                         rx="3" ry="3"
                     />

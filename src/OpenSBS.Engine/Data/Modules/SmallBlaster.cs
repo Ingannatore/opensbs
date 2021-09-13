@@ -2,9 +2,9 @@
 
 namespace OpenSBS.Engine.Data.Modules
 {
-    public class SmallMonoemitterLaser : WeaponModule
+    public class SmallBlaster : WeaponModule
     {
-        public SmallMonoemitterLaser(string id) : base(id, "Small Monoemitter Laser")
+        public SmallBlaster(string id) : base(id, "Blaster S")
         {
             Mass = 2000;
             Size = 4;

@@ -23,7 +23,8 @@ export default class AmmunitionElement extends React.Component<AmmunitionElement
     }
 
     public render() {
-        const icon = `/images/icons.svg#${this.props.type}`
+        const icon = `/images/icons.svg#${this.props.type}`;
+        const typeName = AmmunitionElement.getTypeName(this.props.type);
 
         return (
             <g transform={this.translation}>
@@ -38,6 +39,11 @@ export default class AmmunitionElement extends React.Component<AmmunitionElement
                     fontSize="1.5rem" textAnchor="start"
                     fill={ColorPalette.TEXT}
                 >{this.props.name}</text>
+                <text
+                    x="270" y="20"
+                    fontSize=".75rem" textAnchor="end"
+                    fill={ColorPalette.MUTE_LIGHT}
+                >{typeName}</text>
                 <use href={icon} x="275" y="5" stroke={ColorPalette.TEXT}/>
 
                 <text

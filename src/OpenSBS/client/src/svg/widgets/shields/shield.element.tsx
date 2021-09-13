@@ -1,10 +1,10 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svg-transforms';
-import SmallDisplayElement from '../../elements/smallDisplay.element';
 import {ShieldSectorModel} from '../../../modules/shield-sector.model';
-import ShieldCapacityElement from './shield-capacity.element';
 import ShieldCalibrationElement from './shield-calibration.element';
+import ValueElement from '../../elements/value.element';
 import ButtonElement from '../../elements/button.element';
+import CylinderElement from '../../elements/cylinder.element';
 import ColorPalette from '../../color-palette';
 
 interface ShieldElementProps {
@@ -29,6 +29,11 @@ export default class ShieldElement extends React.Component<ShieldElementProps, {
     }
 
     public render() {
+        if (!this.props.shieldSector) {
+            return null;
+        }
+
+        const ratio = this.props.shieldSector.currentCapacity / this.props.shieldSector.capacity;
         return (
             <g transform={this.translation}>
                 <text
@@ -36,30 +41,30 @@ export default class ShieldElement extends React.Component<ShieldElementProps, {
                     fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.HEADER}
                 >{this.props.label}</text>
-                <SmallDisplayElement
-                    x={0} y={55}
-                    label="Hit Points"
-                >{this.props.shieldSector?.currentCapacity ?? 0}</SmallDisplayElement>
-                <ShieldCapacityElement
+                <ValueElement
+                    x={0} y={60}
+                    label="hit points"
+                >{this.props.shieldSector.currentCapacity}</ValueElement>
+                <CylinderElement
                     x={-25} y={95}
-                    base={this.props.shieldSector?.capacity ?? 0}
-                    current={this.props.shieldSector?.currentCapacity ?? 0}
+                    height={206}
+                    ratio={ratio}
                 />
                 <ShieldCalibrationElement
                     x={5} y={95}
-                    value={this.props.shieldSector?.calibration ?? 0}
+                    value={this.props.shieldSector.calibration}
                     availableCalibrationPoints={this.props.availableCalibrationPoints}
                     onSetCalibration={this.onSetCalibration}
                 />
-                <SmallDisplayElement
-                    x={0} y={335}
+                <ValueElement
+                    x={0} y={340}
                     label="HP/sec"
-                >{this.props.shieldSector?.currentRechargeRate ?? 0}</SmallDisplayElement>
+                >{this.props.shieldSector.currentRechargeRate}</ValueElement>
                 <ButtonElement
                     x={-45} y={370}
                     fontSize={1}
                     width={90} height={30}
-                    enabled={!!this.props.shieldSector}
+                    enabled={true}
                     onClick={this.onReinforceHandler}
                 >REINFORCE</ButtonElement>
             </g>
@@ -71,7 +76,7 @@ export default class ShieldElement extends React.Component<ShieldElementProps, {
             return;
         }
 
-        this.props.onSetCalibration(this.props.shieldSector?.side, value);
+        this.props.onSetCalibration(this.props.shieldSector.side, value);
     }
 
     private onReinforceHandler() {
