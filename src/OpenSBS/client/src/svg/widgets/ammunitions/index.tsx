@@ -2,12 +2,20 @@
 import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svg-transforms';
 import PanelElement from '../../elements/panel.element';
-import ColorPalette from '../../color-palette';
 import AmmunitionElement from './ammunition.element';
+import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
+import StorageModuleModel from '../../../modules/storage-module.model';
+import ItemStackModel from '../../../models/item-stack.model';
+import ClientActions from '../../../store/client/client.actions';
+import ClientSelectors from '../../../store/client/client.selectors';
+import ColorPalette from '../../color-palette';
 
 interface AmmunitionsPropsModel {
     x: number,
     y: number,
+    dispatch: any,
+    selectedAmmo: string | null,
+    storageModule: StorageModuleModel | undefined,
 }
 
 class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
@@ -17,9 +25,18 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
+        this.onAmmoClick = this.onAmmoClick.bind(this);
     }
 
     public render() {
+        if (!this.props.storageModule) {
+            return null;
+        }
+
+        const ammunitions = this.props.storageModule.items.filter(
+            (stack: ItemStackModel) => stack.item.type.startsWith('ammo.')
+        );
+
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={450} height={270}>
                 <line x1="310" y1="0" x2="310" y2="270" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
@@ -41,39 +58,31 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
                     fill={ColorPalette.HEADER}
                 >QUANTITY</text>
 
-                <AmmunitionElement
-                    x={0} y={30}
-                    name="Scarlet" type="ammo.plasma"
-                    quantity={99999}
-                />
-                <AmmunitionElement
-                    x={0} y={70}
-                    name="Violet" type="ammo.plasma"
-                    quantity={99999}
-                />
-                <AmmunitionElement
-                    x={0} y={110}
-                    name="Lance" type="ammo.projectile"
-                    quantity={99999}
-                />
-                <AmmunitionElement
-                    x={0} y={150}
-                    name="Torch" type="ammo.projectile"
-                    quantity={99999}
-                />
-                <AmmunitionElement
-                    x={0} y={190}
-                    name="Shock" type="ammo.torpedo"
-                    quantity={99999}
-                />
-                <AmmunitionElement
-                    x={0} y={230}
-                    name="Vortex" type="ammo.torpedo"
-                    quantity={99999}
-                />
+                {ammunitions.map((value: ItemStackModel, index: number) => <AmmunitionElement
+                    x={0} y={30 + (40 * index)}
+                    name={value.item.name} type={value.item.type}
+                    quantity={value.quantity}
+                    isSelected={value.item.id === this.props.selectedAmmo}
+                    onClick={() => this.onAmmoClick(value.item.id)}
+                />)}
             </PanelElement>
         );
     }
+
+    private onAmmoClick(id: string) {
+        if (id === this.props.selectedAmmo) {
+            this.props.dispatch(ClientActions.resetAmmo());
+        } else {
+            this.props.dispatch(ClientActions.setAmmo(id));
+        }
+    }
 }
 
-export default connect()(AmmunitionsWidget);
+const mapStateToProps = (state: any) => {
+    return {
+        selectedAmmo: ClientSelectors.getSelectedAmmo(state),
+        storageModule: SpaceshipSelectors.getStorage(state),
+    };
+};
+
+export default connect(mapStateToProps)(AmmunitionsWidget);

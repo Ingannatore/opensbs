@@ -7,5 +7,6 @@
         public const string Shield = "module.shield";
         public const string Sensors = "module.sensors";
         public const string Weapon = "module.weapon";
+        public const string Storage = "module.storage";
     }
 }

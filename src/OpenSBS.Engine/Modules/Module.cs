@@ -8,8 +8,8 @@ namespace OpenSBS.Engine.Modules
         public string Id { get; }
         public string Type { get; }
         public string Name { get; }
-        public float Mass { get; protected set; }
-        public float Size { get; protected set; }
+        public int Mass { get; protected set; }
+        public int Size { get; protected set; }
 
         protected Module(string id, string type, string name)
         {

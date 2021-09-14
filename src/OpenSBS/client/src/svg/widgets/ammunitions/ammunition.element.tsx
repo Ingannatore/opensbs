@@ -9,6 +9,8 @@ interface AmmunitionElementProps {
     name: string,
     type: string,
     quantity: number,
+    isSelected: boolean,
+    onClick: () => void,
 }
 
 export default class AmmunitionElement extends React.Component<AmmunitionElementProps, {}> {
@@ -27,7 +29,7 @@ export default class AmmunitionElement extends React.Component<AmmunitionElement
         const typeName = AmmunitionElement.getTypeName(this.props.type);
 
         return (
-            <g transform={this.translation}>
+            <g transform={this.translation} key={'item-' + this.props.type}>
                 <line
                     x1="0" y1="0"
                     x2="450" y2="0"
@@ -55,14 +57,11 @@ export default class AmmunitionElement extends React.Component<AmmunitionElement
                 <SwitchElement
                     x={420} y={10}
                     width={20} height={20}
-                    onClick={this.onSelectAmmo}
-                    toggled={false}
+                    onClick={this.props.onClick}
+                    toggled={this.props.isSelected}
                 />
             </g>
         );
-    }
-
-    private onSelectAmmo() {
     }
 
     private static getTypeName(type: string): string {

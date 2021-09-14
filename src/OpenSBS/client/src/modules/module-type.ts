@@ -4,6 +4,7 @@
     SHIELD: "module.shield",
     SENSORS: "module.sensors",
     WEAPON: "module.weapon",
+    STORAGE: "module.storage",
 }
 
 export default ModuleType;

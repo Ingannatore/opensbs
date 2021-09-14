@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Numerics;
 using OpenSBS.Engine.Modules;
+using OpenSBS.Engine.Modules.Storage;
 using OpenSBS.Engine.Utils;
 
 namespace OpenSBS.Engine.Models
 {
-    public abstract class Entity
+    public abstract class Entity : Item
     {
-        public string Id { get; }
-        public string Type { get; }
-        public string Name { get; }
         public string CallSign { get; }
-        public int Mass { get; protected set; }
         public int Size { get; protected set; }
         public Vector3 Position { get; protected set; }
         public Vector3 Direction { get; protected set; }
@@ -19,13 +16,9 @@ namespace OpenSBS.Engine.Models
         public double AngularSpeed { get; set; }
         public ModulesCollection Modules { get; }
 
-        public Entity(string id, string type, string name, string callSign)
+        public Entity(string id, string type, string name, string callSign) : base(id, type, name)
         {
-            Id = id;
-            Type = type;
-            Name = name;
             CallSign = callSign;
-
             Position = Vector3.Zero;
             Direction = Vector3.UnitX;
             Modules = new ModulesCollection();
@@ -49,6 +42,11 @@ namespace OpenSBS.Engine.Models
         public void MoveTo(float x, float y, float z)
         {
             Position = new Vector3(x, y, z);
+        }
+
+        public void AddToStorage(Item item, int quantity)
+        {
+            Modules.First<StorageModule>().Add(item, quantity);
         }
 
         private void RotateBody(TimeSpan deltaT)

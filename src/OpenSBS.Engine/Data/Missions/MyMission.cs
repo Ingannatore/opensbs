@@ -1,4 +1,5 @@
-﻿using OpenSBS.Engine.Data.Spaceships;
+﻿using OpenSBS.Engine.Data.Items;
+using OpenSBS.Engine.Data.Spaceships;
 using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Engine.Data.Missions
@@ -25,6 +26,9 @@ namespace OpenSBS.Engine.Data.Missions
             var dummyTarget3 = new DummyTarget("DUMMY_3", "Dummy 3", "DMY-003");
             dummyTarget3.MoveTo(-6000, 0, 2000);
             World.AddEntity(dummyTarget3);
+
+            Spaceship.AddToStorage(ScarletPlasmaAmmo.Instance, 500);
+            Spaceship.AddToStorage(VioletPlasmaAmmo.Instance, 300);
         }
     }
 }

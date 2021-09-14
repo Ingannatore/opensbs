@@ -7,6 +7,7 @@ import {SensorsModuleModel} from '../../modules/sensors-module.model';
 import ModuleType from '../../modules/module-type';
 import EngineModuleModel from '../../modules/engine-module.model';
 import ShieldModuleModel from '../../modules/shield-module.model';
+import StorageModuleModel from '../../modules/storage-module.model';
 
 const getId = (state: StateModel): string => {
     return state.spaceship.id;
@@ -49,6 +50,10 @@ const getWeapon = (state: StateModel, index: number): WeaponModuleModel | undefi
     return weapons.length > index ? weapons[index] : undefined
 }
 
+const getStorage = (state: StateModel): StorageModuleModel | undefined => {
+    return getModuleByType<StorageModuleModel>(state, ModuleType.STORAGE);
+}
+
 const getTrace = (state: StateModel, id: string): SensorsTraceModel | undefined => {
     const sensors = getModuleByType<SensorsModuleModel>(state, ModuleType.SENSORS);
     if (!sensors) {
@@ -68,5 +73,6 @@ export default {
     getEngine,
     getShield,
     getWeapon,
+    getStorage,
     getTrace,
 }

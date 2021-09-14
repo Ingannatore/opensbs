@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using OpenSBS.Engine.Models;
 
 namespace OpenSBS.Engine.Modules
@@ -19,6 +20,11 @@ namespace OpenSBS.Engine.Modules
         public Module Get(string id)
         {
             return _modulesIndex[id];
+        }
+
+        public T First<T>() where T : Module
+        {
+            return _modules.OfType<T>().First();
         }
 
         public void Add(Module module)

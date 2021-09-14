@@ -17,6 +17,7 @@ namespace OpenSBS.Engine.Data.Spaceships
             Mass = 100000;
             Size = 50;
 
+            Modules.Add(new GeneralStorage("storage1", 1));
             Modules.Add(new SmallIonEngine("engine1"));
             Modules.Add(new SmallRadarSensors("radar1"));
             Modules.Add(new PrototypeMagneticShield("shield1"));
