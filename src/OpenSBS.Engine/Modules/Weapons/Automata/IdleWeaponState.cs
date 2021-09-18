@@ -5,6 +5,11 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
 {
     public class IdleWeaponState : WeaponState
     {
+        public override string GetName()
+        {
+            return "Idle";
+        }
+
         public override void OnEnter(WeaponModule weapon)
         {
             weapon.Timer.Reset(0);

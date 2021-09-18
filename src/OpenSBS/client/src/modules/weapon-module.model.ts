@@ -1,11 +1,11 @@
 ﻿import {EntityModuleModel} from '../models/entity-module.model';
-import ModuleTimerModel from '../models/module-timer.model';
+import CountdownTimerModel from '../models/countdown-timer.model';
 
 export default interface WeaponModuleModel extends EntityModuleModel {
     damage: number,
     range: number,
     rateOfFire: number,
-    state: string,
+    status: string,
     target: string | null,
-    timer: ModuleTimerModel,
+    timer: CountdownTimerModel,
 }

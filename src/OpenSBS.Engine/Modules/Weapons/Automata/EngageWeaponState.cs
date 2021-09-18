@@ -5,6 +5,11 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
 {
     public class EngageWeaponState : WeaponState
     {
+        public override string GetName()
+        {
+            return "Engaged";
+        }
+
         public override void OnEnter(WeaponModule weapon)
         {
             weapon.Timer.Reset(weapon.CycleTime);

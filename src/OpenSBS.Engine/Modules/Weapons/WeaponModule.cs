@@ -14,13 +14,14 @@ namespace OpenSBS.Engine.Modules.Weapons
         public int Range { get; protected set; }
         public int CycleTime { get; protected set; }
         public string Target { get; protected set; }
-        public ModuleTimer Timer { get; }
+        public CountdownTimer Timer { get; }
+        public string Status => _stateMachine.Current.GetName();
 
         private readonly ModuleStateMachine<WeaponModule, WeaponState> _stateMachine;
 
         public WeaponModule(string id, string name) : base(id, ModuleType.Weapon, name)
         {
-            Timer = new ModuleTimer();
+            Timer = new CountdownTimer();
             _stateMachine = new ModuleStateMachine<WeaponModule, WeaponState>(this, new IdleWeaponState());
         }
 

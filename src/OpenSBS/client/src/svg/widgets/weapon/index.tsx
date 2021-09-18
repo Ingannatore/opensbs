@@ -6,10 +6,9 @@ import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
 import ClientSelectors from '../../../store/client/client.selectors';
 import EntityTraceModel from '../../../modules/entity-trace.model';
 import WeaponModuleModel from '../../../modules/weapon-module.model';
-import ValueElement from '../../elements/value.element';
-import CylinderElement from '../../elements/cylinder.element';
+import PanelElement from '../../elements/panel.element';
 import SwitchElement from '../../elements/switch.element';
-import WeaponNameElement from './weapon-name.element';
+import GaugeElement from '../../elements/gauge.element';
 import ColorPalette from '../../color-palette';
 
 interface WeaponProps {
@@ -38,30 +37,47 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             return null;
         }
 
+        let status = this.props.weapon.status;
+        if (this.props.weaponTarget) {
+            status += ` | ${this.props.weaponTarget.callSign}`
+        }
+
         return (
-            <g transform={this.translation} key={`weapon-${this.props.weapon.id}`}>
-                <g transform="translate(10 10)">
-                    <SwitchElement
-                        x={0} y={0}
-                        width={90} height={40}
-                        fontSize={1.5} color={ColorPalette.WARNING}
-                        onClick={this.onEngage}
-                        enabled={this.props.weapon.target != null || this.props.selectedTarget != null}
-                        toggled={!!this.props.weapon.target}
-                    >ENGAGE</SwitchElement>
-                    <ValueElement
-                        x={45} y={130}
-                        label="target"
-                    >{this.props.weaponTarget?.callSign || '-'}</ValueElement>
+            <PanelElement x={this.props.x} y={this.props.y} width={450} height={150}>
+                <text
+                    x="20" y="15"
+                    fontSize="1rem" textAnchor="start"
+                    fill={ColorPalette.HEADER}
+                >{this.props.weapon.name.toUpperCase()}</text>
+                <text
+                    x="440" y="15"
+                    fontSize="1rem" textAnchor="end"
+                    fill={ColorPalette.TEXT}
+                >{status}</text>
+                <line x1="0" y1="30" x2="450" y2="30" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
+
+                <GaugeElement
+                    x={70} y={90}
+                    value={Math.max(0, this.props.weapon.timer.current).toFixed(2)}
+                    ratio={this.props.weapon.timer.ratio}
+                    label="seconds"
+                />
+
+                <SwitchElement
+                    x={340} y={40}
+                    width={100} height={100}
+                    fontSize={1.5} color={ColorPalette.WARNING}
+                    onClick={this.onEngage}
+                    enabled={this.props.weapon.target != null || this.props.selectedTarget != null}
+                    toggled={!!this.props.weapon.target}
+                >ENGAGE</SwitchElement>
+
+                <g opacity={0}>
+                    <line x1="0" y1="40" x2="450" y2="40" stroke={ColorPalette.DANGER} strokeWidth="1"/>
+                    <line x1="0" y1="140" x2="450" y2="140" stroke={ColorPalette.DANGER} strokeWidth="1"/>
+                    <line x1="20" y1="0" x2="20" y2="150" stroke={ColorPalette.DANGER} strokeWidth="1"/>
                 </g>
-                <g transform="translate(10 175)">
-                    <CylinderElement
-                        x={20} y={0}
-                        height={280} ratio={this.props.weapon.timer.ratio}
-                    />
-                </g>
-                <WeaponNameElement x={55} y={595}>{this.props.weapon.name}</WeaponNameElement>
-            </g>
+            </PanelElement>
         );
     }
 

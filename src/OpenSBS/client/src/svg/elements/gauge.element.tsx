@@ -5,20 +5,26 @@ import ColorPalette from '../color-palette';
 interface GaugeProps {
     x: number,
     y: number,
+    fill: string,
+    value: string,
     ratio: number,
+    label: string | undefined,
 }
 
 export default class GaugeElement extends React.Component<GaugeProps, {}> {
     private readonly translation: string;
-    private readonly path: string;
     private readonly pathLength: number;
+
+    public static defaultProps = {
+        fill: ColorPalette.FILLER,
+        label: undefined,
+    };
 
     constructor(props: GaugeProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
-        this.path = 'M -50 0 A 50 50 0 1 1 0 50';
-        this.pathLength = 314 * (3 / 4);
+        this.pathLength = 2 * Math.PI * 42;
     }
 
     public render() {
@@ -27,24 +33,32 @@ export default class GaugeElement extends React.Component<GaugeProps, {}> {
 
         return (
             <g transform={this.translation}>
-                <g transform="rotate(-45)">
-                    <path
-                        d={this.path}
-                        stroke={ColorPalette.MUTE_LIGHT} strokeWidth="20" strokeLinecap="round"
-                        fill="none"
-                    />
-                    <path
-                        d={this.path}
-                        stroke={ColorPalette.BACKGROUND} strokeWidth="16" strokeLinecap="round"
-                        fill="none"
-                    />
-                    {this.props.ratio > 0 && <path
-                        d={this.path}
-                        stroke={ColorPalette.FILLER} strokeWidth="12" strokeLinecap="round"
-                        strokeDasharray={filled + ' ' + unfilled}
-                        fill="none"
-                    />}
-                </g>
+                <circle
+                    cx="0" cy="0" r="42" fill="none"
+                    stroke={ColorPalette.MUTE_DARK} strokeWidth="10"
+                    strokeDasharray={`${(this.pathLength / 20) - 2} 2`}
+                />
+                <circle
+                    cx="0" cy="0" r="42" fill="none"
+                    stroke={this.props.fill} strokeWidth="10"
+                    transform="rotate(-90)"
+                    strokeDasharray={`${filled} ${unfilled}`}
+                />
+                <circle
+                    cx="0" cy="0" r="34"
+                    stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
+                    fill="none"
+                />
+                <text
+                    x="0" y="-10"
+                    fontSize="1rem" textAnchor="middle"
+                    fill={ColorPalette.TEXT}
+                >{this.props.value}</text>
+                <text
+                    x="0" y="10"
+                    fontSize="0.75rem" textAnchor="middle"
+                    fill={ColorPalette.TEXT}
+                >{this.props.label}</text>
             </g>
         );
     }
