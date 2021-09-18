@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Modules;
 
 namespace OpenSBS.Engine.Automata
@@ -18,17 +18,6 @@ namespace OpenSBS.Engine.Automata
             _states = new Stack<TS>();
 
             PushState(initialState);
-        }
-
-        public void HandleAction(ClientAction action)
-        {
-            if (_states.Peek().IsCompleted)
-            {
-                PopState();
-            }
-
-            var nextState = _states.Peek().HandleAction(_module, action);
-            PushState(nextState);
         }
 
         public void Update(TimeSpan deltaT, Entity owner, World world)

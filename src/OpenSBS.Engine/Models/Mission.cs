@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenSBS.Engine.Models.Entities;
 
 namespace OpenSBS.Engine.Models
 {

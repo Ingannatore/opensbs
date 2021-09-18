@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Numerics;
 using OpenSBS.Engine.Models.Items;
+using OpenSBS.Engine.Models.Templates;
 using OpenSBS.Engine.Modules;
 using OpenSBS.Engine.Utils;
 
-namespace OpenSBS.Engine.Models
+namespace OpenSBS.Engine.Models.Entities
 {
     public abstract class Entity : Item
     {
         public string CallSign { get; }
-        public int Size { get; protected set; }
+        public int Size { get; }
         public Vector3 Position { get; protected set; }
         public Vector3 Direction { get; protected set; }
         public double LinearSpeed { get; set; }
         public double AngularSpeed { get; set; }
+        public EntityHull Hull { get; }
+        public ItemStorage Cargo { get; }
         public ModulesCollection Modules { get; }
-        public ItemStorage Cargo { get; protected set; }
 
-        public Entity(string id, string type, string name, string callSign) : base(id, type, name)
+        public Entity(string id, string name, string callsign, EntityTemplate template) : base(id, template.Type, name)
         {
-            CallSign = callSign;
+            CallSign = callsign;
+            Mass = template.Mass;
+            Size = template.Size;
+
             Position = Vector3.Zero;
             Direction = Vector3.UnitX;
+
+            Hull = EntityHull.Create(template.HitPoints);
+            Cargo = ItemStorage.Create(template.Cargo);
             Modules = new ModulesCollection();
         }
 
@@ -43,6 +51,11 @@ namespace OpenSBS.Engine.Models
         public void MoveTo(float x, float y, float z)
         {
             Position = new Vector3(x, y, z);
+        }
+
+        public void ApplyDamage(int amount)
+        {
+            Hull.ApplyDamage(amount);
         }
 
         private void RotateBody(TimeSpan deltaT)

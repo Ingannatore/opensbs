@@ -2,7 +2,7 @@
 using System.Numerics;
 using OpenSBS.Engine.Utils;
 
-namespace OpenSBS.Engine.Models
+namespace OpenSBS.Engine.Models.Entities
 {
     public class EntityTrace
     {

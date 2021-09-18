@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenSBS.Engine.Automata;
 using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Modules.Weapons.Automata;
 
 namespace OpenSBS.Engine.Modules.Weapons
@@ -23,6 +24,21 @@ namespace OpenSBS.Engine.Modules.Weapons
         {
             Timer = new CountdownTimer();
             _stateMachine = new ModuleStateMachine<WeaponModule, WeaponState>(this, new IdleWeaponState());
+        }
+
+        public bool HasTarget()
+        {
+            return Target != null;
+        }
+
+        public void ResetTimer()
+        {
+            Timer.Reset(CycleTime);
+        }
+
+        public void ResetTarget()
+        {
+            Target = null;
         }
 
         public override void HandleAction(ClientAction action)

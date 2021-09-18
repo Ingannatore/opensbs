@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Models.Entities;
 
 namespace OpenSBS.Engine.Data
 {

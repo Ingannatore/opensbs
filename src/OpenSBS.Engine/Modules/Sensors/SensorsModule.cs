@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Models.Entities;
 
 namespace OpenSBS.Engine.Modules.Sensors
 {
@@ -17,6 +18,14 @@ namespace OpenSBS.Engine.Modules.Sensors
 
         public override void Update(TimeSpan deltaT, Entity owner, World world)
         {
+            foreach (var trace in Traces)
+            {
+                if (!world.ExistsEntity(trace.Id))
+                {
+                    Traces.Remove(trace.Id);
+                }
+            }
+
             foreach (var entity in world)
             {
                 Traces.Update(owner, entity, Range);

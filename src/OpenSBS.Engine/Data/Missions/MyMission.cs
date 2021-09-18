@@ -1,6 +1,7 @@
 ﻿using OpenSBS.Engine.Data.Items;
 using OpenSBS.Engine.Data.Spaceships;
 using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Models.Entities;
 
 namespace OpenSBS.Engine.Data.Missions
 {

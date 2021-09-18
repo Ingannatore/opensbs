@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Models.Entities;
 
 namespace OpenSBS.Engine
 {
@@ -12,6 +12,11 @@ namespace OpenSBS.Engine
         public World()
         {
             _entities = new Dictionary<string, Entity>();
+        }
+
+        public bool ExistsEntity(string id)
+        {
+            return _entities.ContainsKey(id);
         }
 
         public void AddEntity(Entity entity)
@@ -28,6 +33,12 @@ namespace OpenSBS.Engine
         {
             foreach (var entity in _entities.Values)
             {
+                if (entity.Hull.IsDestroyed)
+                {
+                    _entities.Remove(entity.Id);
+                    continue;
+                }
+
                 entity.Update(deltaT, this);
             }
         }

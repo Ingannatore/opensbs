@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Models.Entities;
 
 namespace OpenSBS.Engine.Modules.Weapons.Automata
 {
@@ -15,11 +15,6 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             weapon.Timer.Reset(weapon.CycleTime);
         }
 
-        public override WeaponState HandleAction(WeaponModule weapon, ClientAction action)
-        {
-            return null;
-        }
-
         public override WeaponState Update(WeaponModule weapon, TimeSpan deltaT, Entity owner, World world)
         {
             weapon.Timer.Advance(deltaT.TotalSeconds);
@@ -28,16 +23,21 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
                 return null;
             }
 
-            if (weapon.Target == null)
+            if (!WeaponHasValidTarget(weapon, world))
             {
                 IsCompleted = true;
                 return null;
             }
 
-            // TODO: Danneggia il target
-            weapon.Timer.Reset(weapon.CycleTime);
+            weapon.ResetTimer();
+            world.GetEntity(weapon.Target).ApplyDamage(weapon.Damage);
 
             return null;
+        }
+
+        private bool WeaponHasValidTarget(WeaponModule weapon, World world)
+        {
+            return weapon.HasTarget() && world.ExistsEntity(weapon.Target);
         }
     }
 }

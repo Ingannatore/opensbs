@@ -1,5 +1,6 @@
 ﻿using OpenSBS.Engine.Data.Modules;
-using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Data.Templates;
+using OpenSBS.Engine.Models.Entities;
 
 namespace OpenSBS.Engine.Data.Spaceships
 {
@@ -11,12 +12,9 @@ namespace OpenSBS.Engine.Data.Spaceships
     public class BastionStation : Entity
     {
         public BastionStation(string id, string name, string callSign) : base(
-            id, EntityType.Station, name, callSign
+            id, name, callSign, BastionStationTemplate.Instance
         )
         {
-            Mass = 100000000;
-            Size = 1000;
-
             Modules.Add(new SmallRadarSensors("radar1"));
         }
     }
