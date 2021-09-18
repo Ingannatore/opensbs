@@ -60,7 +60,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                     x={70} y={90}
                     value={Math.max(0, Math.ceil(this.props.weapon.timer.current)).toString()}
                     ratio={this.props.weapon.timer.ratio}
-                    label="seconds"
+                    label="sec"
                 />
 
                 <SwitchElement

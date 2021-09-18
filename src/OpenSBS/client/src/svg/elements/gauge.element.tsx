@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svg-transforms';
 import ColorPalette from '../color-palette';
+import ValueElement from './value.element';
 
 interface GaugeProps {
     x: number,
@@ -49,16 +50,10 @@ export default class GaugeElement extends React.Component<GaugeProps, {}> {
                     stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
                     fill="none"
                 />
-                <text
-                    x="0" y="-10"
-                    fontSize="1rem" textAnchor="middle"
-                    fill={ColorPalette.TEXT}
-                >{this.props.value}</text>
-                <text
-                    x="0" y="10"
-                    fontSize="0.75rem" textAnchor="middle"
-                    fill={ColorPalette.TEXT}
-                >{this.props.label}</text>
+                <ValueElement
+                    x={0} y={5}
+                    label="sec"
+                >{this.props.value}</ValueElement>
             </g>
         );
     }
