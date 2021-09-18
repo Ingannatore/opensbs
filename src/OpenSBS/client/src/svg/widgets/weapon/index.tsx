@@ -58,7 +58,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
 
                 <GaugeElement
                     x={70} y={90}
-                    value={Math.max(0, this.props.weapon.timer.current).toFixed(2)}
+                    value={Math.max(0, Math.ceil(this.props.weapon.timer.current)).toString()}
                     ratio={this.props.weapon.timer.ratio}
                     label="seconds"
                 />

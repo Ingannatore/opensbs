@@ -2,6 +2,7 @@
 using OpenSBS.Engine.Automata;
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Models.Modules;
 using OpenSBS.Engine.Modules.Weapons.Automata;
 
 namespace OpenSBS.Engine.Modules.Weapons

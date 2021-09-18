@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Models.Modules;
 using OpenSBS.Engine.Modules;
 
 namespace OpenSBS.Engine.Automata

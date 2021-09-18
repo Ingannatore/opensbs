@@ -5,6 +5,8 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
 {
     public class EngageWeaponState : WeaponState
     {
+        private bool _hasFired;
+
         public override string GetName()
         {
             return "Engaged";
@@ -12,11 +14,18 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
 
         public override void OnEnter(WeaponModule weapon)
         {
+            _hasFired = false;
             weapon.Timer.Reset(weapon.CycleTime);
         }
 
         public override WeaponState Update(WeaponModule weapon, TimeSpan deltaT, Entity owner, World world)
         {
+            if (!_hasFired && WeaponHasValidTarget(weapon, world))
+            {
+                _hasFired = true;
+                world.GetEntity(weapon.Target).ApplyDamage(weapon.Damage);
+            }
+
             weapon.Timer.Advance(deltaT.TotalSeconds);
             if (!weapon.Timer.IsCompleted)
             {
@@ -29,8 +38,8 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
                 return null;
             }
 
+            _hasFired = false;
             weapon.ResetTimer();
-            world.GetEntity(weapon.Target).ApplyDamage(weapon.Damage);
 
             return null;
         }

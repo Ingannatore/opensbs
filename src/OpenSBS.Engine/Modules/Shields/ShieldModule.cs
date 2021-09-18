@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Models.Modules;
 
 namespace OpenSBS.Engine.Modules.Shields
 {

@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Engine.Modules
+﻿namespace OpenSBS.Engine.Models
 {
     public class CountdownTimer
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenSBS.Engine.Models.Entities;
 
-namespace OpenSBS.Engine.Modules
+namespace OpenSBS.Engine.Models.Modules
 {
     public class ModulesCollection : IEnumerable<Module>
     {
