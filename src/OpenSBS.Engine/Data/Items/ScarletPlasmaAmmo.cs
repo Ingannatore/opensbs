@@ -1,4 +1,4 @@
-﻿using OpenSBS.Engine.Models;
+﻿using OpenSBS.Engine.Models.Items;
 
 namespace OpenSBS.Engine.Data.Items
 {
@@ -22,6 +22,9 @@ namespace OpenSBS.Engine.Data.Items
             "ammo.plasma.scarlet",
             "ammo.plasma",
             "Scarlet"
-        ) { }
+        )
+        {
+            Mass = 1;
+        }
     }
 }

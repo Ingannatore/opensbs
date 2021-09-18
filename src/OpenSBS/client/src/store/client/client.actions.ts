@@ -1,4 +1,5 @@
 ﻿import ActionModel from '../action.model';
+import EntityTraceModel from '../../modules/entity-trace.model';
 
 const Types = {
     SET_TARGET: 'client/target/set',
@@ -7,9 +8,9 @@ const Types = {
     RESET_AMMO: 'client/ammo/reset',
 };
 
-const setTarget = (target: string): ActionModel => ({
+const setTarget = (trace: EntityTraceModel): ActionModel => ({
     type: Types.SET_TARGET,
-    payload: target,
+    payload: trace,
     meta: null,
 });
 

@@ -4,10 +4,10 @@ import SvgTransforms from '../../../lib/svg-transforms';
 import PanelElement from '../../elements/panel.element';
 import AmmunitionElement from './ammunition.element';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import StorageModuleModel from '../../../modules/storage-module.model';
 import ItemStackModel from '../../../models/item-stack.model';
 import ClientActions from '../../../store/client/client.actions';
 import ClientSelectors from '../../../store/client/client.selectors';
+import ItemStorageModel from '../../../models/item-storage.model';
 import ColorPalette from '../../color-palette';
 
 interface AmmunitionsPropsModel {
@@ -15,7 +15,7 @@ interface AmmunitionsPropsModel {
     y: number,
     dispatch: any,
     selectedAmmo: string | null,
-    storageModule: StorageModuleModel | undefined,
+    cargo: ItemStorageModel | undefined,
 }
 
 class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
@@ -29,11 +29,11 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
     }
 
     public render() {
-        if (!this.props.storageModule) {
+        if (!this.props.cargo) {
             return null;
         }
 
-        const ammunitions = this.props.storageModule.items.filter(
+        const ammunitions = this.props.cargo.items.filter(
             (stack: ItemStackModel) => stack.item.type.startsWith('ammo.')
         );
 
@@ -81,7 +81,7 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
 const mapStateToProps = (state: any) => {
     return {
         selectedAmmo: ClientSelectors.getSelectedAmmo(state),
-        storageModule: SpaceshipSelectors.getStorage(state),
+        cargo: SpaceshipSelectors.getCargo(state),
     };
 };
 

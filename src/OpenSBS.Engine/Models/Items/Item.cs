@@ -1,4 +1,4 @@
-﻿namespace OpenSBS.Engine.Models
+﻿namespace OpenSBS.Engine.Models.Items
 {
     public abstract class Item
     {

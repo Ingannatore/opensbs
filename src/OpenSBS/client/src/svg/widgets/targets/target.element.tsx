@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import {SensorsTraceModel} from '../../../modules/sensors-trace.model';
+import EntityTraceModel from '../../../modules/entity-trace.model';
 import SvgTransforms from '../../../lib/svg-transforms';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
@@ -9,7 +9,7 @@ import SwitchElement from '../../elements/switch.element';
 interface TargetPropsModel {
     x: number,
     y: number,
-    trace: SensorsTraceModel,
+    trace: EntityTraceModel,
     isSelected: boolean,
     onClick: () => void,
 }

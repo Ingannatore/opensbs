@@ -2,12 +2,12 @@
 import Vector3 from '../../models/vector3';
 import {EntityModuleModel} from '../../models/entity-module.model';
 import WeaponModuleModel from '../../modules/weapon-module.model';
-import {SensorsTraceModel} from '../../modules/sensors-trace.model';
+import EntityTraceModel from '../../modules/entity-trace.model';
 import {SensorsModuleModel} from '../../modules/sensors-module.model';
-import ModuleType from '../../modules/module-type';
 import EngineModuleModel from '../../modules/engine-module.model';
 import ShieldModuleModel from '../../modules/shield-module.model';
-import StorageModuleModel from '../../modules/storage-module.model';
+import ItemStorageModel from '../../models/item-storage.model';
+import ModuleType from '../../modules/module-type';
 
 const getId = (state: StateModel): string => {
     return state.spaceship.id;
@@ -37,6 +37,14 @@ const getModulesByType = <T extends EntityModuleModel>(state: StateModel, type: 
     ) as [T];
 }
 
+const getCargo = (state: StateModel): ItemStorageModel | undefined => {
+    return state.spaceship.cargo ?? undefined ;
+}
+
+const getSensors = (state: StateModel): SensorsModuleModel | undefined => {
+    return getModuleByType<SensorsModuleModel>(state, ModuleType.SENSORS);
+}
+
 const getEngine = (state: StateModel): EngineModuleModel | undefined => {
     return getModuleByType<EngineModuleModel>(state, ModuleType.ENGINE);
 }
@@ -50,11 +58,7 @@ const getWeapon = (state: StateModel, index: number): WeaponModuleModel | undefi
     return weapons.length > index ? weapons[index] : undefined
 }
 
-const getStorage = (state: StateModel): StorageModuleModel | undefined => {
-    return getModuleByType<StorageModuleModel>(state, ModuleType.STORAGE);
-}
-
-const getTrace = (state: StateModel, id: string): SensorsTraceModel | undefined => {
+const getTrace = (state: StateModel, id: string): EntityTraceModel | undefined => {
     const sensors = getModuleByType<SensorsModuleModel>(state, ModuleType.SENSORS);
     if (!sensors) {
         return undefined;
@@ -70,9 +74,10 @@ export default {
     getLinearSpeed,
     getModuleByType,
     getModulesByType,
+    getCargo,
+    getSensors,
     getEngine,
     getShield,
     getWeapon,
-    getStorage,
     getTrace,
 }

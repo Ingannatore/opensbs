@@ -4,12 +4,24 @@ import SvgTransforms from '../../../lib/svg-transforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
 import ClientSelectors from '../../../store/client/client.selectors';
+import EntityTraceModel from '../../../modules/entity-trace.model';
 import WeaponModuleModel from '../../../modules/weapon-module.model';
-import PanelElement from '../../elements/panel.element';
-import GaugeElement from '../../elements/gauge.element';
-import SwitchElement from '../../elements/switch.element';
 import ValueElement from '../../elements/value.element';
+import CylinderElement from '../../elements/cylinder.element';
+import SwitchElement from '../../elements/switch.element';
+import WeaponNameElement from './weapon-name.element';
 import ColorPalette from '../../color-palette';
+
+interface WeaponProps {
+    x: number,
+    y: number,
+    index: number,
+    dispatch: any,
+    entityId: string,
+    selectedTarget: EntityTraceModel | null,
+    weapon: WeaponModuleModel | undefined,
+    weaponTarget: EntityTraceModel | undefined,
+}
 
 class WeaponWidget extends React.Component<WeaponProps, {}> {
     private readonly translation: string;
@@ -18,7 +30,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
-        this.fire = this.fire.bind(this);
+        this.onEngage = this.onEngage.bind(this);
     }
 
     public render() {
@@ -27,57 +39,38 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
         }
 
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={450} height={150}>
-                <text
-                    x="230" y="15"
-                    fontSize="1rem" textAnchor="middle"
-                    fill={ColorPalette.HEADER}
-                >{this.props.weapon.name.toUpperCase()}</text>
-                <ValueElement
-                    x={230} y={60}
-                    label="target"
-                >{this.props.weapon.target ? this.props.weapon.target : '-'}</ValueElement>
-                <ValueElement
-                    x={230} y={120}
-                    label="ammo"
-                >Argon</ValueElement>
-
-                <g transform="translate(80 90)">
-                    <GaugeElement
+            <g transform={this.translation} key={`weapon-${this.props.weapon.id}`}>
+                <g transform="translate(10 10)">
+                    <SwitchElement
                         x={0} y={0}
-                        ratio={this.props.weapon.counter.ratio}
-                    />
-                    <SwitchElement
-                        x={-30} y={-30} rx={30}
-                        width={60} height={60}
-                        fontSize={1}
-                        color={ColorPalette.WARNING}
-                        onClick={this.fire}
-                        enabled={this.props.weapon.target != null || this.props.target != null}
+                        width={90} height={40}
+                        fontSize={1.5} color={ColorPalette.WARNING}
+                        onClick={this.onEngage}
+                        enabled={this.props.weapon.target != null || this.props.selectedTarget != null}
                         toggled={!!this.props.weapon.target}
-                    >FIRE</SwitchElement>
+                    >ENGAGE</SwitchElement>
+                    <ValueElement
+                        x={45} y={130}
+                        label="target"
+                    >{this.props.weaponTarget?.callSign || '-'}</ValueElement>
                 </g>
-
-                <g transform="translate(380 90)">
-                    <GaugeElement x={0} y={0} ratio={0}/>
-                    <SwitchElement
-                        x={-30} y={-30} rx={30}
-                        width={60} height={60}
-                        fontSize={1}
-                        onClick={this.fire}
-                    >RELOAD</SwitchElement>
+                <g transform="translate(10 175)">
+                    <CylinderElement
+                        x={20} y={0}
+                        height={280} ratio={this.props.weapon.timer.ratio}
+                    />
                 </g>
-
-            </PanelElement>
+                <WeaponNameElement x={55} y={595}>{this.props.weapon.name}</WeaponNameElement>
+            </g>
         );
     }
 
-    private fire() {
+    private onEngage() {
         if (!this.props.weapon) {
             return;
         }
 
-        if (this.props.weapon.isEngaged) {
+        if (this.props.weapon.target) {
             this.props.dispatch(SpaceshipActions.sendModuleAction(
                 this.props.entityId,
                 this.props.weapon.id,
@@ -88,32 +81,25 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             return;
         }
 
-        if (this.props.target) {
+        if (this.props.selectedTarget) {
             this.props.dispatch(SpaceshipActions.sendModuleAction(
                 this.props.entityId,
                 this.props.weapon.id,
                 'engage',
-                this.props.target
+                this.props.selectedTarget.id
             ));
         }
     }
 }
 
-interface WeaponProps {
-    x: number,
-    y: number,
-    dispatch: any,
-    entityId: string,
-    target: string | null,
-    index: number,
-    weapon: WeaponModuleModel | undefined,
-}
-
 const mapStateToProps = (state: any, ownProps: any) => {
+    const weapon = SpaceshipSelectors.getWeapon(state, ownProps.index);
+
     return {
-        target: ClientSelectors.getTarget(state),
+        selectedTarget: ClientSelectors.getSelectedTarget(state),
         entityId: SpaceshipSelectors.getId(state),
-        weapon: SpaceshipSelectors.getWeapon(state, ownProps.index),
+        weapon: weapon,
+        weaponTarget: weapon?.target ? SpaceshipSelectors.getTrace(state, weapon.target) : undefined,
     };
 };
 

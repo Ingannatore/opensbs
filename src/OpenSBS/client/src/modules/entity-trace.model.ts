@@ -1,6 +1,6 @@
 ﻿import Vector3 from '../models/vector3';
 
-export interface SensorsTraceModel {
+export default interface EntityTraceModel {
     id: string,
     type: string,
     callSign: string,

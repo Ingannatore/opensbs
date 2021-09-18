@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
+using OpenSBS.Engine.Models.Items;
 using OpenSBS.Engine.Modules;
-using OpenSBS.Engine.Modules.Storage;
 using OpenSBS.Engine.Utils;
 
 namespace OpenSBS.Engine.Models
@@ -15,6 +15,7 @@ namespace OpenSBS.Engine.Models
         public double LinearSpeed { get; set; }
         public double AngularSpeed { get; set; }
         public ModulesCollection Modules { get; }
+        public ItemStorage Cargo { get; protected set; }
 
         public Entity(string id, string type, string name, string callSign) : base(id, type, name)
         {
@@ -42,11 +43,6 @@ namespace OpenSBS.Engine.Models
         public void MoveTo(float x, float y, float z)
         {
             Position = new Vector3(x, y, z);
-        }
-
-        public void AddToStorage(Item item, int quantity)
-        {
-            Modules.First<StorageModule>().Add(item, quantity);
         }
 
         private void RotateBody(TimeSpan deltaT)

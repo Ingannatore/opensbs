@@ -1,6 +1,5 @@
 ﻿import {EntityModuleModel} from '../models/entity-module.model';
-import WeaponMagazineModel from './weapon-magazine.model';
-import CounterModel from '../models/counter.model';
+import ModuleTimerModel from '../models/module-timer.model';
 
 export default interface WeaponModuleModel extends EntityModuleModel {
     damage: number,
@@ -8,7 +7,5 @@ export default interface WeaponModuleModel extends EntityModuleModel {
     rateOfFire: number,
     state: string,
     target: string | null,
-    isEngaged: boolean,
-    magazine: WeaponMagazineModel | null,
-    counter: CounterModel,
+    timer: ModuleTimerModel,
 }

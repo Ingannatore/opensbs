@@ -2,15 +2,15 @@
 
 namespace OpenSBS.Engine.Data.Modules
 {
-    public class SmallBlaster : WeaponModule
+    public class MonoBlaster : WeaponModule
     {
-        public SmallBlaster(string id) : base(id, "Blaster S")
+        public MonoBlaster(string id) : base(id, "Mono Blaster")
         {
             Mass = 2000;
             Size = 4;
             Damage = 10;
             Range = 5000;
-            RateOfFire = 5;
+            CycleTime = 4;
         }
     }
 }

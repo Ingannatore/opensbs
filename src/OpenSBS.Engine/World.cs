@@ -19,6 +19,11 @@ namespace OpenSBS.Engine
             _entities[entity.Id] = entity;
         }
 
+        public Entity GetEntity(string id)
+        {
+            return _entities[id];
+        }
+
         public void Update(TimeSpan deltaT)
         {
             foreach (var entity in _entities.Values)

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Numerics;
-using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Utils;
 
-namespace OpenSBS.Engine.Modules.Sensors
+namespace OpenSBS.Engine.Models
 {
-    public class SensorsTrace
+    public class EntityTrace
     {
         public string Id { get; }
         public string Type { get; }
@@ -15,12 +14,12 @@ namespace OpenSBS.Engine.Modules.Sensors
         public Vector3 RelativePosition { get; protected set; }
         public Vector3 RelativeDirection { get; protected set; }
 
-        public static SensorsTrace ForEntity(Entity entity)
+        public static EntityTrace ForEntity(Entity entity)
         {
-            return new SensorsTrace(entity.Id, entity.Type, entity.CallSign);
+            return new EntityTrace(entity.Id, entity.Type, entity.CallSign);
         }
 
-        public SensorsTrace(string id, string type, string callSign)
+        public EntityTrace(string id, string type, string callSign)
         {
             Id = id;
             Type = type;

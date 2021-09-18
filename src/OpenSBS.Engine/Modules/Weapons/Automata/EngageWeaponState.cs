@@ -1,47 +1,36 @@
 ﻿using System;
 using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Modules.Weapons
+namespace OpenSBS.Engine.Modules.Weapons.Automata
 {
-    public class FiringWeaponState : WeaponState
+    public class EngageWeaponState : WeaponState
     {
-        public override string GetName()
-        {
-            return "Firing";
-        }
-
         public override void OnEnter(WeaponModule weapon)
         {
-            weapon.Counter.Reset(weapon.RateOfFire);
+            weapon.Timer.Reset(weapon.CycleTime);
         }
 
         public override WeaponState HandleAction(WeaponModule weapon, ClientAction action)
         {
-            if (action.Type == "disengage")
-            {
-                weapon.Target = null;
-            }
-
             return null;
         }
 
         public override WeaponState Update(WeaponModule weapon, TimeSpan deltaT, Entity owner, World world)
         {
-            weapon.Counter.Increment(deltaT.TotalSeconds);
-            if (!weapon.Counter.IsCompleted)
+            weapon.Timer.Advance(deltaT.TotalSeconds);
+            if (!weapon.Timer.IsCompleted)
             {
                 return null;
             }
 
-            weapon.Counter.Reset(weapon.RateOfFire);
             if (weapon.Target == null)
             {
                 IsCompleted = true;
+                return null;
             }
-            else
-            {
-                // TODO: Damage target
-            }
+
+            // TODO: Danneggia il target
+            weapon.Timer.Reset(weapon.CycleTime);
 
             return null;
         }

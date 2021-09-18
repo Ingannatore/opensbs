@@ -1,24 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using OpenSBS.Engine.Models;
 
-namespace OpenSBS.Engine.Modules.Sensors
+namespace OpenSBS.Engine.Models
 {
-    public class SensorsTraceCollection : IEnumerable<SensorsTrace>
+    public class EntityTraceCollection : IEnumerable<EntityTrace>
     {
-        private readonly IDictionary<string, SensorsTrace> _traces;
+        private readonly IDictionary<string, EntityTrace> _traces;
 
-        public SensorsTraceCollection()
+        public EntityTraceCollection()
         {
-            _traces = new Dictionary<string, SensorsTrace>();
+            _traces = new Dictionary<string, EntityTrace>();
         }
 
-        public void Add(SensorsTrace trace)
+        public void Add(EntityTrace trace)
         {
             _traces[trace.Id] = trace;
         }
 
-        public SensorsTrace Get(string entityId)
+        public EntityTrace Get(string entityId)
         {
             return _traces[entityId];
         }
@@ -32,7 +31,7 @@ namespace OpenSBS.Engine.Modules.Sensors
         {
             if (!_traces.ContainsKey(target.Id))
             {
-                _traces[target.Id] = SensorsTrace.ForEntity(target);
+                _traces[target.Id] = EntityTrace.ForEntity(target);
             }
 
             _traces[target.Id].Update(owner, target);
@@ -47,7 +46,7 @@ namespace OpenSBS.Engine.Modules.Sensors
             _traces.Remove(entityId);
         }
 
-        public IEnumerator<SensorsTrace> GetEnumerator()
+        public IEnumerator<EntityTrace> GetEnumerator()
         {
             return _traces.Values.GetEnumerator();
         }

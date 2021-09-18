@@ -13,7 +13,8 @@ const defaultState: EntityModel = {
     direction: {x: 0, y: 0, z: 0},
     linearSpeed: 0,
     angularSpeed: 0,
-    modules: []
+    modules: [],
+    cargo: null,
 };
 
 export default (state = defaultState, action: ActionModel) => {

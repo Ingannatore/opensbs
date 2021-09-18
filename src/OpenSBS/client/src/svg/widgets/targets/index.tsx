@@ -5,16 +5,23 @@ import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 import PanelElement from '../../elements/panel.element';
 import ClientSelectors from '../../../store/client/client.selectors';
 import {SensorsModuleModel} from '../../../modules/sensors-module.model';
-import TargetsPropsModel from './targets-props.model';
 import ClientActions from '../../../store/client/client.actions';
 import TargetElement from './target.element';
-import {SensorsTraceModel} from '../../../modules/sensors-trace.model';
+import EntityTraceModel from '../../../modules/entity-trace.model';
 import ColorPalette from '../../color-palette';
 
-class TargetsWidget extends React.Component<TargetsPropsModel, {}> {
+interface TargetsProps {
+    x: number,
+    y: number,
+    dispatch: any,
+    target: EntityTraceModel | null,
+    sensorsModule: SensorsModuleModel | undefined,
+}
+
+class TargetsWidget extends React.Component<TargetsProps, {}> {
     private readonly translation: string;
 
-    constructor(props: TargetsPropsModel) {
+    constructor(props: TargetsProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -23,12 +30,12 @@ class TargetsWidget extends React.Component<TargetsPropsModel, {}> {
 
     public render() {
         const targets = (this.props.sensorsModule?.traces ?? [])
-        .sort((a: SensorsTraceModel, b: SensorsTraceModel) => a.distance - b.distance)
+        .sort((a: EntityTraceModel, b: EntityTraceModel) => a.distance - b.distance)
         .slice(0, 10)
-        .map((trace: SensorsTraceModel, index: number) => this.renderTargetRow(trace, index));
+        .map((trace: EntityTraceModel, index: number) => this.renderTargetRow(trace, index));
 
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={450} height={430}  isOffline={!this.props.sensorsModule}>
+            <PanelElement x={this.props.x} y={this.props.y} width={450} height={430} isOffline={!this.props.sensorsModule}>
                 <line
                     x1="40" y1="0"
                     x2="40" y2="430"
@@ -69,29 +76,29 @@ class TargetsWidget extends React.Component<TargetsPropsModel, {}> {
         );
     }
 
-    private renderTargetRow(trace: SensorsTraceModel, index: number) {
+    private renderTargetRow(trace: EntityTraceModel, index: number) {
         return (
             <TargetElement
                 x={0} y={30 + (40 * index)}
                 trace={trace}
-                isSelected={trace.id === this.props.target}
-                onClick={() => this.onTraceClick(trace.id)}
+                isSelected={trace.id === this.props.target?.id}
+                onClick={() => this.onTraceClick(trace)}
             />
         )
     }
 
-    private onTraceClick(id: string) {
-        if (id === this.props.target) {
+    private onTraceClick(trace: EntityTraceModel) {
+        if (trace.id === this.props.target?.id) {
             this.props.dispatch(ClientActions.resetTarget());
         } else {
-            this.props.dispatch(ClientActions.setTarget(id));
+            this.props.dispatch(ClientActions.setTarget(trace));
         }
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
-        target: ClientSelectors.getTarget(state),
+        target: ClientSelectors.getSelectedTarget(state),
         sensorsModule: SpaceshipSelectors.getModuleByType<SensorsModuleModel>(state, 'module.sensors')
     };
 };

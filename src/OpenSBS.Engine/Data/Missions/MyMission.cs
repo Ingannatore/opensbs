@@ -27,8 +27,8 @@ namespace OpenSBS.Engine.Data.Missions
             dummyTarget3.MoveTo(-6000, 0, 2000);
             World.AddEntity(dummyTarget3);
 
-            Spaceship.AddToStorage(ScarletPlasmaAmmo.Instance, 500);
-            Spaceship.AddToStorage(VioletPlasmaAmmo.Instance, 300);
+            Spaceship.Cargo.Add(ScarletPlasmaAmmo.Instance, 500);
+            Spaceship.Cargo.Add(VioletPlasmaAmmo.Instance, 300);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using OpenSBS.Engine.Data.Modules;
 using OpenSBS.Engine.Models;
+using OpenSBS.Engine.Models.Items;
 
 namespace OpenSBS.Engine.Data.Spaceships
 {
@@ -16,13 +17,13 @@ namespace OpenSBS.Engine.Data.Spaceships
         {
             Mass = 100000;
             Size = 50;
+            Cargo = ItemStorage.Create(1000);
 
-            Modules.Add(new GeneralStorage("storage1", 1));
             Modules.Add(new SmallIonEngine("engine1"));
             Modules.Add(new SmallRadarSensors("radar1"));
             Modules.Add(new PrototypeMagneticShield("shield1"));
-            Modules.Add(new SmallBlaster("blaster1"));
-            Modules.Add(new SmallBlaster("blaster2"));
+            Modules.Add(new MonoBlaster("blaster1"));
+            Modules.Add(new MonoBlaster("blaster2"));
         }
     }
 }

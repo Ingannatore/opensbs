@@ -1,6 +1,6 @@
-﻿export default interface CounterModel {
-    target: number,
+﻿export default interface ModuleTimerModel {
     current: number,
+    max: number,
     ratio: number,
     isCompleted: boolean,
 }

@@ -2,4 +2,5 @@
     id: string,
     type: string,
     name: string,
+    mass: number,
 }

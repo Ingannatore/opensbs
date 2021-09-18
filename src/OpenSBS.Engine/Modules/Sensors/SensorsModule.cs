@@ -6,11 +6,11 @@ namespace OpenSBS.Engine.Modules.Sensors
     public abstract class SensorsModule : Module
     {
         public int Range { get; protected set; }
-        public SensorsTraceCollection Traces { get; }
+        public EntityTraceCollection Traces { get; }
 
         protected SensorsModule(string id, string name) : base(id, ModuleType.Sensors, name)
         {
-            Traces = new SensorsTraceCollection();
+            Traces = new EntityTraceCollection();
         }
 
         public override void HandleAction(ClientAction action) { }

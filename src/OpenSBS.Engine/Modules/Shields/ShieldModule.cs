@@ -16,14 +16,14 @@ namespace OpenSBS.Engine.Modules.Shields
         public ShieldSectorCollection Sectors { get; }
         public int AvailableCalibrationPoints => Sectors.GetAvailableCalibrationPoints();
 
-        private readonly Counter _counter;
+        private readonly ModuleTimer _moduleTimer;
 
         protected ShieldModule(string id, string name) : base(id, ModuleType.Shield, name)
         {
             IsRaised = false;
             Sectors = new ShieldSectorCollection();
 
-            _counter = new Counter();
+            _moduleTimer = new ModuleTimer();
         }
 
         public override void HandleAction(ClientAction action)
@@ -34,7 +34,7 @@ namespace OpenSBS.Engine.Modules.Shields
                     IsRaised = !IsRaised;
                     if (IsRaised)
                     {
-                        _counter.Reset(1);
+                        _moduleTimer.Reset(1);
                     }
 
                     break;
@@ -62,14 +62,14 @@ namespace OpenSBS.Engine.Modules.Shields
                 return;
             }
 
-            _counter.Increment(deltaT.TotalSeconds);
-            if (!_counter.IsCompleted)
+            _moduleTimer.Advance(deltaT.TotalSeconds);
+            if (!_moduleTimer.IsCompleted)
             {
                 return;
             }
 
             Sectors.Update();
-            _counter.Reset(1);
+            _moduleTimer.Reset(1);
         }
     }
 }

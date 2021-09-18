@@ -42,13 +42,7 @@ namespace OpenSBS.Engine.Automata
             PushState(nextState);
         }
 
-        private void PopState()
-        {
-            _states.Pop();
-            _states.Peek().OnEnter(_module);
-        }
-
-        private void PushState(TS state)
+        public void PushState(TS state)
         {
             if (state == null)
             {
@@ -57,6 +51,12 @@ namespace OpenSBS.Engine.Automata
 
             _states.Push(state);
             state.OnEnter(_module);
+        }
+
+        private void PopState()
+        {
+            _states.Pop();
+            _states.Peek().OnEnter(_module);
         }
     }
 }
