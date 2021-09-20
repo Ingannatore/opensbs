@@ -17,7 +17,7 @@ namespace OpenSBS.Engine.Models.Modules
             Template = template;
         }
 
-        public abstract void HandleAction(ClientAction action);
+        public abstract void HandleAction(ClientAction action, Entity owner);
         public abstract void Update(TimeSpan deltaT, Entity owner, World world);
     }
 }

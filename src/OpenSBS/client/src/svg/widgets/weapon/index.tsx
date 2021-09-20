@@ -19,7 +19,6 @@ interface WeaponProps {
     entityId: string,
     selectedTarget: EntityTraceModel | null,
     weapon: WeaponModuleModel | undefined,
-    weaponTarget: EntityTraceModel | undefined,
 }
 
 class WeaponWidget extends React.Component<WeaponProps, {}> {
@@ -38,8 +37,8 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
         }
 
         let status = this.props.weapon.status;
-        if (this.props.weaponTarget) {
-            status += ` | ${this.props.weaponTarget.callSign}`
+        if (this.props.weapon.target) {
+            status += ` | ${this.props.weapon.target.callSign}`
         }
 
         return (
@@ -115,7 +114,6 @@ const mapStateToProps = (state: any, ownProps: any) => {
         selectedTarget: ClientSelectors.getSelectedTarget(state),
         entityId: SpaceshipSelectors.getId(state),
         weapon: weapon,
-        weaponTarget: weapon?.target ? SpaceshipSelectors.getTrace(state, weapon.target) : undefined,
     };
 };
 

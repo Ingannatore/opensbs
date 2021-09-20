@@ -23,7 +23,7 @@ namespace OpenSBS.Engine.Models.Modules
             return _modulesIndex[id];
         }
 
-        public T First<T>() where T : Module<ModuleTemplate>
+        public T First<T>() where T : IModule
         {
             return _modules.OfType<T>().First();
         }

@@ -20,7 +20,12 @@ namespace OpenSBS.Engine.Modules.Sensors
             Traces = new EntityTraceCollection();
         }
 
-        public override void HandleAction(ClientAction action) { }
+        public EntityTrace GetTrace(string entityId)
+        {
+            return Traces.Get(entityId);
+        }
+
+        public override void HandleAction(ClientAction action, Entity owner) { }
 
         public override void Update(TimeSpan deltaT, Entity owner, World world)
         {

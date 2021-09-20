@@ -23,7 +23,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             if (!_hasFired && WeaponHasValidTarget(weapon, world))
             {
                 _hasFired = true;
-                world.GetEntity(weapon.Target).ApplyDamage(weapon.Template.Damage);
+                world.GetEntity(weapon.Target.Id).ApplyDamage(weapon.Template.Damage);
             }
 
             weapon.Timer.Advance(deltaT.TotalSeconds);
@@ -46,7 +46,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
 
         private bool WeaponHasValidTarget(WeaponModule weapon, World world)
         {
-            return weapon.HasTarget() && world.ExistsEntity(weapon.Target);
+            return weapon.HasTarget() && world.ExistsEntity(weapon.Target.Id);
         }
     }
 }

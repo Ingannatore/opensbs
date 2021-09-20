@@ -27,6 +27,11 @@ namespace OpenSBS.Engine.Models.Entities
             Distance = 0;
         }
 
+        public bool IsOutOfRange(int range)
+        {
+            return Distance > range;
+        }
+
         public void Update(Entity owner, Entity target)
         {
             Position = target.Position;

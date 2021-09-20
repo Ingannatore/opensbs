@@ -31,7 +31,7 @@ namespace OpenSBS.Engine.Modules.Shields
             _countdownTimer = new CountdownTimer();
         }
 
-        public override void HandleAction(ClientAction action)
+        public override void HandleAction(ClientAction action, Entity owner)
         {
             switch (action.Type)
             {

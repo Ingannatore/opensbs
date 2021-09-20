@@ -4,6 +4,7 @@ using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Modules;
 using OpenSBS.Engine.Models.Templates;
+using OpenSBS.Engine.Modules.Sensors;
 using OpenSBS.Engine.Modules.Weapons.Automata;
 
 namespace OpenSBS.Engine.Modules.Weapons
@@ -14,7 +15,7 @@ namespace OpenSBS.Engine.Modules.Weapons
         private const string DisengageAction = "disengage";
         private readonly ModuleStateMachine<WeaponModule, WeaponState> _stateMachine;
 
-        public string Target { get; protected set; }
+        public EntityTrace Target { get; protected set; }
         public CountdownTimer Timer { get; }
         public string Status => _stateMachine.Current.GetName();
 
@@ -45,11 +46,12 @@ namespace OpenSBS.Engine.Modules.Weapons
             Target = null;
         }
 
-        public override void HandleAction(ClientAction action)
+        public override void HandleAction(ClientAction action, Entity owner)
         {
             if (action.Type == EngageAction)
             {
-                Target = action.PayloadTo<string>();
+                var targetId = action.PayloadTo<string>();
+                Target = owner.Modules.First<SensorsModule>().GetTrace(targetId);
             }
 
             if (action.Type == DisengageAction)

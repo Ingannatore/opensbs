@@ -22,7 +22,7 @@ namespace OpenSBS.Engine.Modules.Engines
 
         private EngineModule(EngineModuleTemplate template) : base(ModuleType.Engine, template) { }
 
-        public override void HandleAction(ClientAction action)
+        public override void HandleAction(ClientAction action, Entity owner)
         {
             switch (action.Type)
             {

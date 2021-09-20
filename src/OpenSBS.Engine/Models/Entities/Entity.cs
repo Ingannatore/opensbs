@@ -37,7 +37,7 @@ namespace OpenSBS.Engine.Models.Entities
         {
             if (!string.IsNullOrEmpty(action.Meta.Module))
             {
-                Modules.Get(action.Meta.Module).HandleAction(action);
+                Modules.Get(action.Meta.Module).HandleAction(action, this);
             }
         }
 

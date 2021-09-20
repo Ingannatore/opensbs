@@ -12,19 +12,9 @@ namespace OpenSBS.Engine.Models.Entities
             _traces = new Dictionary<string, EntityTrace>();
         }
 
-        public void Add(EntityTrace trace)
-        {
-            _traces[trace.Id] = trace;
-        }
-
         public EntityTrace Get(string entityId)
         {
-            return _traces[entityId];
-        }
-
-        public bool Exists(Entity target)
-        {
-            return _traces.ContainsKey(target.Id);
+            return _traces.ContainsKey(entityId) ? _traces[entityId] : null;
         }
 
         public void Update(Entity owner, Entity target, int range)
@@ -35,8 +25,9 @@ namespace OpenSBS.Engine.Models.Entities
             }
 
             _traces[target.Id].Update(owner, target);
-            if (_traces[target.Id].Distance > range)
+            if (_traces[target.Id].IsOutOfRange(range))
             {
+                // TODO: Wrong! Should be marked as out-of-range without losing any data
                 _traces.Remove(target.Id);
             }
         }
