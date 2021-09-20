@@ -28,7 +28,7 @@ export default class TargetElement extends React.Component<TargetPropsModel, {}>
         const icon = `/images/icons.svg#icon-${this.props.trace.type}`
 
         return (
-            <g transform={this.translation} key={`target-trace-${this.props.trace.id}`}>
+            <g transform={this.translation}>
                 <line
                     x1="0" y1="0"
                     x2="450" y2="0"

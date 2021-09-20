@@ -59,6 +59,7 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
                 >QUANTITY</text>
 
                 {ammunitions.map((value: ItemStackModel, index: number) => <AmmunitionElement
+                    key={`ammo-element-${value.item.name.toLowerCase()}`}
                     x={0} y={30 + (40 * index)}
                     name={value.item.name} type={value.item.type}
                     quantity={value.quantity}

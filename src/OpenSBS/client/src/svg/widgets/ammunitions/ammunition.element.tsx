@@ -29,7 +29,7 @@ export default class AmmunitionElement extends React.Component<AmmunitionElement
         const typeName = AmmunitionElement.getTypeName(this.props.type);
 
         return (
-            <g transform={this.translation} key={'item-' + this.props.type}>
+            <g transform={this.translation}>
                 <line
                     x1="0" y1="0"
                     x2="450" y2="0"

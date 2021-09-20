@@ -79,6 +79,7 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
     private renderTargetRow(trace: EntityTraceModel, index: number) {
         return (
             <TargetElement
+                key={`target-element-${trace.callSign}`}
                 x={0} y={30 + (40 * index)}
                 trace={trace}
                 isSelected={trace.id === this.props.target?.id}
