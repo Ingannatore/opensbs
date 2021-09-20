@@ -4,21 +4,25 @@ namespace OpenSBS.Engine.Modules.Shields
 {
     public class ShieldSector
     {
-        public string Side { get; protected set; }
+        private readonly int _baseCapacity;
+        private readonly int _baseRechargeRate;
+
+        public string Side { get; }
         public int Capacity { get; protected set; }
-        public int CurrentCapacity { get; protected set; }
         public int Calibration { get; protected set; }
-        public int BaseRechargeRate { get; protected set; }
-        public int CurrentRechargeRate { get; protected set; }
+        public int RechargeRate { get; protected set; }
+        public double Ratio { get; protected set; }
 
         public ShieldSector(string side, int capacity, int rechargeRate)
         {
             Side = side;
-            Capacity = capacity;
-            CurrentCapacity = new Random().Next(10, 100);
+            Capacity = new Random().Next(10, 100);
             Calibration = 3;
-            BaseRechargeRate = rechargeRate;
-            CurrentRechargeRate = rechargeRate;
+            RechargeRate = rechargeRate;
+            Ratio = Capacity / (double)capacity;
+
+            _baseCapacity = capacity;
+            _baseRechargeRate = rechargeRate;
         }
 
         public void SetCalibration(int value, int availableCalibrationPoints)
@@ -40,15 +44,16 @@ namespace OpenSBS.Engine.Modules.Shields
 
         public void Update()
         {
-            if (CurrentCapacity < Capacity)
+            if (Capacity < _baseCapacity)
             {
-                CurrentCapacity = Math.Min(CurrentCapacity + CurrentRechargeRate, Capacity);
+                Capacity = Math.Min(Capacity + RechargeRate, _baseCapacity);
+                Ratio = Capacity / (double)_baseCapacity;
             }
         }
 
         private void UpdateCurrentRechargeRate()
         {
-            CurrentRechargeRate = (int)Math.Round(BaseRechargeRate * GetCalibrationFactor());
+            RechargeRate = (int)Math.Round(_baseRechargeRate * GetCalibrationFactor());
         }
 
         private double GetCalibrationFactor()

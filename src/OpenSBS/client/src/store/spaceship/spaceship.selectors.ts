@@ -1,6 +1,6 @@
 ﻿import {StateModel} from '../state.model';
 import Vector3 from '../../models/vector3';
-import {EntityModuleModel} from '../../models/entity-module.model';
+import EntityModuleModel from '../../models/entity-module.model';
 import WeaponModuleModel from '../../modules/weapon-module.model';
 import EntityTraceModel from '../../modules/entity-trace.model';
 import {SensorsModuleModel} from '../../modules/sensors-module.model';

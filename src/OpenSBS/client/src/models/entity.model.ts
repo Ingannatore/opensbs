@@ -1,6 +1,6 @@
 ﻿import Vector3 from './vector3';
 import ItemModel from './item.model';
-import {EntityModuleModel} from './entity-module.model';
+import EntityModuleModel from './entity-module.model';
 import ItemStorageModel from './item-storage.model';
 
 export interface EntityModel extends ItemModel {

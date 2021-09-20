@@ -1,7 +1,7 @@
-﻿export interface EntityModuleModel {
+﻿import ModuleTemplateModel from './module-template.model';
+
+export default interface EntityModuleModel {
     id: string,
     type: string,
-    name: string,
-    mass: number,
-    size: number,
+    template: ModuleTemplateModel,
 }

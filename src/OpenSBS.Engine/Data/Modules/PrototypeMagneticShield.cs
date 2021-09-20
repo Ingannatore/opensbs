@@ -1,15 +1,31 @@
-﻿using OpenSBS.Engine.Modules.Shields;
+﻿using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Data.Modules
 {
-    public class PrototypeMagneticShield : ShieldModule
+    public class PrototypeMagneticShield : ShieldModuleTemplate
     {
-        public PrototypeMagneticShield(string id) : base(id, "Prototype Magnetic Shield")
+        private static readonly object ClassLock = new object();
+        private static PrototypeMagneticShield _instance;
+
+        public static PrototypeMagneticShield Instance
         {
-            Mass = 10000;
-            Size = 5;
-            BaseCapacity = 100;
-            BaseRechargeRate = 4;
+            get
+            {
+                lock (ClassLock)
+                {
+                    return _instance ??= new PrototypeMagneticShield();
+                }
+            }
+        }
+
+        private PrototypeMagneticShield()
+        {
+            Name = "Mono Blaster";
+            Mass = 2000;
+            Size = 4;
+
+            Capacity = 100;
+            RechargeRate = 4;
         }
     }
 }

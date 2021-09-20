@@ -2,28 +2,31 @@
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Modules;
+using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Modules.Shields
 {
-    public abstract class ShieldModule : Module
+    public class ShieldModule : Module<ShieldModuleTemplate>
     {
         private const string ToggleAction = "toggle";
         private const string SetCalibrationAction = "setCalibration";
         private const string ResetCalibrationAction = "resetCalibration";
         private const string ReinforceSideAction = "reinforceSide";
+        private readonly CountdownTimer _countdownTimer;
 
         public bool IsRaised { get; protected set; }
-        public int BaseCapacity { get; protected set; }
-        public int BaseRechargeRate { get; protected set; }
         public ShieldSectorCollection Sectors { get; }
         public int AvailableCalibrationPoints => Sectors.GetAvailableCalibrationPoints();
 
-        private readonly CountdownTimer _countdownTimer;
+        public static ShieldModule Create(ShieldModuleTemplate template)
+        {
+            return new ShieldModule(template);
+        }
 
-        protected ShieldModule(string id, string name) : base(id, ModuleType.Shield, name)
+        private ShieldModule(ShieldModuleTemplate template) : base(ModuleType.Shield, template)
         {
             IsRaised = false;
-            Sectors = new ShieldSectorCollection();
+            Sectors = new ShieldSectorCollection(Template.Capacity, Template.RechargeRate);
 
             _countdownTimer = new CountdownTimer();
         }
@@ -54,11 +57,6 @@ namespace OpenSBS.Engine.Modules.Shields
 
         public override void Update(TimeSpan deltaT, Entity owner, World world)
         {
-            if (Sectors.IsEmpty())
-            {
-                Sectors.Initialize(BaseCapacity, BaseRechargeRate);
-            }
-
             if (!IsRaised)
             {
                 return;

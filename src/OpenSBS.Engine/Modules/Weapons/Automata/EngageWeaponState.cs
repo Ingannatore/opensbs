@@ -15,7 +15,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
         public override void OnEnter(WeaponModule weapon)
         {
             _hasFired = false;
-            weapon.Timer.Reset(weapon.CycleTime);
+            weapon.Timer.Reset(weapon.Template.CycleTime);
         }
 
         public override WeaponState Update(WeaponModule weapon, TimeSpan deltaT, Entity owner, World world)
@@ -23,7 +23,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             if (!_hasFired && WeaponHasValidTarget(weapon, world))
             {
                 _hasFired = true;
-                world.GetEntity(weapon.Target).ApplyDamage(weapon.Damage);
+                world.GetEntity(weapon.Target).ApplyDamage(weapon.Template.Damage);
             }
 
             weapon.Timer.Advance(deltaT.TotalSeconds);

@@ -2,22 +2,25 @@
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Modules;
+using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Modules.Engines
 {
-    public abstract class EngineModule : Module
+    public class EngineModule : Module<EngineModuleTemplate>
     {
         private const string SetThrottleAction = "setThrottle";
         private const string SetRudderAction = "setRudder";
 
         public int Throttle { get; protected set; }
         public int Rudder { get; protected set; }
-        public int MaximumSpeed { get; protected set; }
-        public int Acceleration { get; protected set; }
-        public int Deceleration { get; protected set; }
-        public int RotationSpeed { get; protected set; }
+        public double TargetSpeed { get; protected set; }
 
-        protected EngineModule(string id, string name) : base(id, ModuleType.Engine, name) { }
+        public static EngineModule Create(EngineModuleTemplate template)
+        {
+            return new EngineModule(template);
+        }
+
+        private EngineModule(EngineModuleTemplate template) : base(ModuleType.Engine, template) { }
 
         public override void HandleAction(ClientAction action)
         {
@@ -46,25 +49,25 @@ namespace OpenSBS.Engine.Modules.Engines
                 return 0;
             }
 
-            return rudderDirection * RotationSpeed * deltaT.TotalSeconds;
+            return rudderDirection * Template.RotationSpeed * deltaT.TotalSeconds;
         }
 
         private double CalculateLinearSpeed(TimeSpan deltaT, Entity owner)
         {
-            var targetSpeed = MaximumSpeed * (Throttle / 100.0);
+            TargetSpeed = Template.MaximumSpeed * (Throttle / 100.0);
             var currentLinearSpeed = owner.LinearSpeed;
-            var linearSpeedDirection = Math.Sign(targetSpeed - currentLinearSpeed);
+            var linearSpeedDirection = Math.Sign(TargetSpeed - currentLinearSpeed);
 
             if (linearSpeedDirection > 0)
             {
-                var deltaSpeed = Acceleration * deltaT.TotalSeconds;
-                return Math.Min(currentLinearSpeed + deltaSpeed, targetSpeed);
+                var deltaSpeed = Template.Acceleration * deltaT.TotalSeconds;
+                return Math.Min(currentLinearSpeed + deltaSpeed, TargetSpeed);
             }
 
             if (linearSpeedDirection < 0)
             {
-                var deltaSpeed = Deceleration * deltaT.TotalSeconds;
-                return Math.Max(currentLinearSpeed - deltaSpeed, targetSpeed);
+                var deltaSpeed = Template.Deceleration * deltaT.TotalSeconds;
+                return Math.Max(currentLinearSpeed - deltaSpeed, TargetSpeed);
             }
 
             return currentLinearSpeed;

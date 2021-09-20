@@ -1,4 +1,4 @@
-﻿using OpenSBS.Engine.Data.Templates;
+﻿using OpenSBS.Engine.Data.Spaceships.Templates;
 using OpenSBS.Engine.Models.Entities;
 
 namespace OpenSBS.Engine.Data.Spaceships

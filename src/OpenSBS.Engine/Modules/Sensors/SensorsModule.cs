@@ -2,15 +2,20 @@
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Modules;
+using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Modules.Sensors
 {
-    public abstract class SensorsModule : Module
+    public class SensorsModule : Module<SensorsModuleTemplate>
     {
-        public int Range { get; protected set; }
         public EntityTraceCollection Traces { get; }
 
-        protected SensorsModule(string id, string name) : base(id, ModuleType.Sensors, name)
+        public static SensorsModule Create(SensorsModuleTemplate template)
+        {
+            return new SensorsModule(template);
+        }
+
+        private SensorsModule(SensorsModuleTemplate template) : base(ModuleType.Sensors, template)
         {
             Traces = new EntityTraceCollection();
         }
@@ -29,7 +34,7 @@ namespace OpenSBS.Engine.Modules.Sensors
 
             foreach (var entity in world)
             {
-                Traces.Update(owner, entity, Range);
+                Traces.Update(owner, entity, Template.Range);
             }
         }
     }

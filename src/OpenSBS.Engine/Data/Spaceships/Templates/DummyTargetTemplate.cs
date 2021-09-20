@@ -1,7 +1,7 @@
 ﻿using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Templates;
 
-namespace OpenSBS.Engine.Data.Templates
+namespace OpenSBS.Engine.Data.Spaceships.Templates
 {
     public class DummyTargetTemplate : EntityTemplate
     {

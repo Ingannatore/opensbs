@@ -1,6 +1,10 @@
 ﻿using OpenSBS.Engine.Data.Modules;
-using OpenSBS.Engine.Data.Templates;
+using OpenSBS.Engine.Data.Spaceships.Templates;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Modules.Engines;
+using OpenSBS.Engine.Modules.Sensors;
+using OpenSBS.Engine.Modules.Shields;
+using OpenSBS.Engine.Modules.Weapons;
 
 namespace OpenSBS.Engine.Data.Spaceships
 {
@@ -15,11 +19,11 @@ namespace OpenSBS.Engine.Data.Spaceships
             id, name, callsign, ViperInterceptorTemplate.Instance
         )
         {
-            Modules.Add(new SmallIonEngine("engine1"));
-            Modules.Add(new SmallRadarSensors("radar1"));
-            Modules.Add(new PrototypeMagneticShield("shield1"));
-            Modules.Add(new MonoBlaster("blaster1"));
-            Modules.Add(new MonoBlaster("blaster2"));
+            Modules.Add(EngineModule.Create(LimitedIonEngine.Instance));
+            Modules.Add(SensorsModule.Create(ScatteredLidarSensors.Instance));
+            Modules.Add(ShieldModule.Create(PrototypeMagneticShield.Instance));
+            Modules.Add(WeaponModule.Create(MonoBlaster.Instance));
+            Modules.Add(WeaponModule.Create(MonoBlaster.Instance));
         }
     }
 }

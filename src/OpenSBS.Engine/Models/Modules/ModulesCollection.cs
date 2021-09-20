@@ -3,37 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Models.Modules
 {
-    public class ModulesCollection : IEnumerable<Module>
+    public class ModulesCollection : IEnumerable<IModule>
     {
-        private readonly ICollection<Module> _modules;
-        private readonly IDictionary<string, Module> _modulesIndex;
+        private readonly ICollection<IModule> _modules;
+        private readonly IDictionary<string, IModule> _modulesIndex;
 
         public ModulesCollection()
         {
-            _modules = new List<Module>();
-            _modulesIndex = new Dictionary<string, Module>();
+            _modules = new List<IModule>();
+            _modulesIndex = new Dictionary<string, IModule>();
         }
 
-        public Module Get(string id)
+        public IModule Get(string id)
         {
             return _modulesIndex[id];
         }
 
-        public T First<T>() where T : Module
+        public T First<T>() where T : Module<ModuleTemplate>
         {
             return _modules.OfType<T>().First();
         }
 
-        public void Add(Module module)
+        public void Add(IModule module)
         {
             _modules.Add(module);
             _modulesIndex.Add(module.Id, module);
         }
 
-        public void Remove(Module module)
+        public void Remove(IModule module)
         {
             _modules.Remove(module);
             _modulesIndex.Remove(module.Id);
@@ -47,7 +48,7 @@ namespace OpenSBS.Engine.Models.Modules
             }
         }
 
-        public IEnumerator<Module> GetEnumerator()
+        public IEnumerator<IModule> GetEnumerator()
         {
             return _modules.GetEnumerator();
         }

@@ -33,7 +33,6 @@ export default class ShieldElement extends React.Component<ShieldElementProps, {
             return null;
         }
 
-        const ratio = this.props.shieldSector.currentCapacity / this.props.shieldSector.capacity;
         return (
             <g transform={this.translation}>
                 <text
@@ -44,11 +43,11 @@ export default class ShieldElement extends React.Component<ShieldElementProps, {
                 <ValueElement
                     x={0} y={60}
                     label="hit points"
-                >{this.props.shieldSector.currentCapacity}</ValueElement>
+                >{this.props.shieldSector.capacity}</ValueElement>
                 <CylinderElement
                     x={-25} y={95}
                     height={206}
-                    ratio={ratio}
+                    ratio={this.props.shieldSector.ratio}
                 />
                 <ShieldCalibrationElement
                     x={5} y={95}
@@ -59,7 +58,7 @@ export default class ShieldElement extends React.Component<ShieldElementProps, {
                 <ValueElement
                     x={0} y={340}
                     label="HP/sec"
-                >{this.props.shieldSector.currentRechargeRate}</ValueElement>
+                >{this.props.shieldSector.rechargeRate}</ValueElement>
                 <ButtonElement
                     x={-45} y={370}
                     fontSize={1}

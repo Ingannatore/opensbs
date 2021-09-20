@@ -19,16 +19,17 @@ class EngineWidget extends React.Component<EnginePropsModel, {}> {
     }
 
     public render() {
-        const throttle = this.props.engineModule?.throttle ?? 0;
-        const targetSpeed = Math.round((this.props.engineModule?.maximumSpeed ?? 0) * (throttle / 100));
+        if (!this.props.engineModule) {
+            return null;
+        }
 
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={450} height={610} isOffline={!this.props.engineModule}>
                 <g transform="translate(20 0)">
                     <ThrottleElement
                         x={0} y={10}
-                        throttle={throttle}
-                        targetSpeed={targetSpeed}
+                        throttle={this.props.engineModule.throttle}
+                        targetSpeed={this.props.engineModule.targetSpeed}
                         onClick={(value) => this.setThrottle(value)}
                     />
                     <line

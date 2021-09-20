@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Modules;
-using OpenSBS.Engine.Modules;
 
 namespace OpenSBS.Engine.Automata
 {
-    public class ModuleStateMachine<TM, TS> where TM : Module where TS : ModuleState<TM, TS>
+    public class ModuleStateMachine<TM, TS> where TM : IModule where TS : ModuleState<TM, TS>
     {
         public TS Current => _states.Peek();
 

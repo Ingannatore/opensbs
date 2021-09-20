@@ -1,21 +1,20 @@
 ﻿using System;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Models.Modules
 {
-    public abstract class Module
+    public abstract class Module<T> : IModule where T : ModuleTemplate
     {
         public string Id { get; }
         public string Type { get; }
-        public string Name { get; }
-        public int Mass { get; protected set; }
-        public int Size { get; protected set; }
+        public T Template { get; }
 
-        protected Module(string id, string type, string name)
+        protected Module(string type, T template)
         {
-            Id = id;
+            Id = Guid.NewGuid().ToString("N");
             Type = type;
-            Name = name;
+            Template = template;
         }
 
         public abstract void HandleAction(ClientAction action);

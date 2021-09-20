@@ -4,7 +4,7 @@ import ClientStateModel from './client-state.model';
 import {EntityModel} from '../../models/entity.model';
 import EntityTraceModel from '../../modules/entity-trace.model';
 import SpaceshipActions from '../spaceship/spaceship.actions';
-import {EntityModuleModel} from '../../models/entity-module.model';
+import EntityModuleModel from '../../models/entity-module.model';
 import {SensorsModuleModel} from '../../modules/sensors-module.model';
 import ModuleType from '../../modules/module-type';
 

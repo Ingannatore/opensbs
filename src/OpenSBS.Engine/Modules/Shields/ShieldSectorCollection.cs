@@ -10,34 +10,27 @@ namespace OpenSBS.Engine.Modules.Shields
         private const int MaximumCalibrationPoints = 12;
         private readonly IDictionary<string, ShieldSector> _sectors;
 
-        public ShieldSectorCollection()
+        public ShieldSectorCollection(int capacity, int rechargeRate)
         {
-            _sectors = new Dictionary<string, ShieldSector>();
-        }
-
-        public bool IsEmpty()
-        {
-            return _sectors.Count == 0;
-        }
-
-        public void Initialize(int baseCapacity, int baseRechargeRate)
-        {
-            _sectors.Add(
-                EntitySide.Front,
-                new ShieldSector(EntitySide.Front, baseCapacity, baseRechargeRate)
-            );
-            _sectors.Add(
-                EntitySide.Left,
-                new ShieldSector(EntitySide.Left, baseCapacity, baseRechargeRate)
-            );
-            _sectors.Add(
-                EntitySide.Right,
-                new ShieldSector(EntitySide.Right, baseCapacity, baseRechargeRate)
-            );
-            _sectors.Add(
-                EntitySide.Rear,
-                new ShieldSector(EntitySide.Rear, baseCapacity, baseRechargeRate)
-            );
+            _sectors = new Dictionary<string, ShieldSector>
+            {
+                {
+                    EntitySide.Front,
+                    new ShieldSector(EntitySide.Front, capacity, rechargeRate)
+                },
+                {
+                    EntitySide.Left,
+                    new ShieldSector(EntitySide.Left, capacity, rechargeRate)
+                },
+                {
+                    EntitySide.Right,
+                    new ShieldSector(EntitySide.Right, capacity, rechargeRate)
+                },
+                {
+                    EntitySide.Rear,
+                    new ShieldSector(EntitySide.Rear, capacity, rechargeRate)
+                }
+            };
         }
 
         public int GetAvailableCalibrationPoints()

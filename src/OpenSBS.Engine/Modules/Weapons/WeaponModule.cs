@@ -3,27 +3,30 @@ using OpenSBS.Engine.Automata;
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Modules;
+using OpenSBS.Engine.Models.Templates;
 using OpenSBS.Engine.Modules.Weapons.Automata;
 
 namespace OpenSBS.Engine.Modules.Weapons
 {
-    public abstract class WeaponModule : Module
+    public class WeaponModule : Module<WeaponModuleTemplate>
     {
         private const string EngageAction = "engage";
         private const string DisengageAction = "disengage";
+        private readonly ModuleStateMachine<WeaponModule, WeaponState> _stateMachine;
 
-        public int Damage { get; protected set; }
-        public int Range { get; protected set; }
-        public int CycleTime { get; protected set; }
         public string Target { get; protected set; }
         public CountdownTimer Timer { get; }
         public string Status => _stateMachine.Current.GetName();
 
-        private readonly ModuleStateMachine<WeaponModule, WeaponState> _stateMachine;
+        public static WeaponModule Create(WeaponModuleTemplate template)
+        {
+            return new WeaponModule(template);
+        }
 
-        public WeaponModule(string id, string name) : base(id, ModuleType.Weapon, name)
+        private WeaponModule(WeaponModuleTemplate template) : base(ModuleType.Weapon, template)
         {
             Timer = new CountdownTimer();
+
             _stateMachine = new ModuleStateMachine<WeaponModule, WeaponState>(this, new IdleWeaponState());
         }
 
@@ -34,7 +37,7 @@ namespace OpenSBS.Engine.Modules.Weapons
 
         public void ResetTimer()
         {
-            Timer.Reset(CycleTime);
+            Timer.Reset(Template.CycleTime);
         }
 
         public void ResetTarget()

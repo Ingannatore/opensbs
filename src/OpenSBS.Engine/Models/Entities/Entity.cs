@@ -3,7 +3,6 @@ using System.Numerics;
 using OpenSBS.Engine.Models.Items;
 using OpenSBS.Engine.Models.Modules;
 using OpenSBS.Engine.Models.Templates;
-using OpenSBS.Engine.Modules;
 using OpenSBS.Engine.Utils;
 
 namespace OpenSBS.Engine.Models.Entities

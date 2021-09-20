@@ -48,7 +48,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                     x="20" y="15"
                     fontSize="1rem" textAnchor="start"
                     fill={ColorPalette.HEADER}
-                >{this.props.weapon.name.toUpperCase()}</text>
+                >{this.props.weapon.template.name.toUpperCase()}</text>
                 <text
                     x="440" y="15"
                     fontSize="1rem" textAnchor="end"

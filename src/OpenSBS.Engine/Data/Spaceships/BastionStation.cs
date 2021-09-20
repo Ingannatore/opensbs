@@ -1,6 +1,7 @@
 ﻿using OpenSBS.Engine.Data.Modules;
-using OpenSBS.Engine.Data.Templates;
+using OpenSBS.Engine.Data.Spaceships.Templates;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Modules.Sensors;
 
 namespace OpenSBS.Engine.Data.Spaceships
 {
@@ -15,7 +16,7 @@ namespace OpenSBS.Engine.Data.Spaceships
             id, name, callSign, BastionStationTemplate.Instance
         )
         {
-            Modules.Add(new SmallRadarSensors("radar1"));
+            Modules.Add(SensorsModule.Create(ScatteredLidarSensors.Instance));
         }
     }
 }
