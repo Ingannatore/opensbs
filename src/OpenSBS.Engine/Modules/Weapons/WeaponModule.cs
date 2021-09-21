@@ -17,7 +17,7 @@ namespace OpenSBS.Engine.Modules.Weapons
 
         public EntityTrace Target { get; protected set; }
         public CountdownTimer Timer { get; }
-        public string Status => _stateMachine.Current.GetName();
+        public string Status => _stateMachine.State.GetName();
 
         public static WeaponModule Create(WeaponModuleTemplate template)
         {
@@ -28,12 +28,17 @@ namespace OpenSBS.Engine.Modules.Weapons
         {
             Timer = new CountdownTimer();
 
-            _stateMachine = new ModuleStateMachine<WeaponModule, WeaponState>(this, new IdleWeaponState());
+            _stateMachine = new ModuleStateMachine<WeaponModule, WeaponState>(this, IdleState.Create());
         }
 
         public bool HasTarget()
         {
             return Target != null;
+        }
+
+        public bool IsTargetOutOfRange()
+        {
+            return Target?.IsOutOfRange(Template.Range) ?? false;
         }
 
         public void ResetTimer()
@@ -62,7 +67,7 @@ namespace OpenSBS.Engine.Modules.Weapons
 
         public override void Update(TimeSpan deltaT, Entity owner, World world)
         {
-            _stateMachine.Update(deltaT, owner, world);
+            _stateMachine.Update(deltaT, this, owner, world);
         }
     }
 }

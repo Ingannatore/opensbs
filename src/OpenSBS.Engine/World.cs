@@ -29,6 +29,11 @@ namespace OpenSBS.Engine
             return _entities[id];
         }
 
+        public void DamageEntity(string id, int amount)
+        {
+            _entities[id].ApplyDamage(amount);
+        }
+
         public void Update(TimeSpan deltaT)
         {
             foreach (var entity in _entities.Values)
