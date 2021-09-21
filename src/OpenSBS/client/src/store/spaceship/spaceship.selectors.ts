@@ -58,6 +58,10 @@ const getWeapon = (state: StateModel, index: number): WeaponModuleModel | undefi
     return weapons.length > index ? weapons[index] : undefined
 }
 
+const getTraces = (state: StateModel): EntityTraceModel[] => {
+    return getSensors(state)?.traces ?? [];
+}
+
 const getTrace = (state: StateModel, id: string): EntityTraceModel | undefined => {
     const sensors = getModuleByType<SensorsModuleModel>(state, ModuleType.SENSORS);
     if (!sensors) {
@@ -79,5 +83,6 @@ export default {
     getEngine,
     getShield,
     getWeapon,
+    getTraces,
     getTrace,
 }
