@@ -9,6 +9,7 @@ import {SensorsModuleModel} from '../../modules/sensors-module.model';
 import ModuleType from '../../modules/module-type';
 
 const defaultState: ClientStateModel = {
+    zoomFactor: 1,
     selectedTarget: null,
     selectedAmmo: null,
 };
@@ -22,6 +23,10 @@ const existsTrace = (entity: EntityModel, trace: EntityTraceModel): boolean => {
 }
 
 export default (state = defaultState, action: ActionModel) => {
+    if (action.type === ClientActions.Types.SET_ZOOM && action.payload) {
+        return {...state, zoomFactor: action.payload};
+    }
+
     if (action.type === ClientActions.Types.SET_TARGET && action.payload) {
         return {...state, selectedTarget: action.payload};
     }

@@ -5,6 +5,7 @@ import SvgTransforms from '../../../lib/svg-transforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
+import ColorPalette from '../../color-palette';
 
 class CompassRadialWidget extends React.Component<CompassPropsModel, {}> {
     private readonly translation: string;
@@ -37,10 +38,10 @@ class CompassRadialWidget extends React.Component<CompassPropsModel, {}> {
             return (
                 <g key={'compass-radial-marker-' + degrees} transform={SvgTransforms.rotate(degrees)}>
                     <text
-                        x="0" y="-484"
+                        x="0" y="-474"
                         textAnchor="middle"
                         fontSize="1.5rem"
-                        fill="whitesmoke"
+                        fill={ColorPalette.FILLER}
                     >{degrees}</text>
                 </g>
             );
@@ -49,9 +50,9 @@ class CompassRadialWidget extends React.Component<CompassPropsModel, {}> {
         return (
             <g key={'compass-radial-marker-' + degrees} transform={SvgTransforms.rotate(degrees)}>
                 <line
-                    x1="0" y1="-478"
-                    x2="0" y2="-492"
-                    stroke="grey" strokeWidth="2"
+                    x1="0" y1="-468"
+                    x2="0" y2="-482"
+                    stroke={ColorPalette.TEXT} strokeWidth="2"
                 />
             </g>
         );

@@ -6,11 +6,15 @@ interface DisplayElementModel {
     x: number,
     y: number,
     topLabel: string,
-    bottomLabel: string,
+    bottomLabel: string | undefined,
 }
 
 export default class DisplayElement extends React.Component<DisplayElementModel, {}> {
     private readonly translation: string;
+
+    public static defaultProps = {
+        bottomLabel: undefined,
+    };
 
     constructor(props: DisplayElementModel) {
         super(props);
@@ -31,11 +35,11 @@ export default class DisplayElement extends React.Component<DisplayElementModel,
                     fontSize="5rem" textAnchor="middle"
                     fill={ColorPalette.TEXT}
                 >{this.props.children}</text>
-                <text
+                {this.props.bottomLabel && <text
                     x="0" y="55"
                     fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.TEXT}
-                >{this.props.bottomLabel}</text>
+                >{this.props.bottomLabel}</text>}
             </g>
         );
     }

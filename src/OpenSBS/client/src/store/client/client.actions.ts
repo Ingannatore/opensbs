@@ -2,11 +2,18 @@
 import EntityTraceModel from '../../modules/entity-trace.model';
 
 const Types = {
+    SET_ZOOM: 'client/zoom/set',
     SET_TARGET: 'client/target/set',
     RESET_TARGET: 'client/target/reset',
     SET_AMMO: 'client/ammo/set',
     RESET_AMMO: 'client/ammo/reset',
 };
+
+const setZoom = (value: number): ActionModel => ({
+    type: Types.SET_ZOOM,
+    payload: value,
+    meta: null,
+});
 
 const setTarget = (trace: EntityTraceModel): ActionModel => ({
     type: Types.SET_TARGET,
@@ -34,6 +41,7 @@ const resetAmmo = (): ActionModel => ({
 
 export default {
     Types,
+    setZoom,
     setTarget,
     resetTarget,
     setAmmo,

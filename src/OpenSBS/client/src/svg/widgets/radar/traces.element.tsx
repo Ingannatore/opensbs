@@ -11,30 +11,37 @@ import {SensorsModuleModel} from '../../../modules/sensors-module.model';
 import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
 import ColorPalette from '../../color-palette';
 
-interface TracesOverlayModel {
+interface TracesElementProps {
+    size: number,
     dispatch: any,
-    range: number,
+    zoomFactor: number,
     direction: Vector3,
     target: EntityTraceModel | null,
     sensors: SensorsModuleModel | undefined,
 }
 
-class TracesOverlay extends React.Component<TracesOverlayModel, {}> {
-    constructor(props: TracesOverlayModel) {
+class TracesElement extends React.Component<TracesElementProps, {}> {
+    constructor(props: TracesElementProps) {
         super(props);
 
         this.onTraceClick = this.onTraceClick.bind(this);
     }
+
+    public static defaultProps = {
+        zoomFactor: 1,
+    };
 
     public render() {
         if (!this.props.sensors) {
             return null;
         }
 
+        const range = Math.round(8000 * (1 / this.props.zoomFactor));
+        const scale = 400 / range;
+
         const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
-        const scale = 440 / this.props.range;
         const traces = this.props.sensors.traces
-        .filter((trace: EntityTraceModel) => trace.distance <= this.props.range)
+        .filter((trace: EntityTraceModel) => trace.distance <= range)
         .map((trace: EntityTraceModel) => this.renderTrace(trace, scale, yaw));
 
         return (
@@ -83,9 +90,10 @@ class TracesOverlay extends React.Component<TracesOverlayModel, {}> {
 
 const mapStateToProps = (state: any) => {
     return {
+        zoomFactor: ClientSelectors.getZoomFactor(state),
         target: ClientSelectors.getSelectedTarget(state),
         sensors: SpaceshipSelectors.getSensors(state),
     };
 };
 
-export default connect(mapStateToProps)(TracesOverlay);
+export default connect(mapStateToProps)(TracesElement);

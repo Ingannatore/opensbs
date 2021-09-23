@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svg-transforms';
+import ColorPalette from '../color-palette';
 
 interface SwitchElementModel {
     x: number,
@@ -38,6 +39,12 @@ export default class SwitchElement extends React.Component<SwitchElementModel, {
         return (
             <g transform={this.translation} cursor={this.props.enabled ? 'pointer' : 'not-allowed'}
                onClick={this.clickHandler}>
+                <rect
+                    x="0" y="0" rx={this.props.rx}
+                    width={this.props.width} height={this.props.height} strokeWidth="2"
+                    fill={ColorPalette.BACKGROUND}
+                    stroke="none"
+                />
                 <rect
                     x="0" y="0" rx={this.props.rx}
                     width={this.props.width} height={this.props.height} strokeWidth="2"
