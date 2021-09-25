@@ -15,46 +15,41 @@ namespace OpenSBS.Engine.Models.Items
             _items = new Dictionary<string, ItemStack>();
         }
 
-        public bool Contains(string id)
+        public bool Contains(string itemId)
         {
-            return _items.ContainsKey(id);
+            return _items.ContainsKey(itemId);
         }
 
         public void Add(Item item, int quantity)
         {
+            if (quantity <= 0)
+            {
+                return;
+            }
+
             if (!_items.ContainsKey(item.Id))
             {
-                _items.Add(item.Id, new ItemStack(item, 0));
+                _items.Add(item.Id, ItemStack.Create(item, 0));
             }
 
             _items[item.Id].Increment(quantity);
         }
 
-        public void Remove(string id)
+        public ItemStack Extract(string itemId, int quantity)
         {
-            _items.Remove(id);
-        }
-
-        public void Remove(string id, int quantity)
-        {
-            if (!_items.ContainsKey(id))
+            if (quantity <= 0 || !_items.ContainsKey(itemId))
             {
-                return;
+                return null;
             }
 
-            var item = _items[id];
-            if (quantity == 0 || !item.HasQuantity(quantity))
+            var item = _items[itemId];
+            if (item.HasNoMoreQuantityThen(quantity))
             {
-                _items.Remove(id);
-                return;
+                _items.Remove(itemId);
+                return item;
             }
 
-            item.Decrement(quantity);
-        }
-
-        public void Clear()
-        {
-            _items.Clear();
+            return item.Split(quantity);
         }
 
         public IEnumerator<ItemStack> GetEnumerator()

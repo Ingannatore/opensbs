@@ -7,7 +7,6 @@ namespace OpenSBS.Engine.Automata
     {
         public virtual void OnEnter(TM module) { }
 
-        public abstract string GetName();
         public abstract TS Update(TimeSpan deltaT, TM module, Entity owner, World world);
     }
 }

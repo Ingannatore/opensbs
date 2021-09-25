@@ -7,9 +7,10 @@ interface GaugeProps {
     x: number,
     y: number,
     fill: string,
-    value: string,
     ratio: number,
     label: string | undefined,
+    divisions: number,
+    inverse: boolean,
 }
 
 export default class GaugeElement extends React.Component<GaugeProps, {}> {
@@ -19,6 +20,8 @@ export default class GaugeElement extends React.Component<GaugeProps, {}> {
     public static defaultProps = {
         fill: ColorPalette.FILLER,
         label: undefined,
+        divisions: 20,
+        inverse: false,
     };
 
     constructor(props: GaugeProps) {
@@ -29,20 +32,22 @@ export default class GaugeElement extends React.Component<GaugeProps, {}> {
     }
 
     public render() {
+        const baseDash = this.pathLength / this.props.divisions;
         const filled = this.pathLength * this.props.ratio;
         const unfilled = this.pathLength - filled;
+        const fillerTransform = this.props.inverse ? 'scale(-1 1) rotate(-90)' : 'rotate(-90)';
 
         return (
             <g transform={this.translation}>
                 <circle
                     cx="0" cy="0" r="42" fill="none"
                     stroke={ColorPalette.MUTE_DARK} strokeWidth="10"
-                    strokeDasharray={`${(this.pathLength / 20) - 2} 2`}
+                    strokeDasharray={`${(baseDash) - 2} 2`}
                 />
                 <circle
                     cx="0" cy="0" r="42" fill="none"
                     stroke={this.props.fill} strokeWidth="10"
-                    transform="rotate(-90)"
+                    transform={fillerTransform}
                     strokeDasharray={`${filled} ${unfilled}`}
                 />
                 <circle
@@ -52,8 +57,8 @@ export default class GaugeElement extends React.Component<GaugeProps, {}> {
                 />
                 <ValueElement
                     x={0} y={5}
-                    label="sec"
-                >{this.props.value}</ValueElement>
+                    label={this.props.label}
+                >{this.props.children}</ValueElement>
             </g>
         );
     }

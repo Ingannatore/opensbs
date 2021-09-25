@@ -10,10 +10,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             return new IdleState();
         }
 
-        public override string GetName()
-        {
-            return "Idle";
-        }
+        private IdleState() : base("Idle") { }
 
         public override void OnEnter(WeaponModule module)
         {

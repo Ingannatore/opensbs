@@ -5,8 +5,6 @@
         public int Capacity { get; }
         public ItemCollection Items { get; }
 
-        public int UsedCapacity => Items.TotalMass;
-
         public static ItemStorage Create(int capacity)
         {
             return new ItemStorage(capacity);
@@ -18,9 +16,9 @@
             Items = new ItemCollection();
         }
 
-        public bool Contains(string id)
+        public ItemStack Extract(string itemId, int quantity = 1)
         {
-            return Items.Contains(id);
+            return Items.Contains(itemId) ? Items.Extract(itemId, quantity) : null;
         }
 
         public void Add(Item item, int quantity = 1)
@@ -28,9 +26,9 @@
             Items.Add(item, quantity);
         }
 
-        public void Remove(string id, int quantity = 0)
+        public void Add(ItemStack stack)
         {
-            Items.Remove(id, quantity);
+            Items.Add(stack.Item, stack.Quantity);
         }
     }
 }

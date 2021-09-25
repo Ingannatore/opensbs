@@ -9,6 +9,8 @@ import WeaponModuleModel from '../../../modules/weapon-module.model';
 import PanelElement from '../../elements/panel.element';
 import SwitchElement from '../../elements/switch.element';
 import GaugeElement from '../../elements/gauge.element';
+import ArcsElements from './arcs.elements';
+import ButtonElement from '../../elements/button.element';
 import ColorPalette from '../../color-palette';
 
 interface WeaponProps {
@@ -18,6 +20,7 @@ interface WeaponProps {
     dispatch: any,
     entityId: string,
     selectedTarget: EntityTraceModel | null,
+    selectedAmmo: string | null,
     weapon: WeaponModuleModel | undefined,
 }
 
@@ -29,6 +32,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.onEngage = this.onEngage.bind(this);
+        this.onReload = this.onReload.bind(this);
     }
 
     public render() {
@@ -56,26 +60,40 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                 <line x1="0" y1="30" x2="450" y2="30" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
 
                 <GaugeElement
-                    x={70} y={90}
-                    value={Math.max(0, Math.ceil(this.props.weapon.timer.current)).toString()}
+                    x={60} y={90}
                     ratio={this.props.weapon.timer.ratio}
                     label="sec"
-                />
+                >{Math.max(0, Math.ceil(this.props.weapon.timer.current)).toString()}</GaugeElement>
+
+                <ArcsElements x={170} y={90}/>
+
+                <GaugeElement
+                    x={280} y={90}
+                    ratio={this.props.weapon.magazine.ratio}
+                    label="ammo"
+                    inverse={true}
+                >{this.props.weapon.magazine.quantity}</GaugeElement>
 
                 <SwitchElement
                     x={340} y={40}
-                    width={100} height={100}
+                    width={100} height={40}
                     fontSize={1.5} color={ColorPalette.WARNING}
                     onClick={this.onEngage}
-                    enabled={this.props.weapon.target != null || this.props.selectedTarget != null}
+                    enabled={this.isFireButtonEnabled()}
                     toggled={!!this.props.weapon.target}
-                >ENGAGE</SwitchElement>
-
-                <g opacity={0}>
-                    <line x1="0" y1="40" x2="450" y2="40" stroke={ColorPalette.DANGER} strokeWidth="1"/>
-                    <line x1="0" y1="140" x2="450" y2="140" stroke={ColorPalette.DANGER} strokeWidth="1"/>
-                    <line x1="20" y1="0" x2="20" y2="150" stroke={ColorPalette.DANGER} strokeWidth="1"/>
-                </g>
+                >FIRE</SwitchElement>
+                <text
+                    x="390" y="95"
+                    fontSize="1rem" textAnchor="middle"
+                    fill={ColorPalette.TEXT}
+                >{this.props.weapon.magazine.name || 'No Ammo'}</text>
+                <ButtonElement
+                    x={340} y={110}
+                    width={100} height={30}
+                    fontSize={1}
+                    enabled={this.isReloadButtonEnabled()}
+                    onClick={this.onReload}
+                >RELOAD</ButtonElement>
             </PanelElement>
         );
     }
@@ -105,6 +123,58 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             ));
         }
     }
+
+    private onReload() {
+        if (!this.props.weapon) {
+            return;
+        }
+        if (!this.isReloadButtonEnabled()) {
+            return;
+        }
+
+        this.props.dispatch(SpaceshipActions.sendModuleAction(
+            this.props.entityId,
+            this.props.weapon.id,
+            'reload',
+            this.props.selectedAmmo ? this.props.selectedAmmo : this.props.weapon.magazine.ammoId,
+        ));
+    }
+
+    private isFireButtonEnabled() {
+        if (!this.props.weapon) {
+            return false;
+        }
+
+        if (!this.props.weapon.magazine.ammoId) {
+            return false;
+        }
+
+        return this.props.weapon.target != null || this.props.selectedTarget != null;
+    }
+
+    private isReloadButtonEnabled() {
+        if (!this.props.weapon) {
+            return false;
+        }
+
+        if (!(this.props.weapon.status == 'Idle' || this.props.weapon.status == 'Out of Ammo')) {
+            return false;
+        }
+
+        if (this.props.weapon.status == 'Out of Ammo' && !this.props.selectedAmmo) {
+            return false;
+        }
+
+        if (!this.props.selectedAmmo && this.props.weapon.magazine.isFull) {
+            return false;
+        }
+
+        if (this.props.selectedAmmo === this.props.weapon.magazine.ammoId && this.props.weapon.magazine.isFull) {
+            return false;
+        }
+
+        return this.props.weapon.magazine.ammoId != null || this.props.selectedAmmo != null;
+    }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => {
@@ -112,6 +182,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
 
     return {
         selectedTarget: ClientSelectors.getSelectedTarget(state),
+        selectedAmmo: ClientSelectors.getSelectedAmmo(state),
         entityId: SpaceshipSelectors.getId(state),
         weapon: weapon,
     };

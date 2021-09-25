@@ -10,10 +10,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             return new CycleState();
         }
 
-        public override string GetName()
-        {
-            return "Firing";
-        }
+        private CycleState() : base("Firing") { }
 
         public override void OnEnter(WeaponModule module)
         {

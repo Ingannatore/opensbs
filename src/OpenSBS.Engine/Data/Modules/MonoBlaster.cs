@@ -24,9 +24,12 @@ namespace OpenSBS.Engine.Data.Modules
             Mass = 2000;
             Size = 4;
 
-            Damage = 10;
+            Damage = 1;
             Range = 5000;
+            AmmoPerCycle = 1;
+            MagazineSize = 4;
             CycleTime = 4;
+            ReloadTime = 12;
         }
     }
 }

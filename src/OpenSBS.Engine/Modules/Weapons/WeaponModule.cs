@@ -2,6 +2,7 @@
 using OpenSBS.Engine.Automata;
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Models.Items;
 using OpenSBS.Engine.Models.Modules;
 using OpenSBS.Engine.Models.Templates;
 using OpenSBS.Engine.Modules.Sensors;
@@ -13,11 +14,13 @@ namespace OpenSBS.Engine.Modules.Weapons
     {
         private const string EngageAction = "engage";
         private const string DisengageAction = "disengage";
+        private const string ReloadAction = "reload";
         private readonly ModuleStateMachine<WeaponModule, WeaponState> _stateMachine;
 
-        public EntityTrace Target { get; protected set; }
+        public EntityTrace Target { get; private set; }
+        public WeaponMagazine Magazine { get; }
         public CountdownTimer Timer { get; }
-        public string Status => _stateMachine.State.GetName();
+        public string Status => _stateMachine.State.Name;
 
         public static WeaponModule Create(WeaponModuleTemplate template)
         {
@@ -26,6 +29,7 @@ namespace OpenSBS.Engine.Modules.Weapons
 
         private WeaponModule(WeaponModuleTemplate template) : base(ModuleType.Weapon, template)
         {
+            Magazine = new WeaponMagazine(template.MagazineSize);
             Timer = new CountdownTimer();
 
             _stateMachine = new ModuleStateMachine<WeaponModule, WeaponState>(this, IdleState.Create());
@@ -41,6 +45,26 @@ namespace OpenSBS.Engine.Modules.Weapons
             return Target?.IsOutOfRange(Template.Range) ?? false;
         }
 
+        public bool IsMagazineEmpty()
+        {
+            return Magazine.IsEmpty();
+        }
+
+        public ItemStack Reload(ItemStack ammo)
+        {
+            return Magazine.Reload(ammo);
+        }
+
+        public void ConsumeAmmo()
+        {
+            Magazine.Consume(Template.AmmoPerCycle);
+        }
+
+        public int GetMissingAmmoQuantity(string ammoId)
+        {
+            return Magazine.AmmoId == ammoId ? Template.MagazineSize - Magazine.Quantity : Template.MagazineSize;
+        }
+
         public void ResetTimer()
         {
             Timer.Reset(Template.CycleTime);
@@ -53,15 +77,31 @@ namespace OpenSBS.Engine.Modules.Weapons
 
         public override void HandleAction(ClientAction action, Entity owner)
         {
-            if (action.Type == EngageAction)
+            switch (action.Type)
             {
-                var targetId = action.PayloadTo<string>();
-                Target = owner.Modules.First<SensorsModule>().GetTrace(targetId);
-            }
+                case EngageAction:
+                {
+                    var targetId = action.PayloadTo<string>();
+                    Target = owner.Modules.First<SensorsModule>().GetTrace(targetId);
+                    break;
+                }
 
-            if (action.Type == DisengageAction)
-            {
-                Target = null;
+                case DisengageAction:
+                {
+                    Target = null;
+                    break;
+                }
+
+                case ReloadAction:
+                {
+                    if (!HasTarget())
+                    {
+                        var ammoId = action.PayloadTo<string>();
+                        _stateMachine.SetState(this, RequireAmmoState.Create(ammoId));
+                    }
+
+                    break;
+                }
             }
         }
 

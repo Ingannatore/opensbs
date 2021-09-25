@@ -13,6 +13,12 @@ namespace OpenSBS.Engine.Automata
             SetState(module, initialState);
         }
 
+        public void SetState(TM module, TS newState)
+        {
+            State = newState;
+            State.OnEnter(module);
+        }
+
         public void Update(TimeSpan deltaT, TM module, Entity owner, World world)
         {
             var nextState = State.Update(deltaT, module, owner, world);
@@ -20,12 +26,6 @@ namespace OpenSBS.Engine.Automata
             {
                 SetState(module, nextState);
             }
-        }
-
-        private void SetState(TM module, TS newState)
-        {
-            State = newState;
-            State.OnEnter(module);
         }
     }
 }
