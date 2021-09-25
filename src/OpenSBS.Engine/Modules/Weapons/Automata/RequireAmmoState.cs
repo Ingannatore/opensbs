@@ -13,7 +13,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             return new RequireAmmoState(itemId);
         }
 
-        private RequireAmmoState(string itemId) : base("Reloading")
+        private RequireAmmoState(string itemId) : base("state.reload")
         {
             _itemId = itemId;
         }
@@ -26,12 +26,17 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
         public override WeaponState Update(TimeSpan deltaT, WeaponModule module, Entity owner, World world)
         {
             var ammoStack = owner.Cargo.Extract(_itemId, _missingAmmoQuantity);
-            if (ammoStack == null)
+            if (ammoStack != null)
+            {
+                return ReloadState.Create(ammoStack);
+            }
+
+            if (module.Magazine.IsEmpty())
             {
                 return OutOfAmmoState.Create();
             }
 
-            return ReloadState.Create(ammoStack);
+            return IdleState.Create();
         }
     }
 }

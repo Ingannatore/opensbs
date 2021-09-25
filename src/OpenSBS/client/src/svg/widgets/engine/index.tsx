@@ -1,12 +1,12 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import EnginePropsModel from './engine-props.model';
-import SvgTransforms from '../../../lib/svg-transforms';
+import SvgTransforms from '../../../lib/svgTransforms';
 import DisplayElement from '../../elements/display.element';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import PanelElement from '../../elements/panel.element';
 import ThrottleElement from './throttle.element';
-import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
+import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
 import ButtonElement from '../../elements/button.element';
 
 class EngineWidget extends React.Component<EnginePropsModel, {}> {

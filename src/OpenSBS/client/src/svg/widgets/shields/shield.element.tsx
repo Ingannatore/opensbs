@@ -1,17 +1,17 @@
 ﻿import * as React from 'react';
-import SvgTransforms from '../../../lib/svg-transforms';
-import {ShieldSectorModel} from '../../../modules/shield-sector.model';
+import SvgTransforms from '../../../lib/svgTransforms';
+import ShieldSector from '../../../modules/shields/shieldSector';
 import ShieldCalibrationElement from './shield-calibration.element';
 import ValueElement from '../../elements/value.element';
 import ButtonElement from '../../elements/button.element';
 import CylinderElement from '../../elements/cylinder.element';
-import ColorPalette from '../../color-palette';
+import ColorPalette from '../../colorPalette';
 
 interface ShieldElementProps {
     x: number,
     y: number,
     label: string,
-    shieldSector: ShieldSectorModel | undefined,
+    shieldSector: ShieldSector | undefined,
     availableCalibrationPoints: number,
     onSetCalibration: (side: string, value: number) => void,
     onReinforce: (side: string) => void,

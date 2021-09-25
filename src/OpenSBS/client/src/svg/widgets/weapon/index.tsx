@@ -1,17 +1,18 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svg-transforms';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
-import ClientSelectors from '../../../store/client/client.selectors';
-import EntityTraceModel from '../../../modules/entity-trace.model';
-import WeaponModuleModel from '../../../modules/weapon-module.model';
+import SvgTransforms from '../../../lib/svgTransforms';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
+import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
+import ClientSelectors from '../../../store/client/clientSelectors';
+import EntityTrace from '../../../models/entityTrace';
 import PanelElement from '../../elements/panel.element';
 import SwitchElement from '../../elements/switch.element';
 import GaugeElement from '../../elements/gauge.element';
 import ArcsElements from './arcs.elements';
 import ButtonElement from '../../elements/button.element';
-import ColorPalette from '../../color-palette';
+import WeaponModule from '../../../modules/weapons/weaponModule';
+import WeaponService from '../../../modules/weapons/weaponService';
+import ColorPalette from '../../colorPalette';
 
 interface WeaponProps {
     x: number,
@@ -19,9 +20,9 @@ interface WeaponProps {
     index: number,
     dispatch: any,
     entityId: string,
-    selectedTarget: EntityTraceModel | null,
+    selectedTarget: EntityTrace | null,
     selectedAmmo: string | null,
-    weapon: WeaponModuleModel | undefined,
+    weapon: WeaponModule | undefined,
 }
 
 class WeaponWidget extends React.Component<WeaponProps, {}> {
@@ -40,11 +41,6 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             return null;
         }
 
-        let status = this.props.weapon.status;
-        if (this.props.weapon.target) {
-            status += ` | ${this.props.weapon.target.callSign}`
-        }
-
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={450} height={150}>
                 <text
@@ -56,14 +52,14 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                     x="440" y="15"
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.TEXT}
-                >{status}</text>
+                >{WeaponService.getStatus(this.props.weapon)}</text>
                 <line x1="0" y1="30" x2="450" y2="30" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
 
                 <GaugeElement
                     x={60} y={90}
                     ratio={this.props.weapon.timer.ratio}
                     label="sec"
-                >{Math.max(0, Math.ceil(this.props.weapon.timer.current)).toString()}</GaugeElement>
+                >{WeaponService.getTimerValue(this.props.weapon)}</GaugeElement>
 
                 <ArcsElements x={170} y={90}/>
 
@@ -145,11 +141,10 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             return false;
         }
 
-        if (!this.props.weapon.magazine.ammoId) {
-            return false;
-        }
-
-        return this.props.weapon.target != null || this.props.selectedTarget != null;
+        return WeaponService.isFireButtonEnabled(
+            this.props.weapon,
+            this.props.selectedTarget
+        );
     }
 
     private isReloadButtonEnabled() {
@@ -157,23 +152,10 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             return false;
         }
 
-        if (!(this.props.weapon.status == 'Idle' || this.props.weapon.status == 'Out of Ammo')) {
-            return false;
-        }
-
-        if (this.props.weapon.status == 'Out of Ammo' && !this.props.selectedAmmo) {
-            return false;
-        }
-
-        if (!this.props.selectedAmmo && this.props.weapon.magazine.isFull) {
-            return false;
-        }
-
-        if (this.props.selectedAmmo === this.props.weapon.magazine.ammoId && this.props.weapon.magazine.isFull) {
-            return false;
-        }
-
-        return this.props.weapon.magazine.ammoId != null || this.props.selectedAmmo != null;
+        return WeaponService.isReloadButtonEnabled(
+            this.props.weapon,
+            this.props.selectedAmmo
+        );
     }
 }
 

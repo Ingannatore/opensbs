@@ -1,21 +1,21 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svg-transforms';
+import SvgTransforms from '../../../lib/svgTransforms';
 import PanelElement from '../../elements/panel.element';
 import AmmunitionElement from './ammunition.element';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import ItemStackModel from '../../../models/item-stack.model';
-import ClientActions from '../../../store/client/client.actions';
-import ClientSelectors from '../../../store/client/client.selectors';
-import ItemStorageModel from '../../../models/item-storage.model';
-import ColorPalette from '../../color-palette';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
+import ItemStack from '../../../models/itemStack';
+import ClientActions from '../../../store/client/clientActions';
+import ClientSelectors from '../../../store/client/clientSelectors';
+import ItemStorage from '../../../models/itemStorage';
+import ColorPalette from '../../colorPalette';
 
 interface AmmunitionsPropsModel {
     x: number,
     y: number,
     dispatch: any,
     selectedAmmo: string | null,
-    cargo: ItemStorageModel | undefined,
+    cargo: ItemStorage | undefined,
 }
 
 class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
@@ -34,7 +34,7 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
         }
 
         const ammunitions = this.props.cargo.items.filter(
-            (stack: ItemStackModel) => stack.item.type.startsWith('ammo.')
+            (stack: ItemStack) => stack.item.type.startsWith('ammo.')
         );
 
         return (
@@ -58,7 +58,7 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
                     fill={ColorPalette.HEADER}
                 >QUANTITY</text>
 
-                {ammunitions.map((value: ItemStackModel, index: number) => <AmmunitionElement
+                {ammunitions.map((value: ItemStack, index: number) => <AmmunitionElement
                     key={`ammo-element-${value.item.name.toLowerCase()}`}
                     x={0} y={30 + (40 * index)}
                     name={value.item.name} type={value.item.type}

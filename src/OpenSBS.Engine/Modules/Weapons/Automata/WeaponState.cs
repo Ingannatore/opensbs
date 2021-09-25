@@ -4,10 +4,10 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
 {
     public abstract class WeaponState : ModuleState<WeaponModule, WeaponState>
     {
-        public string Name { get; }
-        protected WeaponState(string name)
+        public string Id { get; }
+        protected WeaponState(string id)
         {
-            Name = name;
+            Id = id;
         }
 
         protected bool WeaponHasTarget(WeaponModule module, World world)

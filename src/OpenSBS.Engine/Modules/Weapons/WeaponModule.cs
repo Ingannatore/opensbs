@@ -20,7 +20,7 @@ namespace OpenSBS.Engine.Modules.Weapons
         public EntityTrace Target { get; private set; }
         public WeaponMagazine Magazine { get; }
         public CountdownTimer Timer { get; }
-        public string Status => _stateMachine.State.Name;
+        public string Status => _stateMachine.State.Id;
 
         public static WeaponModule Create(WeaponModuleTemplate template)
         {

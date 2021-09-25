@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import client from './client/client.reducer';
-import server from './server/server.reducer';
-import spaceship from './spaceship/spaceship.reducer';
+import client from './client/clientReducer';
+import server from './server/serverReducer';
+import spaceship from './spaceship/spaceshipReducer';
 
 export default combineReducers({
     client,

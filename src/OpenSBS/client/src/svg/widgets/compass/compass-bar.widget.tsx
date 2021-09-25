@@ -1,8 +1,8 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import CompassPropsModel from './compass-props.model';
-import SvgTransforms from '../../../lib/svg-transforms';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
+import SvgTransforms from '../../../lib/svgTransforms';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
 

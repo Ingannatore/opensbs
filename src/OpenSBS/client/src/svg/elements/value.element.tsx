@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
-import SvgTransforms from '../../lib/svg-transforms';
-import ColorPalette from '../color-palette';
+import SvgTransforms from '../../lib/svgTransforms';
+import ColorPalette from '../colorPalette';
 
 interface ValueProps {
     x: number,

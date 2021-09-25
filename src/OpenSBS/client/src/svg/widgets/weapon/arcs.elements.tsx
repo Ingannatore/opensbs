@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
-import SvgTransforms from '../../../lib/svg-transforms';
+import SvgTransforms from '../../../lib/svgTransforms';
 import ValueElement from '../../elements/value.element';
-import ColorPalette from '../../color-palette';
+import ColorPalette from '../../colorPalette';
 
 interface ArcsElementProps {
     x: number,

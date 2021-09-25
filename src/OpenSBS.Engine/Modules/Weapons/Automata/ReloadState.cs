@@ -13,7 +13,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             return new ReloadState(ammo);
         }
 
-        private ReloadState(ItemStack ammo) : base("Reloading")
+        private ReloadState(ItemStack ammo) : base("state.reload")
         {
             _ammo = ammo;
         }

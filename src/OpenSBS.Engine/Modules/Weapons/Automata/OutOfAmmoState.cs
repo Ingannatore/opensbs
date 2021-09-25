@@ -10,7 +10,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             return new OutOfAmmoState();
         }
 
-        private OutOfAmmoState() : base("Out of Ammo") { }
+        private OutOfAmmoState() : base("state.outOfAmmo") { }
 
         public override WeaponState Update(TimeSpan deltaT, WeaponModule module, Entity owner, World world)
         {

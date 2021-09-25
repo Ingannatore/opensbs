@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
+import SvgTransforms from '../../../lib/svgTransforms';
 import ThrottleSliderPropsModel from './throttle-slider-props.model';
-import SvgTransforms from '../../../lib/svg-transforms';
 
 export default class ThrottleSliderElement extends React.Component<ThrottleSliderPropsModel, {}> {
     public static defaultProps = {

@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import DirectionsOverlay from './directions.overlay';
 import RangesElement from './ranges.element';
 import TracesElement from './traces.element';
@@ -9,7 +9,7 @@ import SwitchElement from '../../elements/switch.element';
 import PanelElement from '../../elements/panel.element';
 import TargetElement from './target.element';
 import ZoomElement from './zoom.element';
-import ColorPalette from '../../color-palette';
+import ColorPalette from '../../colorPalette';
 
 interface RadarPropsModel {
     x: number,

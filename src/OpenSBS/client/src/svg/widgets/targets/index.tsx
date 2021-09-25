@@ -1,22 +1,22 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svg-transforms';
+import SvgTransforms from '../../../lib/svgTransforms';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import PanelElement from '../../elements/panel.element';
-import ClientSelectors from '../../../store/client/client.selectors';
-import ClientActions from '../../../store/client/client.actions';
-import EntityTraceModel from '../../../modules/entity-trace.model';
+import ClientSelectors from '../../../store/client/clientSelectors';
+import ClientActions from '../../../store/client/clientActions';
+import EntityTrace from '../../../models/entityTrace';
 import SwitchElement from '../../elements/switch.element';
-import ColorPalette from '../../color-palette';
+import ColorPalette from '../../colorPalette';
 
 interface TargetsProps {
     x: number,
     y: number,
     dispatch: any,
-    target: EntityTraceModel | null,
-    traces: EntityTraceModel[],
+    target: EntityTrace | null,
+    traces: EntityTrace[],
 }
 
 class TargetsWidget extends React.Component<TargetsProps, {}> {
@@ -31,9 +31,9 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
 
     public render() {
         const targets = this.props.traces
-        .sort((a: EntityTraceModel, b: EntityTraceModel) => a.distance - b.distance)
+        .sort((a: EntityTrace, b: EntityTrace) => a.distance - b.distance)
         .slice(0, 10)
-        .map((trace: EntityTraceModel, index: number) => this.renderTargetRow(trace, index));
+        .map((trace: EntityTrace, index: number) => this.renderTargetRow(trace, index));
 
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={450} height={430}>
@@ -77,7 +77,7 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
         );
     }
 
-    private renderTargetRow(trace: EntityTraceModel, index: number) {
+    private renderTargetRow(trace: EntityTrace, index: number) {
         const yaw = Angles.normalizeYaw(Vectors.getYaw(trace.relativeDirection));
 
         return (
@@ -117,7 +117,7 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
         );
     }
 
-    private onTargetSelect(trace: EntityTraceModel) {
+    private onTargetSelect(trace: EntityTrace) {
         if (trace.id === this.props.target?.id) {
             this.props.dispatch(ClientActions.resetTarget());
         } else {

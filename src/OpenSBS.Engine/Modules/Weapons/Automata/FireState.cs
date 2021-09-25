@@ -10,7 +10,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             return new FireState();
         }
 
-        private FireState() : base("Firing") { }
+        private FireState() : base("state.fire") { }
 
         public override WeaponState Update(TimeSpan deltaT, WeaponModule module, Entity owner, World world)
         {

@@ -1,13 +1,13 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import DataEntryInfoModel from '../../models/data-entry-info.model';
-import ServerActions from '../../store/server/server.actions';
-import HomeStateModel from './home-state.model';
-import HomePropsModel from './home-props.model';
+import DataEntryInfo from '../../models/dataEntryInfo';
+import ServerActions from '../../store/server/serverActions';
+import HomePageProps from './homePageProps';
+import HomePageState from './homePageState';
 
-class HomePage extends React.Component<HomePropsModel, HomeStateModel> {
-    constructor(props: HomePropsModel) {
+class HomePage extends React.Component<HomePageProps, HomePageState> {
+    constructor(props: HomePageProps) {
         super(props);
         this.state = {
             mission: '',
@@ -84,7 +84,7 @@ class HomePage extends React.Component<HomePropsModel, HomeStateModel> {
         );
     }
 
-    private renderCheckbox(name: string, info: DataEntryInfoModel, checked: boolean) {
+    private renderCheckbox(name: string, info: DataEntryInfo, checked: boolean) {
         return (
             <p key={name + '-' + info.guid}>
                 <input

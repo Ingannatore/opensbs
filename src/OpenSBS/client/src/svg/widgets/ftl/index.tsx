@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import SvgTransforms from '../../../lib/svg-transforms';
+import SvgTransforms from '../../../lib/svgTransforms';
 import PanelElement from '../../elements/panel.element';
 
 interface FtlWidgetModel {

@@ -1,23 +1,23 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svg-transforms';
+import SvgTransforms from '../../../lib/svgTransforms';
 import Vector3 from '../../../models/vector3';
 import Vectors from '../../../lib/vectors';
 import Angles from '../../../lib/angles';
-import ClientActions from '../../../store/client/client.actions';
-import ClientSelectors from '../../../store/client/client.selectors';
-import EntityTraceModel from '../../../modules/entity-trace.model';
-import {SensorsModuleModel} from '../../../modules/sensors-module.model';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import ColorPalette from '../../color-palette';
+import ClientActions from '../../../store/client/clientActions';
+import ClientSelectors from '../../../store/client/clientSelectors';
+import EntityTrace from '../../../models/entityTrace';
+import SensorsModule from '../../../modules/sensors/sensorsModule';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
+import ColorPalette from '../../colorPalette';
 
 interface TracesElementProps {
     size: number,
     dispatch: any,
     zoomFactor: number,
     direction: Vector3,
-    target: EntityTraceModel | null,
-    sensors: SensorsModuleModel | undefined,
+    target: EntityTrace | null,
+    sensors: SensorsModule | undefined,
 }
 
 class TracesElement extends React.Component<TracesElementProps, {}> {
@@ -41,8 +41,8 @@ class TracesElement extends React.Component<TracesElementProps, {}> {
 
         const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
         const traces = this.props.sensors.traces
-        .filter((trace: EntityTraceModel) => trace.distance <= range)
-        .map((trace: EntityTraceModel) => this.renderTrace(trace, scale, yaw));
+        .filter((trace: EntityTrace) => trace.distance <= range)
+        .map((trace: EntityTrace) => this.renderTrace(trace, scale, yaw));
 
         return (
             <g transform={SvgTransforms.rotate(-yaw)}>
@@ -51,7 +51,7 @@ class TracesElement extends React.Component<TracesElementProps, {}> {
         );
     }
 
-    private renderTrace(trace: EntityTraceModel, scale: number, yaw: number) {
+    private renderTrace(trace: EntityTrace, scale: number, yaw: number) {
         const isSelected = trace.id === this.props.target?.id;
         const transform = SvgTransforms.translate(
             trace.relativePosition.x * scale,
@@ -79,7 +79,7 @@ class TracesElement extends React.Component<TracesElementProps, {}> {
         );
     }
 
-    private onTraceClick(trace: EntityTraceModel) {
+    private onTraceClick(trace: EntityTrace) {
         if (trace.id === this.props.target?.id) {
             this.props.dispatch(ClientActions.resetTarget());
         } else {

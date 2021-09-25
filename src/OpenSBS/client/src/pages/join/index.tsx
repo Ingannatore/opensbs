@@ -1,10 +1,10 @@
 ﻿import * as React from 'react';
-import JoinPropsModel from './join-props.model';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import JoinPageProps from './joinPageProps';
 
-class JoinPage extends React.Component<JoinPropsModel, {}> {
-    constructor(props: JoinPropsModel) {
+class JoinPage extends React.Component<JoinPageProps, {}> {
+    constructor(props: JoinPageProps) {
         super(props);
 
         this.handleSelectTerminal = this.handleSelectTerminal.bind(this);

@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
-import SvgTransforms from '../../lib/svg-transforms';
-import ColorPalette from '../color-palette';
+import SvgTransforms from '../../lib/svgTransforms';
 import ValueElement from './value.element';
+import ColorPalette from '../colorPalette';
 
 interface GaugeProps {
     x: number,

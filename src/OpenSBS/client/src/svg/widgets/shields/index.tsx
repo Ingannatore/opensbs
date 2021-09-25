@@ -1,22 +1,22 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svg-transforms';
+import SvgTransforms from '../../../lib/svgTransforms';
 import PanelElement from '../../elements/panel.element';
 import SwitchElement from '../../elements/switch.element';
 import ButtonElement from '../../elements/button.element';
 import ShieldElement from './shield.element';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import ShieldModuleModel from '../../../modules/shield-module.model';
-import {ShieldSectorModel} from '../../../modules/shield-sector.model';
-import EntitySide from '../../../models/entity-side';
-import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
-import ColorPalette from '../../color-palette';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
+import ShieldModule from '../../../modules/shields/shieldModule';
+import ShieldSector from '../../../modules/shields/shieldSector';
+import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
+import EntitySide from '../../../models/entitySide';
+import ColorPalette from '../../colorPalette';
 
 interface ShieldPropsModel {
     x: number,
     y: number,
     entityId: string,
-    shieldModule: ShieldModuleModel | undefined,
+    shieldModule: ShieldModule | undefined,
     dispatch: any,
 }
 
@@ -100,8 +100,8 @@ class ShieldWidget extends React.Component<ShieldPropsModel, {}> {
         );
     }
 
-    private getShieldSector(side: string): ShieldSectorModel | undefined {
-        return this.props.shieldModule?.sectors.find((item: ShieldSectorModel) => item.side === side);
+    private getShieldSector(side: string): ShieldSector | undefined {
+        return this.props.shieldModule?.sectors.find((item: ShieldSector) => item.side === side);
     }
 
     private toggleShield() {

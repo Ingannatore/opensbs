@@ -6,12 +6,12 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import * as signalR from '@microsoft/signalr';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import rootReducer from './store/reducers';
-import IncomingActionMiddleware from './store/middlewares/incoming-action.middleware';
-import OutgoingActionMiddleware from './store/middlewares/outgoing-action.middleware';
+import IncomingActionMiddleware from './store/middlewares/incomingActionMiddleware';
+import OutgoingActionMiddleware from './store/middlewares/outgoingActionMiddleware';
 import HomePage from './pages/home';
 import JoinPage from './pages/join';
-import NavigationTerminal from './pages/terminals/navigation.terminal';
-import TacticalTerminal from './pages/terminals/tactical.terminal';
+import NavigationTerminal from './pages/terminals/navigationTerminal';
+import TacticalTerminal from './pages/terminals/tacticalTerminal';
 import './index.css';
 
 const hub = new signalR.HubConnectionBuilder().withUrl('/ws').build();

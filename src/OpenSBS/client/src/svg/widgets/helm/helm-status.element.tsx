@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
+import SvgTransforms from '../../../lib/svgTransforms';
 import HelmStatusPropsModel from './helm-status-props.model';
-import SvgTransforms from '../../../lib/svg-transforms';
 
 export default class HelmStatusElement extends React.Component<HelmStatusPropsModel, {}> {
     private readonly translation: string;

@@ -1,4 +1,4 @@
-﻿import EngineModuleModel from '../../../modules/engine-module.model';
+﻿import EngineModule from '../../../modules/engines/engineModule';
 
 export default interface EnginePropsModel {
     x: number,
@@ -6,5 +6,5 @@ export default interface EnginePropsModel {
     dispatch: any,
     entityId: string,
     linearSpeed: number,
-    engineModule: EngineModuleModel | undefined,
+    engineModule: EngineModule | undefined,
 }

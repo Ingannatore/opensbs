@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
-import ClientSelectors from '../../../store/client/client.selectors';
 import {connect} from 'react-redux';
-import ColorPalette from '../../color-palette';
+import ClientSelectors from '../../../store/client/clientSelectors';
+import ColorPalette from '../../colorPalette';
 
 interface RangesElementProps {
     increment: number,

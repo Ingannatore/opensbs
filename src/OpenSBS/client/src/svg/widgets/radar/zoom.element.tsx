@@ -1,11 +1,11 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import ClientActions from '../../../store/client/client.actions';
-import ClientSelectors from '../../../store/client/client.selectors';
-import SvgTransforms from '../../../lib/svg-transforms';
+import SvgTransforms from '../../../lib/svgTransforms';
+import ClientActions from '../../../store/client/clientActions';
+import ClientSelectors from '../../../store/client/clientSelectors';
 import DisplayElement from '../../elements/display.element';
 import SwitchElement from '../../elements/switch.element';
-import ColorPalette from '../../color-palette';
+import ColorPalette from '../../colorPalette';
 
 interface ZoomElementProps {
     x: number,

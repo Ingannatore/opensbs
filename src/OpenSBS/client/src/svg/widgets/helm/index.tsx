@@ -1,10 +1,10 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import HelmPropsModel from './helm-props.model';
-import SvgTransforms from '../../../lib/svg-transforms';
-import SpaceshipActions from '../../../store/spaceship/spaceship.actions';
-import SpaceshipSelectors from '../../../store/spaceship/spaceship.selectors';
-import EngineModuleModel from '../../../modules/engine-module.model';
+import SvgTransforms from '../../../lib/svgTransforms';
+import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
+import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
+import EngineModule from '../../../modules/engines/engineModule';
 import DisplayElement from '../../elements/display.element';
 import Angles from '../../../lib/angles';
 import Vectors from '../../../lib/vectors';
@@ -109,7 +109,7 @@ const mapStateToProps = (state: any) => {
     return {
         entityId: SpaceshipSelectors.getId(state),
         direction: SpaceshipSelectors.getDirection(state),
-        engineModule: SpaceshipSelectors.getModuleByType<EngineModuleModel>(state, 'module.engine'),
+        engineModule: SpaceshipSelectors.getModuleByType<EngineModule>(state, 'module.engine'),
     };
 };
 

@@ -10,7 +10,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
             return new OutOfRangeState();
         }
 
-        private OutOfRangeState() : base("Out of Range") { }
+        private OutOfRangeState() : base("state.outOfRange") { }
 
         public override void OnEnter(WeaponModule module)
         {
