@@ -1,5 +1,6 @@
 ﻿import ClientAction from '../clientAction';
 import EntityTrace from '../../models/entityTrace';
+import Item from '../../models/item';
 
 const Types = {
     SET_ZOOM: 'client/zoom/set',
@@ -27,9 +28,9 @@ const resetTarget = (): ClientAction => ({
     meta: null,
 });
 
-const setAmmo = (id: string): ClientAction => ({
+const setAmmo = (item: Item): ClientAction => ({
     type: Types.SET_AMMO,
-    payload: id,
+    payload: item,
     meta: null,
 });
 

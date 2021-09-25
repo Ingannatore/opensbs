@@ -30,6 +30,7 @@ namespace OpenSBS.Engine.Data.Missions
 
             Spaceship.Cargo.Add(ScarletPlasmaAmmo.Instance, 10);
             Spaceship.Cargo.Add(VioletPlasmaAmmo.Instance, 8);
+            Spaceship.Cargo.Add(LanceProjectileAmmo.Instance, 20);
         }
     }
 }

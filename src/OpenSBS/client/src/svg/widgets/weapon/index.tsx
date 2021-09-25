@@ -12,6 +12,7 @@ import ArcsElements from './arcs.elements';
 import ButtonElement from '../../elements/button.element';
 import WeaponModule from '../../../modules/weapons/weaponModule';
 import WeaponService from '../../../modules/weapons/weaponService';
+import Item from '../../../models/item';
 import ColorPalette from '../../colorPalette';
 
 interface WeaponProps {
@@ -21,7 +22,7 @@ interface WeaponProps {
     dispatch: any,
     entityId: string,
     selectedTarget: EntityTrace | null,
-    selectedAmmo: string | null,
+    selectedAmmo: Item | null,
     weapon: WeaponModule | undefined,
 }
 
@@ -121,10 +122,12 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
     }
 
     private onReload() {
-        if (!this.props.weapon) {
+        if (!this.props.weapon || !this.isReloadButtonEnabled()) {
             return;
         }
-        if (!this.isReloadButtonEnabled()) {
+
+        const ammoToReload = WeaponService.getAmmoToReload(this.props.weapon, this.props.selectedAmmo);
+        if (!ammoToReload) {
             return;
         }
 
@@ -132,7 +135,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             this.props.entityId,
             this.props.weapon.id,
             'reload',
-            this.props.selectedAmmo ? this.props.selectedAmmo : this.props.weapon.magazine.ammoId,
+            ammoToReload,
         ));
     }
 

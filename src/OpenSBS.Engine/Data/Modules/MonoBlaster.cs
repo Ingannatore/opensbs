@@ -1,4 +1,5 @@
-﻿using OpenSBS.Engine.Models.Templates;
+﻿using OpenSBS.Engine.Models.Items;
+using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Data.Modules
 {
@@ -26,6 +27,7 @@ namespace OpenSBS.Engine.Data.Modules
 
             Damage = 1;
             Range = 5000;
+            AmmoType = ItemType.AmmoPlasma;
             AmmoPerCycle = 1;
             MagazineSize = 4;
             CycleTime = 4;

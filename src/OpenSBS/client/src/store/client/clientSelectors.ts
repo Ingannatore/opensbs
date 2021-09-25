@@ -1,4 +1,5 @@
 ﻿import State from '../state';
+import Item from '../../models/item';
 import EntityTrace from '../../models/entityTrace';
 
 const getZoomFactor = (state: State): number => {
@@ -9,7 +10,7 @@ const getSelectedTarget = (state: State): EntityTrace | null => {
     return state.client.selectedTarget;
 }
 
-const getSelectedAmmo = (state: State): string | null => {
+const getSelectedAmmo = (state: State): Item | null => {
     return state.client.selectedAmmo;
 }
 

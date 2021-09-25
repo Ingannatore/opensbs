@@ -29,7 +29,7 @@ namespace OpenSBS.Engine.Modules.Weapons
 
         private WeaponModule(WeaponModuleTemplate template) : base(ModuleType.Weapon, template)
         {
-            Magazine = new WeaponMagazine(template.MagazineSize);
+            Magazine = new WeaponMagazine(template.AmmoType, template.MagazineSize);
             Timer = new CountdownTimer();
 
             _stateMachine = new ModuleStateMachine<WeaponModule, WeaponState>(this, IdleState.Create());

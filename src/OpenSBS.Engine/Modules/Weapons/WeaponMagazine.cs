@@ -4,6 +4,7 @@ namespace OpenSBS.Engine.Modules.Weapons
 {
     public class WeaponMagazine
     {
+        public string AmmoType { get; }
         public string AmmoId => _content?.Item.Id;
         public string Name => _content?.Item.Name;
         public int Quantity => _content?.Quantity ?? 0;
@@ -13,8 +14,9 @@ namespace OpenSBS.Engine.Modules.Weapons
         private readonly int _size;
         private ItemStack _content;
 
-        public WeaponMagazine(int size)
+        public WeaponMagazine(string ammoType, int size)
         {
+            AmmoType = ammoType;
             _size = size;
         }
 

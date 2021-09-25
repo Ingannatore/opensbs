@@ -20,7 +20,7 @@ namespace OpenSBS.Engine.Data.Items
 
         private VioletPlasmaAmmo() : base(
             "ammo.plasma.violet",
-            "ammo.plasma",
+            ItemType.AmmoPlasma,
             "Violet"
         )
         {

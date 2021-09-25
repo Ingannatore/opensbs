@@ -7,6 +7,7 @@ import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import ItemStack from '../../../models/itemStack';
 import ClientActions from '../../../store/client/clientActions';
 import ClientSelectors from '../../../store/client/clientSelectors';
+import Item from '../../../models/item';
 import ItemStorage from '../../../models/itemStorage';
 import ColorPalette from '../../colorPalette';
 
@@ -14,7 +15,7 @@ interface AmmunitionsPropsModel {
     x: number,
     y: number,
     dispatch: any,
-    selectedAmmo: string | null,
+    selectedAmmo: Item | null,
     cargo: ItemStorage | undefined,
 }
 
@@ -63,18 +64,18 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
                     x={0} y={30 + (40 * index)}
                     name={value.item.name} type={value.item.type}
                     quantity={value.quantity}
-                    isSelected={value.item.id === this.props.selectedAmmo}
-                    onClick={() => this.onAmmoClick(value.item.id)}
+                    isSelected={value.item.id === this.props.selectedAmmo?.id}
+                    onClick={() => this.onAmmoClick(value.item)}
                 />)}
             </PanelElement>
         );
     }
 
-    private onAmmoClick(id: string) {
-        if (id === this.props.selectedAmmo) {
+    private onAmmoClick(ammo: Item) {
+        if (ammo.id === this.props.selectedAmmo?.id) {
             this.props.dispatch(ClientActions.resetAmmo());
         } else {
-            this.props.dispatch(ClientActions.setAmmo(id));
+            this.props.dispatch(ClientActions.setAmmo(ammo));
         }
     }
 }

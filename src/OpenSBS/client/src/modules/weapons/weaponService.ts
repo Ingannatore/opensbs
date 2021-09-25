@@ -1,4 +1,5 @@
 ﻿import EntityTrace from '../../models/entityTrace';
+import Item from '../../models/item';
 import WeaponModule from './weaponModule';
 import WeaponStatus from './weaponStatus';
 
@@ -19,24 +20,26 @@ export default class WeaponService {
         return weapon.target != null || selectedTarget != null;
     }
 
-    public static isReloadButtonEnabled(weapon: WeaponModule, selectedAmmo: string | null): boolean {
-        if (!(weapon.status == WeaponStatus.IDLE || weapon.status == WeaponStatus.OUT_OF_AMMO)) {
-            return false;
+    public static isReloadButtonEnabled(weapon: WeaponModule, selectedAmmo: Item | null): boolean {
+        if (weapon.status == WeaponStatus.IDLE || weapon.status == WeaponStatus.OUT_OF_AMMO) {
+            if (selectedAmmo && weapon.magazine.ammoType === selectedAmmo.type) {
+                return true;
+            }
+
+            if (weapon.magazine.ammoId && !weapon.magazine.isFull && weapon.status != WeaponStatus.OUT_OF_AMMO) {
+                return true;
+            }
         }
 
-        if (weapon.status == WeaponStatus.OUT_OF_AMMO && !selectedAmmo) {
-            return false;
+        return false;
+    }
+
+    public static getAmmoToReload(weapon: WeaponModule, selectedAmmo: Item | null): string | null {
+        if (selectedAmmo && weapon.magazine.ammoType === selectedAmmo.type) {
+            return selectedAmmo.id;
         }
 
-        if (!selectedAmmo && weapon.magazine.isFull) {
-            return false;
-        }
-
-        if (selectedAmmo === weapon.magazine.ammoId && weapon.magazine.isFull) {
-            return false;
-        }
-
-        return weapon.magazine.ammoId != null || selectedAmmo != null;
+        return weapon.magazine.ammoId;
     }
 
     private static getStatusName(weapon: WeaponModule): string {
