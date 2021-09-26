@@ -15,6 +15,7 @@ namespace OpenSBS.Engine.Modules.Weapons
         private const string EngageAction = "engage";
         private const string DisengageAction = "disengage";
         private const string ReloadAction = "reload";
+        private const string UnloadAction = "unload";
         private readonly ModuleStateMachine<WeaponModule, WeaponState> _stateMachine;
 
         public EntityTrace Target { get; private set; }
@@ -98,6 +99,16 @@ namespace OpenSBS.Engine.Modules.Weapons
                     {
                         var ammoId = action.PayloadTo<string>();
                         _stateMachine.SetState(this, RequireAmmoState.Create(ammoId));
+                    }
+
+                    break;
+                }
+
+                case UnloadAction:
+                {
+                    if (!HasTarget())
+                    {
+                        _stateMachine.SetState(this, UnloadState.Create());
                     }
 
                     break;

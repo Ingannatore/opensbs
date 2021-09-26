@@ -21,12 +21,12 @@ export default class WeaponService {
     }
 
     public static isReloadButtonEnabled(weapon: WeaponModule, selectedAmmo: Item | null): boolean {
-        if (weapon.status == WeaponStatus.IDLE || weapon.status == WeaponStatus.OUT_OF_AMMO) {
-            if (selectedAmmo && weapon.magazine.ammoType === selectedAmmo.type) {
+        if (this.inStatus(weapon, WeaponStatus.IDLE) || this.inStatus(weapon, WeaponStatus.OUT_OF_AMMO)) {
+            if (selectedAmmo && weapon.magazine.ammoType == selectedAmmo.type && weapon.magazine.ammoId != selectedAmmo.id) {
                 return true;
             }
 
-            if (weapon.magazine.ammoId && !weapon.magazine.isFull && weapon.status != WeaponStatus.OUT_OF_AMMO) {
+            if (weapon.magazine.ammoId && !weapon.magazine.isFull && !this.inStatus(weapon, WeaponStatus.OUT_OF_AMMO)) {
                 return true;
             }
         }
@@ -34,12 +34,20 @@ export default class WeaponService {
         return false;
     }
 
+    public static isUnloadButtonEnabled(weapon: WeaponModule): boolean {
+        return this.inStatus(weapon, WeaponStatus.IDLE) && weapon.magazine.quantity > 0;
+    }
+
     public static getAmmoToReload(weapon: WeaponModule, selectedAmmo: Item | null): string | null {
-        if (selectedAmmo && weapon.magazine.ammoType === selectedAmmo.type) {
+        if (selectedAmmo && weapon.magazine.ammoType == selectedAmmo.type) {
             return selectedAmmo.id;
         }
 
         return weapon.magazine.ammoId;
+    }
+
+    private static inStatus(weapon: WeaponModule, status: string): boolean {
+        return weapon.status == status;
     }
 
     private static getStatusName(weapon: WeaponModule): string {
@@ -54,6 +62,8 @@ export default class WeaponService {
                 return "Out of Range";
             case WeaponStatus.RELOAD:
                 return "Reloading";
+            case WeaponStatus.UNLOAD:
+                return "Unloading";
             default:
                 return weapon.status;
         }

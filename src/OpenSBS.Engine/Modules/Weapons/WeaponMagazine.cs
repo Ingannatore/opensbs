@@ -44,6 +44,14 @@ namespace OpenSBS.Engine.Modules.Weapons
             return currentAmmoStack;
         }
 
+        public ItemStack Unload()
+        {
+            var currentContent = _content;
+            _content = null;
+
+            return currentContent;
+        }
+
         public void Consume(int quantity)
         {
             _content.Decrement(quantity);

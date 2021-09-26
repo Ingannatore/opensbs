@@ -28,7 +28,10 @@
 
         public void Add(ItemStack stack)
         {
-            Items.Add(stack.Item, stack.Quantity);
+            if (stack != null)
+            {
+                Items.Add(stack.Item, stack.Quantity);
+            }
         }
     }
 }

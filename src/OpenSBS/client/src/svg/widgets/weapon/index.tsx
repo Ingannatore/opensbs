@@ -8,7 +8,6 @@ import EntityTrace from '../../../models/entityTrace';
 import PanelElement from '../../elements/panel.element';
 import SwitchElement from '../../elements/switch.element';
 import GaugeElement from '../../elements/gauge.element';
-import ArcsElements from './arcs.elements';
 import ButtonElement from '../../elements/button.element';
 import WeaponModule from '../../../modules/weapons/weaponModule';
 import WeaponService from '../../../modules/weapons/weaponService';
@@ -35,6 +34,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.onEngage = this.onEngage.bind(this);
         this.onReload = this.onReload.bind(this);
+        this.onUnload = this.onUnload.bind(this);
     }
 
     public render() {
@@ -57,40 +57,46 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                 <line x1="0" y1="30" x2="450" y2="30" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
 
                 <GaugeElement
-                    x={60} y={90}
+                    x={70} y={90}
                     ratio={this.props.weapon.timer.ratio}
                     label="sec"
                 >{WeaponService.getTimerValue(this.props.weapon)}</GaugeElement>
 
-                <ArcsElements x={170} y={90}/>
-
                 <GaugeElement
-                    x={280} y={90}
+                    x={180} y={90}
                     ratio={this.props.weapon.magazine.ratio}
                     label="ammo"
                     inverse={true}
                 >{this.props.weapon.magazine.quantity}</GaugeElement>
 
-                <SwitchElement
-                    x={340} y={40}
-                    width={100} height={40}
-                    fontSize={1.5} color={ColorPalette.WARNING}
-                    onClick={this.onEngage}
-                    enabled={this.isFireButtonEnabled()}
-                    toggled={!!this.props.weapon.target}
-                >FIRE</SwitchElement>
+                <ButtonElement
+                    x={240} y={40}
+                    width={80} height={40}
+                    fontSize={1.25}
+                    enabled={this.isReloadButtonEnabled()}
+                    onClick={this.onReload}
+                >RELOAD</ButtonElement>
                 <text
-                    x="390" y="95"
+                    x="280" y="95"
                     fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.TEXT}
                 >{this.props.weapon.magazine.name || 'No Ammo'}</text>
                 <ButtonElement
-                    x={340} y={110}
-                    width={100} height={30}
+                    x={240} y={110}
+                    width={80} height={30}
                     fontSize={1}
-                    enabled={this.isReloadButtonEnabled()}
-                    onClick={this.onReload}
-                >RELOAD</ButtonElement>
+                    enabled={this.isUnloadButtonEnabled()}
+                    onClick={this.onUnload}
+                >UNLOAD</ButtonElement>
+
+                <SwitchElement
+                    x={340} y={40}
+                    width={100} height={40}
+                    color={ColorPalette.WARNING}
+                    onClick={this.onEngage}
+                    enabled={this.isFireButtonEnabled()}
+                    toggled={!!this.props.weapon.target}
+                >FIRE</SwitchElement>
             </PanelElement>
         );
     }
@@ -139,6 +145,19 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
         ));
     }
 
+    private onUnload() {
+        if (!this.props.weapon || !this.isUnloadButtonEnabled()) {
+            return;
+        }
+
+        this.props.dispatch(SpaceshipActions.sendModuleAction(
+            this.props.entityId,
+            this.props.weapon.id,
+            'unload',
+            null,
+        ));
+    }
+
     private isFireButtonEnabled() {
         if (!this.props.weapon) {
             return false;
@@ -159,6 +178,14 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             this.props.weapon,
             this.props.selectedAmmo
         );
+    }
+
+    private isUnloadButtonEnabled() {
+        if (!this.props.weapon) {
+            return false;
+        }
+
+        return WeaponService.isUnloadButtonEnabled(this.props.weapon);
     }
 }
 
