@@ -1,8 +1,7 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svgTransforms';
 import Angles from '../../../lib/angles';
-import Vectors from '../../../lib/vectors';
+import SvgTransforms from '../../../lib/svgTransforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import PanelElement from '../../elements/panel.element';
 import ClientSelectors from '../../../store/client/clientSelectors';
@@ -78,8 +77,6 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
     }
 
     private renderTargetRow(trace: EntityTrace, index: number) {
-        const yaw = Angles.normalizeYaw(Vectors.getYaw(trace.relativeDirection));
-
         return (
             <g transform={SvgTransforms.translate(0, 30 + (40 * index))} key={`target-row-${trace.callSign}`}>
                 <line
@@ -112,7 +109,7 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
                     x="430" y="20"
                     fontSize="1.5rem" textAnchor="end"
                     fill={ColorPalette.TEXT}
-                >{yaw.toString().padStart(3, '0')}</text>
+                >{Angles.bearingToString(trace.relativeBearing)}</text>
             </g>
         );
     }

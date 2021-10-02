@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenSBS.Engine.Automata;
 using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
@@ -22,6 +23,7 @@ namespace OpenSBS.Engine.Modules.Weapons
         public WeaponMagazine Magazine { get; }
         public CountdownTimer Timer { get; }
         public string Status => _stateMachine.State.Id;
+        public IEnumerable<string> FiringArcs => Template.FiringArcs;
 
         public static WeaponModule Create(WeaponModuleTemplate template)
         {
@@ -41,9 +43,14 @@ namespace OpenSBS.Engine.Modules.Weapons
             return Target != null;
         }
 
-        public bool IsTargetOutOfRange()
+        public bool IsTargetUnreachable()
         {
-            return Target?.IsOutOfRange(Template.Range) ?? false;
+            if (Target == null)
+            {
+                return false;
+            }
+
+            return Target.IsOutOfRange(Template.Range) || Target.IsOutOfFiringArc(Template.FiringArcs);
         }
 
         public bool IsMagazineEmpty()

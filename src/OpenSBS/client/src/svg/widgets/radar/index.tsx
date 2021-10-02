@@ -4,7 +4,6 @@ import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import DirectionsOverlay from './directions.overlay';
 import RangesElement from './ranges.element';
 import TracesElement from './traces.element';
-import Vector3 from '../../../models/vector3';
 import SwitchElement from '../../elements/switch.element';
 import PanelElement from '../../elements/panel.element';
 import TargetElement from './target.element';
@@ -14,7 +13,7 @@ import ColorPalette from '../../colorPalette';
 interface RadarPropsModel {
     x: number,
     y: number,
-    direction: Vector3,
+    direction: number,
 }
 
 interface RadarStateModel {
@@ -114,7 +113,7 @@ class RadarWidget extends React.Component<RadarPropsModel, RadarStateModel> {
 
 const mapStateToProps = (state: any) => {
     return {
-        direction: SpaceshipSelectors.getDirection(state),
+        direction: SpaceshipSelectors.getBearing(state),
     };
 };
 

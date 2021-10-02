@@ -1,4 +1,5 @@
-﻿using OpenSBS.Engine.Models.Items;
+﻿using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Models.Items;
 using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Data.Modules
@@ -32,6 +33,7 @@ namespace OpenSBS.Engine.Data.Modules
             MagazineSize = 4;
             CycleTime = 4;
             ReloadTime = 12;
+            FiringArcs = new[] { EntitySide.Front };
         }
     }
 }

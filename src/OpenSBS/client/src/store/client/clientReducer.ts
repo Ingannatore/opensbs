@@ -7,6 +7,7 @@ import EntityTrace from '../../models/entityTrace';
 import SensorsModule from '../../modules/sensors/sensorsModule';
 import SpaceshipActions from '../spaceship/spaceshipActions';
 import ModuleType from '../../modules/moduleType';
+import Item from '../../models/item';
 
 const defaultState: ClientState = {
     zoomFactor: 1,
@@ -14,12 +15,24 @@ const defaultState: ClientState = {
     selectedAmmo: null,
 };
 
-const existsTrace = (entity: Entity, trace: EntityTrace): boolean => {
+const existsTrace = (entity: Entity, trace: EntityTrace | null): boolean => {
+    if (!trace) {
+        return false;
+    }
+
     const sensors = entity.modules.find(
         (module: Partial<EntityModule>) => module.type === ModuleType.SENSORS
     ) as SensorsModule;
 
     return sensors.traces.find(it => it.id === trace.id) != undefined;
+}
+
+const existsAmmo = (entity: Entity, ammo: Item | null): boolean => {
+    if (!ammo) {
+        return false;
+    }
+
+    return entity.cargo?.items.find(it => it.item.id === ammo.id) != undefined ?? false;
 }
 
 export default (state = defaultState, action: ClientAction) => {
@@ -43,10 +56,13 @@ export default (state = defaultState, action: ClientAction) => {
         return {...state, selectedAmmo: null};
     }
 
-    if (state.selectedTarget && action.type === SpaceshipActions.Types.REFRESH && action.payload) {
-        if (!existsTrace(JSON.parse(action.payload), state.selectedTarget)) {
-            return {...state, selectedTarget: null};
-        }
+    if (action.type === SpaceshipActions.Types.REFRESH && action.payload) {
+        const entity = JSON.parse(action.payload);
+        return {
+            ...state,
+            selectedTarget: !existsTrace(entity, state.selectedTarget) ? null : state.selectedTarget,
+            selectedAmmo: !existsAmmo(entity, state.selectedAmmo) ? null : state.selectedAmmo
+        };
     }
 
     return state;

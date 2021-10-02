@@ -1,9 +1,6 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
-import Vector3 from '../../../models/vector3';
-import Vectors from '../../../lib/vectors';
-import Angles from '../../../lib/angles';
 import ClientActions from '../../../store/client/clientActions';
 import ClientSelectors from '../../../store/client/clientSelectors';
 import EntityTrace from '../../../models/entityTrace';
@@ -15,7 +12,7 @@ interface TracesElementProps {
     size: number,
     dispatch: any,
     zoomFactor: number,
-    direction: Vector3,
+    direction: number,
     target: EntityTrace | null,
     sensors: SensorsModule | undefined,
 }
@@ -39,13 +36,13 @@ class TracesElement extends React.Component<TracesElementProps, {}> {
         const range = Math.round(8000 * (1 / this.props.zoomFactor));
         const scale = 400 / range;
 
-        const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
+        const bearing = this.props.direction;
         const traces = this.props.sensors.traces
         .filter((trace: EntityTrace) => trace.distance <= range)
-        .map((trace: EntityTrace) => this.renderTrace(trace, scale, yaw));
+        .map((trace: EntityTrace) => this.renderTrace(trace, scale, bearing));
 
         return (
-            <g transform={SvgTransforms.rotate(-yaw)}>
+            <g transform={SvgTransforms.rotate(-bearing)}>
                 {traces}
             </g>
         );
@@ -74,7 +71,15 @@ class TracesElement extends React.Component<TracesElementProps, {}> {
                     fontSize="1rem" fill="#dedede" textAnchor="middle"
                     transform={SvgTransforms.rotate(yaw)}
                 >{trace.callSign}</text>
-                {isSelected && <use href="/images/icons.svg#brackets" x="-50" y="-18" stroke={ColorPalette.DANGER}/>}
+                {
+                    isSelected &&
+                    <use
+                        href="/images/icons.svg#brackets"
+                        x="-50" y="-18"
+                        stroke={ColorPalette.DANGER}
+                        transform={SvgTransforms.rotate(yaw)}
+                    />
+                }
             </g>
         );
     }

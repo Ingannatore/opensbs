@@ -8,4 +8,5 @@ export default interface WeaponModule extends EntityModule {
     magazine: WeaponMagazine,
     timer: CountdownTimer,
     status: string,
+    firingArcs: string[],
 }

@@ -11,26 +11,29 @@ namespace OpenSBS.Engine.Models.Entities
     {
         public string CallSign { get; }
         public int Size { get; }
-        public Vector3 Position { get; protected set; }
-        public Vector3 Direction { get; protected set; }
+        public Vector3 Position { get; private set; }
+        public Vector3 Direction { get; private set; }
+        public double Bearing { get; private set; }
         public double LinearSpeed { get; set; }
-        public double AngularSpeed { get; set; }
         public EntityHull Hull { get; }
         public ItemStorage Cargo { get; }
         public ModulesCollection Modules { get; }
+
+        private double _angularSpeed;
 
         public Entity(string id, string name, string callsign, EntityTemplate template) : base(id, template.Type, name)
         {
             CallSign = callsign;
             Mass = template.Mass;
             Size = template.Size;
-
             Position = Vector3.Zero;
-            Direction = Vector3.UnitX;
-
+            Bearing = Angles.GetBearing(Vector3.UnitZ);
             Hull = EntityHull.Create(template.HitPoints);
             Cargo = ItemStorage.Create(template.Cargo);
             Modules = new ModulesCollection();
+
+            Direction = Vector3.UnitZ;
+            _angularSpeed = 0;
         }
 
         public void HandleAction(ClientAction action)
@@ -53,6 +56,12 @@ namespace OpenSBS.Engine.Models.Entities
             Position = new Vector3(x, y, z);
         }
 
+        public void UpdateSpeeds(double linearSpeed, double angularSpeed)
+        {
+            LinearSpeed = linearSpeed;
+            _angularSpeed = angularSpeed;
+        }
+
         public void ApplyDamage(int amount)
         {
             Hull.ApplyDamage(amount);
@@ -60,13 +69,15 @@ namespace OpenSBS.Engine.Models.Entities
 
         private void RotateBody(TimeSpan deltaT)
         {
-            if (AngularSpeed == 0)
+            if (_angularSpeed == 0)
             {
                 return;
             }
 
-            var deltaYaw = Angles.ToRadians(AngularSpeed * deltaT.TotalSeconds);
+            var deltaYaw = Angles.ToRadians(_angularSpeed * deltaT.TotalSeconds);
             Direction = Vectors.Rotate(Direction, deltaYaw, 0, 0);
+
+            Bearing = Angles.GetBearing(Direction);
         }
 
         private void MoveBody(TimeSpan deltaT)

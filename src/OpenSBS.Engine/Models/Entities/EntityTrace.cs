@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using OpenSBS.Engine.Utils;
 
@@ -13,13 +15,15 @@ namespace OpenSBS.Engine.Models.Entities
         public int Distance { get; protected set; }
         public Vector3 RelativePosition { get; protected set; }
         public Vector3 RelativeDirection { get; protected set; }
+        public double RelativeBearing { get; protected set; }
+        public string RelativeSide { get; protected set; }
 
         public static EntityTrace ForEntity(Entity entity)
         {
             return new EntityTrace(entity.Id, entity.Type, entity.CallSign);
         }
 
-        public EntityTrace(string id, string type, string callSign)
+        private EntityTrace(string id, string type, string callSign)
         {
             Id = id;
             Type = type;
@@ -32,17 +36,19 @@ namespace OpenSBS.Engine.Models.Entities
             return Distance > range;
         }
 
+        public bool IsOutOfFiringArc(IEnumerable<string> firingArcs)
+        {
+            return !firingArcs.Contains(RelativeSide);
+        }
+
         public void Update(Entity owner, Entity target)
         {
             Position = target.Position;
             Distance = (int)Math.Round(Vector3.Distance(owner.Position, target.Position));
             RelativePosition = target.Position - owner.Position;
-            RelativeDirection = Vectors.Rotate(
-                Vector3.Normalize(RelativePosition),
-                Angles.ToRadians(90),
-                0,
-                0
-            );
+            RelativeDirection = Vector3.Normalize(RelativePosition);
+            RelativeBearing = Angles.GetBearing(RelativeDirection);
+            RelativeSide = Angles.ToEntitySide(owner.Direction, RelativeDirection);
         }
     }
 }

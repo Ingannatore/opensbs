@@ -31,14 +31,17 @@ namespace OpenSBS.Engine.Modules.Engines
                     break;
                 case SetRudderAction:
                     Rudder = action.PayloadTo<int>();
+                    Console.WriteLine($"Set RUDDER to {Rudder}");
                     break;
             }
         }
 
         public override void Update(TimeSpan deltaT, Entity owner, World world)
         {
-            owner.AngularSpeed = CalculateAngularSpeed(deltaT);
-            owner.LinearSpeed = CalculateLinearSpeed(deltaT, owner);
+            owner.UpdateSpeeds(
+                CalculateLinearSpeed(deltaT, owner.LinearSpeed),
+                CalculateAngularSpeed(deltaT)
+            );
         }
 
         private double CalculateAngularSpeed(TimeSpan deltaT)
@@ -52,25 +55,24 @@ namespace OpenSBS.Engine.Modules.Engines
             return rudderDirection * Template.RotationSpeed * deltaT.TotalSeconds;
         }
 
-        private double CalculateLinearSpeed(TimeSpan deltaT, Entity owner)
+        private double CalculateLinearSpeed(TimeSpan deltaT, double currentSpeed)
         {
             TargetSpeed = Template.MaximumSpeed * (Throttle / 100.0);
-            var currentLinearSpeed = owner.LinearSpeed;
-            var linearSpeedDirection = Math.Sign(TargetSpeed - currentLinearSpeed);
+            var linearSpeedDirection = Math.Sign(TargetSpeed - currentSpeed);
 
             if (linearSpeedDirection > 0)
             {
                 var deltaSpeed = Template.Acceleration * deltaT.TotalSeconds;
-                return Math.Min(currentLinearSpeed + deltaSpeed, TargetSpeed);
+                return Math.Min(currentSpeed + deltaSpeed, TargetSpeed);
             }
 
             if (linearSpeedDirection < 0)
             {
                 var deltaSpeed = Template.Deceleration * deltaT.TotalSeconds;
-                return Math.Max(currentLinearSpeed - deltaSpeed, TargetSpeed);
+                return Math.Max(currentSpeed - deltaSpeed, TargetSpeed);
             }
 
-            return currentLinearSpeed;
+            return currentSpeed;
         }
     }
 }

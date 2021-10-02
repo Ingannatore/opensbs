@@ -17,8 +17,8 @@ const getPosition = (state: State): Vector3 => {
     return state.spaceship?.position ?? {x: 0, y: 0, z: 0};
 }
 
-const getDirection = (state: State): Vector3 => {
-    return state.spaceship?.direction ?? {x: 0, y: 0, z: 0};
+const getBearing = (state: State): number => {
+    return state.spaceship?.bearing ?? 0;
 }
 
 const getLinearSpeed = (state: State): number => {
@@ -74,7 +74,7 @@ const getTrace = (state: State, id: string): EntityTrace | undefined => {
 export default {
     getId,
     getPosition,
-    getDirection,
+    getBearing,
     getLinearSpeed,
     getModuleByType,
     getModulesByType,

@@ -17,8 +17,7 @@ namespace OpenSBS.Engine.Utils
 
         public static Vector3 Move(Vector3 position, Vector3 direction, double value)
         {
-            var normalizedDirection = new Vector3(-direction.Z, direction.Y, direction.X);
-            return position + normalizedDirection * (float) value;
+            return position + direction * (float) value;
         }
     }
 }

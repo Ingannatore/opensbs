@@ -19,7 +19,7 @@ namespace OpenSBS.Engine.Modules.Weapons.Automata
                 return IdleState.Create();
             }
 
-            if (module.IsTargetOutOfRange())
+            if (module.IsTargetUnreachable())
             {
                 return OutOfRangeState.Create();
             }

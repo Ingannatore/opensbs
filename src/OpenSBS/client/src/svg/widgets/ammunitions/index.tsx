@@ -2,13 +2,13 @@
 import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
 import PanelElement from '../../elements/panel.element';
-import AmmunitionElement from './ammunition.element';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import ItemStack from '../../../models/itemStack';
 import ClientActions from '../../../store/client/clientActions';
 import ClientSelectors from '../../../store/client/clientSelectors';
 import Item from '../../../models/item';
 import ItemStorage from '../../../models/itemStorage';
+import SwitchElement from '../../elements/switch.element';
 import ColorPalette from '../../colorPalette';
 
 interface AmmunitionsPropsModel {
@@ -59,16 +59,61 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
                     fill={ColorPalette.HEADER}
                 >QUANTITY</text>
 
-                {ammunitions.map((value: ItemStack, index: number) => <AmmunitionElement
-                    key={`ammo-element-${value.item.name.toLowerCase()}`}
-                    x={0} y={30 + (40 * index)}
-                    name={value.item.name} type={value.item.type}
-                    quantity={value.quantity}
-                    isSelected={value.item.id === this.props.selectedAmmo?.id}
-                    onClick={() => this.onAmmoClick(value.item)}
-                />)}
+                {ammunitions.map((value: ItemStack, index: number) => this.renderAmmoRow(value, index))}
             </PanelElement>
         );
+    }
+
+    private renderAmmoRow(stack: ItemStack, index: number) {
+        const icon = `/images/icons.svg#${stack.item.type}`;
+        const typeName = AmmunitionsWidget.getTypeName(stack.item.type);
+
+        return (
+            <g transform={SvgTransforms.translate(0, 30 + (40 * index))} key={`ammo-row-${stack.item.id}`}>
+                <line
+                    x1="0" y1="0"
+                    x2="450" y2="0"
+                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                />
+                <text
+                    x="20" y="20"
+                    fontSize="1.5rem" textAnchor="start"
+                    fill={ColorPalette.TEXT}
+                >{stack.item.name}</text>
+                <text
+                    x="270" y="20"
+                    fontSize=".75rem" textAnchor="end"
+                    fill={ColorPalette.MUTE_LIGHT}
+                >{typeName}</text>
+                <use href={icon} x="275" y="5" stroke={ColorPalette.TEXT}/>
+
+                <text
+                    x="360" y="20"
+                    fontSize="1.5rem" textAnchor="middle"
+                    fill={ColorPalette.TEXT}
+                >{stack.quantity}</text>
+
+                <SwitchElement
+                    x={420} y={10}
+                    width={20} height={20}
+                    toggled={stack.item.id === this.props.selectedAmmo?.id}
+                    onClick={() => this.onAmmoClick(stack.item)}
+                />
+            </g>
+        );
+    }
+
+    private static getTypeName(type: string): string {
+        switch (type) {
+            case 'ammo.plasma':
+                return 'Plasma Charge';
+            case 'ammo.projectile':
+                return 'Artillery Shell';
+            case 'ammo.torpedo':
+                return 'Torpedo Warhead';
+            default:
+                return type;
+        }
     }
 
     private onAmmoClick(ammo: Item) {

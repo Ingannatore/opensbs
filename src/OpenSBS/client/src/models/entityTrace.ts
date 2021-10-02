@@ -8,4 +8,6 @@ export default interface EntityTrace {
     distance: number,
     relativePosition: Vector3,
     relativeDirection: Vector3,
+    relativeBearing: number,
+    relativeSide: string,
 }

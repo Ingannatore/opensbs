@@ -1,17 +1,20 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import CompassPropsModel from './compass-props.model';
 import SvgTransforms from '../../../lib/svgTransforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import Angles from '../../../lib/angles';
-import Vectors from '../../../lib/vectors';
 import ColorPalette from '../../colorPalette';
 
-class CompassRadialWidget extends React.Component<CompassPropsModel, {}> {
+interface CompassWidgetProps {
+    x: number,
+    y: number,
+    bearing: number,
+}
+
+class CompassWidget extends React.Component<CompassWidgetProps, {}> {
     private readonly translation: string;
     private readonly markersDegrees: number[];
 
-    constructor(props: CompassPropsModel) {
+    constructor(props: CompassWidgetProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -20,13 +23,12 @@ class CompassRadialWidget extends React.Component<CompassPropsModel, {}> {
 
     public render() {
         const markers = this.markersDegrees.map((degrees: number) => {
-            return CompassRadialWidget.renderMarker(degrees);
+            return CompassWidget.renderMarker(degrees);
         });
-        const yaw = Angles.normalize(Angles.toDegrees(Vectors.getYaw(this.props.direction)));
 
         return (
             <g transform={this.translation}>
-                <g transform={SvgTransforms.rotate(-yaw)}>
+                <g transform={SvgTransforms.rotate(-this.props.bearing)}>
                     {markers}
                 </g>
             </g>
@@ -61,8 +63,8 @@ class CompassRadialWidget extends React.Component<CompassPropsModel, {}> {
 
 const mapStateToProps = (state: any) => {
     return {
-        direction: SpaceshipSelectors.getDirection(state),
+        bearing: SpaceshipSelectors.getBearing(state),
     };
 };
 
-export default connect(mapStateToProps)(CompassRadialWidget);
+export default connect(mapStateToProps)(CompassWidget);

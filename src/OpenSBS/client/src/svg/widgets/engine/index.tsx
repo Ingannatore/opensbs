@@ -55,7 +55,7 @@ class EngineWidget extends React.Component<EnginePropsModel, {}> {
                         width={200} height={60}
                         fontSize={1.75} color='darkorange'
                         onClick={() => this.setThrottle(0)}
-                    >FULL STOP</ButtonElement>
+                    >STOP</ButtonElement>
                     <ButtonElement
                         x={220} y={375}
                         width={200} height={60}

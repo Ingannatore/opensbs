@@ -7,9 +7,8 @@ export default interface Entity extends Item {
     callSign: string,
     size: number,
     position: Vector3,
-    direction: Vector3,
+    bearing: number,
     linearSpeed: number,
-    angularSpeed: number,
     modules: Array<Partial<EntityModule>>
     cargo: ItemStorage | null,
 }
