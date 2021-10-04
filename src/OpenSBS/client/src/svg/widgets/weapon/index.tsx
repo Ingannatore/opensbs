@@ -12,6 +12,7 @@ import ButtonElement from '../../elements/button.element';
 import WeaponModule from '../../../modules/weapons/weaponModule';
 import WeaponService from '../../../modules/weapons/weaponService';
 import Item from '../../../models/item';
+import ArcsElements from './arcs.elements';
 import ColorPalette from '../../colorPalette';
 
 interface WeaponProps {
@@ -97,6 +98,12 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                     enabled={this.isFireButtonEnabled()}
                     toggled={!!this.props.weapon.target}
                 >FIRE</SwitchElement>
+
+                <ArcsElements
+                    x={390} y={115}
+                    arcs={this.props.weapon.firingArcs}
+                    targetSide={this.props.weapon.target?.relativeSide}
+                />
             </PanelElement>
         );
     }

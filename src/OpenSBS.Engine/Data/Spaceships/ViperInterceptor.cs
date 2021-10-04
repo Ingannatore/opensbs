@@ -24,6 +24,7 @@ namespace OpenSBS.Engine.Data.Spaceships
             Modules.Add(ShieldModule.Create(PrototypeMagneticShield.Instance));
             Modules.Add(WeaponModule.Create(MonoBlaster.Instance));
             Modules.Add(WeaponModule.Create(MonoBlaster.Instance));
+            Modules.Add(WeaponModule.Create(ArtilleryBattery.Instance));
         }
     }
 }

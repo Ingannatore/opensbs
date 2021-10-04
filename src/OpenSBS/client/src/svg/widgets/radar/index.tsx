@@ -19,7 +19,6 @@ interface RadarPropsModel {
 interface RadarStateModel {
     enableDirectionsOverlay: boolean,
     enableRangesOverlay: boolean,
-    enableWeaponsOverlay: boolean,
 }
 
 class RadarWidget extends React.Component<RadarPropsModel, RadarStateModel> {
@@ -28,12 +27,10 @@ class RadarWidget extends React.Component<RadarPropsModel, RadarStateModel> {
         this.state = {
             enableDirectionsOverlay: true,
             enableRangesOverlay: true,
-            enableWeaponsOverlay: false,
         };
 
         this.toggleDirectionsOverlay = this.toggleDirectionsOverlay.bind(this);
         this.toggleRangesOverlay = this.toggleRangesOverlay.bind(this);
-        this.toggleWeaponsOverlay = this.toggleWeaponsOverlay.bind(this);
     }
 
     public render() {
@@ -59,30 +56,19 @@ class RadarWidget extends React.Component<RadarPropsModel, RadarStateModel> {
                         <g transform="translate(-25 -25)">
                             <SwitchElement
                                 x={0} y={0}
-                                width={50} height={50} fontSize={1.25}
+                                width={80} height={50} fontSize={1.25}
                                 onClick={this.toggleRangesOverlay}
                                 toggled={this.state.enableRangesOverlay}
-                            >RNG</SwitchElement>
+                            >RANGE</SwitchElement>
                         </g>
                     </g>
-                    <g transform="translate(-25 -25)">
+                    <g transform="translate(5 -25)">
                         <SwitchElement
                             x={0} y={0}
-                            width={50} height={50} fontSize={1.25}
+                            width={80} height={50} fontSize={1.25}
                             onClick={this.toggleDirectionsOverlay}
                             toggled={this.state.enableDirectionsOverlay}
-                        >SEC</SwitchElement>
-                    </g>
-                    <g transform="translate(60 0)">
-                        <g transform="translate(-25 -25)">
-                            <SwitchElement
-                                x={0} y={0}
-                                width={50} height={50} fontSize={1.25}
-                                enabled={false}
-                                onClick={this.toggleWeaponsOverlay}
-                                toggled={this.state.enableWeaponsOverlay}
-                            >WPN</SwitchElement>
-                        </g>
+                        >SECTOR</SwitchElement>
                     </g>
                 </g>
             </PanelElement>
@@ -100,13 +86,6 @@ class RadarWidget extends React.Component<RadarPropsModel, RadarStateModel> {
         this.setState({
             ...this.state,
             enableRangesOverlay: !this.state.enableRangesOverlay
-        });
-    }
-
-    private toggleWeaponsOverlay() {
-        this.setState({
-            ...this.state,
-            enableWeaponsOverlay: !this.state.enableWeaponsOverlay
         });
     }
 }
