@@ -2,7 +2,7 @@
 import SvgTransforms from '../../lib/svgTransforms';
 import ColorPalette from '../colorPalette';
 
-interface SwitchElementModel {
+interface SwitchElementProps {
     x: number,
     y: number,
     rx: number,
@@ -15,7 +15,7 @@ interface SwitchElementModel {
     onClick: (event: React.MouseEvent<SVGElement, MouseEvent>) => void,
 }
 
-export default class SwitchElement extends React.Component<SwitchElementModel, {}> {
+export default class SwitchElement extends React.Component<SwitchElementProps, {}> {
     private readonly translation: string;
 
     public static defaultProps = {
@@ -28,7 +28,7 @@ export default class SwitchElement extends React.Component<SwitchElementModel, {
         enabled: true,
     };
 
-    constructor(props: SwitchElementModel) {
+    constructor(props: SwitchElementProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

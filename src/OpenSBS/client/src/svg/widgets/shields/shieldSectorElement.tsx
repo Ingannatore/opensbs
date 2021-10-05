@@ -2,9 +2,9 @@
 import SvgTransforms from '../../../lib/svgTransforms';
 import ShieldSector from '../../../modules/shields/shieldSector';
 import ShieldCalibrationElement from './shieldCalibrationElement';
-import ValueElement from '../../elements/value.element';
-import ButtonElement from '../../elements/button.element';
-import CylinderElement from '../../elements/cylinder.element';
+import ValueElement from '../../elements/valueElement';
+import ButtonElement from '../../elements/buttonElement';
+import CylinderElement from '../../elements/cylinderElement';
 import ShieldService from '../../../modules/shields/shieldService';
 import ColorPalette from '../../colorPalette';
 

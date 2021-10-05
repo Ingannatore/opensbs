@@ -2,7 +2,7 @@
 import SvgTransforms from '../../lib/svgTransforms';
 import ColorPalette from '../colorPalette';
 
-interface PanelElementModel {
+interface PanelElementProps {
     x: number,
     y: number,
     width: number,
@@ -10,7 +10,7 @@ interface PanelElementModel {
     isOffline: boolean,
 }
 
-export default class PanelElement extends React.Component<PanelElementModel, {}> {
+export default class PanelElement extends React.Component<PanelElementProps, {}> {
     private readonly translation: string;
     private readonly path: string;
 
@@ -18,7 +18,7 @@ export default class PanelElement extends React.Component<PanelElementModel, {}>
         isOffline: false,
     };
 
-    constructor(props: PanelElementModel) {
+    constructor(props: PanelElementProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

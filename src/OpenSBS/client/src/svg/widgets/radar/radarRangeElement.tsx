@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import ClientSelectors from '../../../store/client/clientSelectors';
-import DisplayElement from '../../elements/display.element';
+import DisplayElement from '../../elements/displayElement';
 
 interface RadarRangeElementProps {
     x: number,

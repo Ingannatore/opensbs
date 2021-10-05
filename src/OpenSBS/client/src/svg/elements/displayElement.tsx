@@ -2,21 +2,21 @@
 import SvgTransforms from '../../lib/svgTransforms';
 import ColorPalette from '../colorPalette';
 
-interface DisplayElementModel {
+interface DisplayElementProps {
     x: number,
     y: number,
     topLabel: string,
     bottomLabel: string | undefined,
 }
 
-export default class DisplayElement extends React.Component<DisplayElementModel, {}> {
+export default class DisplayElement extends React.Component<DisplayElementProps, {}> {
     private readonly translation: string;
 
     public static defaultProps = {
         bottomLabel: undefined,
     };
 
-    constructor(props: DisplayElementModel) {
+    constructor(props: DisplayElementProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

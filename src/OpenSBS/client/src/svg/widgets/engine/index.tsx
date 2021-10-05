@@ -1,12 +1,12 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
-import DisplayElement from '../../elements/display.element';
+import DisplayElement from '../../elements/displayElement';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import PanelElement from '../../elements/panel.element';
+import PanelElement from '../../elements/panelElement';
 import ThrottleElement from './throttleElement';
 import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
-import ButtonElement from '../../elements/button.element';
+import ButtonElement from '../../elements/buttonElement';
 import EngineModule from '../../../modules/engines/engineModule';
 import ColorPalette from '../../colorPalette';
 

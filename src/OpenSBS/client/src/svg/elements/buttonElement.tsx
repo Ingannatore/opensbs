@@ -2,7 +2,7 @@
 import SvgTransforms from '../../lib/svgTransforms';
 import ColorPalette from '../colorPalette';
 
-interface ButtonElementModel {
+interface ButtonElementProps {
     x: number,
     y: number,
     width: number,
@@ -17,7 +17,7 @@ interface ButtonElementState {
     pressed: boolean,
 }
 
-export default class ButtonElement extends React.Component<ButtonElementModel, ButtonElementState> {
+export default class ButtonElement extends React.Component<ButtonElementProps, ButtonElementState> {
     private readonly translation: string;
 
     public static defaultProps = {
@@ -28,7 +28,7 @@ export default class ButtonElement extends React.Component<ButtonElementModel, B
         enabled: true,
     };
 
-    constructor(props: ButtonElementModel) {
+    constructor(props: ButtonElementProps) {
         super(props);
         this.state = {
             pressed: false,

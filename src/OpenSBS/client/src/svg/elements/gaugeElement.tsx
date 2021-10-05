@@ -1,9 +1,9 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svgTransforms';
-import ValueElement from './value.element';
+import ValueElement from './valueElement';
 import ColorPalette from '../colorPalette';
 
-interface GaugeProps {
+interface GaugeElementProps {
     x: number,
     y: number,
     fill: string,
@@ -13,7 +13,7 @@ interface GaugeProps {
     inverse: boolean,
 }
 
-export default class GaugeElement extends React.Component<GaugeProps, {}> {
+export default class GaugeElement extends React.Component<GaugeElementProps, {}> {
     private readonly translation: string;
     private readonly pathLength: number;
 
@@ -24,7 +24,7 @@ export default class GaugeElement extends React.Component<GaugeProps, {}> {
         inverse: false,
     };
 
-    constructor(props: GaugeProps) {
+    constructor(props: GaugeElementProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

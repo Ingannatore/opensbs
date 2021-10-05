@@ -3,8 +3,8 @@ import CompassWidget from '../../svg/widgets/compass';
 import EngineWidget from '../../svg/widgets/engine';
 import HelmWidget from '../../svg/widgets/helm';
 import RadarWidget from '../../svg/widgets/radar';
-import SvgElement from '../../svg/elements/svg.element';
-import TerminalElement from '../../svg/elements/terminal.element';
+import SvgElement from '../../svg/elements/svgElement';
+import TerminalElement from '../../svg/elements/terminalElement';
 import './terminal.css';
 
 export default class NavigationTerminal extends React.Component<{}, {}> {

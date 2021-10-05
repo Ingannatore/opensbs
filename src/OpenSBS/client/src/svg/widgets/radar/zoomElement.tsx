@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
 import ClientActions from '../../../store/client/clientActions';
 import ClientSelectors from '../../../store/client/clientSelectors';
-import SwitchElement from '../../elements/switch.element';
+import SwitchElement from '../../elements/switchElement';
 import ColorPalette from '../../colorPalette';
 
 interface ZoomElementProps {

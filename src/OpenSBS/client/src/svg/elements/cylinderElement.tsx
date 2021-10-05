@@ -39,6 +39,7 @@ export default class CylinderElement extends React.Component<CylinderElementProp
         const labelStartX = this.props.labelsPosition === 'left' ? -4 : 24;
         const labelEndX = this.props.labelsPosition === 'left' ? -8 : 28;
         const textAnchor = this.props.labelsPosition === 'left' ? 'end' : 'start';
+        const labels = this.props.labels.split(' ');
 
         return (
             <g transform={this.translation}>
@@ -89,22 +90,22 @@ export default class CylinderElement extends React.Component<CylinderElementProp
                         x={labelStartX} y={this.markerDeltaHeight * 2}
                         fill={ColorPalette.TEXT}
                         fontSize="1rem" textAnchor={textAnchor}
-                    >{this.props.labels.split(' ')[0]}</text>
+                    >{labels[0]}</text>
                     <text
                         x={labelStartX} y={this.markerDeltaHeight * 4}
                         fill={ColorPalette.TEXT}
                         fontSize="1rem" textAnchor={textAnchor}
-                    >{this.props.labels.split(' ')[1]}</text>
+                    >{labels[1]}</text>
                     <text
                         x={labelStartX} y={this.markerDeltaHeight * 6}
                         fill={ColorPalette.TEXT}
                         fontSize="1rem" textAnchor={textAnchor}
-                    >{this.props.labels.split(' ')[2]}</text>
+                    >{labels[2]}</text>
                     <text
                         x={labelStartX} y={this.markerDeltaHeight * 8}
                         fill={ColorPalette.TEXT}
                         fontSize="1rem" textAnchor={textAnchor}
-                    >{this.props.labels.split(' ')[3]}</text>
+                    >{labels[3]}</text>
                 </g>
             </g>
         );

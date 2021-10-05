@@ -1,9 +1,9 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
-import PanelElement from '../../elements/panel.element';
-import SwitchElement from '../../elements/switch.element';
-import ButtonElement from '../../elements/button.element';
+import PanelElement from '../../elements/panelElement';
+import SwitchElement from '../../elements/switchElement';
+import ButtonElement from '../../elements/buttonElement';
 import ShieldSectorElement from './shieldSectorElement';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import ShieldModule from '../../../modules/shields/shieldModule';

@@ -1,14 +1,14 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
-import PanelElement from '../../elements/panel.element';
+import PanelElement from '../../elements/panelElement';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import ItemStack from '../../../models/itemStack';
 import ClientActions from '../../../store/client/clientActions';
 import ClientSelectors from '../../../store/client/clientSelectors';
 import Item from '../../../models/item';
 import ItemStorage from '../../../models/itemStorage';
-import SwitchElement from '../../elements/switch.element';
+import SwitchElement from '../../elements/switchElement';
 import CargoService from '../../../modules/cargo/cargoService';
 import ColorPalette from '../../colorPalette';
 

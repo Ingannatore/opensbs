@@ -1,11 +1,11 @@
 ﻿import * as React from 'react';
 
-interface StationElementModel {
+interface TerminalElementProps {
     name: string,
     icon: string,
 }
 
-export default class TerminalElement extends React.Component<StationElementModel, {}> {
+export default class TerminalElement extends React.Component<TerminalElementProps, {}> {
     private readonly icon: string;
 
     public static defaultProps = {
@@ -13,7 +13,7 @@ export default class TerminalElement extends React.Component<StationElementModel
         icon: '',
     };
 
-    constructor(props: StationElementModel) {
+    constructor(props: TerminalElementProps) {
         super(props);
 
         this.icon = this.props.icon ? `/images/icons.svg#${this.props.icon}` : '';

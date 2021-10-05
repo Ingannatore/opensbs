@@ -2,9 +2,9 @@
 import AmmunitionsWidget from '../../svg/widgets/ammunitions';
 import RadarWidget from '../../svg/widgets/radar';
 import ShieldWidget from '../../svg/widgets/shields';
-import SvgElement from '../../svg/elements/svg.element';
+import SvgElement from '../../svg/elements/svgElement';
 import TargetsWidget from '../../svg/widgets/targets';
-import TerminalElement from '../../svg/elements/terminal.element';
+import TerminalElement from '../../svg/elements/terminalElement';
 import WeaponWidget from '../../svg/widgets/weapon';
 import './terminal.css';
 

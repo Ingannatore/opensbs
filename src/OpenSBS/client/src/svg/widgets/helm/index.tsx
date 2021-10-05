@@ -5,10 +5,10 @@ import SvgTransforms from '../../../lib/svgTransforms';
 import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import EngineModule from '../../../modules/engines/engineModule';
-import DisplayElement from '../../elements/display.element';
-import SwitchElement from '../../elements/switch.element';
-import PanelElement from '../../elements/panel.element';
-import ButtonElement from '../../elements/button.element';
+import DisplayElement from '../../elements/displayElement';
+import SwitchElement from '../../elements/switchElement';
+import PanelElement from '../../elements/panelElement';
+import ButtonElement from '../../elements/buttonElement';
 import ColorPalette from '../../colorPalette';
 
 interface HelmWidgetProps {
