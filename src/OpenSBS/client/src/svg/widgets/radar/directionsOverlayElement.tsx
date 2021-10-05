@@ -1,11 +1,11 @@
 ﻿import * as React from 'react';
 
-interface DirectionsOverlayModel {
+interface DirectionsOverlayElementProps {
     r: number,
     visible: boolean,
 }
 
-export default class DirectionsOverlay extends React.Component<DirectionsOverlayModel, {}> {
+export default class DirectionsOverlayElement extends React.Component<DirectionsOverlayElementProps, {}> {
     public render() {
         if (!this.props.visible) {
             return null;

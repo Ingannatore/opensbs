@@ -23,7 +23,7 @@ export default class SwitchElement extends React.Component<SwitchElementModel, {
         y: 0,
         rx: 6,
         fontSize: 1.5,
-        color: 'darkturquoise',
+        color: ColorPalette.MAIN,
         toggled: false,
         enabled: true,
     };

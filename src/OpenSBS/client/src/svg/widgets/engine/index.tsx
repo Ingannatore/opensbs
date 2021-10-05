@@ -1,41 +1,52 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import EnginePropsModel from './engine-props.model';
 import SvgTransforms from '../../../lib/svgTransforms';
 import DisplayElement from '../../elements/display.element';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import PanelElement from '../../elements/panel.element';
-import ThrottleElement from './throttle.element';
+import ThrottleElement from './throttleElement';
 import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
 import ButtonElement from '../../elements/button.element';
+import EngineModule from '../../../modules/engines/engineModule';
+import ColorPalette from '../../colorPalette';
 
-class EngineWidget extends React.Component<EnginePropsModel, {}> {
+interface EngineWidgetProps {
+    x: number,
+    y: number,
+    dispatch: any,
+    entityId: string,
+    linearSpeed: number,
+    engineModule: EngineModule | undefined,
+}
+
+class EngineWidget extends React.Component<EngineWidgetProps, {}> {
     private readonly translation: string;
 
-    constructor(props: EnginePropsModel) {
+    constructor(props: EngineWidgetProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
     }
 
     public render() {
-        if (!this.props.engineModule) {
-            return null;
-        }
-
+        const targetSpeed = this.props.engineModule?.targetSpeed ?? 0;
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={450} height={610} isOffline={!this.props.engineModule}>
+            <PanelElement
+                x={this.props.x} y={this.props.y}
+                width={450} height={610}
+                isOffline={!this.props.engineModule}
+            >
                 <g transform="translate(20 0)">
                     <ThrottleElement
                         x={0} y={10}
-                        throttle={this.props.engineModule.throttle}
-                        targetSpeed={this.props.engineModule.targetSpeed}
+                        throttle={this.props.engineModule?.throttle ?? 0}
+                        targetSpeed={targetSpeed}
                         onClick={(value) => this.setThrottle(value)}
                     />
                     <line
                         x1="210" y1="0"
                         x2="210" y2="610"
-                        stroke="#383838" strokeWidth="2"
+                        stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
                     />
 
                     <DisplayElement
@@ -43,23 +54,28 @@ class EngineWidget extends React.Component<EnginePropsModel, {}> {
                         topLabel=" CURRENT SPEED"
                         bottomLabel="meters/sec"
                     >{Math.round(this.props.linearSpeed)}</DisplayElement>
+                    <DisplayElement
+                        x={320} y={530}
+                        topLabel=" TARGET SPEED"
+                        bottomLabel="meters/sec"
+                    >{Math.round(targetSpeed)}</DisplayElement>
 
                     <ButtonElement
-                        x={220} y={175}
+                        x={220} y={170}
                         width={200} height={60}
-                        fontSize={1.75} color='darkturquoise'
+                        fontSize={1.75}
                         onClick={() => this.setThrottle(100)}
                     >FULL AHEAD</ButtonElement>
                     <ButtonElement
                         x={220} y={275}
                         width={200} height={60}
-                        fontSize={1.75} color='darkorange'
+                        fontSize={1.75} color={ColorPalette.WARNING}
                         onClick={() => this.setThrottle(0)}
                     >STOP</ButtonElement>
                     <ButtonElement
-                        x={220} y={375}
+                        x={220} y={380}
                         width={200} height={60}
-                        fontSize={1.75} color='darkturquoise'
+                        fontSize={1.75}
                         onClick={() => this.setThrottle(-100)}
                     >FULL ASTERN</ButtonElement>
                 </g>

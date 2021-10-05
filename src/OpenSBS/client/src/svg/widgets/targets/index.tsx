@@ -8,20 +8,22 @@ import ClientSelectors from '../../../store/client/clientSelectors';
 import ClientActions from '../../../store/client/clientActions';
 import EntityTrace from '../../../models/entityTrace';
 import SwitchElement from '../../elements/switch.element';
+import SensorsModule from '../../../modules/sensors/sensorsModule';
+import SensorsService from '../../../modules/sensors/sensorsService';
 import ColorPalette from '../../colorPalette';
 
-interface TargetsProps {
+interface TargetsWidgetProps {
     x: number,
     y: number,
     dispatch: any,
     target: EntityTrace | null,
-    traces: EntityTrace[],
+    sensors: SensorsModule | undefined,
 }
 
-class TargetsWidget extends React.Component<TargetsProps, {}> {
+class TargetsWidget extends React.Component<TargetsWidgetProps, {}> {
     private readonly translation: string;
 
-    constructor(props: TargetsProps) {
+    constructor(props: TargetsWidgetProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -29,13 +31,16 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
     }
 
     public render() {
-        const targets = this.props.traces
-        .sort((a: EntityTrace, b: EntityTrace) => a.distance - b.distance)
-        .slice(0, 10)
-        .map((trace: EntityTrace, index: number) => this.renderTargetRow(trace, index));
+        const targets = SensorsService.findNearestTraces(this.props.sensors).map(
+            (trace: EntityTrace, index: number) => this.renderTargetRow(trace, index)
+        );
 
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={450} height={430}>
+            <PanelElement
+                x={this.props.x} y={this.props.y}
+                width={450} height={430}
+                isOffline={!this.props.sensors}
+            >
                 <line
                     x1="40" y1="0"
                     x2="40" y2="430"
@@ -77,8 +82,9 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
     }
 
     private renderTargetRow(trace: EntityTrace, index: number) {
+        const transform = SvgTransforms.translate(0, 30 + (40 * index));
         return (
-            <g transform={SvgTransforms.translate(0, 30 + (40 * index))} key={`target-row-${trace.callSign}`}>
+            <g transform={transform} key={`target-row-${trace.callSign}`}>
                 <line
                     x1="0" y1="0"
                     x2="450" y2="0"
@@ -126,7 +132,7 @@ class TargetsWidget extends React.Component<TargetsProps, {}> {
 const mapStateToProps = (state: any) => {
     return {
         target: ClientSelectors.getSelectedTarget(state),
-        traces: SpaceshipSelectors.getTraces(state)
+        sensors: SpaceshipSelectors.getSensors(state),
     };
 };
 

@@ -6,27 +6,24 @@ import ClientSelectors from '../../../store/client/clientSelectors';
 import EntityTrace from '../../../models/entityTrace';
 import SensorsModule from '../../../modules/sensors/sensorsModule';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
+import SensorsService from '../../../modules/sensors/sensorsService';
 import ColorPalette from '../../colorPalette';
 
-interface TracesElementProps {
+interface TracesOverlayElementProps {
     size: number,
     dispatch: any,
     zoomFactor: number,
-    direction: number,
+    bearing: number,
     target: EntityTrace | null,
     sensors: SensorsModule | undefined,
 }
 
-class TracesElement extends React.Component<TracesElementProps, {}> {
-    constructor(props: TracesElementProps) {
+class TracesOverlayElement extends React.Component<TracesOverlayElementProps, {}> {
+    constructor(props: TracesOverlayElementProps) {
         super(props);
 
         this.onTraceClick = this.onTraceClick.bind(this);
     }
-
-    public static defaultProps = {
-        zoomFactor: 1,
-    };
 
     public render() {
         if (!this.props.sensors) {
@@ -36,13 +33,11 @@ class TracesElement extends React.Component<TracesElementProps, {}> {
         const range = Math.round(8000 * (1 / this.props.zoomFactor));
         const scale = 400 / range;
 
-        const bearing = this.props.direction;
-        const traces = this.props.sensors.traces
-        .filter((trace: EntityTrace) => trace.distance <= range)
-        .map((trace: EntityTrace) => this.renderTrace(trace, scale, bearing));
+        const traces = SensorsService.findTraces(this.props.sensors, range)
+        .map((trace: EntityTrace) => this.renderTrace(trace, scale, this.props.bearing));
 
         return (
-            <g transform={SvgTransforms.rotate(-bearing)}>
+            <g transform={SvgTransforms.rotate(-this.props.bearing)}>
                 {traces}
             </g>
         );
@@ -57,18 +52,19 @@ class TracesElement extends React.Component<TracesElementProps, {}> {
 
         return (
             <g
-                key={`trace-${trace.id}`}
+                key={`radar-trace-${trace.id}`}
                 transform={transform} cursor="pointer"
                 onClick={() => this.onTraceClick(trace)}
             >
                 <circle
                     x="0" y="0" r="4"
-                    stroke="whitesmoke" strokeWidth="2"
-                    fill="black"
+                    stroke={ColorPalette.TEXT} strokeWidth="2"
+                    fill={ColorPalette.BACKGROUND}
                 />
                 <text
                     x="0" y="20"
-                    fontSize="1rem" fill="#dedede" textAnchor="middle"
+                    fontSize="1rem" textAnchor="middle"
+                    fill={ColorPalette.TEXT}
                     transform={SvgTransforms.rotate(yaw)}
                 >{trace.callSign}</text>
                 {
@@ -96,9 +92,10 @@ class TracesElement extends React.Component<TracesElementProps, {}> {
 const mapStateToProps = (state: any) => {
     return {
         zoomFactor: ClientSelectors.getZoomFactor(state),
+        bearing: SpaceshipSelectors.getBearing(state),
         target: ClientSelectors.getSelectedTarget(state),
         sensors: SpaceshipSelectors.getSensors(state),
     };
 };
 
-export default connect(mapStateToProps)(TracesElement);
+export default connect(mapStateToProps)(TracesOverlayElement);

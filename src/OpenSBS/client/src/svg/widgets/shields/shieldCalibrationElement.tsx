@@ -1,8 +1,8 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svgTransforms';
-import CalibrationSegmentElement from './calibration-segment.element';
+import CalibrationSegmentElement from './calibrationSegmentElement';
 
-interface ShieldCalibrationProps {
+interface ShieldCalibrationElementProps {
     x: number,
     y: number,
     value: number,
@@ -10,10 +10,10 @@ interface ShieldCalibrationProps {
     onSetCalibration: (value: number) => void,
 }
 
-export default class ShieldCalibrationElement extends React.Component<ShieldCalibrationProps, {}> {
+export default class ShieldCalibrationElement extends React.Component<ShieldCalibrationElementProps, {}> {
     private readonly translation: string;
 
-    constructor(props: ShieldCalibrationProps) {
+    constructor(props: ShieldCalibrationElementProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

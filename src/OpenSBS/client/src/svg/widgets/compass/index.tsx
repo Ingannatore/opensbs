@@ -22,9 +22,9 @@ class CompassWidget extends React.Component<CompassWidgetProps, {}> {
     }
 
     public render() {
-        const markers = this.markersDegrees.map((degrees: number) => {
-            return CompassWidget.renderMarker(degrees);
-        });
+        const markers = this.markersDegrees.map(
+            (degrees: number) => CompassWidget.renderMarker(degrees)
+        );
 
         return (
             <g transform={this.translation}>
@@ -38,7 +38,7 @@ class CompassWidget extends React.Component<CompassWidgetProps, {}> {
     private static renderMarker(degrees: number) {
         if (degrees % 45 === 0) {
             return (
-                <g key={'compass-radial-marker-' + degrees} transform={SvgTransforms.rotate(degrees)}>
+                <g key={'compass-marker-' + degrees} transform={SvgTransforms.rotate(degrees)}>
                     <text
                         x="0" y="-474"
                         textAnchor="middle"
@@ -50,7 +50,7 @@ class CompassWidget extends React.Component<CompassWidgetProps, {}> {
         }
 
         return (
-            <g key={'compass-radial-marker-' + degrees} transform={SvgTransforms.rotate(degrees)}>
+            <g key={'compass-marker-' + degrees} transform={SvgTransforms.rotate(degrees)}>
                 <line
                     x1="0" y1="-468"
                     x2="0" y2="-482"

@@ -32,7 +32,7 @@ export default class DisplayElement extends React.Component<DisplayElementModel,
                 >{this.props.topLabel}</text>
                 <text
                     x="0" y="0"
-                    fontSize="5rem" textAnchor="middle"
+                    fontSize="4.5rem" textAnchor="middle"
                     fill={ColorPalette.TEXT}
                 >{this.props.children}</text>
                 {this.props.bottomLabel && <text

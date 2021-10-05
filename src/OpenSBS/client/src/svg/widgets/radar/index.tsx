@@ -1,27 +1,26 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import DirectionsOverlay from './directions.overlay';
-import RangesElement from './ranges.element';
-import TracesElement from './traces.element';
+import DirectionsOverlayElement from './directionsOverlayElement';
+import RangesOverlayElement from './rangesOverlayElement';
+import TracesOverlayElement from './tracesOverlayElement';
 import SwitchElement from '../../elements/switch.element';
 import PanelElement from '../../elements/panel.element';
-import TargetElement from './target.element';
-import ZoomElement from './zoom.element';
+import TargetDistanceElement from './targetDistanceElement';
+import RadarRangeElement from './radarRangeElement';
+import ZoomElement from './zoomElement';
 import ColorPalette from '../../colorPalette';
 
-interface RadarPropsModel {
+interface RadarWidgetProps {
     x: number,
     y: number,
-    direction: number,
 }
 
-interface RadarStateModel {
+interface RadarWidgetState {
     enableDirectionsOverlay: boolean,
     enableRangesOverlay: boolean,
 }
 
-class RadarWidget extends React.Component<RadarPropsModel, RadarStateModel> {
+class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -36,19 +35,20 @@ class RadarWidget extends React.Component<RadarPropsModel, RadarStateModel> {
     public render() {
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={1000} height={1000}>
-                <TargetElement x={100} y={70}/>
+                <TargetDistanceElement x={100} y={70}/>
 
                 <g transform="translate(500 500)">
                     <circle
                         cx="0" cy="0" r="460"
                         stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
                     />
-                    <RangesElement visible={this.state.enableRangesOverlay}/>
-                    <DirectionsOverlay r={460} visible={this.state.enableDirectionsOverlay}/>
-                    <TracesElement size={400} direction={this.props.direction}/>
+                    <RangesOverlayElement visible={this.state.enableRangesOverlay}/>
+                    <DirectionsOverlayElement r={460} visible={this.state.enableDirectionsOverlay}/>
+                    <TracesOverlayElement size={400}/>
                     <use href="/images/icons.svg#icon-ship" x="-6" y="-6"/>
                 </g>
 
+                <RadarRangeElement x={900} y={920}/>
                 <ZoomElement x={900} y={920}/>
 
                 <g transform="translate(100 910)">
@@ -90,10 +90,4 @@ class RadarWidget extends React.Component<RadarPropsModel, RadarStateModel> {
     }
 }
 
-const mapStateToProps = (state: any) => {
-    return {
-        direction: SpaceshipSelectors.getBearing(state),
-    };
-};
-
-export default connect(mapStateToProps)(RadarWidget);
+export default connect()(RadarWidget);

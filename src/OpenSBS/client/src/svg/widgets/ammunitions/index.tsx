@@ -9,9 +9,10 @@ import ClientSelectors from '../../../store/client/clientSelectors';
 import Item from '../../../models/item';
 import ItemStorage from '../../../models/itemStorage';
 import SwitchElement from '../../elements/switch.element';
+import CargoService from '../../../modules/cargo/cargoService';
 import ColorPalette from '../../colorPalette';
 
-interface AmmunitionsPropsModel {
+interface AmmunitionsWidgetProps {
     x: number,
     y: number,
     dispatch: any,
@@ -19,10 +20,10 @@ interface AmmunitionsPropsModel {
     cargo: ItemStorage | undefined,
 }
 
-class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
+class AmmunitionsWidget extends React.Component<AmmunitionsWidgetProps, {}> {
     private readonly translation: string;
 
-    constructor(props: AmmunitionsPropsModel) {
+    constructor(props: AmmunitionsWidgetProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -30,16 +31,16 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
     }
 
     public render() {
-        if (!this.props.cargo) {
-            return null;
-        }
-
-        const ammunitions = this.props.cargo.items.filter(
-            (stack: ItemStack) => stack.item.type.startsWith('ammo.')
+        const rows = CargoService.findItems(this.props.cargo, 'ammo').map(
+            (value: ItemStack, index: number) => this.renderAmmoRow(value, index)
         );
 
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={450} height={270}>
+            <PanelElement
+                x={this.props.x} y={this.props.y}
+                width={450} height={270}
+                isOffline={!this.props.cargo}
+            >
                 <line x1="310" y1="0" x2="310" y2="270" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
                 <line x1="410" y1="0" x2="410" y2="270" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
 
@@ -58,8 +59,7 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
                     fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.HEADER}
                 >QUANTITY</text>
-
-                {ammunitions.map((value: ItemStack, index: number) => this.renderAmmoRow(value, index))}
+                {rows}
             </PanelElement>
         );
     }
@@ -67,9 +67,10 @@ class AmmunitionsWidget extends React.Component<AmmunitionsPropsModel, {}> {
     private renderAmmoRow(stack: ItemStack, index: number) {
         const icon = `/images/icons.svg#${stack.item.type}`;
         const typeName = AmmunitionsWidget.getTypeName(stack.item.type);
+        const transform = SvgTransforms.translate(0, 30 + (40 * index))
 
         return (
-            <g transform={SvgTransforms.translate(0, 30 + (40 * index))} key={`ammo-row-${stack.item.id}`}>
+            <g transform={transform} key={`ammo-row-${stack.item.id}`}>
                 <line
                     x1="0" y1="0"
                     x2="450" y2="0"

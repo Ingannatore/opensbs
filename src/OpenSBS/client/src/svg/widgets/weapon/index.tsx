@@ -12,7 +12,7 @@ import ButtonElement from '../../elements/button.element';
 import WeaponModule from '../../../modules/weapons/weaponModule';
 import WeaponService from '../../../modules/weapons/weaponService';
 import Item from '../../../models/item';
-import ArcsElements from './arcs.elements';
+import FireArcElement from './fireArcElement';
 import ColorPalette from '../../colorPalette';
 
 interface WeaponProps {
@@ -74,7 +74,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                     x={240} y={40}
                     width={80} height={40}
                     fontSize={1.25}
-                    enabled={this.isReloadButtonEnabled()}
+                    enabled={WeaponService.isReloadButtonEnabled(this.props.weapon, this.props.selectedAmmo)}
                     onClick={this.onReload}
                 >RELOAD</ButtonElement>
                 <text
@@ -86,7 +86,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                     x={240} y={110}
                     width={80} height={30}
                     fontSize={1}
-                    enabled={this.isUnloadButtonEnabled()}
+                    enabled={WeaponService.isUnloadButtonEnabled(this.props.weapon)}
                     onClick={this.onUnload}
                 >UNLOAD</ButtonElement>
 
@@ -95,11 +95,11 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                     width={100} height={40}
                     color={ColorPalette.WARNING}
                     onClick={this.onEngage}
-                    enabled={this.isFireButtonEnabled()}
+                    enabled={WeaponService.isFireButtonEnabled(this.props.weapon, this.props.selectedTarget)}
                     toggled={!!this.props.weapon.target}
                 >FIRE</SwitchElement>
 
-                <ArcsElements
+                <FireArcElement
                     x={390} y={115}
                     arcs={this.props.weapon.firingArcs}
                     targetSide={this.props.weapon.target?.relativeSide}
@@ -135,7 +135,10 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
     }
 
     private onReload() {
-        if (!this.props.weapon || !this.isReloadButtonEnabled()) {
+        if (!this.props.weapon) {
+            return;
+        }
+        if (!WeaponService.isReloadButtonEnabled(this.props.weapon, this.props.selectedAmmo)) {
             return;
         }
 
@@ -153,7 +156,10 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
     }
 
     private onUnload() {
-        if (!this.props.weapon || !this.isUnloadButtonEnabled()) {
+        if (!this.props.weapon) {
+            return;
+        }
+        if (!WeaponService.isUnloadButtonEnabled(this.props.weapon)) {
             return;
         }
 
@@ -163,36 +169,6 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
             'unload',
             null,
         ));
-    }
-
-    private isFireButtonEnabled() {
-        if (!this.props.weapon) {
-            return false;
-        }
-
-        return WeaponService.isFireButtonEnabled(
-            this.props.weapon,
-            this.props.selectedTarget
-        );
-    }
-
-    private isReloadButtonEnabled() {
-        if (!this.props.weapon) {
-            return false;
-        }
-
-        return WeaponService.isReloadButtonEnabled(
-            this.props.weapon,
-            this.props.selectedAmmo
-        );
-    }
-
-    private isUnloadButtonEnabled() {
-        if (!this.props.weapon) {
-            return false;
-        }
-
-        return WeaponService.isUnloadButtonEnabled(this.props.weapon);
     }
 }
 

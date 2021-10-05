@@ -1,42 +1,43 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svgTransforms';
-import ThrottleSliderPropsModel from './throttle-slider-props.model';
+import ColorPalette from '../../colorPalette';
 
-export default class ThrottleSliderElement extends React.Component<ThrottleSliderPropsModel, {}> {
-    public static defaultProps = {
-        color: 'darkturquoise',
-    };
+interface ThrottleSliderElementProps {
+    x: number,
+    y: number,
+}
 
+export default class ThrottleSliderElement extends React.Component<ThrottleSliderElementProps, {}> {
     public render() {
         return (
             <g transform={SvgTransforms.translate(this.props.x, this.props.y)}>
                 <rect
                     x="40" y="-30"
                     width="120" height="60" rx="5"
-                    stroke="none" fill="black"
+                    stroke="none" fill={ColorPalette.BACKGROUND}
                 />
                 <rect
                     x="40" y="-30"
                     width="120" height="60" rx="5"
-                    stroke="none" fill={this.props.color}
+                    stroke="none" fill={ColorPalette.MAIN}
                     opacity={0.05}
                 />
                 <rect
                     x="40" y="-30"
                     width="120" height="60" rx="5"
-                    stroke={this.props.color} strokeWidth="2"
+                    stroke={ColorPalette.MAIN} strokeWidth="2"
                     fill="none"
                 />
                 <text
                     x="100" y="-8"
                     textAnchor="middle" fontSize="2rem"
-                    fill="whitesmoke"
-                >{this.props.children}</text>
+                    fill={ColorPalette.TEXT}
+                >{this.props.children}%</text>
                 <text
                     x="100" y="16"
                     textAnchor="middle" fontSize="0.75rem"
-                    fill="whitesmoke"
-                >target speed</text>
+                    fill={ColorPalette.TEXT}
+                >throttle</text>
             </g>
         );
     }

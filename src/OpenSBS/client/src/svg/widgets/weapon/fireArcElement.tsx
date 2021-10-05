@@ -3,17 +3,17 @@ import SvgTransforms from '../../../lib/svgTransforms';
 import EntitySide from '../../../models/entitySide';
 import ColorPalette from '../../colorPalette';
 
-interface ArcsElementProps {
+interface FireArcElementProps {
     x: number,
     y: number,
     arcs: string[],
     targetSide: string | undefined,
 }
 
-export default class ArcsElements extends React.Component<ArcsElementProps, {}> {
+export default class FireArcElement extends React.Component<FireArcElementProps, {}> {
     private readonly translation: string;
 
-    constructor(props: ArcsElementProps) {
+    constructor(props: FireArcElementProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

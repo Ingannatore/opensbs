@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
 import ClientActions from '../../../store/client/clientActions';
 import ClientSelectors from '../../../store/client/clientSelectors';
-import DisplayElement from '../../elements/display.element';
 import SwitchElement from '../../elements/switch.element';
 import ColorPalette from '../../colorPalette';
 
@@ -17,10 +16,6 @@ interface ZoomElementProps {
 class ZoomElement extends React.Component<ZoomElementProps, {}> {
     private readonly translation: string;
 
-    public static defaultProps = {
-        zoomFactor: 1,
-    };
-
     constructor(props: ZoomElementProps) {
         super(props);
 
@@ -29,15 +24,8 @@ class ZoomElement extends React.Component<ZoomElementProps, {}> {
     }
 
     public render() {
-        const range = Math.round(8000 * (1 / this.props.zoomFactor));
         return (
             <g transform={this.translation}>
-                <DisplayElement
-                    x={0} y={0}
-                    topLabel="RADAR RANGE"
-                    bottomLabel="meters"
-                >{range}</DisplayElement>
-
                 <g transform="translate(-800 50)">
                     <line
                         x1="-60" y1="0"

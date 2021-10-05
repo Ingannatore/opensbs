@@ -4,15 +4,15 @@ import SvgTransforms from '../../../lib/svgTransforms';
 import PanelElement from '../../elements/panel.element';
 import SwitchElement from '../../elements/switch.element';
 import ButtonElement from '../../elements/button.element';
-import ShieldElement from './shield.element';
+import ShieldSectorElement from './shieldSectorElement';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import ShieldModule from '../../../modules/shields/shieldModule';
-import ShieldSector from '../../../modules/shields/shieldSector';
 import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
+import ShieldService from '../../../modules/shields/shieldService';
 import EntitySide from '../../../models/entitySide';
 import ColorPalette from '../../colorPalette';
 
-interface ShieldPropsModel {
+interface ShieldWidgetProps {
     x: number,
     y: number,
     entityId: string,
@@ -20,10 +20,10 @@ interface ShieldPropsModel {
     dispatch: any,
 }
 
-class ShieldWidget extends React.Component<ShieldPropsModel, {}> {
+class ShieldWidget extends React.Component<ShieldWidgetProps, {}> {
     private readonly translation: string;
 
-    constructor(props: ShieldPropsModel) {
+    constructor(props: ShieldWidgetProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -63,34 +63,30 @@ class ShieldWidget extends React.Component<ShieldPropsModel, {}> {
                         onClick={this.resetCalibration}
                     >RESET</ButtonElement>
 
-                    <ShieldElement
+                    <ShieldSectorElement
                         x={55} y={60}
-                        label="FRONT"
-                        shieldSector={this.getShieldSector(EntitySide.FRONT)}
+                        shieldSector={ShieldService.findSector(this.props.shieldModule, EntitySide.FRONT)}
                         availableCalibrationPoints={availableCalibrationPoints}
                         onSetCalibration={this.setCalibration}
                         onReinforce={this.reinforceSide}
                     />
-                    <ShieldElement
+                    <ShieldSectorElement
                         x={165} y={60}
-                        label="LEFT"
-                        shieldSector={this.getShieldSector(EntitySide.LEFT)}
+                        shieldSector={ShieldService.findSector(this.props.shieldModule, EntitySide.LEFT)}
                         availableCalibrationPoints={availableCalibrationPoints}
                         onSetCalibration={this.setCalibration}
                         onReinforce={this.reinforceSide}
                     />
-                    <ShieldElement
+                    <ShieldSectorElement
                         x={275} y={60}
-                        label="RIGHT"
-                        shieldSector={this.getShieldSector(EntitySide.RIGHT)}
+                        shieldSector={ShieldService.findSector(this.props.shieldModule, EntitySide.RIGHT)}
                         availableCalibrationPoints={availableCalibrationPoints}
                         onSetCalibration={this.setCalibration}
                         onReinforce={this.reinforceSide}
                     />
-                    <ShieldElement
+                    <ShieldSectorElement
                         x={385} y={60}
-                        label="REAR"
-                        shieldSector={this.getShieldSector(EntitySide.REAR)}
+                        shieldSector={ShieldService.findSector(this.props.shieldModule, EntitySide.REAR)}
                         availableCalibrationPoints={availableCalibrationPoints}
                         onSetCalibration={this.setCalibration}
                         onReinforce={this.reinforceSide}
@@ -98,10 +94,6 @@ class ShieldWidget extends React.Component<ShieldPropsModel, {}> {
                 </g>
             </PanelElement>
         );
-    }
-
-    private getShieldSector(side: string): ShieldSector | undefined {
-        return this.props.shieldModule?.sectors.find((item: ShieldSector) => item.side === side);
     }
 
     private toggleShield() {

@@ -4,13 +4,13 @@ import ClientSelectors from '../../../store/client/clientSelectors';
 import DisplayElement from '../../elements/display.element';
 import EntityTrace from '../../../models/entityTrace';
 
-interface TargetPropsModel {
+interface TargetDistanceElementProps {
     x: number,
     y: number,
     target: EntityTrace | null,
 }
 
-class TargetElement extends React.Component<TargetPropsModel, {}> {
+class TargetDistanceElement extends React.Component<TargetDistanceElementProps, {}> {
     public render() {
         return (
             <DisplayElement
@@ -28,4 +28,4 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect(mapStateToProps)(TargetElement);
+export default connect(mapStateToProps)(TargetDistanceElement);

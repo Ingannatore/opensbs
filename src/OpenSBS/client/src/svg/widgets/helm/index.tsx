@@ -9,6 +9,7 @@ import DisplayElement from '../../elements/display.element';
 import SwitchElement from '../../elements/switch.element';
 import PanelElement from '../../elements/panel.element';
 import ButtonElement from '../../elements/button.element';
+import ColorPalette from '../../colorPalette';
 
 interface HelmWidgetProps {
     x: number,
@@ -34,22 +35,26 @@ class HelmWidget extends React.Component<HelmWidgetProps, {}> {
         const rudder = this.getRudderValue();
 
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={450} height={240} isOffline={!this.props.engineModule}>
+            <PanelElement
+                x={this.props.x} y={this.props.y}
+                width={450} height={240}
+                isOffline={!this.props.engineModule}
+            >
                 <ButtonElement
                     x={10} y={10}
                     width={420} height={60}
-                    fontSize={2} color='darkorange'
+                    fontSize={2} color={ColorPalette.WARNING}
                     onClick={() => this.setRudder(0)}
                 >STOP</ButtonElement>
                 <line
                     x1="0" y1="80"
                     x2="450" y2="80"
-                    stroke="#383838" strokeWidth="2"
+                    stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
                 />
                 <SwitchElement
                     x={10} y={90}
                     width={100} height={140}
-                    fontSize={3} color='darkturquoise'
+                    fontSize={3}
                     toggled={rudder < 0}
                     onClick={this.onRudderLeftClick}
                 >◄</SwitchElement>
@@ -61,7 +66,7 @@ class HelmWidget extends React.Component<HelmWidgetProps, {}> {
                 <SwitchElement
                     x={330} y={90}
                     width={100} height={140}
-                    fontSize={3} color='darkturquoise'
+                    fontSize={3}
                     toggled={rudder > 0}
                     onClick={this.onRudderRightClick}
                 >►</SwitchElement>

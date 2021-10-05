@@ -2,7 +2,7 @@
 import SvgTransforms from '../../../lib/svgTransforms';
 import ColorPalette from '../../colorPalette';
 
-interface CalibrationSegmentProps {
+interface CalibrationSegmentElementProps {
     x: number,
     y: number,
     toggled: boolean,
@@ -10,10 +10,10 @@ interface CalibrationSegmentProps {
     onClick: () => void,
 }
 
-export default class CalibrationSegmentElement extends React.Component<CalibrationSegmentProps, {}> {
+export default class CalibrationSegmentElement extends React.Component<CalibrationSegmentElementProps, {}> {
     private readonly translation: string;
 
-    constructor(props: CalibrationSegmentProps) {
+    constructor(props: CalibrationSegmentElementProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

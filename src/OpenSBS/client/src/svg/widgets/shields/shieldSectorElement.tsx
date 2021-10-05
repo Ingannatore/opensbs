@@ -1,26 +1,26 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svgTransforms';
 import ShieldSector from '../../../modules/shields/shieldSector';
-import ShieldCalibrationElement from './shield-calibration.element';
+import ShieldCalibrationElement from './shieldCalibrationElement';
 import ValueElement from '../../elements/value.element';
 import ButtonElement from '../../elements/button.element';
 import CylinderElement from '../../elements/cylinder.element';
+import ShieldService from '../../../modules/shields/shieldService';
 import ColorPalette from '../../colorPalette';
 
-interface ShieldElementProps {
+interface ShieldSectorElementProps {
     x: number,
     y: number,
-    label: string,
     shieldSector: ShieldSector | undefined,
     availableCalibrationPoints: number,
     onSetCalibration: (side: string, value: number) => void,
     onReinforce: (side: string) => void,
 }
 
-export default class ShieldElement extends React.Component<ShieldElementProps, {}> {
+export default class ShieldSectorElement extends React.Component<ShieldSectorElementProps, {}> {
     private readonly translation: string;
 
-    constructor(props: ShieldElementProps) {
+    constructor(props: ShieldSectorElementProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -39,7 +39,7 @@ export default class ShieldElement extends React.Component<ShieldElementProps, {
                     x="0" y="15"
                     fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.HEADER}
-                >{this.props.label}</text>
+                >{ShieldService.getSectorName(this.props.shieldSector)}</text>
                 <ValueElement
                     x={0} y={60}
                     label="hit points"
