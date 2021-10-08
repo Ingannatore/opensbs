@@ -9,7 +9,7 @@ import ColorPalette from '../../colorPalette';
 interface ZoomElementProps {
     x: number,
     y: number,
-    zoomFactor: number,
+    radarScale: number,
     dispatch: any,
 }
 
@@ -20,7 +20,7 @@ class ZoomElement extends React.Component<ZoomElementProps, {}> {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
-        this.changeZoom = this.changeZoom.bind(this)
+        this.changeRadarScale = this.changeRadarScale.bind(this)
     }
 
     public render() {
@@ -39,8 +39,8 @@ class ZoomElement extends React.Component<ZoomElementProps, {}> {
                                 x={0} y={0} rx={10}
                                 width={50} height={30}
                                 fontSize={1.25} color={ColorPalette.SECONDARY}
-                                onClick={() => this.changeZoom(1)}
-                                toggled={this.props.zoomFactor === 1}
+                                onClick={() => this.changeRadarScale(20)}
+                                toggled={this.props.radarScale === 20}
                             >×1</SwitchElement>
                         </g>
                     </g>
@@ -50,8 +50,8 @@ class ZoomElement extends React.Component<ZoomElementProps, {}> {
                                 x={0} y={0} rx={10}
                                 width={50} height={30}
                                 fontSize={1.25} color={ColorPalette.SECONDARY}
-                                onClick={() => this.changeZoom(2)}
-                                toggled={this.props.zoomFactor === 2}
+                                onClick={() => this.changeRadarScale(10)}
+                                toggled={this.props.radarScale === 10}
                             >×2</SwitchElement>
                         </g>
                     </g>
@@ -61,8 +61,8 @@ class ZoomElement extends React.Component<ZoomElementProps, {}> {
                                 x={0} y={0} rx={10}
                                 width={50} height={30}
                                 fontSize={1.25} color={ColorPalette.SECONDARY}
-                                onClick={() => this.changeZoom(4)}
-                                toggled={this.props.zoomFactor === 4}
+                                onClick={() => this.changeRadarScale(5)}
+                                toggled={this.props.radarScale === 5}
                             >×4</SwitchElement>
                         </g>
                     </g>
@@ -71,14 +71,14 @@ class ZoomElement extends React.Component<ZoomElementProps, {}> {
         );
     }
 
-    private changeZoom(factor: number) {
-        this.props.dispatch(ClientActions.setZoom(factor));
+    private changeRadarScale(value: number) {
+        this.props.dispatch(ClientActions.setRadarScale(value));
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
-        zoomFactor: ClientSelectors.getZoomFactor(state)
+        radarScale: ClientSelectors.getRadarScale(state)
     };
 };
 

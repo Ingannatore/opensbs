@@ -5,7 +5,7 @@ import ColorPalette from '../../colorPalette';
 
 interface RangesOverlayElementProps {
     visible: boolean,
-    zoomFactor: number,
+    radarScale: number,
 }
 
 class RangesOverlayElement extends React.Component<RangesOverlayElementProps, {}> {
@@ -16,7 +16,7 @@ class RangesOverlayElement extends React.Component<RangesOverlayElementProps, {}
             return null;
         }
 
-        const range = Math.round(8000 * (1 / this.props.zoomFactor));
+        const range = 400 * this.props.radarScale;
         const rangeIncrement = range / 4;
 
         return (
@@ -71,7 +71,7 @@ class RangesOverlayElement extends React.Component<RangesOverlayElementProps, {}
 
 const mapStateToProps = (state: any) => {
     return {
-        zoomFactor: ClientSelectors.getZoomFactor(state),
+        radarScale: ClientSelectors.getRadarScale(state),
     };
 };
 

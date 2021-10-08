@@ -12,7 +12,7 @@ import ColorPalette from '../../colorPalette';
 interface TracesOverlayElementProps {
     size: number,
     dispatch: any,
-    zoomFactor: number,
+    radarScale: number,
     bearing: number,
     target: EntityTrace | null,
     sensors: SensorsModule | undefined,
@@ -30,11 +30,10 @@ class TracesOverlayElement extends React.Component<TracesOverlayElementProps, {}
             return null;
         }
 
-        const range = Math.round(8000 * (1 / this.props.zoomFactor));
-        const scale = 400 / range;
+        const range = 400 * this.props.radarScale;
 
         const traces = SensorsService.findTraces(this.props.sensors, range)
-        .map((trace: EntityTrace) => this.renderTrace(trace, scale, this.props.bearing));
+        .map((trace: EntityTrace) => this.renderTrace(trace, this.props.radarScale, this.props.bearing));
 
         return (
             <g transform={SvgTransforms.rotate(-this.props.bearing)}>
@@ -46,8 +45,8 @@ class TracesOverlayElement extends React.Component<TracesOverlayElementProps, {}
     private renderTrace(trace: EntityTrace, scale: number, yaw: number) {
         const isSelected = trace.id === this.props.target?.id;
         const transform = SvgTransforms.translate(
-            trace.relativePosition.x * scale,
-            -trace.relativePosition.z * scale
+            trace.relativePosition.x / scale,
+            -trace.relativePosition.z / scale
         );
 
         return (
@@ -91,7 +90,7 @@ class TracesOverlayElement extends React.Component<TracesOverlayElementProps, {}
 
 const mapStateToProps = (state: any) => {
     return {
-        zoomFactor: ClientSelectors.getZoomFactor(state),
+        radarScale: ClientSelectors.getRadarScale(state),
         bearing: SpaceshipSelectors.getBearing(state),
         target: ClientSelectors.getSelectedTarget(state),
         sensors: SpaceshipSelectors.getSensors(state),

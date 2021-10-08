@@ -2,8 +2,12 @@
 import Item from '../../models/item';
 import EntityTrace from '../../models/entityTrace';
 
-const getZoomFactor = (state: State): number => {
-    return state.client.zoomFactor;
+const getRadarScale = (state: State): number => {
+    return state.client.radarScale;
+}
+
+const getMapScale = (state: State): number => {
+    return state.client.radarScale;
 }
 
 const getSelectedTarget = (state: State): EntityTrace | null => {
@@ -15,7 +19,8 @@ const getSelectedAmmo = (state: State): Item | null => {
 }
 
 export default {
-    getZoomFactor,
+    getRadarScale,
+    getMapScale,
     getSelectedTarget,
     getSelectedAmmo,
 }

@@ -6,25 +6,24 @@ import DisplayElement from '../../elements/displayElement';
 interface RadarRangeElementProps {
     x: number,
     y: number,
-    zoomFactor: number,
+    radarScale: number,
 }
 
 class RadarRangeElement extends React.Component<RadarRangeElementProps, {}> {
     public render() {
-        const range = Math.round(8000 * (1 / this.props.zoomFactor));
         return (
             <DisplayElement
                 x={this.props.x} y={this.props.y}
                 topLabel="RADAR RANGE"
                 bottomLabel="meters"
-            >{range}</DisplayElement>
+            >{400 * this.props.radarScale}</DisplayElement>
         );
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
-        zoomFactor: ClientSelectors.getZoomFactor(state)
+        radarScale: ClientSelectors.getRadarScale(state)
     };
 };
 

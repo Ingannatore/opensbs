@@ -3,15 +3,22 @@ import EntityTrace from '../../models/entityTrace';
 import Item from '../../models/item';
 
 const Types = {
-    SET_ZOOM: 'client/zoom/set',
+    SET_RADAR_SCALE: 'client/radar/scale/set',
+    SET_MAP_SCALE: 'client/map/scale/set',
     SET_TARGET: 'client/target/set',
     RESET_TARGET: 'client/target/reset',
     SET_AMMO: 'client/ammo/set',
     RESET_AMMO: 'client/ammo/reset',
 };
 
-const setZoom = (value: number): ClientAction => ({
-    type: Types.SET_ZOOM,
+const setRadarScale = (value: number): ClientAction => ({
+    type: Types.SET_RADAR_SCALE,
+    payload: value,
+    meta: null,
+});
+
+const setMapScale = (value: number): ClientAction => ({
+    type: Types.SET_MAP_SCALE,
     payload: value,
     meta: null,
 });
@@ -42,7 +49,8 @@ const resetAmmo = (): ClientAction => ({
 
 export default {
     Types,
-    setZoom,
+    setRadarScale,
+    setMapScale,
     setTarget,
     resetTarget,
     setAmmo,

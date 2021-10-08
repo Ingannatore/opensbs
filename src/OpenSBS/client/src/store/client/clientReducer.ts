@@ -6,11 +6,12 @@ import EntityModule from '../../modules/entityModule';
 import EntityTrace from '../../models/entityTrace';
 import SensorsModule from '../../modules/sensors/sensorsModule';
 import SpaceshipActions from '../spaceship/spaceshipActions';
-import ModuleType from '../../modules/moduleType';
 import Item from '../../models/item';
+import ModuleType from '../../modules/moduleType';
 
 const defaultState: ClientState = {
-    zoomFactor: 1,
+    radarScale: 20,
+    mapScale: 300,
     selectedTarget: null,
     selectedAmmo: null,
 };
@@ -36,8 +37,12 @@ const existsAmmo = (entity: Entity, ammo: Item | null): boolean => {
 }
 
 export default (state = defaultState, action: ClientAction) => {
-    if (action.type === ClientActions.Types.SET_ZOOM && action.payload) {
-        return {...state, zoomFactor: action.payload};
+    if (action.type === ClientActions.Types.SET_RADAR_SCALE && action.payload) {
+        return {...state, radarScale: action.payload};
+    }
+
+    if (action.type === ClientActions.Types.SET_MAP_SCALE && action.payload) {
+        return {...state, mapScale: action.payload};
     }
 
     if (action.type === ClientActions.Types.SET_TARGET && action.payload) {
