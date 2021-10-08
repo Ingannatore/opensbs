@@ -14,6 +14,21 @@
         <line x1="-12" y1="0" x2="-4" y2="0" stroke="#dedede"/>
         <line x1="4" y1="0" x2="12" y2="0" stroke="#dedede"/>
     </symbol>
+    <symbol id="icon-intelligence" width="24" height="24" viewBox="-12 -12 24 24">
+        <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
+        <circle cx="0" cy="0" r="4" fill="none" stroke="#dedede" stroke-width="2"/>
+        <line x1="0" y1="0" x2="10" y2="-10" stroke="black" stroke-width="6"/>
+        <line x1="0" y1="0" x2="10" y2="-10" stroke="#dedede" stroke-width="2"/>
+        <line x1="-10" y1="0" x2="10" y2="0" stroke="#dedede"/>
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="#dedede"/>
+    </symbol>
+    <symbol id="icon-cartography" width="24" height="24" viewBox="-12 -12 24 24">
+        <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
+        <circle cx="0" cy="0" r="4" fill="none" stroke="#dedede" stroke-width="2"/>
+        <circle cx="0" cy="-9" r="2" fill="black" stroke="#dedede" stroke-width="1"/>
+        <circle cx="-4" cy="0" r="2" fill="black" stroke="#dedede" stroke-width="1"/>
+        <circle cx="6.364" cy="6.364" r="2" fill="black" stroke="#dedede" stroke-width="1"/>
+    </symbol>
     <symbol id="icon-ship" width="12" height="12" viewBox="-6 -6 12 12">
         <path d="M 0 -6 L 6 6 L 0 3 L -6 6 Z" stroke="white" stroke-width="1" fill="white"/>
     </symbol>

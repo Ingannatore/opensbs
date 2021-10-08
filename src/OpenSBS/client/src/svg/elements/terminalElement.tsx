@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import ColorPalette from '../colorPalette';
 
 interface TerminalElementProps {
     name: string,
@@ -27,7 +28,7 @@ export default class TerminalElement extends React.Component<TerminalElementProp
                     <use href={this.icon} x="8" y="8" transform="scale(1.5)"/>
                 )}
                 {this.props.name && (
-                    <text x="60" y="30" fontSize="2rem" fill="#dedede">{this.props.name}</text>
+                    <text x="60" y="30" fontSize="2rem" fill={ColorPalette.TEXT}>{this.props.name}</text>
                 )}
 
                 {this.props.children}

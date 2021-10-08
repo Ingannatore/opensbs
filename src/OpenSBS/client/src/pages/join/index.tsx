@@ -20,6 +20,12 @@ class JoinPage extends React.Component<JoinPageProps, {}> {
                 <p>
                     <button onClick={() => this.handleSelectTerminal('tactical')}>Tactical</button>
                 </p>
+                <p>
+                    <button onClick={() => this.handleSelectTerminal('intelligence')}>Intelligence</button>
+                </p>
+                <p>
+                    <button onClick={() => this.handleSelectTerminal('cartography')}>Cartography</button>
+                </p>
             </div>
         );
     }

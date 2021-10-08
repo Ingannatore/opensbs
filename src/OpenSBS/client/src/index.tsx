@@ -12,6 +12,8 @@ import HomePage from './pages/home';
 import JoinPage from './pages/join';
 import NavigationTerminal from './pages/terminals/navigationTerminal';
 import TacticalTerminal from './pages/terminals/tacticalTerminal';
+import IntelligenceTerminal from './pages/terminals/intelligenceTerminal';
+import CartographyTerminal from './pages/terminals/cartographyTerminal';
 import './index.css';
 
 const hub = new signalR.HubConnectionBuilder().withUrl('/ws').build();
@@ -38,6 +40,8 @@ render(
             <Route exact path="/join" component={JoinPage}/>
             <Route exact path="/terminal/navigation" component={NavigationTerminal}/>
             <Route exact path="/terminal/tactical" component={TacticalTerminal}/>
+            <Route exact path="/terminal/intelligence" component={IntelligenceTerminal}/>
+            <Route exact path="/terminal/cartography" component={CartographyTerminal}/>
         </Router>
     </Provider>,
     document.getElementById('root')
