@@ -1,44 +1,50 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import Angles from '../../../lib/angles';
 import SvgTransforms from '../../../lib/svgTransforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import PanelElement from '../../elements/panelElement';
 import ClientSelectors from '../../../store/client/clientSelectors';
 import ClientActions from '../../../store/client/clientActions';
 import EntityTrace from '../../../models/entityTrace';
-import SwitchElement from '../../elements/switchElement';
 import SensorsModule from '../../../modules/sensors/sensorsModule';
 import SensorsService from '../../../modules/sensors/sensorsService';
+import TargetRowElement from './targetRowElement';
 import ColorPalette from '../../colorPalette';
 
 interface TargetsWidgetProps {
     x: number,
     y: number,
-    dispatch: any,
+    size: number,
     target: EntityTrace | null,
     sensors: SensorsModule | undefined,
+    dispatch: any,
 }
 
 class TargetsWidget extends React.Component<TargetsWidgetProps, {}> {
+    private readonly height: number;
     private readonly translation: string;
+
+    public static defaultProps = {
+        size: 10,
+    };
 
     constructor(props: TargetsWidgetProps) {
         super(props);
 
+        this.height = 30 + (this.props.size * 40);
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.onTargetSelect = this.onTargetSelect.bind(this);
     }
 
     public render() {
-        const targets = SensorsService.findNearestTraces(this.props.sensors).map(
+        const targets = SensorsService.findNearestTraces(this.props.sensors, this.props.size).map(
             (trace: EntityTrace, index: number) => this.renderTargetRow(trace, index)
         );
 
         return (
             <PanelElement
                 x={this.props.x} y={this.props.y}
-                width={450} height={430}
+                width={450} height={this.height}
                 isOffline={!this.props.sensors}
             >
                 <line
@@ -66,57 +72,30 @@ class TargetsWidget extends React.Component<TargetsWidgetProps, {}> {
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.HEADER}
                 >DISTANCE</text>
+                <line
+                    x1="380" y1="0"
+                    x2="380" y2="430"
+                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                />
                 <text
                     x="430" y="15"
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.HEADER}
                 >DIR.</text>
                 {targets}
-                <line
-                    x1="380" y1="0"
-                    x2="380" y2="430"
-                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
-                />
             </PanelElement>
         );
     }
 
     private renderTargetRow(trace: EntityTrace, index: number) {
-        const transform = SvgTransforms.translate(0, 30 + (40 * index));
         return (
-            <g transform={transform} key={`target-row-${trace.callSign}`}>
-                <line
-                    x1="0" y1="0"
-                    x2="450" y2="0"
-                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
-                />
-                <SwitchElement
-                    x={10} y={10}
-                    width={20} height={20}
-                    onClick={() => this.onTargetSelect(trace)}
-                    toggled={trace.id === this.props.target?.id}
-                />
-                <text
-                    x="50" y="20"
-                    fontSize="1.5rem" textAnchor="start"
-                    fill={ColorPalette.TEXT}
-                >{trace.callSign}</text>
-                <use
-                    x="230" y="5"
-                    href={`/images/icons.svg#icon-${trace.type}`}
-                    fill="none" stroke={ColorPalette.TEXT}
-                />
-                <text
-                    x="370" y="20"
-                    fontSize="1.5rem" textAnchor="end"
-                    fill={ColorPalette.TEXT}
-                >{trace.distance}</text>
-                <text
-                    x="430" y="20"
-                    fontSize="1.5rem" textAnchor="end"
-                    fill={ColorPalette.TEXT}
-                >{Angles.bearingToString(trace.relativeBearing)}</text>
-            </g>
+            <TargetRowElement
+                key={`target-row-${trace.callSign}`}
+                x={0} y={30 + (40 * index)}
+                trace={trace}
+                selected={trace.id === this.props.target?.id}
+                onClick={this.onTargetSelect}
+            />
         );
     }
 

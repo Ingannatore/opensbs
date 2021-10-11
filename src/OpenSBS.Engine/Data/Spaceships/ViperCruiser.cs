@@ -10,13 +10,13 @@ namespace OpenSBS.Engine.Data.Spaceships
 {
     [DataEntry(
         DataEntryCategory.Spaceship,
-        "Viper-class Interceptor",
-        Description = "A fast and agile ship used mainly against fighters and bombers"
+        "Viper-class Cruiser",
+        Description = "It just works (TM)"
     )]
-    public class ViperInterceptor : Entity
+    public class ViperCruiser : Entity
     {
-        public ViperInterceptor(string id, string name, string callsign) : base(
-            id, name, callsign, ViperInterceptorTemplate.Instance
+        public ViperCruiser(string id, string name, string callsign) : base(
+            id, name, callsign, ViperCruiserTemplate.Instance
         )
         {
             Modules.Add(EngineModule.Create(LimitedIonEngine.Instance));

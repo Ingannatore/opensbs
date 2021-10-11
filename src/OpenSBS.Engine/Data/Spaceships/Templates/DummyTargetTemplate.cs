@@ -21,7 +21,7 @@ namespace OpenSBS.Engine.Data.Spaceships.Templates
 
         private DummyTargetTemplate()
         {
-            Type = EntityType.Dummy;
+            Type = EntityType.Container;
             Mass = 1000;
             Size = 5;
             HitPoints = 50;

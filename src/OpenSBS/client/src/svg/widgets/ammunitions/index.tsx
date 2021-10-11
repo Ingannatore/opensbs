@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
+import Icons from '../../../lib/icons';
 import PanelElement from '../../elements/panelElement';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import ItemStack from '../../../models/itemStack';
@@ -65,7 +66,6 @@ class AmmunitionsWidget extends React.Component<AmmunitionsWidgetProps, {}> {
     }
 
     private renderAmmoRow(stack: ItemStack, index: number) {
-        const icon = `/images/icons.svg#${stack.item.type}`;
         const typeName = AmmunitionsWidget.getTypeName(stack.item.type);
         const transform = SvgTransforms.translate(0, 30 + (40 * index))
 
@@ -86,7 +86,11 @@ class AmmunitionsWidget extends React.Component<AmmunitionsWidgetProps, {}> {
                     fontSize=".75rem" textAnchor="end"
                     fill={ColorPalette.MUTE_LIGHT}
                 >{typeName}</text>
-                <use href={icon} x="275" y="5" stroke={ColorPalette.TEXT}/>
+                <use
+                    x="275" y="5"
+                    href={Icons.getItemIcon(stack.item.type)}
+                    stroke={ColorPalette.TEXT}
+                />
 
                 <text
                     x="360" y="20"

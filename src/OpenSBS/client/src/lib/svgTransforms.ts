@@ -3,6 +3,10 @@
         return x || y ? `translate(${x} ${y})` : '';
     }
 
+    public static scale(value: number): string {
+        return `scale(${value})`
+    }
+
     public static rotate(degrees: number, x: number = 0, y: number = 0): string {
         if (!degrees) {
             return '';

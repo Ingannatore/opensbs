@@ -11,7 +11,9 @@ import ModuleType from '../../modules/moduleType';
 
 const defaultState: ClientState = {
     radarScale: 20,
-    mapScale: 300,
+    mapGridVisible: true,
+    mapScale: 200,
+    mapCenter: {x: 0, y: 0, z: 0},
     selectedTarget: null,
     selectedAmmo: null,
 };
@@ -43,6 +45,10 @@ export default (state = defaultState, action: ClientAction) => {
 
     if (action.type === ClientActions.Types.SET_MAP_SCALE && action.payload) {
         return {...state, mapScale: action.payload};
+    }
+
+    if (action.type === ClientActions.Types.SET_MAP_CENTER && action.payload) {
+        return {...state, mapCenter: action.payload};
     }
 
     if (action.type === ClientActions.Types.SET_TARGET && action.payload) {

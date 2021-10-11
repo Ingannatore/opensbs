@@ -11,7 +11,7 @@ export default class NavigationTerminal extends React.Component<{}, {}> {
     public render() {
         return (
             <SvgElement>
-                <TerminalElement name="NAVIGATION" icon="icon-navigation">
+                <TerminalElement name="NAVIGATION" icon="terminal.navigation">
                     <EngineWidget x={-10} y={390}/>
 
                     <RadarWidget x={460} y={40}/>

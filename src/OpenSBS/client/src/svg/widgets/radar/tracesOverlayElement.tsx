@@ -30,7 +30,7 @@ class TracesOverlayElement extends React.Component<TracesOverlayElementProps, {}
             return null;
         }
 
-        const range = 400 * this.props.radarScale;
+        const range = this.props.size * this.props.radarScale;
 
         const traces = SensorsService.findTraces(this.props.sensors, range)
         .map((trace: EntityTrace) => this.renderTrace(trace, this.props.radarScale, this.props.bearing));

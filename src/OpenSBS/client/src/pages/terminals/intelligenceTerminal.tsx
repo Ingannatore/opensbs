@@ -7,7 +7,7 @@ export default class IntelligenceTerminal extends React.Component<{}, {}> {
     public render() {
         return (
             <SvgElement>
-                <TerminalElement name="INTELLIGENCE" icon="icon-intelligence">
+                <TerminalElement name="INTELLIGENCE" icon="terminal.intelligence">
 
                 </TerminalElement>
             </SvgElement>

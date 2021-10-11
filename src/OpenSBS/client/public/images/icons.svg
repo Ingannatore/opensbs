@@ -1,88 +1,11 @@
 ﻿<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <symbol id="icon-navigation" width="24" height="24" viewBox="-12 -12 24 24">
-        <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
-        <line x1="0" y1="-12" x2="0" y2="12" stroke="#dedede"/>
-        <line x1="-12" y1="0" x2="12" y2="0" stroke="#dedede"/>
-        <line x1="-10" y1="-10" x2="10" y2="10" stroke="#dedede"/>
-        <line x1="10" y1="-10" x2="-10" y2="10" stroke="#dedede"/>
-    </symbol>
-    <symbol id="icon-target" width="24" height="24" viewBox="-12 -12 24 24">
-        <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
-        <circle cx="0" cy="0" r="4" fill="none" stroke="#dedede" stroke-width="2"/>
-        <line x1="0" y1="-12" x2="0" y2="-4" stroke="#dedede"/>
-        <line x1="0" y1="4" x2="0" y2="12" stroke="#dedede"/>
-        <line x1="-12" y1="0" x2="-4" y2="0" stroke="#dedede"/>
-        <line x1="4" y1="0" x2="12" y2="0" stroke="#dedede"/>
-    </symbol>
-    <symbol id="icon-intelligence" width="24" height="24" viewBox="-12 -12 24 24">
-        <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
-        <circle cx="0" cy="0" r="4" fill="none" stroke="#dedede" stroke-width="2"/>
-        <line x1="0" y1="0" x2="10" y2="-10" stroke="black" stroke-width="6"/>
-        <line x1="0" y1="0" x2="10" y2="-10" stroke="#dedede" stroke-width="2"/>
-        <line x1="-10" y1="0" x2="10" y2="0" stroke="#dedede"/>
-        <line x1="0" y1="-10" x2="0" y2="10" stroke="#dedede"/>
-    </symbol>
-    <symbol id="icon-cartography" width="24" height="24" viewBox="-12 -12 24 24">
-        <circle cx="0" cy="0" r="9" fill="none" stroke="#dedede" stroke-width="2"/>
-        <circle cx="0" cy="0" r="4" fill="none" stroke="#dedede" stroke-width="2"/>
-        <circle cx="0" cy="-9" r="2" fill="black" stroke="#dedede" stroke-width="1"/>
-        <circle cx="-4" cy="0" r="2" fill="black" stroke="#dedede" stroke-width="1"/>
-        <circle cx="6.364" cy="6.364" r="2" fill="black" stroke="#dedede" stroke-width="1"/>
-    </symbol>
     <symbol id="icon-ship" width="12" height="12" viewBox="-6 -6 12 12">
         <path d="M 0 -6 L 6 6 L 0 3 L -6 6 Z" stroke="white" stroke-width="1" fill="white"/>
-    </symbol>
-    <symbol id="icon-spaceship.dummy" width="30" height="30" viewBox="-15 -15 30 30">
-        <circle cx="0" cy="0" r="10" stroke-width="2"/>
-        <circle cx="0" cy="0" r="4" stroke-width="2"/>
     </symbol>
     <symbol id="brackets" width="100" height="60" viewBox="-50 -30 100 60">
         <path d="M -25 20 L -35 20 L -35 -20 L -25 -20" stroke-width="3" fill="none"/>
         <path d="M 25 20 L 35 20 L 35 -20 L 25 -20" stroke-width="3" fill="none"/>
         <line x1="-35" y1="0" x2="-40" y2="0" stroke-width="3"/>
         <line x1="35" y1="0" x2="40" y2="0" stroke-width="3"/>
-    </symbol>
-    <symbol id="ammo.plasma" width="30" height="30" viewBox="-15 -15 30 30">
-        <rect x="-10" y="-10" width="20" height="20" rx="4" ry="4" stroke-width="2" fill="none"/>
-        <circle cx="0" cy="0" r="5" stroke-width="2"/>
-    </symbol>
-    <symbol id="ammo.projectile" width="30" height="30" viewBox="-15 -15 30 30">
-        <rect x="-10" y="-10" width="20" height="20" rx="4" ry="4" stroke-width="2" fill="none"/>
-        <line x1="-5" y1="-5" x2="5" y2="5" stroke-width="2"/>
-        <line x1="-5" y1="5" x2="5" y2="-5" stroke-width="2"/>
-    </symbol>
-    <symbol id="ammo.torpedo" width="30" height="30" viewBox="-15 -15 30 30">
-        <rect x="-10" y="-10" width="20" height="20" rx="4" ry="4" stroke-width="2" fill="none"/>
-        <path d="M -5 5 L 0 -5 L 5 5" stroke-width="2" fill="none"/>
-    </symbol>
-    <symbol id="weapon.plasma" width="30" height="30" viewBox="-15 -15 30 30">
-        <path d="M -5 10 Q -15 0 -5 -10" stroke="white" stroke-width="2" fill="none"/>
-        <path d="M 5 10 Q 15 0 5 -10" stroke="white" stroke-width="2" fill="none"/>
-        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
-    </symbol>
-    <symbol id="weapon.artillery" width="30" height="30" viewBox="-15 -15 30 30">
-        <path d="M -5 10 L -10 0 L -5 -10" stroke="white" stroke-width="2" fill="none"/>
-        <path d="M 5 10 L 10 0 L 5 -10" stroke="white" stroke-width="2" fill="none"/>
-        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
-    </symbol>
-    <symbol id="weapon.tube" width="30" height="30" viewBox="-15 -15 30 30">
-        <line x1="-5" y1="-10" x2="-10" y2="0" stroke-width="2"/>
-        <line x1="10" y1="0" x2="5" y2="10" stroke-width="2"/>
-        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
-    </symbol>
-    <symbol id="weapon.mono" width="30" height="30" viewBox="-15 -15 30 30">
-        <line x1="-10" y1="0" x2="10" y2="0" stroke-width="2"/>
-        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
-    </symbol>
-    <symbol id="weapon.twin" width="30" height="30" viewBox="-15 -15 30 30">
-        <line x1="-10" y1="-5" x2="10" y2="-5" stroke-width="2"/>
-        <line x1="-10" y1="5" x2="10" y2="5" stroke-width="2"/>
-        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
-    </symbol>
-    <symbol id="weapon.battery" width="30" height="30" viewBox="-15 -15 30 30">
-        <line x1="-10" y1="-5" x2="10" y2="-5" stroke-width="2"/>
-        <line x1="-10" y1="0" x2="10" y2="0" stroke-width="2"/>
-        <line x1="-10" y1="5" x2="10" y2="5" stroke-width="2"/>
-        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
     </symbol>
 </svg>

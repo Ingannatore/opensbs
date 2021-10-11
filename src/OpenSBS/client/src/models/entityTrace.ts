@@ -6,8 +6,8 @@ export default interface EntityTrace {
     callSign: string,
     position: Vector3,
     distance: number,
+    bearing: number,
     relativePosition: Vector3,
-    relativeDirection: Vector3,
     relativeBearing: number,
     relativeSide: string,
 }

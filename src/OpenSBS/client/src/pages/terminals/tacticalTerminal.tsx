@@ -12,7 +12,7 @@ export default class TacticalTerminal extends React.Component<{}, {}> {
     public render() {
         return (
             <SvgElement>
-                <TerminalElement name="TACTICAL" icon="icon-target">
+                <TerminalElement name="TACTICAL" icon="terminal.tactical">
                     <AmmunitionsWidget x={-10} y={80}/>
                     <WeaponWidget x={-10} y={370} index={0}/>
                     <WeaponWidget x={-10} y={530} index={1}/>

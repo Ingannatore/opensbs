@@ -3,25 +3,25 @@ using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Data.Spaceships.Templates
 {
-    public class ViperInterceptorTemplate : EntityTemplate
+    public class ViperCruiserTemplate : EntityTemplate
     {
         private static readonly object ClassLock = new object();
-        private static ViperInterceptorTemplate _instance;
+        private static ViperCruiserTemplate _instance;
 
-        public static ViperInterceptorTemplate Instance
+        public static ViperCruiserTemplate Instance
         {
             get
             {
                 lock (ClassLock)
                 {
-                    return _instance ??= new ViperInterceptorTemplate();
+                    return _instance ??= new ViperCruiserTemplate();
                 }
             }
         }
 
-        private ViperInterceptorTemplate()
+        private ViperCruiserTemplate()
         {
-            Type = EntityType.Interceptor;
+            Type = EntityType.Cruiser;
             Mass = 100000;
             Size = 50;
             HitPoints = 500;

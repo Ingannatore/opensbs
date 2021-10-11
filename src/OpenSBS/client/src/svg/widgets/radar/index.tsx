@@ -8,6 +8,7 @@ import PanelElement from '../../elements/panelElement';
 import TargetDistanceElement from './targetDistanceElement';
 import RadarRangeElement from './radarRangeElement';
 import ZoomElement from './zoomElement';
+import ShipElement from '../../elements/shipElement';
 import ColorPalette from '../../colorPalette';
 
 interface RadarWidgetProps {
@@ -45,7 +46,7 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
                     <RangesOverlayElement visible={this.state.enableRangesOverlay}/>
                     <DirectionsOverlayElement r={460} visible={this.state.enableDirectionsOverlay}/>
                     <TracesOverlayElement size={400}/>
-                    <use href="/images/icons.svg#icon-ship" x="-6" y="-6"/>
+                    <ShipElement x={0} y={0}/>
                 </g>
 
                 <RadarRangeElement x={900} y={920}/>

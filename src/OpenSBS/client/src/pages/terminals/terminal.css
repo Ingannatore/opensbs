@@ -17,3 +17,7 @@ svg {
 text {
     dominant-baseline: central;
 }
+
+text.hanging {
+    dominant-baseline: hanging;
+}

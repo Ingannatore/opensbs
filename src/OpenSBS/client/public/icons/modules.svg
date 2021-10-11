@@ -1,0 +1,32 @@
+﻿<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="module.weapon.plasma" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M -5 10 Q -15 0 -5 -10" stroke="white" stroke-width="2" fill="none"/>
+        <path d="M 5 10 Q 15 0 5 -10" stroke="white" stroke-width="2" fill="none"/>
+        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
+    </symbol>
+    <symbol id="module.weapon.artillery" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M -5 10 L -10 0 L -5 -10" stroke="white" stroke-width="2" fill="none"/>
+        <path d="M 5 10 L 10 0 L 5 -10" stroke="white" stroke-width="2" fill="none"/>
+        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
+    </symbol>
+    <symbol id="module.weapon.tube" width="32" height="32" viewBox="-16 -16 32 32">
+        <line x1="-5" y1="-10" x2="-10" y2="0" stroke-width="2"/>
+        <line x1="10" y1="0" x2="5" y2="10" stroke-width="2"/>
+        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
+    </symbol>
+    <symbol id="module.weapon.mono" width="32" height="32" viewBox="-16 -16 32 32">
+        <line x1="-10" y1="0" x2="10" y2="0" stroke-width="2"/>
+        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
+    </symbol>
+    <symbol id="module.weapon.twin" width="32" height="32" viewBox="-16 -16 32 32">
+        <line x1="-10" y1="-5" x2="10" y2="-5" stroke-width="2"/>
+        <line x1="-10" y1="5" x2="10" y2="5" stroke-width="2"/>
+        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
+    </symbol>
+    <symbol id="module.weapon.battery" width="32" height="32" viewBox="-16 -16 32 32">
+        <line x1="-10" y1="-5" x2="10" y2="-5" stroke-width="2"/>
+        <line x1="-10" y1="0" x2="10" y2="0" stroke-width="2"/>
+        <line x1="-10" y1="5" x2="10" y2="5" stroke-width="2"/>
+        <path d="M 0 -10 L 5 0 L 0 10 L -5 0 Z" stroke="white" stroke-width="2" fill="black"/>
+    </symbol>
+</svg>

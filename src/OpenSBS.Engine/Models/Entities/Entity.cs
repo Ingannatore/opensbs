@@ -14,7 +14,7 @@ namespace OpenSBS.Engine.Models.Entities
         public Vector3 Position { get; private set; }
         public Vector3 Direction { get; private set; }
         public double Bearing { get; private set; }
-        public double LinearSpeed { get; set; }
+        public double LinearSpeed { get; private set; }
         public EntityHull Hull { get; }
         public ItemStorage Cargo { get; }
         public ModulesCollection Modules { get; }
@@ -27,12 +27,12 @@ namespace OpenSBS.Engine.Models.Entities
             Mass = template.Mass;
             Size = template.Size;
             Position = Vector3.Zero;
+            Direction = Vector3.UnitZ;
             Bearing = Angles.GetBearing(Vector3.UnitZ);
             Hull = EntityHull.Create(template.HitPoints);
             Cargo = ItemStorage.Create(template.Cargo);
             Modules = new ModulesCollection();
 
-            Direction = Vector3.UnitZ;
             _angularSpeed = 0;
         }
 

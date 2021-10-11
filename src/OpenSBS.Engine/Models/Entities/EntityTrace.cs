@@ -13,8 +13,8 @@ namespace OpenSBS.Engine.Models.Entities
         public string CallSign { get; }
         public Vector3 Position { get; protected set; }
         public int Distance { get; protected set; }
+        public double Bearing { get; protected set; }
         public Vector3 RelativePosition { get; protected set; }
-        public Vector3 RelativeDirection { get; protected set; }
         public double RelativeBearing { get; protected set; }
         public string RelativeSide { get; protected set; }
 
@@ -29,6 +29,7 @@ namespace OpenSBS.Engine.Models.Entities
             Type = type;
             CallSign = callSign;
             Distance = 0;
+            Bearing = 0;
         }
 
         public bool IsOutOfRange(int range)
@@ -44,11 +45,13 @@ namespace OpenSBS.Engine.Models.Entities
         public void Update(Entity owner, Entity target)
         {
             Position = target.Position;
+            Bearing = target.Bearing;
             Distance = (int)Math.Round(Vector3.Distance(owner.Position, target.Position));
             RelativePosition = target.Position - owner.Position;
-            RelativeDirection = Vector3.Normalize(RelativePosition);
-            RelativeBearing = Angles.GetBearing(RelativeDirection);
-            RelativeSide = Angles.ToEntitySide(owner.Direction, RelativeDirection);
+
+            var relativeDirection = Vector3.Normalize(RelativePosition);
+            RelativeBearing = Angles.GetBearing(relativeDirection);
+            RelativeSide = Angles.ToEntitySide(owner.Direction, relativeDirection);
         }
     }
 }

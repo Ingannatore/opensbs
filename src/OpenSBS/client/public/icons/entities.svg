@@ -1,0 +1,40 @@
+﻿<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="entity.spaceship.fighter" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M -16 8 L 0 -8 L 16 8" stroke-width="5" fill="none"/>
+    </symbol>
+    <symbol id="entity.spaceship.frigate" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M -16 8 L 0 -8 L 16 8 Z" stroke="none"/>
+    </symbol>
+    <symbol id="entity.spaceship.cruiser" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M -16 0 L 0 -16 L 16 0 Z" stroke="none"/>
+        <path d="M -16 8 L -16 5 L 16 5 L 16 8 Z" stroke="none"/>
+    </symbol>
+    <symbol id="entity.spaceship.battlecruiser" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M -16 0 L 0 -16 L 16 0 Z" stroke="none"/>
+        <path d="M -16 8 L -16 4 L 16 4 L 16 8 Z" stroke="none"/>
+        <path d="M -16 16 L -16 12 L 16 12 L 16 16 Z" stroke="none"/>
+    </symbol>
+    <symbol id="entity.spaceship.dreadnought" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M -16 0 L 0 -16 L 16 0 L 16 16 L 0 0 L -16 16 Z" stroke="none"/>
+    </symbol>
+    <symbol id="entity.spaceship.carrier" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M -16 0 L 0 -16 L 16 0 L 16 16 L -16 16 Z" stroke="none"/>
+    </symbol>
+    <symbol id="entity.spaceship.station" width="32" height="32" viewBox="-16 -16 32 32">
+        <rect x="-15" y="-15" width="30" height="30" stroke="none"/>
+        <rect x="-8" y="-8" width="16" height="16" stroke="none" fill="black"/>
+    </symbol>
+    <symbol id="entity.spaceship.freighter" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M 0 -15 L 8 -8 L 8 15 L -8 15 L -8 -8 Z" stroke="none"/>
+    </symbol>
+    <symbol id="entity.container" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M 0 -15 L 15 0 L 0 15 L -15 0 Z" stroke="none" fill="black"/>
+        <path d="M 0 -15 L 15 0 L 0 15 L -15 0 Z" stroke-width="2" fill="none"/>
+        <path d="M 0 -6 L 6 0 L 0 6 L -6 0 Z" stroke="none"/>
+    </symbol>
+    <symbol id="entity.wreck" width="32" height="32" viewBox="-16 -16 32 32">
+        <path d="M 0 -15 L 15 0 L 0 15 L -15 0 Z" stroke="none" fill="black"/>
+        <path d="M 0 -6 L 6 0 L 0 6 L -6 0 Z" stroke="none"/>
+        <path d="M -15 0 L 0 15 L 15 0" stroke-width="3" fill="none"/>
+    </symbol>
+</svg>
