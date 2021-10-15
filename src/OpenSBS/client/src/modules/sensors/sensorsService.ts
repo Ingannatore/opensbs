@@ -2,18 +2,9 @@
 import EntityTrace from '../../models/entityTrace';
 
 export default class SensorsService {
-    public static getAllTraces(module: SensorsModule | undefined): EntityTrace[] {
-        return module?.traces ?? [];
-    }
-
-    public static findNearestTraces(module: SensorsModule | undefined, limit: number): EntityTrace[] {
+    public static getTraces(module: SensorsModule | undefined, distance: number): EntityTrace[] {
         return module?.traces
-        .sort((a: EntityTrace, b: EntityTrace) => a.distance - b.distance)
-        .slice(0, limit) ?? [];
-    }
-
-    public static findTraces(module: SensorsModule | undefined, distance: number): EntityTrace[] {
-        return module?.traces
-        .filter((trace: EntityTrace) => trace.distance <= distance) ?? [];
+        .filter((trace: EntityTrace) => trace.distance <= distance)
+        .sort((a: EntityTrace, b: EntityTrace) => a.distance - b.distance) ?? [];
     }
 }

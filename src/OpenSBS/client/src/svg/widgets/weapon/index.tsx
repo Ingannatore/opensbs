@@ -55,7 +55,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.TEXT}
                 >{WeaponService.getStatus(this.props.weapon)}</text>
-                <line x1="0" y1="30" x2="450" y2="30" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
+                <line x1="0" y1="30" x2="450" y2="30" stroke={ColorPalette.MUTE} strokeWidth="2"/>
 
                 <GaugeElement
                     x={70} y={90}

@@ -1,27 +1,29 @@
 ﻿import * as React from 'react';
-import {connect} from 'react-redux';
-import SwitchElement from '../../elements/switchElement';
+import SvgTransforms from '../../../lib/svgTransforms';
 import PanelElement from '../../elements/panelElement';
-import ShipElement from '../../elements/shipElement';
-import ZoomControls from '../../commons/zoomControls';
-import DistancesOverlay from '../../commons/distancesOverlay';
-import SidesElement from '../../elements/sidesElement';
+import ShipOverlay from './shipOverlay';
 import TracesOverlay from './tracesOverlay';
+import DistancesOverlay from '../../commons/distancesOverlay';
+import ZoomControls from '../../commons/zoomControls';
+import SidesOverlay from './sidesOverlay';
+import SwitchElement from '../../elements/switchElement';
 import ColorPalette from '../../colorPalette';
 
-interface RadarWidgetProps {
+interface ScannerWidgetProps {
     x: number,
     y: number,
 }
 
-interface RadarWidgetState {
+interface ScannerWidgetState {
     zoom: number,
     showDistancesOverlay: boolean,
     showSidesOverlay: boolean,
 }
 
-class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
-    constructor(props: any) {
+export default class ScannerWidget extends React.Component<ScannerWidgetProps, ScannerWidgetState> {
+    private readonly translation: string;
+
+    constructor(props: ScannerWidgetProps) {
         super(props);
         this.state = {
             zoom: 1,
@@ -29,6 +31,7 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
             showSidesOverlay: true,
         };
 
+        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.setZoom = this.setZoom.bind(this);
         this.toggleDistancesOverlay = this.toggleDistancesOverlay.bind(this);
         this.toggleSidesOverlay = this.toggleSidesOverlay.bind(this);
@@ -39,21 +42,15 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
             <PanelElement x={this.props.x} y={this.props.y} width={1000} height={1000}>
                 {
                     this.state.showDistancesOverlay &&
-                    <DistancesOverlay
-                        x={500} y={500} r={460}
-                        scale={this.state.zoom}
-                        range={10000}
-                    />
+                    <DistancesOverlay x={500} y={500} r={490} scale={this.state.zoom}/>
                 }
                 {
                     this.state.showSidesOverlay &&
-                    <SidesElement x={500} y={500} r={460}/>
+                    <SidesOverlay x={500} y={500} r={490}/>
                 }
-
-                <ShipElement x={500} y={500}/>
-                <TracesOverlay x={500} y={500} r={460} scale={this.state.zoom} range={10000}/>
+                <ShipOverlay x={500} y={500}/>
+                <TracesOverlay x={500} y={500} r={490} scale={this.state.zoom}/>
                 <ZoomControls x={770} y={950} zoom={this.state.zoom} onChangeZoom={this.setZoom}/>
-
                 <g transform="translate(10 950)">
                     <text
                         x="110" y="-24"
@@ -78,12 +75,6 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
                         toggled={this.state.showSidesOverlay}
                     >SIDES</SwitchElement>
                 </g>
-
-                <circle
-                    cx="500" cy="500" r="460"
-                    stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
-                    fill="none"
-                />
             </PanelElement>
         );
     }
@@ -109,5 +100,3 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
         });
     }
 }
-
-export default connect()(RadarWidget);

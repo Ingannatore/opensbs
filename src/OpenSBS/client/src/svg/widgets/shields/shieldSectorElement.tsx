@@ -45,22 +45,22 @@ export default class ShieldSectorElement extends React.Component<ShieldSectorEle
                     label="hit points"
                 >{this.props.shieldSector.capacity}</ValueElement>
                 <CylinderElement
-                    x={-25} y={95}
+                    x={-25} y={100}
                     height={206}
                     ratio={this.props.shieldSector.ratio}
                 />
                 <ShieldCalibrationElement
-                    x={5} y={95}
+                    x={5} y={100}
                     value={this.props.shieldSector.calibration}
                     availableCalibrationPoints={this.props.availableCalibrationPoints}
                     onSetCalibration={this.onSetCalibration}
                 />
                 <ValueElement
-                    x={0} y={340}
+                    x={0} y={350}
                     label="HP/sec"
                 >{this.props.shieldSector.rechargeRate}</ValueElement>
                 <ButtonElement
-                    x={-45} y={370}
+                    x={-45} y={380}
                     fontSize={1}
                     width={90} height={30}
                     enabled={true}

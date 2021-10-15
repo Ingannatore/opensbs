@@ -19,13 +19,9 @@ export default class Coords {
 
     public static scale(point: Vector3, factor: number): Vector3 {
         return {
-            x: point.x / factor,
-            y: point.y / factor,
-            z: point.z / factor
+            x: point.x * factor,
+            y: point.y * factor,
+            z: point.z * factor
         };
-    }
-
-    public static translateAndScale(point: Vector3, origin: Vector3, factor: number): Vector3 {
-        return this.scale(this.translate(point, origin), factor);
     }
 }

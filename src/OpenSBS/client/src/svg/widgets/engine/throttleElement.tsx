@@ -42,23 +42,23 @@ export default class ThrottleElement extends React.Component<ThrottleElementProp
                 <text
                     x="100" y="30"
                     textAnchor="middle" fontSize="1.75rem"
-                    fill={ColorPalette.MUTE_DARK}
+                    fill={ColorPalette.MUTE}
                 >AHEAD</text>
                 <text
                     x="100" y="200"
                     textAnchor="middle" fontSize="8rem"
-                    fill={ColorPalette.MUTE_DARK}
+                    fill={ColorPalette.MUTE}
                 >^</text>
                 <text
                     x="100" y="-390"
                     textAnchor="middle" fontSize="8rem"
-                    fill={ColorPalette.MUTE_DARK}
+                    fill={ColorPalette.MUTE}
                     transform="scale(1, -1)"
                 >^</text>
                 <text
                     x="100" y="560"
                     textAnchor="middle" fontSize="1.75rem"
-                    fill={ColorPalette.MUTE_DARK}
+                    fill={ColorPalette.MUTE}
                 >ASTERN</text>
 
                 <ThrottleSliderElement
@@ -70,7 +70,7 @@ export default class ThrottleElement extends React.Component<ThrottleElementProp
 
     private static renderMarker(y: number, index: number) {
         const isMayor = index % 4 === 0;
-        const fill = isMayor ? ColorPalette.TEXT : ColorPalette.MUTE_DARK;
+        const fill = isMayor ? ColorPalette.TEXT : ColorPalette.MUTE;
         return (
             <g key={'throttle-marker-' + y} transform={SvgTransforms.translate(0, y)}>
                 <rect

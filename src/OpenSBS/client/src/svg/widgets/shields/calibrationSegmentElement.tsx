@@ -47,7 +47,7 @@ export default class CalibrationSegmentElement extends React.Component<Calibrati
                     <rect
                         x="3" y="3"
                         width="14" height="34"
-                        fill={ColorPalette.MUTE_DARK}
+                        fill={ColorPalette.MUTE}
                         rx="3" ry="3"
                     />
                 }

@@ -14,7 +14,8 @@ import ColorPalette from '../../colorPalette';
 interface TargetsWidgetProps {
     x: number,
     y: number,
-    size: number,
+    maxItems: number,
+    maxRange: number | undefined,
     target: EntityTrace | null,
     sensors: SensorsModule | undefined,
     dispatch: any,
@@ -25,21 +26,23 @@ class TargetsWidget extends React.Component<TargetsWidgetProps, {}> {
     private readonly translation: string;
 
     public static defaultProps = {
-        size: 10,
+        maxItems: 13,
+        maxRange: undefined,
     };
 
     constructor(props: TargetsWidgetProps) {
         super(props);
 
-        this.height = 30 + (this.props.size * 40);
+        this.height = 30 + (this.props.maxItems * 30);
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.onTargetSelect = this.onTargetSelect.bind(this);
     }
 
     public render() {
-        const targets = SensorsService.findNearestTraces(this.props.sensors, this.props.size).map(
-            (trace: EntityTrace, index: number) => this.renderTargetRow(trace, index)
-        );
+        const targets = SensorsService
+        .getTraces(this.props.sensors, this.getRangeLimit())
+        .slice(0, this.props.maxItems)
+        .map((trace: EntityTrace, index: number) => this.renderTargetRow(trace, index));
 
         return (
             <PanelElement
@@ -47,51 +50,65 @@ class TargetsWidget extends React.Component<TargetsWidgetProps, {}> {
                 width={450} height={this.height}
                 isOffline={!this.props.sensors}
             >
-                <line
-                    x1="40" y1="0"
-                    x2="40" y2="430"
-                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
-                />
                 <text
                     x="50" y="15"
                     fontSize="1rem" textAnchor="start"
                     fill={ColorPalette.HEADER}
                 >CALLSIGN</text>
                 <text
-                    x="260" y="15"
-                    fontSize="1rem" textAnchor="end"
+                    x="190" y="15"
+                    fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.HEADER}
-                >TYPE</text>
-                <line
-                    x1="270" y1="0"
-                    x2="270" y2="430"
-                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
-                />
+                >DIR</text>
                 <text
-                    x="370" y="15"
+                    x="320" y="15"
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.HEADER}
                 >DISTANCE</text>
-                <line
-                    x1="380" y1="0"
-                    x2="380" y2="430"
-                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
-                />
                 <text
                     x="430" y="15"
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.HEADER}
-                >DIR.</text>
+                >SPEED</text>
                 {targets}
+                <line
+                    x1="40" y1="0"
+                    x2="40" y2={this.height}
+                    stroke={ColorPalette.MUTE} strokeWidth="1"
+                />
+                <line
+                    x1="160" y1="0"
+                    x2="160" y2={this.height}
+                    stroke={ColorPalette.MUTE} strokeWidth="1"
+                />
+                <line
+                    x1="220" y1="0"
+                    x2="220" y2={this.height}
+                    stroke={ColorPalette.MUTE} strokeWidth="1"
+                />
+                <line
+                    x1="330" y1="0"
+                    x2="330" y2={this.height}
+                    stroke={ColorPalette.MUTE} strokeWidth="1"
+                />
             </PanelElement>
         );
+    }
+
+    private getRangeLimit(): number {
+        const sensorsRange = this.props.sensors?.range ?? 0;
+        if (!this.props.maxRange) {
+            return sensorsRange;
+        }
+
+        return Math.min(sensorsRange, this.props.maxRange)
     }
 
     private renderTargetRow(trace: EntityTrace, index: number) {
         return (
             <TargetRowElement
-                key={`target-row-${trace.callSign}`}
-                x={0} y={30 + (40 * index)}
+                key={`target-row-${trace.id}`}
+                x={0} y={30 + (30 * index)}
                 trace={trace}
                 selected={trace.id === this.props.target?.id}
                 onClick={this.onTargetSelect}

@@ -1,21 +1,22 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import CompassElement from '../../elements/compassElement';
+import SidesElement from '../../elements/sidesElement';
 
-interface CompassWidgetProps {
+interface SidesOverlayProps {
     x: number,
     y: number,
+    r: number,
     bearing: number,
 }
 
-class CompassWidget extends React.Component<CompassWidgetProps, {}> {
+class SidesOverlay extends React.Component<SidesOverlayProps, {}> {
     public render() {
         return (
-            <CompassElement
+            <SidesElement
                 x={this.props.x}
                 y={this.props.y}
-                r={460}
+                r={this.props.r}
                 rotation={this.props.bearing}
             />
         );
@@ -28,4 +29,4 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect(mapStateToProps)(CompassWidget);
+export default connect(mapStateToProps)(SidesOverlay);

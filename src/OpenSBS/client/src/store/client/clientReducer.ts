@@ -10,10 +10,7 @@ import Item from '../../models/item';
 import ModuleType from '../../modules/moduleType';
 
 const defaultState: ClientState = {
-    radarScale: 20,
-    mapGridVisible: true,
-    mapScale: 200,
-    mapCenter: {x: 0, y: 0, z: 0},
+    radarScale: 1,
     selectedTarget: null,
     selectedAmmo: null,
 };
@@ -41,14 +38,6 @@ const existsAmmo = (entity: Entity, ammo: Item | null): boolean => {
 export default (state = defaultState, action: ClientAction) => {
     if (action.type === ClientActions.Types.SET_RADAR_SCALE && action.payload) {
         return {...state, radarScale: action.payload};
-    }
-
-    if (action.type === ClientActions.Types.SET_MAP_SCALE && action.payload) {
-        return {...state, mapScale: action.payload};
-    }
-
-    if (action.type === ClientActions.Types.SET_MAP_CENTER && action.payload) {
-        return {...state, mapCenter: action.payload};
     }
 
     if (action.type === ClientActions.Types.SET_TARGET && action.payload) {

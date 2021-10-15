@@ -24,7 +24,7 @@ namespace OpenSBS.Engine.Data.Modules
             Mass = 2500;
             Size = 5;
 
-            Range = 50000;
+            Range = 20000;
         }
     }
 }

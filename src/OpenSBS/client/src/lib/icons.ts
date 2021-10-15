@@ -1,13 +1,13 @@
 ﻿export default class Icons {
-    public static getTerminalIcon(type: string): string {
+    public static forTerminal(type: string): string {
         return `/icons/terminals.svg#${type}`;
     }
 
-    public static getEntityIcon(type: string): string {
+    public static forEntity(type: string): string {
         return `/icons/entities.svg#${type}`;
     }
 
-    public static getItemIcon(type: string): string {
+    public static forItem(type: string): string {
         return `/icons/items.svg#${type}`;
     }
 }

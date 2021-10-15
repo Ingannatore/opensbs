@@ -19,7 +19,7 @@ export default class TerminalElement extends React.Component<TerminalElementProp
                 {this.props.icon && (
                     <use
                         x="8" y="8"
-                        href={Icons.getTerminalIcon(this.props.icon)}
+                        href={Icons.forTerminal(this.props.icon)}
                         transform="scale(1.5)"
                     />
                 )}

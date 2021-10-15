@@ -9,6 +9,7 @@ namespace OpenSBS.Engine.Modules.Sensors
     public class SensorsModule : Module<SensorsModuleTemplate>
     {
         public EntityTraceCollection Traces { get; }
+        public int Range => Template.Range;
 
         public static SensorsModule Create(SensorsModuleTemplate template)
         {

@@ -41,7 +41,7 @@ export default class GaugeElement extends React.Component<GaugeElementProps, {}>
             <g transform={this.translation}>
                 <circle
                     cx="0" cy="0" r="42" fill="none"
-                    stroke={ColorPalette.MUTE_DARK} strokeWidth="10"
+                    stroke={ColorPalette.MUTE} strokeWidth="10"
                     strokeDasharray={`${(baseDash) - 2} 2`}
                 />
                 <circle

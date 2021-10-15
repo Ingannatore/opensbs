@@ -40,14 +40,14 @@ class ShieldWidget extends React.Component<ShieldWidgetProps, {}> {
         return (
             <PanelElement
                 x={this.props.x} y={this.props.y}
-                width={450} height={470}
+                width={450} height={480}
                 isOffline={!this.props.shieldModule}
             >
                 <g>
-                    <line x1="0" y1="60" x2="450" y2="60" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
-                    <line x1="110" y1="60" x2="110" y2="470" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
-                    <line x1="220" y1="60" x2="220" y2="470" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
-                    <line x1="330" y1="60" x2="330" y2="470" stroke={ColorPalette.MUTE_DARK} strokeWidth="2"/>
+                    <line x1="0" y1="60" x2="450" y2="60" stroke={ColorPalette.MUTE} strokeWidth="2"/>
+                    <line x1="110" y1="60" x2="110" y2="480" stroke={ColorPalette.MUTE} strokeWidth="2"/>
+                    <line x1="220" y1="60" x2="220" y2="480" stroke={ColorPalette.MUTE} strokeWidth="2"/>
+                    <line x1="330" y1="60" x2="330" y2="480" stroke={ColorPalette.MUTE} strokeWidth="2"/>
 
                     <SwitchElement
                         x={10} y={10}

@@ -9,11 +9,11 @@ export default class SvgElement extends React.Component<{}, {}> {
                         <line x1="0" y1="10" x2="10" y2="10" stroke="#fff" strokeWidth="1"/>
                         <line x1="10" y1="0" x2="10" y2="10" stroke="#fff" strokeWidth="1"/>
                     </pattern>
-                    <mask id="mapMask">
-                        <rect x="-495" y="-495" width="990" height="990" fill="white"/>
+                    <mask id="radarMask">
+                        <circle cx="0" cy="0" r="490" fill="white"/>
                     </mask>
-                    <mask id="gridMask">
-                        <rect x="-495" y="-495" width="990" height="990" fill="white"/>
+                    <mask id="scannerMask">
+                        <circle cx="0" cy="0" r="490" fill="white"/>
                     </mask>
                 </defs>
                 <rect x="0" y="0" width="1920" height="1080" fill="#121212"/>

@@ -30,7 +30,7 @@ export default class PanelElement extends React.Component<PanelElementProps, {}>
             <g transform={this.translation}>
                 <path
                     d={this.path}
-                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                    stroke={ColorPalette.MUTE} strokeWidth="2"
                     fill={ColorPalette.BACKGROUND}
                     shapeRendering="crispEdges"
                 />
@@ -56,7 +56,7 @@ export default class PanelElement extends React.Component<PanelElementProps, {}>
                 />
                 <path
                     d={this.path}
-                    stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                    stroke={ColorPalette.MUTE} strokeWidth="2"
                     fill="none"
                     shapeRendering="crispEdges"
                 />

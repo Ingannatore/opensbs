@@ -1,22 +1,20 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import CompassElement from '../../elements/compassElement';
+import ShipElement from '../../elements/shipElement';
 
-interface CompassWidgetProps {
+interface ShipOverlayProps {
     x: number,
     y: number,
     bearing: number,
 }
 
-class CompassWidget extends React.Component<CompassWidgetProps, {}> {
+class ShipOverlay extends React.Component<ShipOverlayProps, {}> {
     public render() {
         return (
-            <CompassElement
-                x={this.props.x}
-                y={this.props.y}
-                r={460}
-                rotation={this.props.bearing}
+            <ShipElement
+                x={this.props.x} y={this.props.y}
+                bearing={this.props.bearing}
             />
         );
     }
@@ -28,4 +26,4 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect(mapStateToProps)(CompassWidget);
+export default connect(mapStateToProps)(ShipOverlay);

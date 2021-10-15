@@ -1,29 +1,28 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svgTransforms';
-import Vector3 from '../../../models/vector3';
-import EntityTrace from '../../../models/entityTrace';
-import ClientActions from '../../../store/client/clientActions';
-import ClientSelectors from '../../../store/client/clientSelectors';
 import SensorsModule from '../../../modules/sensors/sensorsModule';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import SensorsService from '../../../modules/sensors/sensorsService';
+import SvgTransforms from '../../../lib/svgTransforms';
+import EntityTrace from '../../../models/entityTrace';
 import TraceElement from '../../elements/traceElement';
+import ClientSelectors from '../../../store/client/clientSelectors';
+import ClientActions from '../../../store/client/clientActions';
+import Coords from '../../../lib/coords';
 
-interface TracesOverlayElementProps {
+interface TracesOverlayProps {
     x: number,
     y: number,
-    mapScale: number,
-    mapCenter: Vector3,
+    r: number,
+    scale: number,
     target: EntityTrace | null,
     sensors: SensorsModule | undefined,
     dispatch: any,
 }
 
-class TracesOverlayElement extends React.Component<TracesOverlayElementProps, {}> {
+class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
     private readonly translation: string;
 
-    constructor(props: TracesOverlayElementProps) {
+    constructor(props: TracesOverlayProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -35,24 +34,27 @@ class TracesOverlayElement extends React.Component<TracesOverlayElementProps, {}
             return null;
         }
 
-        const traces = SensorsService.getAllTraces(this.props.sensors)
-        .map((trace: EntityTrace) => this.renderTrace(trace));
+        const scale = this.props.r / (this.props.sensors.range * this.props.scale);
+        const traces = this.props.sensors.traces.map(
+            (trace: EntityTrace) => this.renderTrace(trace, scale)
+        );
 
         return (
-            <g transform={this.translation} mask="url(#mapMask)">
+            <g transform={this.translation} mask="url(#scannerMask)">
                 {traces}
             </g>
         );
     }
 
-    private renderTrace(trace: EntityTrace) {
+    private renderTrace(trace: EntityTrace, scale: number) {
+        const position = Coords.scale(trace.relativePosition, scale);
         return (
             <TraceElement
-                key={'map-trace-' + trace.id}
+                key={'scanner-trace-' + trace.id}
+                x={position.x}
+                y={-position.z}
                 trace={trace}
                 selected={trace.id === this.props.target?.id}
-                scale={this.props.mapScale}
-                center={this.props.mapCenter}
                 onClick={this.onTraceClick}
             />
         );
@@ -69,11 +71,9 @@ class TracesOverlayElement extends React.Component<TracesOverlayElementProps, {}
 
 const mapStateToProps = (state: any) => {
     return {
-        mapScale: ClientSelectors.getMapScale(state),
-        mapCenter: ClientSelectors.getMapCenter(state),
         target: ClientSelectors.getSelectedTarget(state),
         sensors: SpaceshipSelectors.getSensors(state),
     };
 };
 
-export default connect(mapStateToProps)(TracesOverlayElement);
+export default connect(mapStateToProps)(TracesOverlay);

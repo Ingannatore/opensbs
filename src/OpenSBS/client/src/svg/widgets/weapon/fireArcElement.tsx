@@ -26,16 +26,16 @@ export default class FireArcElement extends React.Component<FireArcElementProps,
                     <line
                         x1="-40" y1="-40"
                         x2="40" y2="40"
-                        stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                        stroke={ColorPalette.MUTE} strokeWidth="2"
                     />
                     <line
                         x1="-40" y1="40"
                         x2="40" y2="-40"
-                        stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                        stroke={ColorPalette.MUTE} strokeWidth="2"
                     />
                     <circle
                         cx="0" cy="0" r="50"
-                        stroke={ColorPalette.MUTE_DARK} strokeWidth="2"
+                        stroke={ColorPalette.MUTE} strokeWidth="2"
                         fill="none"
                     />
                     {
