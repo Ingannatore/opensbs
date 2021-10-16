@@ -49,17 +49,17 @@ export default class TargetRowElement extends React.Component<TargetRowElementPr
                     x="190" y="15"
                     fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.TEXT}
-                >{Angles.bearingToString(this.props.trace.relativeBearing)}</text>
+                >{Angles.bearingToString(this.props.trace.spatial.relativeBearing)}</text>
                 <text
                     x="320" y="15"
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.TEXT}
-                >{this.props.trace.distance}</text>
+                >{this.props.trace.spatial.distance}</text>
                 <text
                     x="430" y="15"
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.TEXT}
-                >{this.props.trace.speed}</text>
+                >{this.props.trace.spatial.speed}</text>
             </g>
         );
     }

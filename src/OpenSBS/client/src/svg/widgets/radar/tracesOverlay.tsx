@@ -59,7 +59,7 @@ class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
     }
 
     private renderTrace(trace: EntityTrace, scale: number) {
-        const position = Coords.scale(trace.relativePosition, scale);
+        const position = Coords.scale(trace.spatial.relativePosition, scale);
         return (
             <TraceElement
                 key={'scanner-trace-' + trace.id}

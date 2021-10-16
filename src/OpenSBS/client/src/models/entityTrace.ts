@@ -1,14 +1,16 @@
-﻿import Vector3 from '../models/vector3';
+﻿import TraceSpatialData from './traceSpatialData';
+import TraceShieldData from './traceShieldData';
+import TraceStructureData from './traceStructureData';
 
 export default interface EntityTrace {
     id: string,
+    scanLevel: number,
+
     type: string,
     callSign: string,
-    position: Vector3,
-    bearing: number,
-    distance: number,
-    speed: number,
-    relativePosition: Vector3,
-    relativeBearing: number,
-    relativeSide: string,
+    reputation: number,
+
+    spatial: TraceSpatialData,
+    shield: TraceShieldData,
+    structure: TraceStructureData,
 }

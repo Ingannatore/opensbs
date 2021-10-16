@@ -33,6 +33,11 @@ namespace OpenSBS.Engine.Modules.Shields
             };
         }
 
+        public double GetSectorRatio(string side)
+        {
+            return _sectors[side].Ratio;
+        }
+
         public int GetAvailableCalibrationPoints()
         {
             return MaximumCalibrationPoints - _sectors.Values.Sum(sector => sector.Calibration);

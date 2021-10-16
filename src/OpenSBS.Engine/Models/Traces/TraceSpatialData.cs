@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Utils;
 
-namespace OpenSBS.Engine.Models.Entities
+namespace OpenSBS.Engine.Models.Traces
 {
-    public class EntityTrace
+    public class TraceSpatialData
     {
-        public string Id { get; }
-        public string Type { get; }
-        public string CallSign { get; }
         public Vector3 Position { get; protected set; }
         public double Bearing { get; protected set; }
         public int Distance { get; protected set; }
@@ -18,20 +16,6 @@ namespace OpenSBS.Engine.Models.Entities
         public Vector3 RelativePosition { get; protected set; }
         public double RelativeBearing { get; protected set; }
         public string RelativeSide { get; protected set; }
-
-        public static EntityTrace ForEntity(Entity entity)
-        {
-            return new EntityTrace(entity.Id, entity.Type, entity.CallSign);
-        }
-
-        private EntityTrace(string id, string type, string callSign)
-        {
-            Id = id;
-            Type = type;
-            CallSign = callSign;
-            Distance = 0;
-            Bearing = 0;
-        }
 
         public bool IsOutOfRange(int range)
         {

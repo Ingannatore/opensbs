@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using OpenSBS.Engine.Models.Entities;
-using OpenSBS.Engine.Models.Templates;
 
 namespace OpenSBS.Engine.Models.Modules
 {
@@ -23,9 +22,9 @@ namespace OpenSBS.Engine.Models.Modules
             return _modulesIndex[id];
         }
 
-        public T First<T>() where T : IModule
+        public T FirstOrDefault<T>() where T : IModule
         {
-            return _modules.OfType<T>().First();
+            return _modules.OfType<T>().FirstOrDefault();
         }
 
         public void Add(IModule module)

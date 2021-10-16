@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using OpenSBS.Engine.Models.Entities;
 
-namespace OpenSBS.Engine.Models.Entities
+namespace OpenSBS.Engine.Models.Traces
 {
     public class EntityTraceCollection : IEnumerable<EntityTrace>
     {

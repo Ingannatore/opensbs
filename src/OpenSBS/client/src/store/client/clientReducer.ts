@@ -24,7 +24,7 @@ const existsTrace = (entity: Entity, trace: EntityTrace | null): boolean => {
         (module: Partial<EntityModule>) => module.type === ModuleType.SENSORS
     ) as SensorsModule;
 
-    return sensors.traces.find(it => it.id === trace.id) != undefined;
+    return sensors.traces.find(it => it.id === trace.id) !== undefined;
 }
 
 const existsAmmo = (entity: Entity, ammo: Item | null): boolean => {
@@ -32,7 +32,7 @@ const existsAmmo = (entity: Entity, ammo: Item | null): boolean => {
         return false;
     }
 
-    return entity.cargo?.items.find(it => it.item.id === ammo.id) != undefined ?? false;
+    return entity.cargo?.items.find(it => it.item.id === ammo.id) !== undefined ?? false;
 }
 
 export default (state = defaultState, action: ClientAction) => {

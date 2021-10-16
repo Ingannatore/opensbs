@@ -21,7 +21,7 @@ export default class TraceElement extends React.Component<TraceElementProps, {}>
 
     public render() {
         const translation = SvgTransforms.translate(this.props.x, this.props.y);
-        const bearingRotation = SvgTransforms.rotate(this.props.trace.bearing);
+        const bearingRotation = SvgTransforms.rotate(this.props.trace.spatial.bearing);
         const textRotation = SvgTransforms.rotate(this.props.rotation);
 
         return (

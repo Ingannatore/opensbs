@@ -102,7 +102,7 @@ class WeaponWidget extends React.Component<WeaponProps, {}> {
                 <FireArcElement
                     x={390} y={115}
                     arcs={this.props.weapon.firingArcs}
-                    targetSide={this.props.weapon.target?.relativeSide}
+                    targetSide={this.props.weapon.target?.spatial.relativeSide}
                 />
             </PanelElement>
         );

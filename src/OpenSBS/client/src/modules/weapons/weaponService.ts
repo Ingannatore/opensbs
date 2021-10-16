@@ -22,7 +22,7 @@ export default class WeaponService {
 
     public static isReloadButtonEnabled(weapon: WeaponModule, selectedAmmo: Item | null): boolean {
         if (this.inStatus(weapon, WeaponStatus.IDLE) || this.inStatus(weapon, WeaponStatus.OUT_OF_AMMO)) {
-            if (selectedAmmo && weapon.magazine.ammoType == selectedAmmo.type && weapon.magazine.ammoId != selectedAmmo.id) {
+            if (selectedAmmo && weapon.magazine.ammoType === selectedAmmo.type && weapon.magazine.ammoId !== selectedAmmo.id) {
                 return true;
             }
 
@@ -39,7 +39,7 @@ export default class WeaponService {
     }
 
     public static getAmmoToReload(weapon: WeaponModule, selectedAmmo: Item | null): string | null {
-        if (selectedAmmo && weapon.magazine.ammoType == selectedAmmo.type) {
+        if (selectedAmmo && weapon.magazine.ammoType === selectedAmmo.type) {
             return selectedAmmo.id;
         }
 
@@ -47,7 +47,7 @@ export default class WeaponService {
     }
 
     private static inStatus(weapon: WeaponModule, status: string): boolean {
-        return weapon.status == status;
+        return weapon.status === status;
     }
 
     private static getStatusName(weapon: WeaponModule): string {

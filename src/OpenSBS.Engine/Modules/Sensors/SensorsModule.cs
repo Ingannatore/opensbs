@@ -3,6 +3,7 @@ using OpenSBS.Engine.Models;
 using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Modules;
 using OpenSBS.Engine.Models.Templates;
+using OpenSBS.Engine.Models.Traces;
 
 namespace OpenSBS.Engine.Modules.Sensors
 {

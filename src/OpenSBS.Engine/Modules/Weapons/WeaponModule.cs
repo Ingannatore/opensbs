@@ -6,6 +6,7 @@ using OpenSBS.Engine.Models.Entities;
 using OpenSBS.Engine.Models.Items;
 using OpenSBS.Engine.Models.Modules;
 using OpenSBS.Engine.Models.Templates;
+using OpenSBS.Engine.Models.Traces;
 using OpenSBS.Engine.Modules.Sensors;
 using OpenSBS.Engine.Modules.Weapons.Automata;
 
@@ -90,7 +91,7 @@ namespace OpenSBS.Engine.Modules.Weapons
                 case EngageAction:
                 {
                     var targetId = action.PayloadTo<string>();
-                    Target = owner.Modules.First<SensorsModule>().GetTrace(targetId);
+                    Target = owner.Modules.FirstOrDefault<SensorsModule>().GetTrace(targetId);
                     break;
                 }
 
