@@ -1,7 +1,7 @@
 ﻿export default interface TraceShieldData {
     isRaised: boolean,
-    frontCapacity: number,
-    rightCapacity: number,
-    leftCapacity: number,
-    rearCapacity: number,
+    frontRatio: number,
+    rightRatio: number,
+    leftRatio: number,
+    rearRatio: number,
 }

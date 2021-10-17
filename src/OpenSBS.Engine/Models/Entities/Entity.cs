@@ -15,6 +15,7 @@ namespace OpenSBS.Engine.Models.Entities
         public Vector3 Direction { get; private set; }
         public double Bearing { get; private set; }
         public double LinearSpeed { get; private set; }
+        public int Reputation { get; private set; }
         public EntityHull Hull { get; }
         public ItemStorage Cargo { get; }
         public ModulesCollection Modules { get; }
@@ -65,6 +66,11 @@ namespace OpenSBS.Engine.Models.Entities
         public void ApplyDamage(int amount)
         {
             Hull.ApplyDamage(amount);
+        }
+
+        public void AssignReputation(int value)
+        {
+            Reputation = value;
         }
 
         private void RotateBody(TimeSpan deltaT)

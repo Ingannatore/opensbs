@@ -13,6 +13,7 @@ namespace OpenSBS.Engine.Models.Traces
         public double Bearing { get; protected set; }
         public int Distance { get; protected set; }
         public int Speed { get; protected set; }
+        public int Size { get; protected set; }
         public Vector3 RelativePosition { get; protected set; }
         public double RelativeBearing { get; protected set; }
         public string RelativeSide { get; protected set; }
@@ -33,6 +34,7 @@ namespace OpenSBS.Engine.Models.Traces
             Bearing = target.Bearing;
             Distance = (int)Math.Round(Vector3.Distance(owner.Position, target.Position));
             Speed = (int)Math.Round(target.LinearSpeed);
+            Size = target.Size;
             RelativePosition = target.Position - owner.Position;
 
             var relativeDirection = Vector3.Normalize(RelativePosition);

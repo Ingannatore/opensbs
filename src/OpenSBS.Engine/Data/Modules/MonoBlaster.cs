@@ -23,10 +23,11 @@ namespace OpenSBS.Engine.Data.Modules
         private MonoBlaster()
         {
             Name = "Mono Blaster";
+            ShortName = "Mono Blaster";
             Mass = 2000;
             Size = 4;
 
-            Damage = 1;
+            Damage = 5;
             Range = 5000;
             AmmoType = ItemType.AmmoPlasma;
             AmmoPerCycle = 1;

@@ -18,7 +18,7 @@ namespace OpenSBS.Engine.Models.Entities
         {
             CurrentHp = hp;
             MaxHp = hp;
-            Ratio = 100;
+            Ratio = 1;
         }
 
         public void ApplyDamage(int amount)

@@ -16,21 +16,18 @@ namespace OpenSBS.Engine.Data.Missions
 
         public override void Init()
         {
-            var dummyTarget1 = new DummyTarget("DUMMY_1", "Dummy 1", "DMY-001");
-            dummyTarget1.MoveTo(2000, 0, 0);
-            World.AddEntity(dummyTarget1);
+            var container = new FloatingContainer("CONTAINER_1", "Container 1", "CNT-001");
+            container.MoveTo(2000, 0, 0);
+            World.AddEntity(container);
 
-            var dummyTarget2 = new DummyTarget("DUMMY_2", "Dummy 2", "DMY-002");
-            dummyTarget2.MoveTo(500, 0, -3000);
-            World.AddEntity(dummyTarget2);
+            var dummyTarget = new DummyTarget("DUMMY_1", "Dummy 1", "DMY-001");
+            dummyTarget.MoveTo(-6000, 0, 2000);
+            dummyTarget.AssignReputation(-1);
+            World.AddEntity(dummyTarget);
 
-            var dummyTarget3 = new DummyTarget("DUMMY_3", "Dummy 3", "DMY-003");
-            dummyTarget3.MoveTo(-6000, 0, 2000);
-            World.AddEntity(dummyTarget3);
-
-            Spaceship.Cargo.Add(ScarletPlasmaAmmo.Instance, 10);
-            Spaceship.Cargo.Add(VioletPlasmaAmmo.Instance, 8);
-            Spaceship.Cargo.Add(LanceProjectileAmmo.Instance, 20);
+            Spaceship.Cargo.Add(ScarletPlasmaAmmo.Instance, 100);
+            Spaceship.Cargo.Add(VioletPlasmaAmmo.Instance, 80);
+            Spaceship.Cargo.Add(LanceProjectileAmmo.Instance, 200);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace OpenSBS.Engine.Data.Modules
         private LimitedIonEngine()
         {
             Name = "Limited Ion Engine";
+            ShortName = "Limited Ion Engine";
             Mass = 5000;
             Size = 5;
 

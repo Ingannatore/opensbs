@@ -8,6 +8,8 @@ namespace OpenSBS.Engine.Models.Modules
     {
         public string Id { get; }
         public string Type { get; }
+        public string Name => Template.Name;
+        public string ShortName => Template.ShortName;
         public T Template { get; }
 
         protected Module(string type, T template)

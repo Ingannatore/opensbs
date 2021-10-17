@@ -5,6 +5,7 @@ export default interface TraceSpatialData {
     bearing: number,
     distance: number,
     speed: number,
+    size: number,
     relativePosition: Vector3,
     relativeBearing: number,
     relativeSide: string,

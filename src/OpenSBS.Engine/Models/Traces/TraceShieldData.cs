@@ -6,19 +6,18 @@ namespace OpenSBS.Engine.Models.Traces
     public class TraceShieldData
     {
         public bool IsRaised { get; protected set; }
-        public double FrontCapacity { get; protected set; }
-        public double RightCapacity { get; protected set; }
-        public double LeftCapacity { get; protected set; }
-        public double RearCapacity { get; protected set; }
+        public double FrontRatio { get; protected set; }
+        public double RightRatio { get; protected set; }
+        public double LeftRatio { get; protected set; }
+        public double RearRatio { get; protected set; }
 
-        public void Update(Entity owner)
+        public void Update(ShieldModule module)
         {
-            var shieldModule = owner.Modules.FirstOrDefault<ShieldModule>();
-            IsRaised = shieldModule?.IsRaised ?? false;
-            FrontCapacity = shieldModule?.Sectors.GetSectorRatio(EntitySide.Front) ?? 0;
-            RightCapacity = shieldModule?.Sectors.GetSectorRatio(EntitySide.Right) ?? 0;
-            LeftCapacity = shieldModule?.Sectors.GetSectorRatio(EntitySide.Left) ?? 0;
-            RearCapacity = shieldModule?.Sectors.GetSectorRatio(EntitySide.Rear) ?? 0;
+            IsRaised = module.IsRaised;
+            FrontRatio = module.Sectors.GetSectorRatio(EntitySide.Front);
+            RightRatio = module.Sectors.GetSectorRatio(EntitySide.Right);
+            LeftRatio = module.Sectors.GetSectorRatio(EntitySide.Left);
+            RearRatio = module.Sectors.GetSectorRatio(EntitySide.Rear);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OpenSBS.Engine.Models.Entities;
+using OpenSBS.Engine.Modules.Shields;
 
 namespace OpenSBS.Engine.Models.Traces
 {
@@ -9,10 +10,10 @@ namespace OpenSBS.Engine.Models.Traces
         public int ScanLevel { get; }
         public string Type { get; }
         public string CallSign { get; }
-        public int Reputation { get; }
+        public int Reputation { get; private set; }
         public TraceSpatialData Spatial { get; }
-        public TraceShieldData Shield { get; }
         public TraceStructureData Structure { get; }
+        public TraceShieldData Shield { get; private set; }
 
         public static EntityTrace ForEntity(Entity entity)
         {
@@ -28,8 +29,8 @@ namespace OpenSBS.Engine.Models.Traces
             Reputation = 0;
 
             Spatial = new TraceSpatialData();
-            Shield = new TraceShieldData();
             Structure = new TraceStructureData();
+            Shield = null;
         }
 
         public bool IsOutOfRange(int range)
@@ -44,9 +45,16 @@ namespace OpenSBS.Engine.Models.Traces
 
         public void Update(Entity owner, Entity target)
         {
+            Reputation = target.Reputation;
             Spatial.Update(owner, target);
-            Shield.Update(owner);
-            Structure.Update(owner);
+            Structure.Update(target);
+
+            var shieldModule = target.Modules.FirstOrDefault<ShieldModule>();
+            if (shieldModule != null)
+            {
+                Shield ??= new TraceShieldData();
+                Shield.Update(shieldModule);
+            }
         }
     }
 }

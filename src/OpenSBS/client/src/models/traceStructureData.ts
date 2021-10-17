@@ -1,3 +1,4 @@
 ﻿export default interface TraceStructureData {
-    hullRation: number,
+    hullRatio: number,
+    modules: string[],
 }

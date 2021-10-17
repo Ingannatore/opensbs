@@ -36,7 +36,7 @@ export default class TargetRowElement extends React.Component<TargetRowElementPr
                     <use
                         x="-16" y="-16"
                         href={Icons.forEntity(this.props.trace.type)}
-                        stroke={ColorPalette.TEXT} fill={ColorPalette.TEXT}
+                        stroke={this.getColor()} fill={ColorPalette.TEXT}
                         transform="scale(.5)"
                     />
                 </g>
@@ -62,5 +62,16 @@ export default class TargetRowElement extends React.Component<TargetRowElementPr
                 >{this.props.trace.spatial.speed}</text>
             </g>
         );
+    }
+
+    private getColor() {
+        if (this.props.trace.reputation < 0) {
+            return ColorPalette.DANGER;
+        }
+        if (this.props.trace.reputation > 0) {
+            return ColorPalette.SUCCESS;
+        }
+
+        return ColorPalette.TEXT
     }
 }

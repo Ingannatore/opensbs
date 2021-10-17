@@ -20,7 +20,8 @@ namespace OpenSBS.Engine.Data.Modules
 
         private PrototypeMagneticShield()
         {
-            Name = "Mono Blaster";
+            Name = "Prototype Magnetic Shielding";
+            ShortName = "Prot Mag Shld";
             Mass = 2000;
             Size = 4;
 

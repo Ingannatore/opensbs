@@ -11,6 +11,6 @@ export default interface EntityTrace {
     reputation: number,
 
     spatial: TraceSpatialData,
-    shield: TraceShieldData,
     structure: TraceStructureData,
+    shield: TraceShieldData | null,
 }

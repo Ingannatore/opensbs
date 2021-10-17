@@ -21,11 +21,11 @@ namespace OpenSBS.Engine.Data.Spaceships.Templates
 
         private DummyTargetTemplate()
         {
-            Type = EntityType.Container;
+            Type = EntityType.Fighter;
             Mass = 1000;
-            Size = 5;
-            HitPoints = 50;
-            Cargo = 0;
+            Size = 6;
+            HitPoints = 100;
+            Cargo = 10;
         }
     }
 }

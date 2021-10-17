@@ -23,10 +23,11 @@ namespace OpenSBS.Engine.Data.Modules
         private ArtilleryBattery()
         {
             Name = "Artillery Battery";
+            ShortName = "Artillery Battery";
             Mass = 6000;
             Size = 8;
 
-            Damage = 1;
+            Damage = 40;
             Range = 8000;
             AmmoType = ItemType.AmmoProjectile;
             AmmoPerCycle = 4;

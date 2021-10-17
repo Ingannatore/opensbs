@@ -23,6 +23,7 @@ export default class TraceElement extends React.Component<TraceElementProps, {}>
         const translation = SvgTransforms.translate(this.props.x, this.props.y);
         const bearingRotation = SvgTransforms.rotate(this.props.trace.spatial.bearing);
         const textRotation = SvgTransforms.rotate(this.props.rotation);
+        const color = this.getColor();
 
         return (
             <g
@@ -33,24 +34,35 @@ export default class TraceElement extends React.Component<TraceElementProps, {}>
                     <use
                         x="-16" y="-16"
                         href={Icons.forEntity(this.props.trace.type)}
-                        stroke={ColorPalette.TEXT} fill={ColorPalette.TEXT}
+                        stroke={color} fill={ColorPalette.TEXT}
                         transform={'scale(.5) ' + bearingRotation}
                     />
                     <text
                         x="0" y="20"
                         fontSize="1rem" textAnchor="middle"
-                        fill={ColorPalette.TEXT}
+                        fill={color}
                     >{this.props.trace.callSign}</text>
                     {
                         this.props.selected &&
                         <use
                             href="/images/icons.svg#brackets"
                             x="-50" y="-18"
-                            stroke={ColorPalette.DANGER}
+                            stroke={ColorPalette.MUTE_LIGHT}
                         />
                     }
                 </g>
             </g>
         );
+    }
+
+    private getColor() {
+        if (this.props.trace.reputation < 0) {
+            return ColorPalette.DANGER;
+        }
+        if (this.props.trace.reputation > 0) {
+            return ColorPalette.SUCCESS;
+        }
+
+        return ColorPalette.TEXT
     }
 }
