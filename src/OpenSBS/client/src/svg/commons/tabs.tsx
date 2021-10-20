@@ -34,7 +34,8 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
 
         const buttons = React.Children.map(this.props.children,
             (child, index) => {
-                return this.renderButton((child as TabPage).props.label, index)
+                const tabPage = (child as TabPage);
+                return this.renderButton(tabPage.props.label, tabPage.props.enabled, index)
             }
         );
 
@@ -43,7 +44,7 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
                 <line
                     x1="1" y1="40"
                     x2={this.props.width - 1} y2="40"
-                    stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
+                    stroke={ColorPalette.MUTE} strokeWidth="2"
                 />
                 {buttons}
                 {React.Children.toArray(this.props.children)[this.state.selectedTab]}
@@ -51,12 +52,13 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
         );
     }
 
-    private renderButton(label: string, index: number) {
+    private renderButton(label: string, enabled: boolean, index: number) {
         return (
             <TabButton
                 x={index * 110} y={0}
                 width={100} height={40}
                 toggled={index === this.state.selectedTab}
+                enabled={enabled}
                 onClick={() => this.selectTab(index)}
             >{label}</TabButton>
         );

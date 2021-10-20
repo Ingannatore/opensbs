@@ -22,103 +22,33 @@ export default class SpatialData extends React.Component<SpatialDataProps, {}> {
     public render() {
         return (
             <g transform={this.translation}>
-                <g transform="translate(0 0)">
-                    <text
-                        x="0" y="20"
-                        fontSize="1rem" textAnchor="start"
-                        fill={ColorPalette.MUTE_LIGHT}
-                    >Position</text>
-                    <text
-                        x="200" y="20"
-                        fontSize="1.5rem" textAnchor="end"
-                        fill={ColorPalette.TEXT}
-                    >{SpatialData.getSideName(this.props.trace.spatial.relativeSide)}</text>
-                </g>
-                <g transform="translate(0 40)">
-                    <text
-                        x="0" y="20"
-                        fontSize="1rem" textAnchor="start"
-                        fill={ColorPalette.MUTE_LIGHT}
-                    >Distance</text>
-                    <text
-                        x="200" y="20"
-                        fontSize="1.5rem" textAnchor="end"
-                        fill={ColorPalette.TEXT}
-                    >{this.props.trace.spatial.distance}</text>
-                </g>
-                <g transform="translate(0 80)">
-                    <text
-                        x="0" y="20"
-                        fontSize="1rem" textAnchor="start"
-                        fill={ColorPalette.MUTE_LIGHT}
-                    >Bearing</text>
-                    <text
-                        x="200" y="20"
-                        fontSize="1.5rem" textAnchor="end"
-                        fill={ColorPalette.TEXT}
-                    >{Angles.bearingToString(this.props.trace.spatial.bearing)}</text>
-                </g>
-                <g transform="translate(0 120)">
-                    <text
-                        x="0" y="20"
-                        fontSize="1rem" textAnchor="start"
-                        fill={ColorPalette.MUTE_LIGHT}
-                    >Direction</text>
-                    <text
-                        x="200" y="20"
-                        fontSize="1.5rem" textAnchor="end"
-                        fill={ColorPalette.TEXT}
-                    >{Angles.bearingToString(this.props.trace.spatial.relativeBearing)}</text>
-                </g>
-                <g transform="translate(0 160)">
-                    <text
-                        x="0" y="20"
-                        fontSize="1rem" textAnchor="start"
-                        fill={ColorPalette.MUTE_LIGHT}
-                    >Speed</text>
-                    <text
-                        x="200" y="20"
-                        fontSize="1.5rem" textAnchor="end"
-                        fill={ColorPalette.TEXT}
-                    >{this.props.trace.spatial.speed}</text>
-                </g>
-                <g transform="translate(0 200)">
-                    <text
-                        x="0" y="20"
-                        fontSize="1rem" textAnchor="start"
-                        fill={ColorPalette.MUTE_LIGHT}
-                    >Size</text>
-                    <text
-                        x="200" y="20"
-                        fontSize="1.5rem" textAnchor="end"
-                        fill={ColorPalette.TEXT}
-                    >{this.props.trace.spatial.size}</text>
-                </g>
-                <g transform="translate(0 240)">
-                    <text
-                        x="0" y="20"
-                        fontSize="1rem" textAnchor="start"
-                        fill={ColorPalette.MUTE_LIGHT}
-                    >Reputation</text>
-                    <text
-                        x="200" y="20"
-                        fontSize="1.5rem" textAnchor="end"
-                        fill={this.getColor()}
-                    >{SpatialData.getReputationName(this.props.trace.reputation)}</text>
-                </g>
+                {this.renderRow(0, 'Position', SpatialData.getSideName(this.props.trace.spatial.relativeSide))}
+                {this.renderRow(50, 'Distance', this.props.trace.spatial.distance)}
+                {this.renderRow(100, 'Direction', Angles.bearingToString(this.props.trace.spatial.relativeBearing))}
+                {this.renderRow(150, 'Bearing', Angles.bearingToString(this.props.trace.spatial.bearing))}
+                {this.renderRow(200, 'Speed', this.props.trace.spatial.speed)}
+                {this.renderRow(250, 'Size', this.props.trace.spatial.size)}
+                {this.renderRow(300, 'Reputation', SpatialData.getReputationName(this.props.trace.reputation))}
             </g>
         );
     }
 
-    private getColor() {
-        if (this.props.trace.reputation < 0) {
-            return ColorPalette.DANGER;
-        }
-        if (this.props.trace.reputation > 0) {
-            return ColorPalette.SUCCESS;
-        }
-
-        return ColorPalette.TEXT
+    private renderRow(y: number, label: string, value: any) {
+        const transform = SvgTransforms.translate(0, y);
+        return (
+            <g transform={transform}>
+                <text
+                    x="0" y="25"
+                    fontSize="1rem" textAnchor="start"
+                    fill={ColorPalette.MUTE_LIGHT}
+                >{label}</text>
+                <text
+                    x="200" y="25"
+                    fontSize="1.5rem" textAnchor="end"
+                    fill={ColorPalette.TEXT}
+                >{value}</text>
+            </g>
+        );
     }
 
     private static getSideName(side: string): string {

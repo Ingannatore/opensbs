@@ -28,56 +28,56 @@ export default class ShieldData extends React.Component<ShieldDataProps, {}> {
             <g transform={this.translation}>
                 <g transform="translate(0 0)">
                     <text
-                        x="-10" y="20"
+                        x="10" y="25"
                         fontSize="1rem" textAnchor="start"
                         fill={ColorPalette.MUTE_LIGHT}
                     >Shield Status</text>
                     <text
-                        x="190" y="20"
+                        x="210" y="25"
                         fontSize="1.5rem" textAnchor="end"
                         fill={ColorPalette.TEXT}
                     >{this.props.trace.shield.isRaised ? 'ON' : 'OFF'}</text>
                 </g>
 
                 <CylinderElement
-                    x={10} y={50}
-                    height={186}
+                    x={35} y={75}
+                    height={226}
                     ratio={this.props.trace.shield.frontRatio}
                 />
                 <CylinderElement
-                    x={60} y={50}
-                    height={186}
+                    x={85} y={75}
+                    height={226}
                     ratio={this.props.trace.shield.leftRatio}
                 />
                 <CylinderElement
-                    x={110} y={50}
-                    height={186}
+                    x={135} y={75}
+                    height={226}
                     ratio={this.props.trace.shield.rightRatio}
                 />
                 <CylinderElement
-                    x={160} y={50}
-                    height={186}
+                    x={185} y={75}
+                    height={226}
                     ratio={this.props.trace.shield.rearRatio}
                 />
 
                 <text
-                    x="30" y="260"
-                    fontSize=".75rem" textAnchor="end"
+                    x="35" y="325"
+                    fontSize=".75rem" textAnchor="middle"
                     fill={ColorPalette.MUTE_LIGHT}
                 >FRONT</text>
                 <text
-                    x="80" y="260"
-                    fontSize=".75rem" textAnchor="end"
+                    x="85" y="325"
+                    fontSize=".75rem" textAnchor="middle"
                     fill={ColorPalette.MUTE_LIGHT}
                 >LEFT</text>
                 <text
-                    x="130" y="260"
-                    fontSize=".75rem" textAnchor="end"
+                    x="135" y="325"
+                    fontSize=".75rem" textAnchor="middle"
                     fill={ColorPalette.MUTE_LIGHT}
                 >RIGHT</text>
                 <text
-                    x="180" y="260"
-                    fontSize=".75rem" textAnchor="end"
+                    x="185" y="325"
+                    fontSize=".75rem" textAnchor="middle"
                     fill={ColorPalette.MUTE_LIGHT}
                 >REAR</text>
             </g>
@@ -88,19 +88,19 @@ export default class ShieldData extends React.Component<ShieldDataProps, {}> {
         return (
             <g transform={this.translation}>
                 <text
-                    x="90" y="60"
+                    x="110" y="75"
                     textAnchor="middle" fontSize="2.5rem"
                     fontWeight="light"
                     fill={ColorPalette.MUTE_LIGHT}
                 >NO</text>
                 <text
-                    x="90" y="140"
+                    x="110" y="175"
                     textAnchor="middle" fontSize="2.5rem"
                     fontWeight="light"
                     fill={ColorPalette.MUTE_LIGHT}
                 >SHIELD</text>
                 <text
-                    x="90" y="220"
+                    x="110" y="275"
                     textAnchor="middle" fontSize="2.5rem"
                     fontWeight="light"
                     fill={ColorPalette.MUTE_LIGHT}

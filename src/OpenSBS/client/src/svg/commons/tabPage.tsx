@@ -3,10 +3,15 @@ import SvgTransforms from '../../lib/svgTransforms';
 
 interface TabPageProps {
     label: string,
+    enabled: boolean,
 }
 
 export default class TabPage extends React.Component<TabPageProps, {}> {
     private readonly translation: string;
+
+    public static defaultProps = {
+        enabled: true,
+    };
 
     constructor(props: TabPageProps) {
         super(props);

@@ -1,6 +1,5 @@
 ﻿import TraceSpatialData from './traceSpatialData';
 import TraceShieldData from './traceShieldData';
-import TraceStructureData from './traceStructureData';
 
 export default interface EntityTrace {
     id: string,
@@ -11,6 +10,5 @@ export default interface EntityTrace {
     reputation: number,
 
     spatial: TraceSpatialData,
-    structure: TraceStructureData,
     shield: TraceShieldData | null,
 }
