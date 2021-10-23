@@ -25,4 +25,19 @@
                 return type;
         }
     }
+
+    public static getReputationName(value: number | null): string {
+        if (!value) {
+            return 'UNKNOWN';
+        }
+
+        if (value > 0) {
+            return 'FRIEND';
+        }
+        if (value < 0) {
+            return 'ENEMY';
+        }
+
+        return 'NEUTRAL';
+    }
 }

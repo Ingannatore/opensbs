@@ -10,7 +10,7 @@ namespace OpenSBS.Engine.Models.Traces
         public int ScanLevel { get; }
         public string Type { get; }
         public string CallSign { get; }
-        public int Reputation { get; private set; }
+        public int? Reputation { get; private set; }
         public TraceSpatialData Spatial { get; }
         public TraceShieldData Shield { get; private set; }
 
@@ -22,10 +22,10 @@ namespace OpenSBS.Engine.Models.Traces
         private EntityTrace(string id, string type, string callSign)
         {
             Id = id;
-            ScanLevel = 2;
+            ScanLevel = 0;
             Type = type;
             CallSign = callSign;
-            Reputation = 0;
+            Reputation = null;
 
             Spatial = new TraceSpatialData();
             Shield = null;
@@ -43,8 +43,11 @@ namespace OpenSBS.Engine.Models.Traces
 
         public void Update(Entity owner, Entity target)
         {
-            Reputation = target.Reputation;
             Spatial.Update(owner, target);
+            if (ScanLevel < 1)
+            {
+                return;
+            }
 
             var shieldModule = target.Modules.FirstOrDefault<ShieldModule>();
             if (shieldModule != null)
@@ -52,6 +55,8 @@ namespace OpenSBS.Engine.Models.Traces
                 Shield ??= new TraceShieldData();
                 Shield.Update(shieldModule);
             }
+
+            Reputation = target.Reputation;
         }
     }
 }

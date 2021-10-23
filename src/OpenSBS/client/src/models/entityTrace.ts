@@ -7,7 +7,7 @@ export default interface EntityTrace {
 
     type: string,
     callSign: string,
-    reputation: number,
+    reputation: number | null,
 
     spatial: TraceSpatialData,
     shield: TraceShieldData | null,

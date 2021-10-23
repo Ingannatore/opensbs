@@ -1,13 +1,13 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../../lib/svgTransforms';
-import EntityTrace from '../../../models/entityTrace';
+import TraceShieldData from '../../../models/traceShieldData';
 import CylinderElement from '../../elements/cylinderElement';
 import ColorPalette from '../../colorPalette';
 
 interface ShieldDataProps {
     x: number,
     y: number,
-    trace: EntityTrace,
+    data: TraceShieldData | null,
 }
 
 export default class ShieldData extends React.Component<ShieldDataProps, {}> {
@@ -20,7 +20,7 @@ export default class ShieldData extends React.Component<ShieldDataProps, {}> {
     }
 
     public render() {
-        if (!this.props.trace.shield) {
+        if (!this.props.data) {
             return this.renderNoShieldContent();
         }
 
@@ -36,28 +36,28 @@ export default class ShieldData extends React.Component<ShieldDataProps, {}> {
                         x="210" y="25"
                         fontSize="1.5rem" textAnchor="end"
                         fill={ColorPalette.TEXT}
-                    >{this.props.trace.shield.isRaised ? 'ON' : 'OFF'}</text>
+                    >{this.props.data.isRaised ? 'ON' : 'OFF'}</text>
                 </g>
 
                 <CylinderElement
                     x={35} y={75}
                     height={226}
-                    ratio={this.props.trace.shield.frontRatio}
+                    ratio={this.props.data.frontRatio}
                 />
                 <CylinderElement
                     x={85} y={75}
                     height={226}
-                    ratio={this.props.trace.shield.leftRatio}
+                    ratio={this.props.data.leftRatio}
                 />
                 <CylinderElement
                     x={135} y={75}
                     height={226}
-                    ratio={this.props.trace.shield.rightRatio}
+                    ratio={this.props.data.rightRatio}
                 />
                 <CylinderElement
                     x={185} y={75}
                     height={226}
-                    ratio={this.props.trace.shield.rearRatio}
+                    ratio={this.props.data.rearRatio}
                 />
 
                 <text

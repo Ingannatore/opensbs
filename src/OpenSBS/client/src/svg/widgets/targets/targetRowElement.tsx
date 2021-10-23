@@ -4,6 +4,7 @@ import EntityTrace from '../../../models/entityTrace';
 import Icons from '../../../lib/icons';
 import Angles from '../../../lib/angles';
 import ColorPalette from '../../colorPalette';
+import Coloring from '../../../lib/coloring';
 
 interface TargetRowElementProps {
     x: number,
@@ -15,6 +16,8 @@ interface TargetRowElementProps {
 
 export default class TargetRowElement extends React.Component<TargetRowElementProps, {}> {
     public render() {
+        const color = Coloring.getReputationColor(this.props.trace.reputation);
+
         return (
             <g
                 transform={SvgTransforms.translate(this.props.x, this.props.y)}
@@ -36,7 +39,7 @@ export default class TargetRowElement extends React.Component<TargetRowElementPr
                     <use
                         x="-16" y="-16"
                         href={Icons.forEntity(this.props.trace.type)}
-                        stroke={this.getColor()} fill={ColorPalette.TEXT}
+                        stroke={color} fill={color}
                         transform="scale(.5)"
                     />
                 </g>
@@ -62,16 +65,5 @@ export default class TargetRowElement extends React.Component<TargetRowElementPr
                 >{this.props.trace.spatial.speed}</text>
             </g>
         );
-    }
-
-    private getColor() {
-        if (this.props.trace.reputation < 0) {
-            return ColorPalette.DANGER;
-        }
-        if (this.props.trace.reputation > 0) {
-            return ColorPalette.SUCCESS;
-        }
-
-        return ColorPalette.TEXT
     }
 }

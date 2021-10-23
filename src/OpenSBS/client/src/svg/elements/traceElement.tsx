@@ -3,6 +3,7 @@ import Icons from '../../lib/icons';
 import SvgTransforms from '../../lib/svgTransforms';
 import EntityTrace from '../../models/entityTrace';
 import ColorPalette from '../colorPalette';
+import Coloring from '../../lib/coloring';
 
 interface TraceElementProps {
     x: number,
@@ -23,7 +24,7 @@ export default class TraceElement extends React.Component<TraceElementProps, {}>
         const translation = SvgTransforms.translate(this.props.x, this.props.y);
         const bearingRotation = SvgTransforms.rotate(this.props.trace.spatial.bearing);
         const textRotation = SvgTransforms.rotate(this.props.rotation);
-        const color = this.getColor();
+        const color = Coloring.getReputationColor(this.props.trace.reputation);
 
         return (
             <g
@@ -34,7 +35,7 @@ export default class TraceElement extends React.Component<TraceElementProps, {}>
                     <use
                         x="-16" y="-16"
                         href={Icons.forEntity(this.props.trace.type)}
-                        stroke={color} fill={ColorPalette.TEXT}
+                        stroke={color} fill={color}
                         transform={'scale(.5) ' + bearingRotation}
                     />
                     <text
@@ -53,16 +54,5 @@ export default class TraceElement extends React.Component<TraceElementProps, {}>
                 </g>
             </g>
         );
-    }
-
-    private getColor() {
-        if (this.props.trace.reputation < 0) {
-            return ColorPalette.DANGER;
-        }
-        if (this.props.trace.reputation > 0) {
-            return ColorPalette.SUCCESS;
-        }
-
-        return ColorPalette.TEXT
     }
 }
