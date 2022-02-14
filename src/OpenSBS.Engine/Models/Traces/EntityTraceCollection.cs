@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using OpenSBS.Engine.Models.Entities;
 
@@ -6,11 +7,23 @@ namespace OpenSBS.Engine.Models.Traces
 {
     public class EntityTraceCollection : IEnumerable<EntityTrace>
     {
+        private readonly Random _randomizer;
+        private readonly SignatureGenerator _signatureGenerator;
         private readonly IDictionary<string, EntityTrace> _traces;
 
         public EntityTraceCollection()
         {
+            _randomizer = new Random();
+            _signatureGenerator = new SignatureGenerator(_randomizer);
             _traces = new Dictionary<string, EntityTrace>();
+        }
+
+        public void CompleteScansion(string entityId)
+        {
+            if (_traces.ContainsKey(entityId))
+            {
+                _traces[entityId].IncreaseScanLevel();
+            }
         }
 
         public EntityTrace Get(string entityId)
@@ -22,7 +35,11 @@ namespace OpenSBS.Engine.Models.Traces
         {
             if (!_traces.ContainsKey(target.Id))
             {
-                _traces[target.Id] = EntityTrace.ForEntity(target);
+                _traces[target.Id] = EntityTrace.ForEntity(
+                    target,
+                    $"X-{_randomizer.Next(1, 99999):00000}",
+                    _signatureGenerator.Generate()
+                );
             }
 
             _traces[target.Id].Update(owner, target);

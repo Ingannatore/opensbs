@@ -8,6 +8,7 @@
     SUCCESS: '#22cf22',
     MAIN: '#009999',
     SECONDARY: '#b66dff',
+    TERTIARY: '#ff6db6',
     FILLER: '#ffdf4d',
     TEXT: '#fff',
     HEADER: '#ffdf4d',

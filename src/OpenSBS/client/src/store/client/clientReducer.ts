@@ -15,16 +15,16 @@ const defaultState: ClientState = {
     selectedAmmo: null,
 };
 
-const existsTrace = (entity: Entity, trace: EntityTrace | null): boolean => {
+const findTrace = (entity: Entity, trace: EntityTrace | null): EntityTrace | null => {
     if (!trace) {
-        return false;
+        return null;
     }
 
     const sensors = entity.modules.find(
         (module: Partial<EntityModule>) => module.type === ModuleType.SENSORS
     ) as SensorsModule;
 
-    return sensors.traces.find(it => it.id === trace.id) !== undefined;
+    return sensors.traces.find(it => it.id === trace.id) ?? null;
 }
 
 const existsAmmo = (entity: Entity, ammo: Item | null): boolean => {
@@ -60,8 +60,8 @@ export default (state = defaultState, action: ClientAction) => {
         const entity = JSON.parse(action.payload);
         return {
             ...state,
-            selectedTarget: !existsTrace(entity, state.selectedTarget) ? null : state.selectedTarget,
-            selectedAmmo: !existsAmmo(entity, state.selectedAmmo) ? null : state.selectedAmmo
+            selectedTarget: findTrace(entity, state.selectedTarget),
+            selectedAmmo: existsAmmo(entity, state.selectedAmmo) ? state.selectedAmmo : null
         };
     }
 

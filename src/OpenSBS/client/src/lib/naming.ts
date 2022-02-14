@@ -21,6 +21,8 @@
                 return 'Container';
             case 'entity.wreck':
                 return 'Wreck';
+            case 'entity.unknown':
+                return 'Unknown';
             default:
                 return type;
         }

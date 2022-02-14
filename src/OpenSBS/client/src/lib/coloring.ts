@@ -3,7 +3,7 @@
 export default class Coloring {
     public static getReputationColor(value: number | null) {
         if (value === null) {
-            return ColorPalette.MUTE_LIGHT;
+            return ColorPalette.FILLER;
         }
         if (value < 0) {
             return ColorPalette.DANGER;

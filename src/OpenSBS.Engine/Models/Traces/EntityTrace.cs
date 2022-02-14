@@ -7,28 +7,35 @@ namespace OpenSBS.Engine.Models.Traces
     public class EntityTrace
     {
         public string Id { get; }
-        public int ScanLevel { get; }
-        public string Type { get; }
-        public string CallSign { get; }
+        public int ScanLevel { get; private set; }
+        public string[,] Signature { get; }
+        public string Type { get; private set; }
+        public string CallSign { get; private set; }
         public int? Reputation { get; private set; }
         public TraceSpatialData Spatial { get; }
         public TraceShieldData Shield { get; private set; }
 
-        public static EntityTrace ForEntity(Entity entity)
+        public static EntityTrace ForEntity(Entity entity, string initialCallSign, string[,] signature)
         {
-            return new EntityTrace(entity.Id, entity.Type, entity.CallSign);
+            return new EntityTrace(entity.Id, initialCallSign, signature);
         }
 
-        private EntityTrace(string id, string type, string callSign)
+        private EntityTrace(string id, string initialCallSign, string[,] signature)
         {
             Id = id;
             ScanLevel = 0;
-            Type = type;
-            CallSign = callSign;
+            Signature = signature;
+            Type = EntityType.Unknown;
+            CallSign = initialCallSign;
             Reputation = null;
 
             Spatial = new TraceSpatialData();
             Shield = null;
+        }
+
+        public void IncreaseScanLevel(int amount = 1)
+        {
+            ScanLevel += amount;
         }
 
         public bool IsOutOfRange(int range)
@@ -56,6 +63,8 @@ namespace OpenSBS.Engine.Models.Traces
                 Shield.Update(shieldModule);
             }
 
+            Type = target.Type;
+            CallSign = target.CallSign;
             Reputation = target.Reputation;
         }
     }

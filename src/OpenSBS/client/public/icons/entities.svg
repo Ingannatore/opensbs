@@ -37,4 +37,7 @@
         <path d="M 0 -6 L 6 0 L 0 6 L -6 0 Z" stroke="none"/>
         <path d="M -15 0 L 0 15 L 15 0" stroke-width="3" fill="none"/>
     </symbol>
+    <symbol id="entity.unknown" width="32" height="32" viewBox="-16 -16 32 32">
+        <circle cx="0" cy="0" r="6" stroke-width="2"/>
+    </symbol>
 </svg>

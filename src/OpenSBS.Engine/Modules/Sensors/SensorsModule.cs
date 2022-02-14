@@ -9,6 +9,8 @@ namespace OpenSBS.Engine.Modules.Sensors
 {
     public class SensorsModule : Module<SensorsModuleTemplate>
     {
+        private const string ScanCompletedAction = "scanCompleted";
+
         public EntityTraceCollection Traces { get; }
         public int Range => Template.Range;
 
@@ -27,7 +29,15 @@ namespace OpenSBS.Engine.Modules.Sensors
             return Traces.Get(entityId);
         }
 
-        public override void HandleAction(ClientAction action, Entity owner) { }
+        public override void HandleAction(ClientAction action, Entity owner)
+        {
+            switch (action.Type)
+            {
+                case ScanCompletedAction:
+                    Traces.CompleteScansion(action.PayloadTo<string>());
+                    break;
+            }
+        }
 
         public override void Update(TimeSpan deltaT, Entity owner, World world)
         {

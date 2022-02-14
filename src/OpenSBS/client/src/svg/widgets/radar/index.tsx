@@ -8,6 +8,7 @@ import DistancesOverlay from '../../commons/distancesOverlay';
 import SidesElement from '../../elements/sidesElement';
 import TracesOverlay from './tracesOverlay';
 import ColorPalette from '../../colorPalette';
+import GroupLabel from '../../elements/groupLabel';
 
 interface RadarWidgetProps {
     x: number,
@@ -55,16 +56,7 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
                 <ZoomControls x={770} y={950} zoom={this.state.zoom} onChangeZoom={this.setZoom}/>
 
                 <g transform="translate(10 950)">
-                    <text
-                        x="110" y="-24"
-                        fontSize="1rem" textAnchor="middle"
-                        fill={ColorPalette.HEADER}
-                    >OVERLAYS</text>
-                    <path
-                        d="M 50 -4 L 50 -12 L 170 -12 L 170 -4"
-                        stroke={ColorPalette.MUTE} strokeWidth="2"
-                        fill="none"
-                    />
+                    <GroupLabel x={110} y={-28} size={120}>OVERLAYS</GroupLabel>
                     <SwitchElement
                         x={0} y={0}
                         width={100} height={40} fontSize={1.5}

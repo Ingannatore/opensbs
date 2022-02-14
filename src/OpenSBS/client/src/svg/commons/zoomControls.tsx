@@ -2,6 +2,7 @@
 import SvgTransforms from '../../lib/svgTransforms';
 import SwitchElement from '../elements/switchElement';
 import ColorPalette from '../colorPalette';
+import GroupLabel from '../elements/groupLabel';
 
 interface ZoomControlsProps {
     x: number,
@@ -22,16 +23,7 @@ export default class ZoomControls extends React.Component<ZoomControlsProps, {}>
     public render() {
         return (
             <g transform={this.translation}>
-                <text
-                    x="110" y="-24"
-                    fontSize="1rem" textAnchor="middle"
-                    fill={ColorPalette.HEADER}
-                >ZOOM LEVEL</text>
-                <path
-                    d="M 20 -4 L 20 -12 L 200 -12 L 200 -4"
-                    stroke={ColorPalette.MUTE} strokeWidth="2"
-                    fill="none"
-                />
+                <GroupLabel x={110} y={-28} size={180}>ZOOM LEVEL</GroupLabel>
                 <line
                     x1="20" y1="20"
                     x2="200" y2="20"

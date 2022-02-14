@@ -12,5 +12,6 @@
         public const string Freighter = "entity.spaceship.freighter";
         public const string Container = "entity.container";
         public const string Wreck = "entity.wreck";
+        public const string Unknown = "entity.unknown";
     }
 }
