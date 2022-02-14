@@ -1,22 +1,23 @@
 ﻿import * as React from 'react';
-import SvgTransforms from '../../lib/svgTransforms';
-import ColorPalette from '../colorPalette';
+import SvgTransforms from '../../../lib/svgTransforms';
+import ColorPalette from '../../colorPalette';
 
-interface SidesElementProps {
+interface SidesOverlayProps {
     x: number,
     y: number,
     r: number,
     rotation: number,
 }
 
-export default class SidesElement extends React.Component<SidesElementProps, {}> {
+export default class SidesOverlay extends React.Component<SidesOverlayProps, {}> {
     private readonly translation: string;
 
     public static defaultProps = {
+        r: 460,
         rotation: 0,
     };
 
-    constructor(props: SidesElementProps) {
+    constructor(props: SidesOverlayProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);

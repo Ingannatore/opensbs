@@ -1,33 +1,25 @@
 ﻿import * as React from 'react';
 import {connect} from 'react-redux';
-import SensorsModule from '../../../modules/sensors/sensorsModule';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
+import Coords from '../../../lib/coords';
 import SvgTransforms from '../../../lib/svgTransforms';
 import EntityTrace from '../../../models/entityTrace';
 import TraceElement from '../../elements/traceElement';
-import ClientSelectors from '../../../store/client/clientSelectors';
 import ClientActions from '../../../store/client/clientActions';
-import Coords from '../../../lib/coords';
-import SensorsService from '../../../modules/sensors/sensorsService';
+import ClientSelectors from '../../../store/client/clientSelectors';
 
 interface TracesOverlayProps {
     x: number,
     y: number,
     r: number,
-    scale: number,
-    range: number | undefined,
+    range: number,
     target: EntityTrace | null,
+    traces: EntityTrace[],
     bearing: number,
-    sensors: SensorsModule | undefined,
     dispatch: any,
 }
 
 class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
     private readonly translation: string;
-
-    public static defaultProps = {
-        range: undefined,
-    };
 
     constructor(props: TracesOverlayProps) {
         super(props);
@@ -37,17 +29,10 @@ class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
     }
 
     public render() {
-        if (!this.props.sensors) {
-            return null;
-        }
-
         const bearingRotation = SvgTransforms.rotate(-this.props.bearing);
+        const scale = this.props.r / this.props.range;
 
-        const maxRange = this.props.range ? this.props.range : this.props.sensors.range;
-        const range = maxRange * this.props.scale;
-        const scale = this.props.r / range;
-
-        const traces = SensorsService.getTraces(this.props.sensors, range).map(
+        const traces = this.props.traces.map(
             (trace: EntityTrace) => this.renderTrace(trace, scale)
         );
 
@@ -85,8 +70,6 @@ class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
 const mapStateToProps = (state: any) => {
     return {
         target: ClientSelectors.getSelectedTarget(state),
-        bearing: SpaceshipSelectors.getBearing(state),
-        sensors: SpaceshipSelectors.getSensors(state),
     };
 };
 

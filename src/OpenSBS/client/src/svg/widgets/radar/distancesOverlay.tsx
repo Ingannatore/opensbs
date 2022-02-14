@@ -1,26 +1,21 @@
 ﻿import * as React from 'react';
-import {connect} from 'react-redux';
-import SvgTransforms from '../../lib/svgTransforms';
-import SpaceshipSelectors from '../../store/spaceship/spaceshipSelectors';
-import SensorsModule from '../../modules/sensors/sensorsModule';
-import ColorPalette from '../colorPalette';
+import SvgTransforms from '../../../lib/svgTransforms';
+import ColorPalette from '../../colorPalette';
 
 interface DistancesOverlayProps {
     x: number,
     y: number,
     r: number,
-    scale: number,
-    range: number | undefined,
+    range: number,
     numberOfMarkers: number,
-    sensors: SensorsModule | undefined,
 }
 
-class DistancesOverlay extends React.Component<DistancesOverlayProps, {}> {
+export default class DistancesOverlay extends React.Component<DistancesOverlayProps, {}> {
     private readonly radiusIncrement: number;
     private readonly translation: string;
 
     public static defaultProps = {
-        range: undefined,
+        r: 460,
         numberOfMarkers: 5,
     };
 
@@ -32,12 +27,7 @@ class DistancesOverlay extends React.Component<DistancesOverlayProps, {}> {
     }
 
     public render() {
-        if (!this.props.sensors) {
-            return null;
-        }
-
-        const maxRange = this.props.range ? this.props.range : this.props.sensors.range;
-        const rangeIncrement = this.props.scale * maxRange / this.props.numberOfMarkers;
+        const rangeIncrement = this.props.range / this.props.numberOfMarkers;
         const markers = Array.from(
             {length: this.props.numberOfMarkers},
             (value, key) => this.renderMarker(key + 1, rangeIncrement)
@@ -53,7 +43,6 @@ class DistancesOverlay extends React.Component<DistancesOverlayProps, {}> {
     private renderMarker(index: number, rangeIncrement: number) {
         const radius = this.radiusIncrement * index;
         const range = rangeIncrement * index;
-        const value = range < 10000 ? `${range}` : `${range / 1000}Km`;
         return (
             <g key={'distance-marker-' + radius}>
                 <circle
@@ -65,16 +54,8 @@ class DistancesOverlay extends React.Component<DistancesOverlayProps, {}> {
                     x="0" y={16 - radius}
                     fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.MUTE_LIGHT}
-                >{value}</text>
+                >{range}</text>
             </g>
         );
     }
 }
-
-const mapStateToProps = (state: any) => {
-    return {
-        sensors: SpaceshipSelectors.getSensors(state),
-    };
-};
-
-export default connect(mapStateToProps)(DistancesOverlay);
