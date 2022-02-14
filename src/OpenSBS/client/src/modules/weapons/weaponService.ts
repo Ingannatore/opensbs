@@ -13,11 +13,15 @@ export default class WeaponService {
     }
 
     public static isFireButtonEnabled(weapon: WeaponModule, selectedTarget: EntityTrace | null): boolean {
+        if (weapon.target != null) {
+            return true;
+        }
+
         if (!weapon.magazine.ammoId) {
             return false;
         }
 
-        return weapon.target != null || selectedTarget != null;
+        return selectedTarget != null && selectedTarget.scanLevel > 0;
     }
 
     public static isReloadButtonEnabled(weapon: WeaponModule, selectedAmmo: Item | null): boolean {
