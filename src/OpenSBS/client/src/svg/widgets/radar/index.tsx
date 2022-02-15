@@ -6,14 +6,15 @@ import PanelElement from '../../elements/panelElement';
 import ShipElement from '../../elements/shipElement';
 import SwitchElement from '../../elements/switchElement';
 import SensorsModule from '../../../modules/sensors/sensorsModule';
+import SensorsService from '../../../modules/sensors/sensorsService';
 import CompassOverlay from './compassOverlay';
 import DistancesOverlay from './distancesOverlay';
+import RangeControls from './rangeControls';
 import SidesOverlay from './sidesOverlay';
 import TracesOverlay from './tracesOverlay';
 import ClientSelectors from '../../../store/client/clientSelectors';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import ColorPalette from '../../colorPalette';
-import SensorsService from '../../../modules/sensors/sensorsService';
 
 interface RadarWidgetProps {
     x: number,
@@ -25,8 +26,8 @@ interface RadarWidgetProps {
 interface RadarWidgetState {
     range: number,
     zoom: number,
-    showDistancesOverlay: boolean,
-    showSidesOverlay: boolean,
+    isDistancesOverlayVisible: boolean,
+    isSidesOverlayVisible: boolean,
 }
 
 class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
@@ -35,8 +36,8 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
         this.state = {
             range: 10000,
             zoom: 1,
-            showDistancesOverlay: true,
-            showSidesOverlay: true,
+            isDistancesOverlayVisible: true,
+            isSidesOverlayVisible: true,
         };
 
         this.setRange = this.setRange.bind(this);
@@ -51,64 +52,48 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
         }
 
         const effectiveRange = this.state.range * this.state.zoom;
-        const maximumRange = this.props.sensors.range;
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={1000} height={1000}>
-                <CompassOverlay x={500} y={500} r={460} rotation={this.props.bearing}/>
+                <RangeControls
+                    x={10} y={10}
+                    range={this.state.range} maximumRange={this.props.sensors.range}
+                    onChange={this.setRange}
+                />
 
-                {
-                    this.state.showDistancesOverlay &&
-                    <DistancesOverlay x={500} y={500} range={effectiveRange}/>
-                }
-                {
-                    this.state.showSidesOverlay &&
-                    <SidesOverlay x={500} y={500}/>
-                }
-
-                <g transform="translate(20 20)">
-                    <line
-                        x1="20" y1="20"
-                        x2="200" y2="20"
-                        stroke={ColorPalette.SECONDARY} strokeWidth="2"
+                <g transform="translate(500, 500)">
+                    <CompassOverlay rotation={this.props.bearing}/>
+                    <DistancesOverlay
+                        range={effectiveRange}
+                        visible={this.state.isDistancesOverlayVisible}
                     />
-                    <SwitchElement
-                        x={0} y={0}
-                        width={100} height={40}
-                        fontSize={1.5} color={ColorPalette.SECONDARY}
-                        onClick={() => this.setRange(10000)}
-                        toggled={this.state.range <= 10000}
-                    >SHORT</SwitchElement>
-                    <SwitchElement
-                        x={120} y={0}
-                        width={100} height={40}
-                        fontSize={1.5} color={ColorPalette.SECONDARY}
-                        onClick={() => this.setRange(maximumRange)}
-                        toggled={this.state.range > 10000}
-                    >LONG</SwitchElement>
-                    <GroupLabel x={110} y={68} size={120} mirrored={true}>RANGE</GroupLabel>
+                    <SidesOverlay visible={this.state.isSidesOverlayVisible}/>
+                    <TracesOverlay
+                        range={effectiveRange}
+                        bearing={this.props.bearing}
+                        traces={SensorsService.getTraces(this.props.sensors, effectiveRange)}
+                    />
+                    <ShipElement/>
                 </g>
 
-                <ShipElement x={500} y={500}/>
-                <TracesOverlay
-                    x={500} y={500} r={460}
-                    range={effectiveRange} bearing={this.props.bearing}
-                    traces={SensorsService.getTraces(this.props.sensors, effectiveRange)}
+                <ZoomControls
+                    x={770} y={950}
+                    zoom={this.state.zoom}
+                    onChangeZoom={this.setZoom}
                 />
-                <ZoomControls x={760} y={940} zoom={this.state.zoom} onChangeZoom={this.setZoom}/>
 
-                <g transform="translate(20 940)">
+                <g transform="translate(10 950)">
                     <GroupLabel x={110} y={-28} size={120}>OVERLAYS</GroupLabel>
                     <SwitchElement
                         x={0} y={0}
                         width={100} height={40} fontSize={1.5}
                         onClick={this.toggleDistancesOverlay}
-                        toggled={this.state.showDistancesOverlay}
+                        toggled={this.state.isDistancesOverlayVisible}
                     >RANGES</SwitchElement>
                     <SwitchElement
                         x={120} y={0}
                         width={100} height={40} fontSize={1.5}
                         onClick={this.toggleSidesOverlay}
-                        toggled={this.state.showSidesOverlay}
+                        toggled={this.state.isSidesOverlayVisible}
                     >SIDES</SwitchElement>
                 </g>
 
@@ -138,14 +123,14 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
     private toggleDistancesOverlay() {
         this.setState({
             ...this.state,
-            showDistancesOverlay: !this.state.showDistancesOverlay
+            isDistancesOverlayVisible: !this.state.isDistancesOverlayVisible
         });
     }
 
     private toggleSidesOverlay() {
         this.setState({
             ...this.state,
-            showSidesOverlay: !this.state.showSidesOverlay
+            isSidesOverlayVisible: !this.state.isSidesOverlayVisible
         });
     }
 }

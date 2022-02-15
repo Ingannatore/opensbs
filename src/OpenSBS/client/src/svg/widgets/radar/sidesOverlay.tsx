@@ -7,14 +7,18 @@ interface SidesOverlayProps {
     y: number,
     r: number,
     rotation: number,
+    visible: boolean,
 }
 
 export default class SidesOverlay extends React.Component<SidesOverlayProps, {}> {
     private readonly translation: string;
 
     public static defaultProps = {
+        x: 0,
+        y: 0,
         r: 460,
         rotation: 0,
+        visible: true,
     };
 
     constructor(props: SidesOverlayProps) {
@@ -24,6 +28,10 @@ export default class SidesOverlay extends React.Component<SidesOverlayProps, {}>
     }
 
     public render() {
+        if (!this.props.visible) {
+            return null;
+        }
+
         return (
             <g transform={this.translation}>
                 <g transform={SvgTransforms.rotate(this.props.rotation)}>

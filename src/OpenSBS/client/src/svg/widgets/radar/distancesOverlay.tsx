@@ -7,6 +7,7 @@ interface DistancesOverlayProps {
     y: number,
     r: number,
     range: number,
+    visible: boolean,
     numberOfMarkers: number,
 }
 
@@ -15,7 +16,10 @@ export default class DistancesOverlay extends React.Component<DistancesOverlayPr
     private readonly translation: string;
 
     public static defaultProps = {
+        x: 0,
+        y: 0,
         r: 460,
+        visible: true,
         numberOfMarkers: 5,
     };
 
@@ -27,6 +31,10 @@ export default class DistancesOverlay extends React.Component<DistancesOverlayPr
     }
 
     public render() {
+        if (!this.props.visible) {
+            return null;
+        }
+
         const rangeIncrement = this.props.range / this.props.numberOfMarkers;
         const markers = Array.from(
             {length: this.props.numberOfMarkers},

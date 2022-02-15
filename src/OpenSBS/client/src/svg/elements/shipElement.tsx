@@ -9,6 +9,8 @@ interface ShipElementProps {
 
 export default class ShipElement extends React.Component<ShipElementProps, {}> {
     public static defaultProps = {
+        x: 0,
+        y: 0,
         bearing: 0,
     };
 

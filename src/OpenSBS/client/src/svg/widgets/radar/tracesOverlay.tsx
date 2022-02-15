@@ -21,6 +21,12 @@ interface TracesOverlayProps {
 class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
     private readonly translation: string;
 
+    public static defaultProps = {
+        x: 0,
+        y: 0,
+        r: 460,
+    };
+
     constructor(props: TracesOverlayProps) {
         super(props);
 

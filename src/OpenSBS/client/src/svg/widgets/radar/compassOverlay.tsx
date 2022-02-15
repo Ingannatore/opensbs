@@ -13,6 +13,12 @@ export default class CompassOverlay extends React.Component<CompassOverlayProps,
     private readonly translation: string;
     private readonly markersDegrees: number[];
 
+    public static defaultProps = {
+        x: 0,
+        y: 0,
+        r: 460,
+    };
+
     constructor(props: CompassOverlayProps) {
         super(props);
 

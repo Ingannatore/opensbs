@@ -48,7 +48,7 @@ export default class TraceElement extends React.Component<TraceElementProps, {}>
                         <use
                             href="/images/icons.svg#brackets"
                             x="-50" y="-18"
-                            stroke={ColorPalette.TEXT}
+                            stroke={ColorPalette.FILLER}
                         />
                     }
                 </g>
