@@ -13,6 +13,7 @@ const defaultState: ClientState = {
     radarScale: 1,
     selectedTarget: null,
     selectedAmmo: null,
+    selectedSector: {x: 0, y: 0},
 };
 
 const findTrace = (entity: Entity, trace: EntityTrace | null): EntityTrace | null => {
@@ -54,6 +55,10 @@ export default (state = defaultState, action: ClientAction) => {
 
     if (action.type === ClientActions.Types.RESET_AMMO) {
         return {...state, selectedAmmo: null};
+    }
+
+    if (action.type === ClientActions.Types.SET_SECTOR && action.payload) {
+        return {...state, selectedSector: action.payload};
     }
 
     if (action.type === SpaceshipActions.Types.REFRESH && action.payload) {

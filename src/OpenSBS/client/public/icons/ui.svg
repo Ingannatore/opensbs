@@ -1,0 +1,8 @@
+﻿<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="selector-rect" width="84" height="84" viewBox="-42 -42 84 84">
+        <path
+            d="M -42 -21 L -42 -42 L -21 -42 M 21 -42 L 42 -42 L 42 -21 M 42 21 L 42 42 L 21 42 M -21 42 L -42 42 L -42 21"
+            fill="none"
+        />
+    </symbol>
+</svg>

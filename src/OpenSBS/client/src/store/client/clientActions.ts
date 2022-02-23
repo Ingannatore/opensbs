@@ -1,6 +1,7 @@
 ﻿import ClientAction from '../clientAction';
 import EntityTrace from '../../models/entityTrace';
 import Item from '../../models/item';
+import Vector2 from '../../models/Vector2';
 
 const Types = {
     SET_RADAR_SCALE: 'client/radar/scale/set',
@@ -10,6 +11,7 @@ const Types = {
     RESET_TARGET: 'client/target/reset',
     SET_AMMO: 'client/ammo/set',
     RESET_AMMO: 'client/ammo/reset',
+    SET_SECTOR: 'client/sector/set',
 };
 
 const setRadarScale = (value: number): ClientAction => ({
@@ -42,6 +44,12 @@ const resetAmmo = (): ClientAction => ({
     meta: null,
 });
 
+const setSector = (value: Vector2): ClientAction => ({
+    type: Types.SET_SECTOR,
+    payload: value,
+    meta: null,
+});
+
 export default {
     Types,
     setRadarScale,
@@ -49,4 +57,5 @@ export default {
     resetTarget,
     setAmmo,
     resetAmmo,
+    setSector,
 };

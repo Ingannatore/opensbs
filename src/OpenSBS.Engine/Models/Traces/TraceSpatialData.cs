@@ -10,6 +10,7 @@ namespace OpenSBS.Engine.Models.Traces
     public class TraceSpatialData
     {
         public Vector3 Position { get; protected set; }
+        public Vector2 Sector { get; protected set; }
         public double Bearing { get; protected set; }
         public int Distance { get; protected set; }
         public int Speed { get; protected set; }
@@ -31,6 +32,7 @@ namespace OpenSBS.Engine.Models.Traces
         public void Update(Entity owner, Entity target)
         {
             Position = target.Position;
+            Sector = Vectors.ToSector(target.Position);
             Bearing = target.Bearing;
             Distance = (int)Math.Round(Vector3.Distance(owner.Position, target.Position));
             Speed = (int)Math.Round(target.LinearSpeed);
