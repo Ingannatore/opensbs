@@ -7,14 +7,14 @@ import Vector3 from '../../../models/vector3';
 import SensorsModule from '../../../modules/sensors/sensorsModule';
 import ClickableOverlay from '../../elements/clickableOverlay';
 import PanelElement from '../../elements/panelElement';
+import SwitchElement from '../../elements/switchElement';
 import GridOverlay from './gridOverlay';
 import SectorOverlay from './sectorOverlay';
 import TracesOverlay from './tracesOverlay';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import ColorPalette from '../../colorPalette';
-import ClientActions from '../../../store/client/clientActions';
+import {selectSector} from '../../../store/client/clientSlice';
 import ClientSelectors from '../../../store/client/clientSelectors';
-import SwitchElement from '../../elements/switchElement';
+import ColorPalette from '../../colorPalette';
 
 interface SectorsWidgetProps {
     x: number,
@@ -122,7 +122,7 @@ class SectorsWidget extends React.Component<SectorsWidgetProps, SectorsWidgetSta
         }
 
         if (sector.x !== this.props.selectedSector.x || sector.y !== this.props.selectedSector.y) {
-            this.props.dispatch(ClientActions.setSector(sector));
+            this.props.dispatch(selectSector(sector));
         }
     }
 

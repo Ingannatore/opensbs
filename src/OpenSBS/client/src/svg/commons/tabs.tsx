@@ -1,10 +1,10 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svgTransforms';
 import TabButton from '../elements/tabButton';
+import BaseComponentProps from "../../models/baseComponentProps";
 import ColorPalette from '../colorPalette';
-import TabPage from './tabPage';
 
-interface TabsProps {
+interface TabsProps extends BaseComponentProps{
     x: number,
     y: number,
     width: number,
@@ -34,8 +34,9 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
 
         const buttons = React.Children.map(this.props.children,
             (child, index) => {
-                const tabPage = (child as TabPage);
-                return this.renderButton(tabPage.props.label, tabPage.props.enabled, index)
+                if (!React.isValidElement(child)) return
+
+                return this.renderButton(child.props.label, child.props.enabled, index)
             }
         );
 

@@ -1,19 +1,21 @@
 import * as React from 'react';
-import {render} from 'react-dom';
-import {Provider} from 'react-redux';
-import {applyMiddleware, createStore} from 'redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
 import * as signalR from '@microsoft/signalr';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import rootReducer from './store/reducers';
+import {configureStore} from "@reduxjs/toolkit";
+import {createRoot} from 'react-dom/client';
+import {Provider} from 'react-redux';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import IncomingActionMiddleware from './store/middlewares/incomingActionMiddleware';
 import OutgoingActionMiddleware from './store/middlewares/outgoingActionMiddleware';
+import clientReducer from "./store/client/clientSlice";
+import serverReducer from "./store/server/serverSlice";
+import spaceshipReducer from "./store/spaceship/spaceshipSlice";
 import HomePage from './pages/home';
 import JoinPage from './pages/join';
 import NavigationTerminal from './pages/terminals/navigationTerminal';
 import TacticalTerminal from './pages/terminals/tacticalTerminal';
 import IntelligenceTerminal from './pages/terminals/intelligenceTerminal';
 import CartographyTerminal from './pages/terminals/cartographyTerminal';
+import ClientAction from "./store/clientAction";
 import './index.css';
 
 const hub = new signalR.HubConnectionBuilder().withUrl('/ws').build();
@@ -25,24 +27,34 @@ hub.start().then(() => {
     return console.error(err.toString());
 });
 
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(
-        IncomingActionMiddleware(hub),
-        OutgoingActionMiddleware(hub)
-    ))
-);
+const store = configureStore({
+    reducer: {
+        client: clientReducer,
+        server: serverReducer,
+        spaceship: spaceshipReducer,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+        .concat(IncomingActionMiddleware(hub))
+        .concat(OutgoingActionMiddleware(hub)),
+});
 
-render(
+hub.on('OnServerAction', (data: ClientAction) => {
+    return store.dispatch(data);
+});
+
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
     <Provider store={store}>
-        <Router>
-            <Route exact path="/" component={HomePage}/>
-            <Route exact path="/join" component={JoinPage}/>
-            <Route exact path="/terminal/navigation" component={NavigationTerminal}/>
-            <Route exact path="/terminal/tactical" component={TacticalTerminal}/>
-            <Route exact path="/terminal/intelligence" component={IntelligenceTerminal}/>
-            <Route exact path="/terminal/cartography" component={CartographyTerminal}/>
-        </Router>
-    </Provider>,
-    document.getElementById('root')
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<HomePage/>}/>
+                <Route path="/join" element={<JoinPage/>}/>
+                <Route path="/terminal/navigation" element={<NavigationTerminal/>}/>
+                <Route path="/terminal/tactical" element={<TacticalTerminal/>}/>
+                <Route path="/terminal/intelligence" element={<IntelligenceTerminal/>}/>
+                <Route path="/terminal/cartography" element={<CartographyTerminal/>}/>
+            </Routes>
+        </BrowserRouter>
+    </Provider>
 );

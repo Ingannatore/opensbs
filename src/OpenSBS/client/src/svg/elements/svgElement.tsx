@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
+import BaseComponentProps from "../../models/baseComponentProps";
 
-export default class SvgElement extends React.Component<{}, {}> {
+export default class SvgElement extends React.Component<BaseComponentProps, {}> {
     public render() {
         return (
             <svg width="1920" height="1080" viewBox="0 0 1920 1080" version="1.1" xmlns="http://www.w3.org/2000/svg">

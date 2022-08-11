@@ -1,9 +1,5 @@
 ﻿import ClientAction from '../clientAction';
 
-const Types = {
-    REFRESH: 'spaceship/refresh',
-};
-
 const sendModuleAction = (entityId: string, moduleId: string, type: string, payload: any): ClientAction => ({
     type: type,
     payload: payload,
@@ -11,6 +7,5 @@ const sendModuleAction = (entityId: string, moduleId: string, type: string, payl
 });
 
 export default {
-    Types,
     sendModuleAction,
 };

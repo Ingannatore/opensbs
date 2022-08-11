@@ -4,7 +4,7 @@ import SvgTransforms from '../../../lib/svgTransforms';
 import PanelElement from '../../elements/panelElement';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import ItemStack from '../../../models/itemStack';
-import ClientActions from '../../../store/client/clientActions';
+import {selectAmmo, resetAmmo} from '../../../store/client/clientSlice';
 import ClientSelectors from '../../../store/client/clientSelectors';
 import Item from '../../../models/item';
 import ItemStorage from '../../../models/itemStorage';
@@ -81,9 +81,9 @@ class AmmoWidget extends React.Component<AmmoWidgetProps, {}> {
 
     private onAmmoClick(ammo: Item) {
         if (ammo.id === this.props.selectedAmmo?.id) {
-            this.props.dispatch(ClientActions.resetAmmo());
+            this.props.dispatch(resetAmmo());
         } else {
-            this.props.dispatch(ClientActions.setAmmo(ammo));
+            this.props.dispatch(selectAmmo(ammo));
         }
     }
 }

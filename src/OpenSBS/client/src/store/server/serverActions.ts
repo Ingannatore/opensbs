@@ -3,7 +3,6 @@
 const Types = {
     START_MISSION: 'server/init',
     PAUSE_MISSION: 'server/pause',
-    REFRESH_SERVER_STATE: 'server/refresh'
 };
 
 const startMission = (missionId: string, spaceshipId: string, spaceshipName: string, spaceshipCallsign: string): ClientAction => ({

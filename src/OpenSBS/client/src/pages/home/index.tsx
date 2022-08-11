@@ -1,12 +1,31 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {Navigate} from "react-router-dom";
 import DataEntryInfo from '../../models/dataEntryInfo';
 import ServerActions from '../../store/server/serverActions';
-import HomePageProps from './homePageProps';
-import HomePageState from './homePageState';
+
+interface HomePageProps {
+    isReady: boolean,
+    missions: DataEntryInfo[],
+    spaceships: DataEntryInfo[],
+    dispatch: any,
+}
+
+interface HomePageState {
+    mission: string,
+    spaceship: string,
+    spaceshipName: string,
+    spaceshipCallsign: string,
+    isValid: boolean,
+}
 
 class HomePage extends React.Component<HomePageProps, HomePageState> {
+    public static defaultProps = {
+        isReady: false,
+        missions: [],
+        spaceships: [],
+    };
+
     constructor(props: HomePageProps) {
         super(props);
         this.state = {
@@ -14,6 +33,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
             spaceship: '',
             spaceshipName: '',
             spaceshipCallsign: '',
+            isValid: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -21,12 +41,12 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     }
 
     public render() {
-        const missions = this.props.missions.map((info) => this.renderCheckbox(
+        const missions = this.props.missions.map(info => this.renderCheckbox(
             'mission',
             info,
             this.state.mission === info.guid
         ));
-        const spaceships = this.props.spaceships.map((info) => this.renderCheckbox(
+        const spaceships = this.props.spaceships.map(info => this.renderCheckbox(
             'spaceship',
             info,
             this.state.spaceship === info.guid
@@ -38,6 +58,14 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
                     <h2>Loading...</h2>
                 </div>
             );
+        }
+
+        if (this.state.isValid) {
+            this.startMission();
+
+            return (
+                <Navigate to="/join" replace={true} />
+            )
         }
 
         return (
@@ -108,20 +136,10 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     }
 
     private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        if (this.isStateValid()) {
-            this.props.dispatch(
-                ServerActions.startMission(
-                    this.state.mission,
-                    this.state.spaceship,
-                    this.state.spaceshipName,
-                    this.state.spaceshipCallsign,
-                )
-            );
-
-            this.props.history.push('/join');
-        }
-
-        event.preventDefault();
+        this.setState({
+            ...this.state,
+            isValid: this.isStateValid(), 
+        });
     }
 
     private isStateValid(): boolean {
@@ -131,6 +149,17 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         if (!this.state.spaceshipCallsign) return false;
 
         return true;
+    }
+
+    private startMission() {
+        this.props.dispatch(
+            ServerActions.startMission(
+                this.state.mission,
+                this.state.spaceship,
+                this.state.spaceshipName,
+                this.state.spaceshipCallsign,
+            )
+        );
     }
 }
 
@@ -142,4 +171,4 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps, null)(HomePage));
+export default connect(mapStateToProps)(HomePage);

@@ -2,8 +2,9 @@
 import SvgTransforms from '../../lib/svgTransforms';
 import ValueElement from './valueElement';
 import ColorPalette from '../colorPalette';
+import BaseComponentProps from "../../models/baseComponentProps";
 
-interface GaugeElementProps {
+interface GaugeElementProps extends BaseComponentProps {
     x: number,
     y: number,
     fill: string,

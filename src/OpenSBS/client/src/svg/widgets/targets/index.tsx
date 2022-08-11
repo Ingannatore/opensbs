@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import SvgTransforms from '../../../lib/svgTransforms';
 import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
 import PanelElement from '../../elements/panelElement';
+import {selectTarget, resetTarget} from '../../../store/client/clientSlice';
 import ClientSelectors from '../../../store/client/clientSelectors';
-import ClientActions from '../../../store/client/clientActions';
 import EntityTrace from '../../../models/entityTrace';
 import SensorsModule from '../../../modules/sensors/sensorsModule';
 import SensorsService from '../../../modules/sensors/sensorsService';
@@ -40,9 +40,9 @@ class TargetsWidget extends React.Component<TargetsWidgetProps, {}> {
 
     public render() {
         const targets = SensorsService
-        .getTraces(this.props.sensors, this.getRangeLimit())
-        .slice(0, this.props.maxItems)
-        .map((trace: EntityTrace, index: number) => this.renderTargetRow(trace, index));
+            .getTraces(this.props.sensors, this.getRangeLimit())
+            .slice(0, this.props.maxItems)
+            .map((trace: EntityTrace, index: number) => this.renderTargetRow(trace, index));
 
         return (
             <PanelElement
@@ -54,22 +54,26 @@ class TargetsWidget extends React.Component<TargetsWidgetProps, {}> {
                     x="50" y="15"
                     fontSize="1rem" textAnchor="start"
                     fill={ColorPalette.HEADER}
-                >CALLSIGN</text>
+                >CALLSIGN
+                </text>
                 <text
                     x="190" y="15"
                     fontSize="1rem" textAnchor="middle"
                     fill={ColorPalette.HEADER}
-                >DIR</text>
+                >DIR
+                </text>
                 <text
                     x="320" y="15"
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.HEADER}
-                >DISTANCE</text>
+                >DISTANCE
+                </text>
                 <text
                     x="430" y="15"
                     fontSize="1rem" textAnchor="end"
                     fill={ColorPalette.HEADER}
-                >SPEED</text>
+                >SPEED
+                </text>
                 {targets}
                 <line
                     x1="40" y1="0"
@@ -118,9 +122,9 @@ class TargetsWidget extends React.Component<TargetsWidgetProps, {}> {
 
     private onTargetSelect(trace: EntityTrace) {
         if (trace.id === this.props.target?.id) {
-            this.props.dispatch(ClientActions.resetTarget());
+            this.props.dispatch(resetTarget());
         } else {
-            this.props.dispatch(ClientActions.setTarget(trace));
+            this.props.dispatch(selectTarget(trace));
         }
     }
 }

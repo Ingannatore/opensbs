@@ -1,8 +1,9 @@
 ﻿import * as React from 'react';
 import SvgTransforms from '../../lib/svgTransforms';
 import ColorPalette from '../colorPalette';
+import BaseComponentProps from "../../models/baseComponentProps";
 
-interface PanelHeaderProps {
+interface PanelHeaderProps extends BaseComponentProps {
     x: number,
     y: number,
     subtext: string | null,

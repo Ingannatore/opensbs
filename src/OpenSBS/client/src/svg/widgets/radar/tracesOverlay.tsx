@@ -4,7 +4,7 @@ import Coords from '../../../lib/coords';
 import SvgTransforms from '../../../lib/svgTransforms';
 import EntityTrace from '../../../models/entityTrace';
 import TraceElement from '../../elements/traceElement';
-import ClientActions from '../../../store/client/clientActions';
+import {selectTarget, resetTarget} from '../../../store/client/clientSlice';
 import ClientSelectors from '../../../store/client/clientSelectors';
 
 interface TracesOverlayProps {
@@ -66,9 +66,9 @@ class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
 
     private onTraceClick(trace: EntityTrace) {
         if (trace.id === this.props.target?.id) {
-            this.props.dispatch(ClientActions.resetTarget());
+            this.props.dispatch(resetTarget());
         } else {
-            this.props.dispatch(ClientActions.setTarget(trace));
+            this.props.dispatch(selectTarget(trace));
         }
     }
 }
