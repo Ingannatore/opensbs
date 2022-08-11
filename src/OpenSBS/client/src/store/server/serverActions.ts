@@ -1,12 +1,12 @@
-import ClientAction from '../clientAction';
+import ClientAction from 'store/clientAction';
 
-const Types = {
+const serverActionTypes = {
     START_MISSION: 'server/init',
     PAUSE_MISSION: 'server/pause',
 };
 
 const startMission = (missionId: string, spaceshipId: string, spaceshipName: string, spaceshipCallsign: string): ClientAction => ({
-    type: Types.START_MISSION,
+    type: serverActionTypes.START_MISSION,
     payload: {
         mission: missionId,
         spaceship: spaceshipId,
@@ -17,7 +17,7 @@ const startMission = (missionId: string, spaceshipId: string, spaceshipName: str
 });
 
 const pauseMission = (): ClientAction => ({
-    type: Types.PAUSE_MISSION,
+    type: serverActionTypes.PAUSE_MISSION,
     payload: null,
     meta: {socket: true, entity: null, module: null}
 });

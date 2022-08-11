@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Icons from '../../../lib/icons';
-import SvgTransforms from '../../../lib/svgTransforms';
-import Item from '../../../models/item';
-import ColorPalette from '../../colorPalette';
+import Icons from 'lib/icons';
+import SvgTransforms from 'lib/svgTransforms';
+import Item from 'models/item';
+import ColorPalette from 'svg/colorPalette';
 
 interface AmmoRowElementProps {
     x: number,

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import EntityTrace from '../../../models/entityTrace';
-import Naming from '../../../lib/naming';
-import Icons from '../../../lib/icons';
-import PanelElement from '../../elements/panelElement';
-import PanelHeader from '../../elements/panelHeader';
-import ScanningData from './scanningData';
+import Icons from 'lib/icons';
+import Naming from 'lib/naming';
+import EntityTrace from 'models/entityTrace';
+import PanelElement from 'svg/elements/panelElement';
+import PanelHeader from 'svg/elements/panelHeader';
+import ScanningData from 'svg/widgets/traceScan/scanningData';
 
 interface TraceScanWidgetProps {
     x: number,

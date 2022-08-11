@@ -1,6 +1,6 @@
-import Entity from '../models/entity';
-import ClientState from './client/clientState';
-import ServerState from './server/serverState';
+import Entity from 'models/entity';
+import ClientState from 'store/client/clientState';
+import ServerState from 'store/server/serverState';
 
 export default interface State {
     spaceship: Entity,

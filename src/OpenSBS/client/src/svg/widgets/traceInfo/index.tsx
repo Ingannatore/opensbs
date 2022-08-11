@@ -1,13 +1,13 @@
 import * as React from 'react';
-import EntityTrace from '../../../models/entityTrace';
-import Naming from '../../../lib/naming';
-import Icons from '../../../lib/icons';
-import PanelElement from '../../elements/panelElement';
-import PanelHeader from '../../elements/panelHeader';
-import ShieldData from './shieldData';
-import SpatialData from './spatialData';
-import ReputationData from './reputationData';
-import ColorPalette from '../../colorPalette';
+import Icons from 'lib/icons';
+import Naming from 'lib/naming';
+import EntityTrace from 'models/entityTrace';
+import ColorPalette from 'svg/colorPalette';
+import PanelElement from 'svg/elements/panelElement';
+import PanelHeader from 'svg/elements/panelHeader';
+import ReputationData from 'svg/widgets/traceInfo/reputationData';
+import ShieldData from 'svg/widgets/traceInfo/shieldData';
+import SpatialData from 'svg/widgets/traceInfo/spatialData';
 
 interface TraceInfoWidgetProps {
     x: number,

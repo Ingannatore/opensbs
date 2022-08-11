@@ -1,7 +1,7 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import ThrottleSliderElement from './throttleSliderElement';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import ColorPalette from 'svg/colorPalette';
+import ThrottleSliderElement from 'svg/widgets/engine/throttleSliderElement';
 
 interface ThrottleElementProps {
     x: number,

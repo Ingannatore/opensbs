@@ -1,6 +1,6 @@
-import ShieldSector from './shieldSector';
-import ShieldModule from './shieldModule';
-import EntitySide from '../../models/entitySide';
+import EntitySide from 'models/entitySide';
+import ShieldSector from 'modules/shields/shieldSector';
+import ShieldModule from 'modules/shields/shieldModule';
 
 export default class ShieldService {
     public static findSector(module: ShieldModule | undefined, side: string): ShieldSector | undefined {

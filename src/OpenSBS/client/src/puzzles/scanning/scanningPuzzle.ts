@@ -1,5 +1,5 @@
-import SignatureItem from './signatureItem';
-import EntityTrace from '../../models/entityTrace';
+import EntityTrace from 'models/entityTrace';
+import SignatureItem from 'puzzles/scanning/signatureItem';
 
 export default class ScanningPuzzle {
     private trace: EntityTrace;

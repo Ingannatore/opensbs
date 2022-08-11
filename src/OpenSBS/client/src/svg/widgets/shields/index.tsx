@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svgTransforms';
-import PanelElement from '../../elements/panelElement';
-import SwitchElement from '../../elements/switchElement';
-import ButtonElement from '../../elements/buttonElement';
-import ShieldSectorElement from './shieldSectorElement';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import ShieldModule from '../../../modules/shields/shieldModule';
-import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
-import ShieldService from '../../../modules/shields/shieldService';
-import EntitySide from '../../../models/entitySide';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import EntitySide from 'models/entitySide';
+import ShieldModule from 'modules/shields/shieldModule';
+import ShieldService from 'modules/shields/shieldService';
+import SpaceshipActions from 'store/spaceship/spaceshipActions';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import ColorPalette from 'svg/colorPalette';
+import PanelElement from 'svg/elements/panelElement';
+import SwitchElement from 'svg/elements/switchElement';
+import ButtonElement from 'svg/elements/buttonElement';
+import ShieldSectorElement from 'svg/widgets/shields/shieldSectorElement';
 
 interface ShieldWidgetProps {
     x: number,

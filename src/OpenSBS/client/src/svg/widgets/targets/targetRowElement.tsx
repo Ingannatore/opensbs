@@ -1,10 +1,10 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import EntityTrace from '../../../models/entityTrace';
-import Icons from '../../../lib/icons';
-import Angles from '../../../lib/angles';
-import ColorPalette from '../../colorPalette';
-import Coloring from '../../../lib/coloring';
+import Angles from 'lib/angles';
+import Coloring from 'lib/coloring';
+import Icons from 'lib/icons';
+import SvgTransforms from 'lib/svgTransforms';
+import EntityTrace from 'models/entityTrace';
+import ColorPalette from 'svg/colorPalette';
 
 interface TargetRowElementProps {
     x: number,

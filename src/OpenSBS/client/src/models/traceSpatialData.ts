@@ -1,5 +1,5 @@
-import Vector3 from './vector3';
-import Vector2 from './Vector2';
+import Vector3 from 'models/vector3';
+import Vector2 from 'models/vector2';
 
 export default interface TraceSpatialData {
     position: Vector3,

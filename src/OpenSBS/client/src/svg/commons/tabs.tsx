@@ -1,8 +1,8 @@
 import * as React from 'react';
-import SvgTransforms from '../../lib/svgTransforms';
-import TabButton from '../elements/tabButton';
-import BaseComponentProps from "../../models/baseComponentProps";
-import ColorPalette from '../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import BaseComponentProps from "models/baseComponentProps";
+import ColorPalette from 'svg/colorPalette';
+import TabButton from 'svg/elements/tabButton';
 
 interface TabsProps extends BaseComponentProps{
     x: number,

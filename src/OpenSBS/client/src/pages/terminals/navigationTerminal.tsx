@@ -1,10 +1,10 @@
 import * as React from 'react';
-import SvgElement from '../../svg/elements/svgElement';
-import TerminalElement from '../../svg/elements/terminalElement';
-import EngineWidget from '../../svg/widgets/engine';
-import HelmWidget from '../../svg/widgets/helm';
-import RadarWidget from '../../svg/widgets/radar';
-import './terminal.css';
+import SvgElement from 'svg/elements/svgElement';
+import TerminalElement from 'svg/elements/terminalElement';
+import EngineWidget from 'svg/widgets/engine';
+import HelmWidget from 'svg/widgets/helm';
+import RadarWidget from 'svg/widgets/radar';
+import 'pages/terminals/terminal.css';
 
 export default class NavigationTerminal extends React.Component<{}, {}> {
     public render() {

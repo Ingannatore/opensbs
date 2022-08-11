@@ -1,20 +1,20 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import ZoomControls from '../../commons/zoomControls';
-import GroupLabel from '../../elements/groupLabel';
-import PanelElement from '../../elements/panelElement';
-import ShipElement from '../../elements/shipElement';
-import SwitchElement from '../../elements/switchElement';
-import SensorsModule from '../../../modules/sensors/sensorsModule';
-import SensorsService from '../../../modules/sensors/sensorsService';
-import CompassOverlay from './compassOverlay';
-import DistancesOverlay from './distancesOverlay';
-import RangeControls from './rangeControls';
-import SidesOverlay from './sidesOverlay';
-import TracesOverlay from './tracesOverlay';
-import ClientSelectors from '../../../store/client/clientSelectors';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import ColorPalette from '../../colorPalette';
+import SensorsModule from 'modules/sensors/sensorsModule';
+import SensorsService from 'modules/sensors/sensorsService';
+import ClientSelectors from 'store/client/clientSelectors';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import ColorPalette from 'svg/colorPalette';
+import GroupLabel from 'svg/elements/groupLabel';
+import PanelElement from 'svg/elements/panelElement';
+import ShipElement from 'svg/elements/shipElement';
+import SwitchElement from 'svg/elements/switchElement';
+import ZoomControls from 'svg/commons/zoomControls';
+import CompassOverlay from 'svg/widgets/radar/compassOverlay';
+import DistancesOverlay from 'svg/widgets/radar/distancesOverlay';
+import RangeControls from 'svg/widgets/radar/rangeControls';
+import SidesOverlay from 'svg/widgets/radar/sidesOverlay';
+import TracesOverlay from 'svg/widgets/radar/tracesOverlay';
 
 interface RadarWidgetProps {
     x: number,

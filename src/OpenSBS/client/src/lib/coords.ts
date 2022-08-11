@@ -1,4 +1,4 @@
-import Vector3 from '../models/vector3';
+import Vector3 from 'models/vector3';
 
 export default class Coords {
     public static distance(pointA: Vector3, pointB: Vector3): number {

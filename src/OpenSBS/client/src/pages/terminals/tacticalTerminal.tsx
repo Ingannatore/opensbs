@@ -1,12 +1,12 @@
 import * as React from 'react';
-import SvgElement from '../../svg/elements/svgElement';
-import TerminalElement from '../../svg/elements/terminalElement';
-import AmmoWidget from '../../svg/widgets/ammo';
-import RadarWidget from '../../svg/widgets/radar';
-import ShieldWidget from '../../svg/widgets/shields';
-import TargetsWidget from '../../svg/widgets/targets';
-import WeaponWidget from '../../svg/widgets/weapon';
-import './terminal.css';
+import SvgElement from 'svg/elements/svgElement';
+import TerminalElement from 'svg/elements/terminalElement';
+import AmmoWidget from 'svg/widgets/ammo';
+import RadarWidget from 'svg/widgets/radar';
+import ShieldWidget from 'svg/widgets/shields';
+import TargetsWidget from 'svg/widgets/targets';
+import WeaponWidget from 'svg/widgets/weapon';
+import 'pages/terminals/terminal.css';
 
 export default class TacticalTerminal extends React.Component<{}, {}> {
     public render() {

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import EntitySide from '../../../models/entitySide';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import EntitySide from 'models/entitySide';
+import ColorPalette from 'svg/colorPalette';
 
 interface FireArcElementProps {
     x: number,

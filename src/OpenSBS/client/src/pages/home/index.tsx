@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Navigate} from "react-router-dom";
-import DataEntryInfo from '../../models/dataEntryInfo';
-import ServerActions from '../../store/server/serverActions';
+import {Navigate} from 'react-router-dom';
+import DataEntryInfo from 'models/dataEntryInfo';
+import ServerActions from 'store/server/serverActions';
 
 interface HomePageProps {
     isReady: boolean,

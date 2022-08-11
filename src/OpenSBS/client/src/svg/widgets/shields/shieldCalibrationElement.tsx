@@ -1,6 +1,6 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import CalibrationSegmentElement from './calibrationSegmentElement';
+import SvgTransforms from 'lib/svgTransforms';
+import CalibrationSegmentElement from 'svg/widgets/shields/calibrationSegmentElement';
 
 interface ShieldCalibrationElementProps {
     x: number,

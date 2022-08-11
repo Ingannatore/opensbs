@@ -1,5 +1,5 @@
-import TraceSpatialData from './traceSpatialData';
-import TraceShieldData from './traceShieldData';
+import TraceSpatialData from 'models/traceSpatialData';
+import TraceShieldData from 'models/traceShieldData';
 
 export default interface EntityTrace {
     id: string,

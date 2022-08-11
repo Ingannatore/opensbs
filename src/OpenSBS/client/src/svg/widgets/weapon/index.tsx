@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svgTransforms';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
-import ClientSelectors from '../../../store/client/clientSelectors';
-import EntityTrace from '../../../models/entityTrace';
-import PanelElement from '../../elements/panelElement';
-import SwitchElement from '../../elements/switchElement';
-import GaugeElement from '../../elements/gaugeElement';
-import ButtonElement from '../../elements/buttonElement';
-import WeaponModule from '../../../modules/weapons/weaponModule';
-import WeaponService from '../../../modules/weapons/weaponService';
-import Item from '../../../models/item';
-import FireArcElement from './fireArcElement';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import EntityTrace from 'models/entityTrace';
+import Item from 'models/item';
+import WeaponModule from 'modules/weapons/weaponModule';
+import WeaponService from 'modules/weapons/weaponService';
+import ClientSelectors from 'store/client/clientSelectors';
+import SpaceshipActions from 'store/spaceship/spaceshipActions';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import ColorPalette from 'svg/colorPalette';
+import ButtonElement from 'svg/elements/buttonElement';
+import GaugeElement from 'svg/elements/gaugeElement';
+import PanelElement from 'svg/elements/panelElement';
+import SwitchElement from 'svg/elements/switchElement';
+import FireArcElement from 'svg/widgets/weapon/fireArcElement';
 
 interface WeaponProps {
     x: number,

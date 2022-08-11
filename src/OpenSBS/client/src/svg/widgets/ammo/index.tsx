@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svgTransforms';
-import PanelElement from '../../elements/panelElement';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import ItemStack from '../../../models/itemStack';
-import {selectAmmo, resetAmmo} from '../../../store/client/clientSlice';
-import ClientSelectors from '../../../store/client/clientSelectors';
-import Item from '../../../models/item';
-import ItemStorage from '../../../models/itemStorage';
-import CargoService from '../../../modules/cargo/cargoService';
-import AmmoRowElement from './ammoRowElement';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import Item from 'models/item';
+import ItemStack from 'models/itemStack';
+import ItemStorage from 'models/itemStorage';
+import CargoService from 'modules/cargo/cargoService';
+import PanelElement from 'svg/elements/panelElement';
+import ClientSelectors from 'store/client/clientSelectors';
+import {selectAmmo, resetAmmo} from 'store/client/clientSlice';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import ColorPalette from 'svg/colorPalette';
+import AmmoRowElement from 'svg/widgets/ammo/ammoRowElement';
 
 interface AmmoWidgetProps {
     x: number,

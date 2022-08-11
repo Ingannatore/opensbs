@@ -1,7 +1,7 @@
 import * as React from 'react';
-import SvgTransforms from '../../lib/svgTransforms';
-import ColorPalette from '../colorPalette';
-import BaseComponentProps from "../../models/baseComponentProps";
+import SvgTransforms from 'lib/svgTransforms';
+import BaseComponentProps from 'models/baseComponentProps';
+import ColorPalette from 'svg/colorPalette';
 
 interface ValueElementProps extends BaseComponentProps {
     x: number,

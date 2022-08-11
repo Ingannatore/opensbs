@@ -1,4 +1,4 @@
-import ModuleTemplate from './moduleTemplate';
+import ModuleTemplate from 'modules/moduleTemplate';
 
 export default interface EntityModule {
     id: string,

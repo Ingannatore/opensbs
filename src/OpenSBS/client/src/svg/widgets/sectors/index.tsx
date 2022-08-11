@@ -1,20 +1,20 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import Coords from '../../../lib/coords';
-import OverlayEvent from '../../../models/OverlayEvent';
-import Vector2 from '../../../models/Vector2';
-import Vector3 from '../../../models/vector3';
-import SensorsModule from '../../../modules/sensors/sensorsModule';
-import ClickableOverlay from '../../elements/clickableOverlay';
-import PanelElement from '../../elements/panelElement';
-import SwitchElement from '../../elements/switchElement';
-import GridOverlay from './gridOverlay';
-import SectorOverlay from './sectorOverlay';
-import TracesOverlay from './tracesOverlay';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import {selectSector} from '../../../store/client/clientSlice';
-import ClientSelectors from '../../../store/client/clientSelectors';
-import ColorPalette from '../../colorPalette';
+import Coords from 'lib/coords';
+import OverlayEvent from 'models/OverlayEvent';
+import Vector2 from 'models/vector2';
+import Vector3 from 'models/vector3';
+import SensorsModule from 'modules/sensors/sensorsModule';
+import ClientSelectors from 'store/client/clientSelectors';
+import {selectSector} from 'store/client/clientSlice';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import ColorPalette from 'svg/colorPalette';
+import ClickableOverlay from 'svg/elements/clickableOverlay';
+import PanelElement from 'svg/elements/panelElement';
+import SwitchElement from 'svg/elements/switchElement';
+import GridOverlay from 'svg/widgets/sectors/gridOverlay';
+import SectorOverlay from 'svg/widgets/sectors/sectorOverlay';
+import TracesOverlay from 'svg/widgets/sectors/tracesOverlay';
 
 interface SectorsWidgetProps {
     x: number,

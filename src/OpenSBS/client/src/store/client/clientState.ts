@@ -1,6 +1,6 @@
-import EntityTrace from '../../models/entityTrace';
-import Item from '../../models/item';
-import Vector2 from '../../models/Vector2';
+import EntityTrace from 'models/entityTrace';
+import Item from 'models/item';
+import Vector2 from 'models/vector2';
 
 export default interface ClientState {
     radarScale: number,

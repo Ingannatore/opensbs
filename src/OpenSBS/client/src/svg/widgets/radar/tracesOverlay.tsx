@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import Coords from '../../../lib/coords';
-import SvgTransforms from '../../../lib/svgTransforms';
-import EntityTrace from '../../../models/entityTrace';
-import TraceElement from '../../elements/traceElement';
-import {selectTarget, resetTarget} from '../../../store/client/clientSlice';
-import ClientSelectors from '../../../store/client/clientSelectors';
+import Coords from 'lib/coords';
+import SvgTransforms from 'lib/svgTransforms';
+import EntityTrace from 'models/entityTrace';
+import ClientSelectors from 'store/client/clientSelectors';
+import {selectTarget, resetTarget} from 'store/client/clientSlice';
+import TraceElement from 'svg/elements/traceElement';
 
 interface TracesOverlayProps {
     x: number,

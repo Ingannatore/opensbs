@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svgTransforms';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import PanelElement from '../../elements/panelElement';
-import {selectTarget, resetTarget} from '../../../store/client/clientSlice';
-import ClientSelectors from '../../../store/client/clientSelectors';
-import EntityTrace from '../../../models/entityTrace';
-import SensorsModule from '../../../modules/sensors/sensorsModule';
-import SensorsService from '../../../modules/sensors/sensorsService';
-import TargetRowElement from './targetRowElement';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import EntityTrace from 'models/entityTrace';
+import SensorsModule from 'modules/sensors/sensorsModule';
+import SensorsService from 'modules/sensors/sensorsService';
+import ClientSelectors from 'store/client/clientSelectors';
+import {selectTarget, resetTarget} from 'store/client/clientSlice';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import ColorPalette from 'svg/colorPalette';
+import PanelElement from 'svg/elements/panelElement';
+import TargetRowElement from 'svg/widgets/targets/targetRowElement';
 
 interface TargetsWidgetProps {
     x: number,

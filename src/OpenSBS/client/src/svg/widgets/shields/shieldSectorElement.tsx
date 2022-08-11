@@ -1,12 +1,12 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import ShieldSector from '../../../modules/shields/shieldSector';
-import ShieldCalibrationElement from './shieldCalibrationElement';
-import ValueElement from '../../elements/valueElement';
-import ButtonElement from '../../elements/buttonElement';
-import CylinderElement from '../../elements/cylinderElement';
-import ShieldService from '../../../modules/shields/shieldService';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import ShieldSector from 'modules/shields/shieldSector';
+import ShieldService from 'modules/shields/shieldService';
+import ColorPalette from 'svg/colorPalette';
+import ValueElement from 'svg/elements/valueElement';
+import ButtonElement from 'svg/elements/buttonElement';
+import CylinderElement from 'svg/elements/cylinderElement';
+import ShieldCalibrationElement from 'svg/widgets/shields/shieldCalibrationElement';
 
 interface ShieldSectorElementProps {
     x: number,

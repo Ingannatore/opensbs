@@ -1,10 +1,10 @@
 import * as React from 'react';
-import SvgElement from '../../svg/elements/svgElement';
-import TerminalElement from '../../svg/elements/terminalElement';
-import RadarWidget from '../../svg/widgets/radar';
-import TargetWidget from '../../svg/widgets/target';
-import TargetsWidget from '../../svg/widgets/targets';
-import './terminal.css';
+import SvgElement from 'svg/elements/svgElement';
+import TerminalElement from 'svg/elements/terminalElement';
+import RadarWidget from 'svg/widgets/radar';
+import TargetWidget from 'svg/widgets/target';
+import TargetsWidget from 'svg/widgets/targets';
+import 'pages/terminals/terminal.css';
 
 export default class IntelligenceTerminal extends React.Component<{}, {}> {
     public render() {

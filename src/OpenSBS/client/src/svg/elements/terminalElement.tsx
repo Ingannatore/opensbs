@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Icons from '../../lib/icons';
-import ColorPalette from '../colorPalette';
-import BaseComponentProps from "../../models/baseComponentProps";
+import Icons from 'lib/icons';
+import BaseComponentProps from 'models/baseComponentProps';
+import ColorPalette from 'svg/colorPalette';
 
 interface TerminalElementProps extends BaseComponentProps {
     name: string,

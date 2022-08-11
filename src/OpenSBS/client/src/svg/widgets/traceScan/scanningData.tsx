@@ -1,11 +1,11 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import EntityTrace from '../../../models/entityTrace';
-import ScanningPuzzle from '../../../puzzles/scanning/scanningPuzzle';
-import SignatureItem from '../../../puzzles/scanning/signatureItem';
-import SwitchElement from '../../elements/switchElement';
-import GroupLabel from '../../elements/groupLabel';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import EntityTrace from 'models/entityTrace';
+import SignatureItem from 'puzzles/scanning/signatureItem';
+import ScanningPuzzle from 'puzzles/scanning/scanningPuzzle';
+import ColorPalette from 'svg/colorPalette';
+import GroupLabel from 'svg/elements/groupLabel';
+import SwitchElement from 'svg/elements/switchElement';
 
 interface ScanningDataProps {
     x: number,

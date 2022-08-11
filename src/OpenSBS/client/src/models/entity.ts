@@ -1,7 +1,7 @@
-import Vector3 from './vector3';
-import Item from './item';
-import EntityModule from '../modules/entityModule';
-import ItemStorage from './itemStorage';
+import Vector3 from 'models/vector3';
+import Item from 'models/item';
+import EntityModule from 'modules/entityModule';
+import ItemStorage from 'models/itemStorage';
 
 export default interface Entity extends Item {
     callSign: string,

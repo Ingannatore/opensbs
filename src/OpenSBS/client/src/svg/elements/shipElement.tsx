@@ -1,5 +1,5 @@
 import * as React from 'react';
-import SvgTransforms from '../../lib/svgTransforms';
+import SvgTransforms from 'lib/svgTransforms';
 
 interface ShipElementProps {
     x: number,

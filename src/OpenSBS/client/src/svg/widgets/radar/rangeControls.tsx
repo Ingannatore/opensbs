@@ -1,8 +1,8 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import GroupLabel from '../../elements/groupLabel';
-import SwitchElement from '../../elements/switchElement';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import ColorPalette from 'svg/colorPalette';
+import GroupLabel from 'svg/elements/groupLabel';
+import SwitchElement from 'svg/elements/switchElement';
 
 interface RangeControlsProps {
     x: number,

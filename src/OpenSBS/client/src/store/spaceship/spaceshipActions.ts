@@ -1,4 +1,4 @@
-import ClientAction from '../clientAction';
+import ClientAction from 'store/clientAction';
 
 const sendModuleAction = (entityId: string, moduleId: string, type: string, payload: any): ClientAction => ({
     type: type,

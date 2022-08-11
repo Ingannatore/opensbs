@@ -1,8 +1,8 @@
 import * as React from 'react';
-import SvgTransforms from '../../lib/svgTransforms';
-import ValueElement from './valueElement';
-import ColorPalette from '../colorPalette';
-import BaseComponentProps from "../../models/baseComponentProps";
+import SvgTransforms from 'lib/svgTransforms';
+import BaseComponentProps from 'models/baseComponentProps';
+import ColorPalette from 'svg/colorPalette';
+import ValueElement from 'svg/elements/valueElement';
 
 interface GaugeElementProps extends BaseComponentProps {
     x: number,

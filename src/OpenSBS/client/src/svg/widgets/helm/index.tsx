@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import Angles from '../../../lib/angles';
-import SvgTransforms from '../../../lib/svgTransforms';
-import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import EngineModule from '../../../modules/engines/engineModule';
-import DisplayElement from '../../elements/displayElement';
-import SwitchElement from '../../elements/switchElement';
-import PanelElement from '../../elements/panelElement';
-import ButtonElement from '../../elements/buttonElement';
-import ColorPalette from '../../colorPalette';
+import Angles from 'lib/angles';
+import SvgTransforms from 'lib/svgTransforms';
+import EngineModule from 'modules/engines/engineModule';
+import SpaceshipActions from 'store/spaceship/spaceshipActions';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import ColorPalette from 'svg/colorPalette';
+import ButtonElement from 'svg/elements/buttonElement';
+import DisplayElement from 'svg/elements/displayElement';
+import PanelElement from 'svg/elements/panelElement';
+import SwitchElement from 'svg/elements/switchElement';
 
 interface HelmWidgetProps {
     x: number,

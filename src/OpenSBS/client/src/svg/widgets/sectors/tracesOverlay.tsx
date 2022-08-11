@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Coords from '../../../lib/coords';
-import Coloring from '../../../lib/coloring';
-import SvgTransforms from '../../../lib/svgTransforms';
-import EntityTrace from '../../../models/entityTrace';
+import Coloring from 'lib/coloring';
+import Coords from 'lib/coords';
+import SvgTransforms from 'lib/svgTransforms';
+import EntityTrace from 'models/entityTrace';
 
 interface TracesOverlayProps {
     x: number,

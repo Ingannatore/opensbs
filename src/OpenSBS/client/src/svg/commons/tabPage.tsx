@@ -1,6 +1,6 @@
 import * as React from 'react';
-import SvgTransforms from '../../lib/svgTransforms';
-import BaseComponentProps from "../../models/baseComponentProps";
+import SvgTransforms from 'lib/svgTransforms';
+import BaseComponentProps from 'models/baseComponentProps';
 
 interface TabPageProps extends BaseComponentProps {
     label: string,

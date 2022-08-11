@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Vector2 from '../../../models/Vector2';
-import SvgTransforms from '../../../lib/svgTransforms';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import Vector2 from 'models/vector2';
+import ColorPalette from 'svg/colorPalette';
 
 interface SectorOverlayProps {
     x: number,

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import PanelElement from '../../elements/panelElement';
+import SvgTransforms from 'lib/svgTransforms';
+import PanelElement from 'svg/elements/panelElement';
 
 interface FtlWidgetModel {
     x: number,

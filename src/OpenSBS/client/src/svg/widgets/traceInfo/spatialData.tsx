@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Angles from '../../../lib/angles';
-import SvgTransforms from '../../../lib/svgTransforms';
-import TraceSpatialData from '../../../models/traceSpatialData';
-import DataRow from '../../elements/dataRow';
+import Angles from 'lib/angles';
+import SvgTransforms from 'lib/svgTransforms';
+import TraceSpatialData from 'models/traceSpatialData';
+import DataRow from 'svg/elements/dataRow';
 
 interface SpatialDataProps {
     x: number,

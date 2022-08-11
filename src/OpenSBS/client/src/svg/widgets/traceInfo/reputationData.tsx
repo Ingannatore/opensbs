@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Naming from '../../../lib/naming';
-import DataRow from '../../elements/dataRow';
+import Naming from 'lib/naming';
+import DataRow from 'svg/elements/dataRow';
 
 interface ReputationDataProps {
     x: number,

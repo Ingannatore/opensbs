@@ -1,6 +1,6 @@
 import * as React from 'react';
-import SvgTransforms from '../../lib/svgTransforms';
-import ColorPalette from '../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import ColorPalette from 'svg/colorPalette';
 
 interface CylinderElementProps {
     x: number,

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import EntityTrace from '../../../models/entityTrace';
-import SensorsModule from '../../../modules/sensors/sensorsModule';
-import PanelElement from '../../elements/panelElement';
-import TraceInfoWidget from '../traceInfo';
-import TraceScanWidget from '../traceScan';
-import ClientSelectors from '../../../store/client/clientSelectors';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
+import EntityTrace from 'models/entityTrace';
+import SensorsModule from 'modules/sensors/sensorsModule';
+import ClientSelectors from 'store/client/clientSelectors';
+import SpaceshipActions from 'store/spaceship/spaceshipActions';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import PanelElement from 'svg/elements/panelElement';
+import TraceInfoWidget from 'svg/widgets/traceInfo';
+import TraceScanWidget from 'svg/widgets/traceScan';
 
 interface TargetWidgetProps {
     x: number,

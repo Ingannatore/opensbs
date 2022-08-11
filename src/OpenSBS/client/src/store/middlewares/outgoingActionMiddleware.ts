@@ -1,4 +1,4 @@
-import ClientAction from '../clientAction';
+import ClientAction from 'store/clientAction';
 
 const isSocketAction = (action: ClientAction): boolean => {
     return !!(action.meta?.socket);

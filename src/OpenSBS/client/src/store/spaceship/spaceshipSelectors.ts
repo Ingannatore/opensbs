@@ -1,13 +1,13 @@
-import State from '../state';
-import EngineModule from '../../modules/engines/engineModule';
-import EntityTrace from '../../models/entityTrace';
-import EntityModule from '../../modules/entityModule';
-import ItemStorage from '../../models/itemStorage';
-import SensorsModule from '../../modules/sensors/sensorsModule';
-import ShieldModule from '../../modules/shields/shieldModule';
-import Vector3 from '../../models/vector3';
-import WeaponModule from '../../modules/weapons/weaponModule';
-import ModuleType from '../../modules/moduleType';
+import State from 'store/state';
+import EntityTrace from 'models/entityTrace';
+import ItemStorage from 'models/itemStorage';
+import Vector3 from 'models/vector3';
+import EntityModule from 'modules/entityModule';
+import ModuleType from 'modules/moduleType';
+import EngineModule from 'modules/engines/engineModule';
+import SensorsModule from 'modules/sensors/sensorsModule';
+import ShieldModule from 'modules/shields/shieldModule';
+import WeaponModule from 'modules/weapons/weaponModule';
 
 const getId = (state: State): string => {
     return state.spaceship.id;

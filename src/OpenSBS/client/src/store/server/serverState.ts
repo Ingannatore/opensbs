@@ -1,4 +1,4 @@
-import DataEntryInfo from '../../models/dataEntryInfo';
+import DataEntryInfo from 'models/dataEntryInfo';
 
 export default interface ServerState {
     isReady: boolean;

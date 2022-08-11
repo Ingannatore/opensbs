@@ -1,6 +1,6 @@
 import * as React from 'react';
-import SvgTransforms from '../../lib/svgTransforms';
-import OverlayEvent from '../../models/OverlayEvent';
+import SvgTransforms from 'lib/svgTransforms';
+import OverlayEvent from 'models/OverlayEvent';
 
 interface ClickableOverlayProps {
     x: number,

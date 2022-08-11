@@ -1,4 +1,4 @@
-import Item from './item';
+import Item from 'models/item';
 
 export default interface ItemStack {
     item: Item,

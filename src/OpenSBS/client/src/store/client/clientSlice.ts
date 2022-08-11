@@ -1,11 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit'
-import ClientState from "./clientState";
-import Entity from "../../models/entity";
-import EntityTrace from "../../models/entityTrace";
-import EntityModule from "../../modules/entityModule";
-import ModuleType from "../../modules/moduleType";
-import SensorsModule from "../../modules/sensors/sensorsModule";
-import Item from "../../models/item";
+import Entity from 'models/entity';
+import Item from 'models/item';
+import EntityModule from 'modules/entityModule';
+import EntityTrace from 'models/entityTrace';
+import ModuleType from 'modules/moduleType';
+import SensorsModule from 'modules/sensors/sensorsModule';
+import ClientState from 'store/client/clientState';
 
 const initialState: ClientState = {
     radarScale: 1,

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Icons from '../../lib/icons';
-import SvgTransforms from '../../lib/svgTransforms';
-import EntityTrace from '../../models/entityTrace';
-import ColorPalette from '../colorPalette';
-import Coloring from '../../lib/coloring';
+import Coloring from 'lib/coloring';
+import Icons from 'lib/icons';
+import SvgTransforms from 'lib/svgTransforms';
+import EntityTrace from 'models/entityTrace';
+import ColorPalette from 'svg/colorPalette';
 
 interface TraceElementProps {
     x: number,

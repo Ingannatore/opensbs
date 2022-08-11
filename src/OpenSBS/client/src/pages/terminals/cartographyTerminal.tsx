@@ -1,8 +1,8 @@
 import * as React from 'react';
-import SvgElement from '../../svg/elements/svgElement';
-import TerminalElement from '../../svg/elements/terminalElement';
-import SectorsWidget from '../../svg/widgets/sectors';
-import './terminal.css';
+import SvgElement from 'svg/elements/svgElement';
+import TerminalElement from 'svg/elements/terminalElement';
+import SectorsWidget from 'svg/widgets/sectors';
+import 'pages/terminals/terminal.css';
 
 export default class CartographyTerminal extends React.Component<{}, {}> {
     public render() {

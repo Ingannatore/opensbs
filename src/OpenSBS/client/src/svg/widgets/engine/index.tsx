@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import SvgTransforms from '../../../lib/svgTransforms';
-import DisplayElement from '../../elements/displayElement';
-import SpaceshipSelectors from '../../../store/spaceship/spaceshipSelectors';
-import PanelElement from '../../elements/panelElement';
-import ThrottleElement from './throttleElement';
-import SpaceshipActions from '../../../store/spaceship/spaceshipActions';
-import ButtonElement from '../../elements/buttonElement';
-import EngineModule from '../../../modules/engines/engineModule';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import EngineModule from 'modules/engines/engineModule';
+import SpaceshipActions from 'store/spaceship/spaceshipActions';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
+import ColorPalette from 'svg/colorPalette';
+import ButtonElement from 'svg/elements/buttonElement';
+import DisplayElement from 'svg/elements/displayElement';
+import PanelElement from 'svg/elements/panelElement';
+import ThrottleElement from 'svg/widgets/engine/throttleElement';
 
 interface EngineWidgetProps {
     x: number,

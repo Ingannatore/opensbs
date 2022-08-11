@@ -1,5 +1,5 @@
-import ItemStorage from '../../models/itemStorage';
-import ItemStack from '../../models/itemStack';
+import ItemStorage from 'models/itemStorage';
+import ItemStack from 'models/itemStack';
 
 export default class CargoService {
     public static findItems(cargo: ItemStorage | undefined, category: string): ItemStack[] {

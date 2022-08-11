@@ -1,8 +1,8 @@
 import * as React from 'react';
-import SvgTransforms from '../../../lib/svgTransforms';
-import TraceShieldData from '../../../models/traceShieldData';
-import CylinderElement from '../../elements/cylinderElement';
-import ColorPalette from '../../colorPalette';
+import SvgTransforms from 'lib/svgTransforms';
+import TraceShieldData from 'models/traceShieldData';
+import ColorPalette from 'svg/colorPalette';
+import CylinderElement from 'svg/elements/cylinderElement';
 
 interface ShieldDataProps {
     x: number,

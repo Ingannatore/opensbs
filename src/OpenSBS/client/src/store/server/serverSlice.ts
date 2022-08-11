@@ -1,5 +1,5 @@
-import ServerState from "./serverState";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
+import ServerState from 'store/server/serverState';
 
 const initialState: ServerState = {
     isReady: false,
