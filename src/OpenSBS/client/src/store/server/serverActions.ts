@@ -1,4 +1,4 @@
-﻿import ClientAction from '../clientAction';
+import ClientAction from '../clientAction';
 
 const Types = {
     START_MISSION: 'server/init',
@@ -22,8 +22,9 @@ const pauseMission = (): ClientAction => ({
     meta: {socket: true, entity: null, module: null}
 });
 
-export default {
-    Types,
+const serverActions = {
     startMission,
     pauseMission
 };
+
+export default serverActions;

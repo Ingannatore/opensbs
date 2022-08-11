@@ -1,4 +1,4 @@
-﻿export default class Naming {
+export default class Naming {
     public static getEntityTypeName(type: string): string {
         switch (type) {
             case 'entity.spaceship.fighter':

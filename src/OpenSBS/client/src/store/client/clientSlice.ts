@@ -1,4 +1,4 @@
-﻿import {createSlice} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 import ClientState from "./clientState";
 import Entity from "../../models/entity";
 import EntityTrace from "../../models/entityTrace";

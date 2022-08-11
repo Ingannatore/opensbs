@@ -1,9 +1,11 @@
-﻿import ClientAction from '../clientAction';
+import ClientAction from '../clientAction';
 
-export default (hub: any) => (store: any) => {
+const incomingActionMiddleware = (hub: any) => (store: any) => {
     hub.on('OnServerAction', (data: ClientAction) => {
         return store.dispatch(data);
     });
 
     return (next: any) => (action: ClientAction) => next(action);
 };
+
+export default incomingActionMiddleware;

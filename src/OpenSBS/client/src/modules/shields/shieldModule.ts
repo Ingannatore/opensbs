@@ -1,4 +1,4 @@
-﻿import EntityModule from '../entityModule';
+import EntityModule from '../entityModule';
 import ShieldSector from './shieldSector';
 
 export default interface ShieldModule extends EntityModule {

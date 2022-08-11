@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import Vector2 from '../../../models/Vector2';
 import SvgTransforms from '../../../lib/svgTransforms';
 import ColorPalette from '../../colorPalette';

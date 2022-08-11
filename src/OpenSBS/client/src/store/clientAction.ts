@@ -1,4 +1,4 @@
-﻿import ClientActionMetadata from './clientActionMetadata';
+import ClientActionMetadata from './clientActionMetadata';
 
 export default interface ClientAction {
     type: string;

@@ -1,4 +1,4 @@
-﻿import State from '../state';
+import State from '../state';
 import EngineModule from '../../modules/engines/engineModule';
 import EntityTrace from '../../models/entityTrace';
 import EntityModule from '../../modules/entityModule';
@@ -38,7 +38,7 @@ const getModulesByType = <T extends EntityModule>(state: State, type: string): [
 }
 
 const getCargo = (state: State): ItemStorage | undefined => {
-    return state.spaceship.cargo ?? undefined ;
+    return state.spaceship.cargo ?? undefined;
 }
 
 const getSensors = (state: State): SensorsModule | undefined => {
@@ -71,7 +71,7 @@ const getTrace = (state: State, id: string): EntityTrace | undefined => {
     return sensors.traces.find((trace) => trace.id === id);
 }
 
-export default {
+const spaceshipSelectors = {
     getId,
     getPosition,
     getBearing,
@@ -85,4 +85,6 @@ export default {
     getWeapon,
     getTraces,
     getTrace,
-}
+};
+
+export default spaceshipSelectors;

@@ -1,4 +1,4 @@
-﻿export default interface WeaponMagazine {
+export default interface WeaponMagazine {
     ammoType: string,
     ammoId: string | null,
     name: string | null,

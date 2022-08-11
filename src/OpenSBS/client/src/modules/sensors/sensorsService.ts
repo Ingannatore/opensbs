@@ -1,4 +1,4 @@
-﻿import SensorsModule from './sensorsModule';
+import SensorsModule from './sensorsModule';
 import EntityTrace from '../../models/entityTrace';
 
 export default class SensorsService {

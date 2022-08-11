@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import SvgTransforms from '../../../lib/svgTransforms';
 import EntityTrace from '../../../models/entityTrace';
 import ScanningPuzzle from '../../../puzzles/scanning/scanningPuzzle';

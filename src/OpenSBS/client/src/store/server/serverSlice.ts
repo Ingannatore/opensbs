@@ -1,4 +1,4 @@
-﻿import ServerState from "./serverState";
+import ServerState from "./serverState";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState: ServerState = {

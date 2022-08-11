@@ -1,4 +1,4 @@
-﻿import ClientAction from '../clientAction';
+import ClientAction from '../clientAction';
 
 const sendModuleAction = (entityId: string, moduleId: string, type: string, payload: any): ClientAction => ({
     type: type,
@@ -6,6 +6,8 @@ const sendModuleAction = (entityId: string, moduleId: string, type: string, payl
     meta: {socket: true, entity: entityId, module: moduleId}
 });
 
-export default {
+const spaceshipActions = {
     sendModuleAction,
 };
+
+export default spaceshipActions;

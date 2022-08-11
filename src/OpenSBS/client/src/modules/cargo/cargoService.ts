@@ -1,4 +1,4 @@
-﻿import ItemStorage from '../../models/itemStorage';
+import ItemStorage from '../../models/itemStorage';
 import ItemStack from '../../models/itemStack';
 
 export default class CargoService {

@@ -1,4 +1,4 @@
-﻿export default interface ShieldSector {
+export default interface ShieldSector {
     side: string,
     capacity: number,
     calibration: number,

@@ -1,4 +1,4 @@
-﻿const ModuleType = {
+const ModuleType = {
     ENGINE: "module.engine",
     NAVIGATION: "module.navigation",
     SHIELD: "module.shield",

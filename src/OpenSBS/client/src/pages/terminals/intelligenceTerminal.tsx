@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import SvgElement from '../../svg/elements/svgElement';
 import TerminalElement from '../../svg/elements/terminalElement';
 import RadarWidget from '../../svg/widgets/radar';

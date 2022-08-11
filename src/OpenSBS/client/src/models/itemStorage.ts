@@ -1,4 +1,4 @@
-﻿import ItemStack from './itemStack';
+import ItemStack from './itemStack';
 
 export default interface ItemStorage {
     capacity: number,

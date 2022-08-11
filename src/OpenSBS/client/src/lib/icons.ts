@@ -1,4 +1,4 @@
-﻿export default class Icons {
+export default class Icons {
     public static forTerminal(type: string): string {
         return `/icons/terminals.svg#${type}`;
     }

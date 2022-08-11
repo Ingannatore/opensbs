@@ -1,4 +1,4 @@
-﻿import ColorPalette from '../svg/colorPalette';
+import ColorPalette from '../svg/colorPalette';
 
 export default class Coloring {
     public static getReputationColor(value: number | null) {

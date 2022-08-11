@@ -1,4 +1,4 @@
-﻿export default interface SignatureItem {
+export default interface SignatureItem {
     id: number,
     x: number,
     y: number,

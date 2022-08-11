@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import SvgTransforms from '../../../lib/svgTransforms';
 import EntitySide from '../../../models/entitySide';
 import ColorPalette from '../../colorPalette';

@@ -1,4 +1,4 @@
-﻿export default interface CountdownTimer {
+export default interface CountdownTimer {
     current: number,
     original: number,
     ratio: number,

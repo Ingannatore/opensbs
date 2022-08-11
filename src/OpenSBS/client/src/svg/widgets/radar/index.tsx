@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import ZoomControls from '../../commons/zoomControls';
 import GroupLabel from '../../elements/groupLabel';

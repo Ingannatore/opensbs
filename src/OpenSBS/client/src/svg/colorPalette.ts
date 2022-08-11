@@ -1,4 +1,4 @@
-﻿const ColorPalette = {
+const ColorPalette = {
     BACKGROUND: '#000',
     MUTE_DARK: '#252525',
     MUTE: '#383838',

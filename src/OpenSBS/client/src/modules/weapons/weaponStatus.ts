@@ -1,4 +1,4 @@
-﻿const WeaponStatus = {
+const WeaponStatus = {
     IDLE: "state.idle",
     FIRE: "state.fire",
     OUT_OF_AMMO: "state.outOfAmmo",

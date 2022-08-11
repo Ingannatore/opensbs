@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import Angles from '../../../lib/angles';
 import SvgTransforms from '../../../lib/svgTransforms';

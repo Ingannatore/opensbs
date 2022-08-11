@@ -1,4 +1,4 @@
-﻿import TraceSpatialData from './traceSpatialData';
+import TraceSpatialData from './traceSpatialData';
 import TraceShieldData from './traceShieldData';
 
 export default interface EntityTrace {

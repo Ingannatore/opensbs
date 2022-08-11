@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import EntityTrace from '../../../models/entityTrace';
 import SensorsModule from '../../../modules/sensors/sensorsModule';

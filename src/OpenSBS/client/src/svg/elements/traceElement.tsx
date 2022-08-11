@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import Icons from '../../lib/icons';
 import SvgTransforms from '../../lib/svgTransforms';
 import EntityTrace from '../../models/entityTrace';

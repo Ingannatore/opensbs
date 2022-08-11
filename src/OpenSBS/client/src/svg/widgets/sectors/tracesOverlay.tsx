@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import Coords from '../../../lib/coords';
 import Coloring from '../../../lib/coloring';
 import SvgTransforms from '../../../lib/svgTransforms';

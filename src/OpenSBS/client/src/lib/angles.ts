@@ -1,4 +1,4 @@
-﻿export default class Angles {
+export default class Angles {
     public static toDegrees(radians: number): number {
         return radians * (180 / Math.PI);
     }

@@ -1,4 +1,4 @@
-﻿export default interface OverlayEvent {
+export default interface OverlayEvent {
     x: number,
     y: number,
     width: number,

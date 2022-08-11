@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import Angles from '../../../lib/angles';
 import SvgTransforms from '../../../lib/svgTransforms';
 import TraceSpatialData from '../../../models/traceSpatialData';

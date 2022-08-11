@@ -1,4 +1,4 @@
-﻿import ShieldSector from './shieldSector';
+import ShieldSector from './shieldSector';
 import ShieldModule from './shieldModule';
 import EntitySide from '../../models/entitySide';
 

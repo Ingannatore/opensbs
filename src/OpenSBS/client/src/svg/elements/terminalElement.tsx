@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import Icons from '../../lib/icons';
 import ColorPalette from '../colorPalette';
 import BaseComponentProps from "../../models/baseComponentProps";

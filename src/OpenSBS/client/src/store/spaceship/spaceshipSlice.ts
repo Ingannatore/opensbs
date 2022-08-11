@@ -1,4 +1,4 @@
-﻿import Entity from "../../models/entity";
+import Entity from "../../models/entity";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState: Entity = {

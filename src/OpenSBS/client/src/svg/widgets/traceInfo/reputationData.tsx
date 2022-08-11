@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import Naming from '../../../lib/naming';
 import DataRow from '../../elements/dataRow';
 

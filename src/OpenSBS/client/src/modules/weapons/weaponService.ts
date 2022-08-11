@@ -1,4 +1,4 @@
-﻿import EntityTrace from '../../models/entityTrace';
+import EntityTrace from '../../models/entityTrace';
 import Item from '../../models/item';
 import WeaponModule from './weaponModule';
 import WeaponStatus from './weaponStatus';

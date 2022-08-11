@@ -1,4 +1,4 @@
-﻿export default interface TraceShieldData {
+export default interface TraceShieldData {
     isRaised: boolean,
     frontRatio: number,
     rightRatio: number,

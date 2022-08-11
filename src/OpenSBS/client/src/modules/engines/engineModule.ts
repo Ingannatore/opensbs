@@ -1,4 +1,4 @@
-﻿import EntityModule from '../entityModule';
+import EntityModule from '../entityModule';
 
 export default interface EngineModule extends EntityModule {
     throttle: number,

@@ -1,4 +1,4 @@
-﻿import State from '../state';
+import State from '../state';
 import Item from '../../models/item';
 import EntityTrace from '../../models/entityTrace';
 import Vector2 from '../../models/Vector2';
@@ -19,9 +19,11 @@ const getSelectedSector = (state: State): Vector2 => {
     return state.client.selectedSector;
 }
 
-export default {
+const clientSelectors = {
     getRadarScale,
     getSelectedTarget,
     getSelectedAmmo,
     getSelectedSector,
 }
+
+export default clientSelectors

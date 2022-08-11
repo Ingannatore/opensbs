@@ -1,4 +1,4 @@
-﻿import CountdownTimer from '../../models/countdownTimer';
+import CountdownTimer from '../../models/countdownTimer';
 import EntityModule from '../entityModule';
 import EntityTrace from '../../models/entityTrace';
 import WeaponMagazine from './weaponMagazine';

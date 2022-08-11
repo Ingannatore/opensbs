@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import SvgTransforms from '../../lib/svgTransforms';
 import TabButton from '../elements/tabButton';
 import BaseComponentProps from "../../models/baseComponentProps";

@@ -1,4 +1,4 @@
-﻿import Vector3 from './vector3';
+import Vector3 from './vector3';
 import Item from './item';
 import EntityModule from '../modules/entityModule';
 import ItemStorage from './itemStorage';

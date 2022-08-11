@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import SvgTransforms from '../../lib/svgTransforms';
 import SwitchElement from '../elements/switchElement';
 import ColorPalette from '../colorPalette';

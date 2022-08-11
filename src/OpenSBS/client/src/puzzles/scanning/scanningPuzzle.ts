@@ -1,4 +1,4 @@
-﻿import SignatureItem from './signatureItem';
+import SignatureItem from './signatureItem';
 import EntityTrace from '../../models/entityTrace';
 
 export default class ScanningPuzzle {
