@@ -1,42 +1,23 @@
-import * as React from 'react';
+﻿import * as React from 'react';
 import SvgTransforms from 'lib/svgTransforms';
 import ColorPalette from 'svg/colorPalette';
-import ThrottleSliderElement from 'svg/widgets/engine/throttleSliderElement';
 
-interface ThrottleElementProps {
-    x: number,
-    y: number,
-    throttle: number,
-    targetSpeed: number,
-    onClick: (throttle: number) => void,
-}
-
-export default class ThrottleElement extends React.Component<ThrottleElementProps, {}> {
-    private readonly translation: string;
+export default class ThrottleMarkers extends React.Component<{}, {}> {
     private readonly markers: number[];
 
-    constructor(props: ThrottleElementProps) {
+    constructor(props: any) {
         super(props);
 
-        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.markers = Array.from({length: 17}, (value, key) => (key * 33) + 30);
-        this.clickHandler = this.clickHandler.bind(this);
     }
 
     public render() {
-        const sliderY = 30 + (530 * ((100 - this.props.throttle) / 200));
-
         const markers = this.markers.map(
-            (y: number, index: number) => ThrottleElement.renderMarker(y, index)
+            (y: number, index: number) => ThrottleMarkers.renderMarker(y, index)
         );
 
         return (
-            <g transform={this.translation} cursor="crosshair" onClick={this.clickHandler}>
-                <rect
-                    x="0" y="0"
-                    width="200" height="590"
-                    fill={ColorPalette.BACKGROUND}
-                />
+            <g transform={SvgTransforms.translate(0, 10)}>
                 {markers}
 
                 <text
@@ -60,10 +41,6 @@ export default class ThrottleElement extends React.Component<ThrottleElementProp
                     textAnchor="middle" fontSize="1.75rem"
                     fill={ColorPalette.MUTE}
                 >ASTERN</text>
-
-                <ThrottleSliderElement
-                    x={0} y={sliderY}
-                >{this.props.throttle}</ThrottleSliderElement>
             </g>
         );
     }
@@ -85,13 +62,5 @@ export default class ThrottleElement extends React.Component<ThrottleElementProp
                 />
             </g>
         );
-    }
-
-    private clickHandler(event: React.MouseEvent<SVGElement, MouseEvent>) {
-        const relativeY = 695 - event.clientY;
-        const throttle = Math.round(relativeY / 2.65);
-        const normalizedThrottle = Math.max(Math.min(throttle, 100), -100);
-
-        this.props.onClick(normalizedThrottle);
     }
 }

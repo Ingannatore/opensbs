@@ -1,14 +1,18 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import SvgTransforms from 'lib/svgTransforms';
+import OverlayEvent from 'models/overlayEvent';
 import EngineModule from 'modules/engines/engineModule';
+import EngineService from 'modules/engines/engineService';
 import SpaceshipActions from 'store/spaceship/spaceshipActions';
 import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
 import ColorPalette from 'svg/colorPalette';
 import ButtonElement from 'svg/elements/buttonElement';
+import ClickableOverlay from 'svg/elements/clickableOverlay';
 import DisplayElement from 'svg/elements/displayElement';
 import PanelElement from 'svg/elements/panelElement';
-import ThrottleElement from 'svg/widgets/engine/throttleElement';
+import ThrottleMarkers from 'svg/widgets/engine/throttleMarkers';
+import ThrottleSlider from 'svg/widgets/engine/throttleSlider';
 
 interface EngineWidgetProps {
     x: number,
@@ -26,6 +30,7 @@ class EngineWidget extends React.Component<EngineWidgetProps, {}> {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
+        this.onOverlayClick = this.onOverlayClick.bind(this);
     }
 
     public render() {
@@ -37,12 +42,17 @@ class EngineWidget extends React.Component<EngineWidgetProps, {}> {
                 isOffline={!this.props.engineModule}
             >
                 <g transform="translate(20 0)">
-                    <ThrottleElement
-                        x={0} y={10}
+                    <ThrottleMarkers/>
+                    <ThrottleSlider
+                        x={100} y={305}
                         throttle={this.props.engineModule?.throttle ?? 0}
-                        targetSpeed={targetSpeed}
-                        onClick={(value) => this.setThrottle(value)}
                     />
+                    <ClickableOverlay
+                        x={0} y={40}
+                        width={200} height={530}
+                        onClick={this.onOverlayClick}
+                    />
+
                     <line
                         x1="210" y1="0"
                         x2="210" y2="610"
@@ -80,6 +90,12 @@ class EngineWidget extends React.Component<EngineWidgetProps, {}> {
                     >FULL ASTERN</ButtonElement>
                 </g>
             </PanelElement>
+        );
+    }
+
+    private onOverlayClick(event: OverlayEvent) {
+        this.setThrottle(
+            EngineService.normalizeThrottle(100 - 200 * event.verticalDeviation)
         );
     }
 

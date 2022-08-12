@@ -27,7 +27,7 @@ export default class ClickableOverlay extends React.Component<ClickableOverlayPr
 
     public render() {
         return (
-            <g transform={this.translation} cursor="cell" pointerEvents="bounding-box">
+            <g transform={this.translation} cursor="crosshair" pointerEvents="bounding-box">
                 <rect
                     x="0" y="0"
                     width={this.props.width} height={this.props.height}
