@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import Coords from 'lib/coords';
-import OverlayEvent from 'models/OverlayEvent';
+import OverlayEvent from 'models/overlayEvent';
 import Vector2 from 'models/vector2';
 import Vector3 from 'models/vector3';
 import SensorsModule from 'modules/sensors/sensorsModule';
