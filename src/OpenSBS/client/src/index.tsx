@@ -10,7 +10,6 @@ import CartographyTerminal from 'pages/terminals/cartographyTerminal';
 import IntelligenceTerminal from 'pages/terminals/intelligenceTerminal';
 import NavigationTerminal from 'pages/terminals/navigationTerminal';
 import TacticalTerminal from 'pages/terminals/tacticalTerminal';
-import ClientAction from "store/clientAction";
 import clientReducer from "store/client/clientSlice";
 import IncomingActionMiddleware from 'store/middlewares/incomingActionMiddleware';
 import OutgoingActionMiddleware from 'store/middlewares/outgoingActionMiddleware';
@@ -36,10 +35,6 @@ const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
         .concat(IncomingActionMiddleware(hub))
         .concat(OutgoingActionMiddleware(hub)),
-});
-
-hub.on('OnServerAction', (data: ClientAction) => {
-    return store.dispatch(data);
 });
 
 const container = document.getElementById('root');
