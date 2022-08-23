@@ -2,14 +2,14 @@ import * as React from 'react';
 import SvgTransforms from 'lib/svgTransforms';
 import ColorPalette from 'svg/colorPalette';
 
-interface CompassOverlayProps {
+interface CompassBezelProps {
     x: number,
     y: number,
     r: number,
     rotation: number,
 }
 
-export default class CompassOverlay extends React.Component<CompassOverlayProps, {}> {
+export default class CompassBezel extends React.Component<CompassBezelProps, {}> {
     private readonly translation: string;
     private readonly markersDegrees: number[];
 
@@ -19,7 +19,7 @@ export default class CompassOverlay extends React.Component<CompassOverlayProps,
         r: 460,
     };
 
-    constructor(props: CompassOverlayProps) {
+    constructor(props: CompassBezelProps) {
         super(props);
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
@@ -28,7 +28,7 @@ export default class CompassOverlay extends React.Component<CompassOverlayProps,
 
     public render() {
         const markers = this.markersDegrees.map(
-            (degrees: number) => CompassOverlay.renderMarker(this.props.r, degrees)
+            (degrees: number) => CompassBezel.renderMarker(this.props.r, degrees)
         );
 
         return (

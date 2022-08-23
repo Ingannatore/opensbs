@@ -1,36 +1,34 @@
-import * as React from 'react';
-import {connect} from 'react-redux';
+﻿import * as React from 'react';
+import SvgTransforms from 'lib/svgTransforms';
 import SensorsModule from 'modules/sensors/sensorsModule';
 import SensorsService from 'modules/sensors/sensorsService';
-import ClientSelectors from 'store/client/clientSelectors';
-import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
-import ColorPalette from 'svg/colorPalette';
 import GroupLabel from 'svg/elements/groupLabel';
-import PanelElement from 'svg/elements/panelElement';
 import ShipElement from 'svg/elements/shipElement';
 import SwitchElement from 'svg/elements/switchElement';
-import ZoomControls from 'svg/commons/zoomControls';
-import CompassOverlay from 'svg/widgets/radar/compassOverlay';
-import DistancesOverlay from 'svg/widgets/radar/distancesOverlay';
 import RangeControls from 'svg/widgets/radar/rangeControls';
-import SidesOverlay from 'svg/widgets/radar/sidesOverlay';
-import TracesOverlay from 'svg/widgets/radar/tracesOverlay';
+import CompassBezel from 'svg/widgets/scanner/bezels/compassBezel';
+import ZoomControls from 'svg/widgets/scanner/controls/zoomControls';
+import DistancesOverlay from 'svg/widgets/scanner/overlays/distancesOverlay';
+import SidesOverlay from 'svg/widgets/scanner/overlays/sidesOverlay';
+import TracesOverlay from 'svg/widgets/scanner/overlays/tracesOverlay';
 
-interface RadarWidgetProps {
+interface NavigationModeProps {
     x: number,
     y: number,
     bearing: number,
     sensors: SensorsModule | undefined,
 }
 
-interface RadarWidgetState {
+interface NavigationModeState {
     range: number,
     zoom: number,
     isDistancesOverlayVisible: boolean,
     isSidesOverlayVisible: boolean,
 }
 
-class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
+export default class NavigationMode extends React.Component<NavigationModeProps, NavigationModeState> {
+    private readonly translation: string;
+
     constructor(props: any) {
         super(props);
         this.state = {
@@ -40,6 +38,7 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
             isSidesOverlayVisible: true,
         };
 
+        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.setRange = this.setRange.bind(this);
         this.setZoom = this.setZoom.bind(this);
         this.toggleDistancesOverlay = this.toggleDistancesOverlay.bind(this);
@@ -51,9 +50,9 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
             return null;
         }
 
-        const effectiveRange = this.state.range * this.state.zoom;
+        const effectiveRange = this.state.range * (1 / this.state.zoom);
         return (
-            <PanelElement x={this.props.x} y={this.props.y} width={1000} height={1000}>
+            <g transform={this.translation}>
                 <RangeControls
                     x={10} y={10}
                     range={this.state.range} maximumRange={this.props.sensors.range}
@@ -61,7 +60,7 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
                 />
 
                 <g transform="translate(500, 500)">
-                    <CompassOverlay rotation={this.props.bearing}/>
+                    <CompassBezel rotation={this.props.bearing}/>
                     <DistancesOverlay
                         range={effectiveRange}
                         visible={this.state.isDistancesOverlayVisible}
@@ -76,9 +75,9 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
                 </g>
 
                 <ZoomControls
-                    x={770} y={950}
-                    zoom={this.state.zoom}
-                    onChangeZoom={this.setZoom}
+                    x={880} y={970}
+                    value={this.state.zoom}
+                    onChange={this.setZoom}
                 />
 
                 <g transform="translate(10 950)">
@@ -96,51 +95,35 @@ class RadarWidget extends React.Component<RadarWidgetProps, RadarWidgetState> {
                         toggled={this.state.isSidesOverlayVisible}
                     >SIDES</SwitchElement>
                 </g>
-
-                <circle
-                    cx="500" cy="500" r="460"
-                    stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
-                    fill="none"
-                />
-            </PanelElement>
+            </g>
         );
     }
 
     private setRange(value: number) {
         this.setState({
             ...this.state,
-            range: value
+            range: value,
         });
     }
 
     private setZoom(value: number) {
         this.setState({
             ...this.state,
-            zoom: value
+            zoom: value,
         });
     }
 
     private toggleDistancesOverlay() {
         this.setState({
             ...this.state,
-            isDistancesOverlayVisible: !this.state.isDistancesOverlayVisible
+            isDistancesOverlayVisible: !this.state.isDistancesOverlayVisible,
         });
     }
 
     private toggleSidesOverlay() {
         this.setState({
             ...this.state,
-            isSidesOverlayVisible: !this.state.isSidesOverlayVisible
+            isSidesOverlayVisible: !this.state.isSidesOverlayVisible,
         });
     }
 }
-
-const mapStateToProps = (state: any) => {
-    return {
-        target: ClientSelectors.getSelectedTarget(state),
-        bearing: SpaceshipSelectors.getBearing(state),
-        sensors: SpaceshipSelectors.getSensors(state),
-    };
-};
-
-export default connect(mapStateToProps)(RadarWidget);
