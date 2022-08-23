@@ -2,15 +2,16 @@
 import SvgTransforms from 'lib/svgTransforms';
 import SensorsModule from 'modules/sensors/sensorsModule';
 import SensorsService from 'modules/sensors/sensorsService';
-import GroupLabel from 'svg/elements/groupLabel';
+import ColorPalette from 'svg/colorPalette';
 import ShipElement from 'svg/elements/shipElement';
-import SwitchElement from 'svg/elements/switchElement';
-import RangeControls from 'svg/widgets/radar/rangeControls';
 import CompassBezel from 'svg/widgets/scanner/bezels/compassBezel';
-import ZoomControls from 'svg/widgets/scanner/controls/zoomControls';
+import OverlaysControl from 'svg/widgets/scanner/controls/overlaysControl';
+import RangeControl from 'svg/widgets/scanner/controls/rangeControl';
+import ZoomControl from 'svg/widgets/scanner/controls/zoomControl';
 import DistancesOverlay from 'svg/widgets/scanner/overlays/distancesOverlay';
 import SidesOverlay from 'svg/widgets/scanner/overlays/sidesOverlay';
 import TracesOverlay from 'svg/widgets/scanner/overlays/tracesOverlay';
+import OverlayType from 'svg/widgets/scanner/overlayType';
 
 interface NavigationModeProps {
     x: number,
@@ -22,6 +23,7 @@ interface NavigationModeProps {
 interface NavigationModeState {
     range: number,
     zoom: number,
+    overlays: Record<OverlayType, boolean>,
     isDistancesOverlayVisible: boolean,
     isSidesOverlayVisible: boolean,
 }
@@ -34,15 +36,19 @@ export default class NavigationMode extends React.Component<NavigationModeProps,
         this.state = {
             range: 10000,
             zoom: 1,
+            overlays: {
+                [OverlayType.Ranges]: true,
+                [OverlayType.Sides]: true,
+                [OverlayType.Traces]: true,
+            },
             isDistancesOverlayVisible: true,
             isSidesOverlayVisible: true,
         };
 
         this.translation = SvgTransforms.translate(this.props.x, this.props.y);
-        this.setRange = this.setRange.bind(this);
-        this.setZoom = this.setZoom.bind(this);
-        this.toggleDistancesOverlay = this.toggleDistancesOverlay.bind(this);
-        this.toggleSidesOverlay = this.toggleSidesOverlay.bind(this);
+        this.onChangeRangeHandler = this.onChangeRangeHandler.bind(this);
+        this.onChangeZoomHandler = this.onChangeZoomHandler.bind(this);
+        this.onToggleOverlayHandler = this.onToggleOverlayHandler.bind(this);
     }
 
     public render() {
@@ -53,77 +59,67 @@ export default class NavigationMode extends React.Component<NavigationModeProps,
         const effectiveRange = this.state.range * (1 / this.state.zoom);
         return (
             <g transform={this.translation}>
-                <RangeControls
-                    x={10} y={10}
-                    range={this.state.range} maximumRange={this.props.sensors.range}
-                    onChange={this.setRange}
+                <RangeControl
+                    x={120} y={30}
+                    value={this.state.range} maxValue={this.props.sensors.range}
+                    onChange={this.onChangeRangeHandler}
                 />
 
                 <g transform="translate(500, 500)">
                     <CompassBezel rotation={this.props.bearing}/>
                     <DistancesOverlay
                         range={effectiveRange}
-                        visible={this.state.isDistancesOverlayVisible}
+                        visible={this.state.overlays[OverlayType.Ranges]}
                     />
-                    <SidesOverlay visible={this.state.isSidesOverlayVisible}/>
+                    <SidesOverlay visible={this.state.overlays[OverlayType.Sides]}/>
                     <TracesOverlay
                         range={effectiveRange}
                         bearing={this.props.bearing}
                         traces={SensorsService.getTraces(this.props.sensors, effectiveRange)}
                     />
                     <ShipElement/>
+                    <circle
+                        cx="0" cy="0" r="460"
+                        stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
+                        fill="none"
+                    />
                 </g>
 
-                <ZoomControls
+                <ZoomControl
                     x={880} y={970}
                     value={this.state.zoom}
-                    onChange={this.setZoom}
+                    onChange={this.onChangeZoomHandler}
                 />
-
-                <g transform="translate(10 950)">
-                    <GroupLabel x={110} y={-28} size={120}>OVERLAYS</GroupLabel>
-                    <SwitchElement
-                        x={0} y={0}
-                        width={100} height={40} fontSize={1.5}
-                        onClick={this.toggleDistancesOverlay}
-                        toggled={this.state.isDistancesOverlayVisible}
-                    >RANGES</SwitchElement>
-                    <SwitchElement
-                        x={120} y={0}
-                        width={100} height={40} fontSize={1.5}
-                        onClick={this.toggleSidesOverlay}
-                        toggled={this.state.isSidesOverlayVisible}
-                    >SIDES</SwitchElement>
-                </g>
+                <OverlaysControl
+                    x={120} y={970}
+                    values={this.state.overlays}
+                    onToggle={this.onToggleOverlayHandler}
+                />
             </g>
         );
     }
 
-    private setRange(value: number) {
+    private onChangeRangeHandler(value: number) {
         this.setState({
             ...this.state,
             range: value,
         });
     }
 
-    private setZoom(value: number) {
+    private onChangeZoomHandler(value: number) {
         this.setState({
             ...this.state,
             zoom: value,
         });
     }
 
-    private toggleDistancesOverlay() {
-        this.setState({
-            ...this.state,
-            isDistancesOverlayVisible: !this.state.isDistancesOverlayVisible,
-        });
-    }
+    private onToggleOverlayHandler(value: OverlayType) {
+        const overlays = this.state.overlays;
+        overlays[value] = !overlays[value];
 
-    private toggleSidesOverlay() {
         this.setState({
             ...this.state,
-            isSidesOverlayVisible: !this.state.isSidesOverlayVisible,
+            overlays: overlays,
         });
     }
 }

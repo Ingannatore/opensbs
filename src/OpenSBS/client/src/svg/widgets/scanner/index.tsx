@@ -1,51 +1,50 @@
-﻿import * as React from 'react';
+﻿import SensorsModule from 'modules/sensors/sensorsModule';
+import * as React from 'react';
 import {connect} from 'react-redux';
-import SensorsModule from 'modules/sensors/sensorsModule';
 import ClientSelectors from 'store/client/clientSelectors';
 import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
-import ColorPalette from 'svg/colorPalette';
 import PanelElement from 'svg/elements/panelElement';
-import ModeControls from 'svg/widgets/scanner/controls/modeControls';
+import ModeControl from 'svg/widgets/scanner/controls/modeControl';
 import NavigationMode from 'svg/widgets/scanner/navigationMode';
 import ScannerMode from 'svg/widgets/scanner/scannerMode';
 
 interface ScannerWidgetProps {
     x: number,
     y: number,
-    mode: ScannerMode,
     bearing: number,
-    sensors: SensorsModule | undefined,
+    defaultMode?: ScannerMode,
+    sensors?: SensorsModule,
 }
 
-class ScannerWidget extends React.Component<ScannerWidgetProps, {}> {
-    public static defaultProps = {
-        mode: ScannerMode.Navigation,
-    };
+interface ScannerWidgetState {
+    mode: ScannerMode,
+}
 
+class ScannerWidget extends React.Component<ScannerWidgetProps, ScannerWidgetState> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            mode: this.props.defaultMode || ScannerMode.Navigation,
+        }
+
+        this.onChangeModeHandler = this.onChangeModeHandler.bind(this);
     }
 
     public render() {
         return (
             <PanelElement x={this.props.x} y={this.props.y} width={1000} height={1000} isOffline={!this.props.sensors}>
-                <ModeControls
+                <ModeControl
                     x={880} y={30}
-                    currentMode={this.props.mode}
-                    onChange={() => {}}
+                    value={this.state.mode}
+                    onChange={this.onChangeModeHandler}
                 />
                 {this.renderContent()}
-                <circle
-                    cx="500" cy="500" r="460"
-                    stroke={ColorPalette.MUTE_LIGHT} strokeWidth="2"
-                    fill="none"
-                />
             </PanelElement>
         );
     }
 
     private renderContent() {
-        switch (this.props.mode) {
+        switch (this.state.mode) {
             case ScannerMode.Navigation:
                 return (
                     <NavigationMode
@@ -57,6 +56,13 @@ class ScannerWidget extends React.Component<ScannerWidgetProps, {}> {
             default:
                 return null;
         }
+    }
+
+    private onChangeModeHandler(value: ScannerMode) {
+        this.setState({
+            ...this.state,
+            mode: value,
+        });
     }
 }
 
