@@ -5,7 +5,7 @@ import ClientSelectors from 'store/client/clientSelectors';
 import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
 import PanelElement from 'svg/elements/panelElement';
 import ModeControl from 'svg/widgets/scanner/controls/modeControl';
-import NavigationMode from 'svg/widgets/scanner/navigationMode';
+import NavigationMode from 'svg/widgets/scanner/modes/navigationMode';
 import ScannerMode from 'svg/widgets/scanner/scannerMode';
 
 interface ScannerWidgetProps {
