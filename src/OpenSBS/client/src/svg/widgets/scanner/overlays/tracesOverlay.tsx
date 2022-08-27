@@ -12,7 +12,7 @@ interface TracesOverlayProps {
     y: number,
     r: number,
     range: number,
-    target: EntityTrace | null,
+    selectedTrace: EntityTrace | null,
     traces: EntityTrace[],
     bearing: number,
     dispatch: any,
@@ -58,14 +58,14 @@ class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
                 y={-position.z}
                 trace={trace}
                 rotation={this.props.bearing}
-                selected={trace.id === this.props.target?.id}
+                selected={trace.id === this.props.selectedTrace?.id}
                 onClick={this.onTraceClick}
             />
         );
     }
 
     private onTraceClick(trace: EntityTrace) {
-        if (trace.id === this.props.target?.id) {
+        if (trace.id === this.props.selectedTrace?.id) {
             this.props.dispatch(resetTarget());
         } else {
             this.props.dispatch(selectTarget(trace));
@@ -75,7 +75,7 @@ class TracesOverlay extends React.Component<TracesOverlayProps, {}> {
 
 const mapStateToProps = (state: any) => {
     return {
-        target: ClientSelectors.getSelectedTarget(state),
+        selectedTrace: ClientSelectors.getSelectedTarget(state),
     };
 };
 

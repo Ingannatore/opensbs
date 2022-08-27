@@ -1,36 +1,34 @@
-﻿import * as React from 'react';
-import SvgTransforms from 'lib/svgTransforms';
 import SensorsModule from 'modules/sensors/sensorsModule';
 import SensorsService from 'modules/sensors/sensorsService';
+import * as React from 'react';
+import {connect} from 'react-redux';
+import SpaceshipSelectors from 'store/spaceship/spaceshipSelectors';
 import ColorPalette from 'svg/colorPalette';
+import PanelElement from 'svg/elements/panelElement';
 import ShipElement from 'svg/elements/shipElement';
 import CompassBezel from 'svg/widgets/scanner/bezels/compassBezel';
 import OverlaysControl from 'svg/widgets/scanner/controls/overlaysControl';
 import RangeControl from 'svg/widgets/scanner/controls/rangeControl';
 import ZoomControl from 'svg/widgets/scanner/controls/zoomControl';
 import DistancesOverlay from 'svg/widgets/scanner/overlays/distancesOverlay';
+import OverlayType from 'svg/widgets/scanner/overlays/overlayType';
 import SidesOverlay from 'svg/widgets/scanner/overlays/sidesOverlay';
 import TracesOverlay from 'svg/widgets/scanner/overlays/tracesOverlay';
-import OverlayType from 'svg/widgets/scanner/overlayType';
 
-interface NavigationModeProps {
+interface TacScannerWidgetProps {
     x: number,
     y: number,
     bearing: number,
-    sensors: SensorsModule | undefined,
+    sensors?: SensorsModule,
 }
 
-interface NavigationModeState {
+interface TacScannerWidgetState {
     range: number,
     zoom: number,
     overlays: Record<OverlayType, boolean>,
-    isDistancesOverlayVisible: boolean,
-    isSidesOverlayVisible: boolean,
 }
 
-export default class NavigationMode extends React.Component<NavigationModeProps, NavigationModeState> {
-    private readonly translation: string;
-
+class TacScannerWidget extends React.Component<TacScannerWidgetProps, TacScannerWidgetState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -41,27 +39,21 @@ export default class NavigationMode extends React.Component<NavigationModeProps,
                 [OverlayType.Sides]: true,
                 [OverlayType.Traces]: true,
             },
-            isDistancesOverlayVisible: true,
-            isSidesOverlayVisible: true,
         };
 
-        this.translation = SvgTransforms.translate(this.props.x, this.props.y);
         this.onChangeRangeHandler = this.onChangeRangeHandler.bind(this);
         this.onChangeZoomHandler = this.onChangeZoomHandler.bind(this);
         this.onToggleOverlayHandler = this.onToggleOverlayHandler.bind(this);
     }
 
     public render() {
-        if (!this.props.sensors) {
-            return null;
-        }
-
         const effectiveRange = this.state.range * (1 / this.state.zoom);
+
         return (
-            <g transform={this.translation}>
+            <PanelElement x={this.props.x} y={this.props.y} width={1000} height={1000} isOffline={!this.props.sensors}>
                 <RangeControl
                     x={120} y={30}
-                    value={this.state.range} maxValue={this.props.sensors.range}
+                    value={this.state.range} maxValue={this.props.sensors?.range || 0}
                     onChange={this.onChangeRangeHandler}
                 />
 
@@ -95,7 +87,7 @@ export default class NavigationMode extends React.Component<NavigationModeProps,
                     values={this.state.overlays}
                     onToggle={this.onToggleOverlayHandler}
                 />
-            </g>
+            </PanelElement>
         );
     }
 
@@ -123,3 +115,12 @@ export default class NavigationMode extends React.Component<NavigationModeProps,
         });
     }
 }
+
+const mapStateToProps = (state: any) => {
+    return {
+        bearing: SpaceshipSelectors.getBearing(state),
+        sensors: SpaceshipSelectors.getSensors(state),
+    };
+};
+
+export default connect(mapStateToProps)(TacScannerWidget);

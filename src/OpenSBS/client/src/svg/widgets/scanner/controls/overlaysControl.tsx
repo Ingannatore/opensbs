@@ -1,8 +1,8 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import ColorPalette from 'svg/colorPalette';
 import ButtonComponent from 'svg/components/buttonComponent';
 import ButtonsGroupComponent from 'svg/components/buttonsGroupComponent';
-import OverlayType from 'svg/widgets/scanner/overlayType';
+import OverlayType from 'svg/widgets/scanner/overlays/overlayType';
 
 interface OverlaysControlProps {
     x: number,

@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import ColorPalette from 'svg/colorPalette';
 import ButtonComponent from 'svg/components/buttonComponent';
 import ButtonsGroupComponent from 'svg/components/buttonsGroupComponent';
@@ -23,7 +23,7 @@ export default class ZoomControl extends React.Component<ZoomControlProps, {}> {
                     x={-110} y={-20}
                     width={60} height={40}
                     color={ColorPalette.SECONDARY}
-                    toggled={this.props.value == 1}
+                    toggled={this.props.value === 1}
                     onClick={() => this.props.onChange(1)}
                 />
                 <ButtonComponent
@@ -31,7 +31,7 @@ export default class ZoomControl extends React.Component<ZoomControlProps, {}> {
                     x={-30} y={-20}
                     width={60} height={40}
                     color={ColorPalette.SECONDARY}
-                    toggled={this.props.value == 2}
+                    toggled={this.props.value === 2}
                     onClick={() => this.props.onChange(2)}
                 />
                 <ButtonComponent
@@ -39,7 +39,7 @@ export default class ZoomControl extends React.Component<ZoomControlProps, {}> {
                     x={50} y={-20}
                     width={60} height={40}
                     color={ColorPalette.SECONDARY}
-                    toggled={this.props.value == 4}
+                    toggled={this.props.value === 4}
                     onClick={() => this.props.onChange(4)}
                 />
             </ButtonsGroupComponent>

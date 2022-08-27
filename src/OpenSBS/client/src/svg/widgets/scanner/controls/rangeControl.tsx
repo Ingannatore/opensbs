@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import ColorPalette from 'svg/colorPalette';
 import ButtonComponent from 'svg/components/buttonComponent';
 import ButtonsGroupComponent from 'svg/components/buttonsGroupComponent';
@@ -24,7 +24,7 @@ export default class RangeControl extends React.Component<RangeControlProps, {}>
                     x={-110} y={-20}
                     width={60} height={40}
                     color={ColorPalette.SECONDARY}
-                    toggled={this.props.value == 5000}
+                    toggled={this.props.value === 5000}
                     onClick={() => this.props.onChange(5000)}
                 />
                 <ButtonComponent
@@ -32,7 +32,7 @@ export default class RangeControl extends React.Component<RangeControlProps, {}>
                     x={-30} y={-20}
                     width={60} height={40}
                     color={ColorPalette.SECONDARY}
-                    toggled={this.props.value == 10000}
+                    toggled={this.props.value === 10000}
                     onClick={() => this.props.onChange(10000)}
                 />
                 <ButtonComponent
@@ -40,7 +40,7 @@ export default class RangeControl extends React.Component<RangeControlProps, {}>
                     x={50} y={-20}
                     width={60} height={40}
                     color={ColorPalette.SECONDARY}
-                    toggled={this.props.value == this.props.maxValue}
+                    toggled={this.props.value === this.props.maxValue}
                     onClick={() => this.props.onChange(this.props.maxValue)}
                 />
             </ButtonsGroupComponent>

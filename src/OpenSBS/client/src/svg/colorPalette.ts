@@ -11,6 +11,7 @@ const ColorPalette = {
     TERTIARY: '#ff6db6',
     FILLER: '#ffdf4d',
     TEXT: '#fff',
+    TEXT_DARK: '#999',
     HEADER: '#ffdf4d',
 }
 
