@@ -4,13 +4,13 @@ namespace OpenSBS.Core.Components
 {
     internal class ElectronicComponent
     {
-        public IEnumerable<EntityTrace> Traces => _traces.Values;
+        public int SensorsRange { get; }
+        public EntityTraceCollection Traces { get; private set; }
 
-        private readonly IDictionary<string, EntityTrace> _traces;
-
-        public ElectronicComponent()
+        public ElectronicComponent(int sensorsRange)
         {
-            _traces = new Dictionary<string, EntityTrace>();
+            SensorsRange = sensorsRange;
+            Traces = new();
         }
 
         public void HandleCommand(ComponentCommand command)
@@ -19,28 +19,24 @@ namespace OpenSBS.Core.Components
         }
 
         public void Update(TimeSpan deltaT, Entity owner, World world)
-        {
+        {            
             UpdateTraces(owner, world);
         }
 
         private void UpdateTraces(Entity owner, World world)
         {
-            foreach (var trace in _traces.Values)
-            {
-                if (!world.ExistsEntity(trace.Id))
-                {
-                    _traces.Remove(trace.Id);
-                }
-            }
+            Traces.RemoveInexistent(world.GetIds());
 
             foreach (var entity in world)
             {
-                if (!_traces.ContainsKey(entity.Id))
+                var distance = owner.GetDistanceTo(entity);
+                if (distance > SensorsRange)
                 {
-                    _traces[entity.Id] = new(entity.Id);
+                    Traces.Remove(entity.Id);
+                    continue;
                 }
 
-                _traces[entity.Id].Update(owner, entity);
+                Traces.GetOrCreateTrace(entity.Id).Update(owner.GetBearingTo(entity), distance);
             }
         }
     }

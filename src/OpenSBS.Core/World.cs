@@ -20,6 +20,7 @@ namespace OpenSBS.Core
             }
         }
 
+        public ICollection<string> GetIds() => _entities.Keys;
         public bool ExistsEntity(string id) => _entities.ContainsKey(id);
         public void AddEntity(Entity entity) => _entities[entity.Id] = entity;
 

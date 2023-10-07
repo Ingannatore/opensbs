@@ -1,4 +1,5 @@
 ﻿using OpenSBS.Core.Components;
+using OpenSBS.Core.Utils;
 using System.Numerics;
 
 namespace OpenSBS.Core.Models
@@ -35,5 +36,11 @@ namespace OpenSBS.Core.Models
                     Electronic?.HandleCommand(command); break;
             }
         }
+
+        public int GetDistanceTo(Entity target) =>
+            (int)Math.Round(Vector3.Distance(Body.Position, target.Body.Position));
+
+        public int GetBearingTo(Entity target) =>
+            (int)Math.Round(Angles.ToBearing(Vector3.Normalize(target.Body.Position - Body.Position)));
     }
 }

@@ -1,7 +1,4 @@
-﻿using OpenSBS.Core.Utils;
-using System.Numerics;
-
-namespace OpenSBS.Core.Models
+﻿namespace OpenSBS.Core.Models
 {
     internal class EntityTrace
     {
@@ -14,10 +11,10 @@ namespace OpenSBS.Core.Models
             Id = id;
         }
 
-        public void Update(Entity owner, Entity target)
+        public void Update(int bearing, int distance)
         {
-            Bearing = (int)Math.Round(Angles.ToBearing(Vector3.Normalize(target.Body.Position - owner.Body.Position)));
-            Distance = (int)Math.Round(Vector3.Distance(owner.Body.Position, target.Body.Position));
+            Bearing = bearing;
+            Distance = distance;
         }
     }
 }
