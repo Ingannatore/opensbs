@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29324.140
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenSBS", "OpenSBS\OpenSBS.csproj", "{36231C42-73D4-41B3-9AA1-1D54ECAF0A3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSBS.Engine", "OpenSBS.Engine\OpenSBS.Engine.csproj", "{20496AD1-5034-4CB1-B3C4-300D38D47DD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenSBS.Engine", "OpenSBS.Engine\OpenSBS.Engine.csproj", "{20496AD1-5034-4CB1-B3C4-300D38D47DD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSBS.Core", "OpenSBS.Core\OpenSBS.Core.csproj", "{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,18 @@ Global
 		{20496AD1-5034-4CB1-B3C4-300D38D47DD1}.Release|x64.Build.0 = Release|Any CPU
 		{20496AD1-5034-4CB1-B3C4-300D38D47DD1}.Release|x86.ActiveCfg = Release|Any CPU
 		{20496AD1-5034-4CB1-B3C4-300D38D47DD1}.Release|x86.Build.0 = Release|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Debug|x64.Build.0 = Debug|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Debug|x86.Build.0 = Debug|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Release|x64.ActiveCfg = Release|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Release|x64.Build.0 = Release|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Release|x86.ActiveCfg = Release|Any CPU
+		{D0FB8DC0-CB18-4102-A87B-5EB61EF1DF5A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

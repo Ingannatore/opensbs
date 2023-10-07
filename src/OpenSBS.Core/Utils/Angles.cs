@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 
 namespace OpenSBS.Core.Utils
 {
@@ -17,6 +12,13 @@ namespace OpenSBS.Core.Utils
         public static double ToDegrees(double value)
         {
             return value * (180 / Math.PI);
+        }
+
+        public static double ToBearing(Vector3 direction)
+        {
+            var degrees = ToDegrees(Math.Atan2(direction.Z, direction.X));
+            var rotatedDegrees = degrees >= -90 ? degrees - 90 : 270 + degrees;
+            return rotatedDegrees <= 0 ? -rotatedDegrees : 360 - rotatedDegrees;
         }
     }
 }

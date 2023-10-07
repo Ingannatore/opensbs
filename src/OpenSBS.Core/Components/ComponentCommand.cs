@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace OpenSBS.Core
+namespace OpenSBS.Core.Components
 {
     internal class ComponentCommand
     {
