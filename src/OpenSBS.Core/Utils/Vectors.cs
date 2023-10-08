@@ -4,7 +4,7 @@ namespace OpenSBS.Core.Utils
 {
     internal static class Vectors
     {
-        public static Vector3 Rotate(Vector3 value, double yaw, double pitch, double roll)
+        public static Vector2 Rotate(Vector2 value, double yaw, double pitch = 0, double roll = 0)
         {
             var rotationQuaternion = Quaternion.CreateFromYawPitchRoll(
                 (float)yaw,
@@ -12,10 +12,10 @@ namespace OpenSBS.Core.Utils
                 (float)roll
             );
 
-            return Vector3.Normalize(Vector3.Transform(value, rotationQuaternion));
+            return Vector2.Normalize(Vector2.Transform(value, rotationQuaternion));
         }
 
-        public static Vector3 Move(Vector3 position, Vector3 direction, double value)
+        public static Vector2 Move(Vector2 position, Vector2 direction, double value)
         {
             return position + direction * (float)value;
         }

@@ -5,15 +5,15 @@ namespace OpenSBS.Core.Components
 {
     internal class BodyComponent
     {
-        public Vector3 Position { get; protected set; }
-        public Vector3 Direction { get; protected set; }
+        public Vector2 Position { get; protected set; }
+        public Vector2 Direction { get; protected set; }
         public double AngularSpeed { get; protected set; }
         public double LinearSpeed { get; protected set; }
         public int Bearing { get; protected set; }
 
         public BodyComponent(
-            Vector3 position,
-            Vector3 direction,
+            Vector2 position,
+            Vector2 direction,
             double angularSpeed = 0,
             double linearSpeed = 0
         )
@@ -46,7 +46,7 @@ namespace OpenSBS.Core.Components
         {
             if (rotationSpeed == 0) return;
 
-            Direction = Vectors.Rotate(Direction, (double)Angles.ToRadians(rotationSpeed * deltaT.TotalSeconds), 0, 0);
+            Direction = Vectors.Rotate(Direction, (double)Angles.ToRadians(rotationSpeed * deltaT.TotalSeconds));
             Bearing = (int)Math.Round(Angles.ToBearing(Direction));
         }
 

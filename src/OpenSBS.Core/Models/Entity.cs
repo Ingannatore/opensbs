@@ -11,7 +11,7 @@ namespace OpenSBS.Core.Models
         public PropulsionComponent? Propulsion { get; set; }
         public ElectronicComponent? Electronic { get; set; }
 
-        protected Entity(string id, Vector3 position, Vector3 direction)
+        protected Entity(string id, Vector2 position, Vector2 direction)
         {
             Id = id;
             Body = new(position, direction);
@@ -38,9 +38,9 @@ namespace OpenSBS.Core.Models
         }
 
         public int GetDistanceTo(Entity target) =>
-            (int)Math.Round(Vector3.Distance(Body.Position, target.Body.Position));
+            (int)Math.Round(Vector2.Distance(Body.Position, target.Body.Position));
 
         public int GetBearingTo(Entity target) =>
-            (int)Math.Round(Angles.ToBearing(Vector3.Normalize(target.Body.Position - Body.Position)));
+            (int)Math.Round(Angles.ToBearing(Vector2.Normalize(target.Body.Position - Body.Position)));
     }
 }
