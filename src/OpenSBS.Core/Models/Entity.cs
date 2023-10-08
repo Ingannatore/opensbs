@@ -37,10 +37,10 @@ namespace OpenSBS.Core.Models
             }
         }
 
-        public int GetDistanceTo(Entity target) =>
-            (int)Math.Round(Vector2.Distance(Body.Position, target.Body.Position));
+        public float GetDistanceTo(Vector2 target) =>
+            Vector2.Distance(Body.Position, target);
 
-        public int GetBearingTo(Entity target) =>
-            (int)Math.Round(Angles.ToBearing(Vector2.Normalize(target.Body.Position - Body.Position)));
+        public int GetBearingTo(Vector2 target) =>
+            Angles.ToBearing(Vector2.Normalize(target - Body.Position));
     }
 }

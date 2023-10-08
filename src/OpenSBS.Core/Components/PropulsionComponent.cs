@@ -1,4 +1,5 @@
 ﻿using OpenSBS.Core.Models;
+using System.Numerics;
 
 namespace OpenSBS.Core.Components
 {
@@ -7,6 +8,7 @@ namespace OpenSBS.Core.Components
         private const string ThrottleAction = "throttle";
         private const string RudderAction = "rudder";
         private const string AlignAction = "align";
+        private const string AutopilotAction = "autopilot";
 
         public int Acceleration { get; }
         public int Deceleration { get; }
@@ -15,6 +17,7 @@ namespace OpenSBS.Core.Components
         public int Throttle { get; private set; }
         public int Rudder { get; private set; }
         public int? TargetBearing { get; private set; }
+        public Vector2? TargetLocation { get; private set; }
 
         protected PropulsionComponent(int acceleration, int deceleration, int maximumLinearSpeed, int maximumAngularSpeed)
         {
@@ -31,22 +34,51 @@ namespace OpenSBS.Core.Components
                 case ThrottleAction:
                     Throttle = Math.Clamp(command.PayloadTo<int>(), -100, 100);
                     TargetBearing = null;
+                    TargetLocation = null;
                     break;
 
                 case RudderAction:
                     Rudder = Math.Clamp(command.PayloadTo<int>(), -100, 100);
                     TargetBearing = null;
+                    TargetLocation = null;
                     break;
 
                 case AlignAction:
                     var value = command.PayloadTo<int?>();
                     TargetBearing = value != null ? Math.Clamp(value.Value, 0, 359) : null;
+                    TargetLocation = null;
+                    break;
+
+                case AutopilotAction:
+                    TargetLocation = command.PayloadTo<Vector2?>();
+                    TargetBearing = null;
                     break;
             }
         }
 
         public void Update(TimeSpan deltaT, Entity owner)
         {
+            if (TargetLocation != null)
+            {
+                var bearingToTarget = owner.GetBearingTo(TargetLocation.Value);
+                if (owner.Body.Bearing != bearingToTarget)
+                {
+                    TargetBearing = bearingToTarget;
+                }
+
+                var distanceToTarget = owner.GetDistanceTo(TargetLocation.Value);
+                if (distanceToTarget > 2000)
+                {
+                    Throttle = CalculateAutopilotThrottle(owner.Body.LinearSpeed, distanceToTarget);
+                }
+                else
+                {
+                    Throttle = 0;
+                    TargetBearing = null;
+                    TargetLocation = null;
+                }
+            }
+
             if (TargetBearing != null)
             {
                 AlignToBearing(owner.Body.Bearing, TargetBearing.Value);
@@ -67,6 +99,12 @@ namespace OpenSBS.Core.Components
             {
                 TargetBearing = null;
             }
+        }
+
+        private int CalculateAutopilotThrottle(double linearSpeed, float distanceToTarget)
+        {
+            var stoppingDistance = Math.Pow(linearSpeed, 2) / (2 * Deceleration);
+            return distanceToTarget > stoppingDistance ? 100 : 0;
         }
 
         private double CalculateNextLinearSpeed(TimeSpan deltaT, double linearSpeed)

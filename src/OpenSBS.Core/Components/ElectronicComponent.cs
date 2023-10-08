@@ -29,14 +29,14 @@ namespace OpenSBS.Core.Components
 
             foreach (var entity in world)
             {
-                var distance = owner.GetDistanceTo(entity);
+                var distance = owner.GetDistanceTo(entity.Body.Position);
                 if (distance > SensorsRange)
                 {
                     Traces.Remove(entity.Id);
                     continue;
                 }
 
-                Traces.GetOrCreateTrace(entity.Id).Update(owner.GetBearingTo(entity), distance);
+                Traces.GetOrCreateTrace(entity.Id).Update(owner.GetBearingTo(entity.Body.Position), distance);
             }
         }
     }

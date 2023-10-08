@@ -46,15 +46,15 @@ namespace OpenSBS.Core.Components
         {
             if (rotationSpeed == 0) return;
 
-            Direction = Vectors.Rotate(Direction, (double)Angles.ToRadians(rotationSpeed * deltaT.TotalSeconds));
-            Bearing = (int)Math.Round(Angles.ToBearing(Direction));
+            Direction = Vectors.Rotate(Direction, (float)Angles.ToRadians(rotationSpeed * deltaT.TotalSeconds));
+            Bearing = Angles.ToBearing(Direction);
         }
 
         private void MoveBody(TimeSpan deltaT, double linearSpeed)
         {
             if (linearSpeed == 0) return;
 
-            Position = Vectors.Move(Position, Direction, (double)(linearSpeed * deltaT.TotalSeconds));
+            Position = Vectors.Move(Position, Direction, (float)(linearSpeed * deltaT.TotalSeconds));
         }
     }
 }
