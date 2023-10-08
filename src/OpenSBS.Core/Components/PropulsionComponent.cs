@@ -6,13 +6,15 @@ namespace OpenSBS.Core.Components
     {
         private const string ThrottleAction = "throttle";
         private const string RudderAction = "rudder";
+        private const string AlignAction = "align";
 
         public int Acceleration { get; }
         public int Deceleration { get; }
         public double MaximumLinearSpeed { get; }
         public double MaximumAngularSpeed { get; }
-        public int Throttle { get; protected set; }
-        public int Rudder { get; protected set; }
+        public int Throttle { get; private set; }
+        public int Rudder { get; private set; }
+        public int? TargetBearing { get; private set; }
 
         protected PropulsionComponent(int acceleration, int deceleration, int maximumLinearSpeed, int maximumAngularSpeed)
         {
@@ -27,17 +29,44 @@ namespace OpenSBS.Core.Components
             switch (command.Action)
             {
                 case ThrottleAction:
-                    Throttle = Math.Clamp(command.PayloadTo<int>(), -100, 100); break;
+                    Throttle = Math.Clamp(command.PayloadTo<int>(), -100, 100);
+                    TargetBearing = null;
+                    break;
 
                 case RudderAction:
-                    Rudder = Math.Clamp(command.PayloadTo<int>(), -100, 100); break;
+                    Rudder = Math.Clamp(command.PayloadTo<int>(), -100, 100);
+                    TargetBearing = null;
+                    break;
+
+                case AlignAction:
+                    var value = command.PayloadTo<int?>();
+                    TargetBearing = value != null ? Math.Clamp(value.Value, 0, 359) : null;
+                    break;
             }
         }
 
         public void Update(TimeSpan deltaT, Entity owner)
         {
-            owner.Body.SetLinearSpeed(CalculateNextLinearSpeed(deltaT, owner.Body.LinearSpeed));
-            owner.Body.SetAngularSpeed(CalculateNextAngularSpeed(deltaT));
+            if (TargetBearing != null)
+            {
+                AlignToBearing(owner.Body.Bearing, TargetBearing.Value);
+            }
+
+            owner.Body
+                .SetLinearSpeed(CalculateNextLinearSpeed(deltaT, owner.Body.LinearSpeed))
+                .SetAngularSpeed(CalculateNextAngularSpeed(deltaT));
+        }
+
+        private void AlignToBearing(int current, int target)
+        {
+            if (current != target)
+            {
+                Rudder = 100 * Math.Sign(180 - target - current);
+            }
+            else
+            {
+                TargetBearing = null;
+            }
         }
 
         private double CalculateNextLinearSpeed(TimeSpan deltaT, double linearSpeed)
